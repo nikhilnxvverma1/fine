@@ -1,0 +1,17 @@
+{ 
+  "version": "0.1.0", 
+  // List of configurations. Add new configurations or edit existing ones. 
+  // ONLY "node" and "mono" are supported, change "type" to switch. 
+  "configurations": [
+    { 
+      "name": "Attach", 
+      "type": "node", 
+	  "program": "${workspaceRoot}/app/main.js",
+      // TCP/IP address. Default is "localhost". 
+      "address": "localhost", 
+      // Port to attach to.
+      "port": 5858, 
+      "sourceMaps": false 
+     } 
+   ] 
+}
