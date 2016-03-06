@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col s2" *ngFor="#dataItem of context.data.dataItems">
+        <data-item [dataItem]="dataItem" (openfolder)="addNewContext($folder)"></data-item>
+    </div>
+</div>

@@ -1,22 +1,13 @@
 <div class="row">
-    <nav>
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a class="btn-floating btn-med waves-effect waves-light red" (click)="openRoot()">
-                    <!--<i class="material-icons">add</i>-->
-                    +
-                </a>
-                <a href="#!" class="breadcrumb">First</a>
-                <a href="#!" class="breadcrumb">Second</a>
-                <a href="#!" class="breadcrumb">Third</a>
-            </div>
-        </div>
-    </nav>
+    <breadcrumb [rootModel]="rootModel"></breadcrumb>
 
     <div class="row">
         <div class="col s9">
-            <input id="tagField" type="text">
-            <data-area></data-area>
+            <selection-field></selection-field>
+
+            <div *ngIf="rootModel.contextStack[rootModel.contextStack.length-1]">
+                <data-area [context]="rootModel.contextStack[rootModel.contextStack.length-1]"></data-area>
+            </div>
         </div>
         <div class="col s3">
             <ul class="collapsible popout" data-collapsible="accordion">

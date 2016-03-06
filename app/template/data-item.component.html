@@ -1,0 +1,12 @@
+<div style="{ display: inline-block;}">
+    <div *ngIf="dataItem.isDirectory">
+        <div (dblclick)="openFolder(dataItem)">
+            {{dataItem.name|slice:0:5}}(Folder)
+        </div>
+    </div>
+    <div *ngIf="!dataItem.isDirectory">
+        <div (dblclick)="openFile(dataItem)">
+            {{dataItem.name|slice:0:5}}(File)
+        </div>
+    </div>
+</div>

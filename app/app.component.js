@@ -1,4 +1,4 @@
-System.register(['angular2/core', './core/data.service', "./info-box.component", "./data-area.component"], function(exports_1, context_1) {
+System.register(['angular2/core', './core/data.service', "./info-box.component", "./data-area.component", "./breadcrumb.component", "./selection-field.component", "./core/root-model"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './core/data.service', "./info-box.component",
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_service_1, info_box_component_1, data_area_component_1;
+    var core_1, data_service_1, info_box_component_1, data_area_component_1, breadcrumb_component_1, selection_field_component_1, root_model_1;
     var AppComponent;
     return {
         setters:[
@@ -25,36 +25,45 @@ System.register(['angular2/core', './core/data.service', "./info-box.component",
             },
             function (data_area_component_1_1) {
                 data_area_component_1 = data_area_component_1_1;
+            },
+            function (breadcrumb_component_1_1) {
+                breadcrumb_component_1 = breadcrumb_component_1_1;
+            },
+            function (selection_field_component_1_1) {
+                selection_field_component_1 = selection_field_component_1_1;
+            },
+            function (root_model_1_1) {
+                root_model_1 = root_model_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_dataService) {
-                    this._dataService = _dataService;
+                function AppComponent() {
+                    this.rootModel = new root_model_1.RootModel();
+                    this.rootModel = new root_model_1.RootModel();
                 }
+                //consuming the injection here will not make it available for its children
+                //constructor(private _dataService:DataService){}
                 AppComponent.prototype.ngOnInit = function () {
                     //dom initializations
                     //noinspection TypeScriptUnresolvedFunction
                     $('.collapsible').collapsible({
                         accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
                     });
-                };
-                AppComponent.prototype.openRoot = function () {
-                    var _this = this;
-                    var remote = require('remote');
-                    var dialog = remote.require('dialog');
-                    dialog.showOpenDialog({ properties: ['openDirectory'] }, function (folderToOpen) {
-                        console.log('Root folder: ' + folderToOpen);
-                        _this._dataService.readDirectory(folderToOpen[0]);
-                    });
+                    //this.rootModel=new RootModel();
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
                         templateUrl: 'app/template/app.component.html',
                         providers: [data_service_1.DataService],
-                        directives: [data_area_component_1.DataAreaComponent, info_box_component_1.InfoBoxComponent],
+                        directives: [
+                            breadcrumb_component_1.BreadcrumbComponent,
+                            selection_field_component_1.SelectionFieldComponent,
+                            data_area_component_1.DataAreaComponent,
+                            info_box_component_1.InfoBoxComponent
+                        ],
                     }), 
-                    __metadata('design:paramtypes', [data_service_1.DataService])
+                    __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());

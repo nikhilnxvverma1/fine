@@ -1,5 +1,6 @@
-export class DataItem{
-    public name:string;
-    public isDirectory:boolean;
-
+import {Stats} from "fs";
+export interface DataItem{
+    name:string;
+    isDirectory:boolean;
+    stats:Stats;
 }

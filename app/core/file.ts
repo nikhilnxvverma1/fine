@@ -1,9 +1,17 @@
 import {DataItem} from './data-item';
+import {Stats} from "fs";
 
-export class File extends DataItem{
-    public fileSize:number;
+export class File implements DataItem{
 
-    //more metdata about file
+    name:string;
+    isDirectory:boolean;
+    stats:Stats;
+    //metadata about folder
+    constructor(_name:string,_stats:Stats){
+        this.name=_name;
+        this.isDirectory=false
+        this.stats=_stats;
+    }
 }
 
 

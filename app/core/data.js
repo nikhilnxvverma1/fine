@@ -7,7 +7,8 @@ System.register([], function(exports_1, context_1) {
         execute: function() {
             //this class is mostly a container for data in a directory
             Data = (function () {
-                function Data() {
+                function Data(_dataItems) {
+                    this.dataItems = _dataItems;
                 }
                 return Data;
             }());

@@ -100,7 +100,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 P.component = new COMPONENT(P, SETTINGS)
 
 
-                // Create the picker root with a holder and then prepare it.
+                // Create the picker rootModel with a holder and then prepare it.
                 P.$root = $( PickerConstructor._.node('div', createWrappedComponent(), CLASSES.picker, 'id="' + ELEMENT.id + '_root" tabindex="0"') )
                 prepareElementRoot()
 
@@ -115,7 +115,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 prepareElement()
 
 
-                // Insert the root as specified in the settings.
+                // Insert the rootModel as specified in the settings.
                 if ( SETTINGS.container ) $( SETTINGS.container ).append( P.$root )
                 else $ELEMENT.after( P.$root )
 
@@ -158,7 +158,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
              */
             render: function( entireComponent ) {
 
-                // Insert a new component holder in the root or box.
+                // Insert a new component holder in the rootModel or box.
                 if ( entireComponent ) P.$root.html( createWrappedComponent() )
                 else P.$root.find( '.' + CLASSES.box ).html( P.component.nodes( STATE.open ) )
 
@@ -183,7 +183,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     P._hidden.parentNode.removeChild( P._hidden )
                 }
 
-                // Remove the root.
+                // Remove the rootModel.
                 P.$root.remove()
 
                 // Remove the input class, remove the stored data, and unbind
@@ -225,7 +225,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
                 setTimeout( function() {
 
-                    // Add the “opened” class to the picker root.
+                    // Add the “opened” class to the picker rootModel.
                     P.$root.addClass( CLASSES.opened )
                     aria( P.$root[0], 'hidden', false )
 
@@ -244,8 +244,8 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                             css( 'padding-right', '+=' + getScrollbarWidth() )
                     }
 
-                    // Pass focus to the root element’s jQuery object.
-                    // * Workaround for iOS8 to bring the picker’s root into view.
+                    // Pass focus to the rootModel element’s jQuery object.
+                    // * Workaround for iOS8 to bring the picker’s rootModel into view.
                     P.$root[0].focus()
 
                     // Bind the document events.
@@ -254,7 +254,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                         var target = event.target
 
                         // If the target of the event is not the element, close the picker picker.
-                        // * Don’t worry about clicks or focusins on the root because those don’t bubble up.
+                        // * Don’t worry about clicks or focusins on the rootModel because those don’t bubble up.
                         //   Also, for Firefox, a click on an `option` element bubbles up directly
                         //   to the doc. So make sure the target wasn't the doc.
                         // * In Firefox stopPropagation() doesn’t prevent right-click events from bubbling,
@@ -304,7 +304,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                         }
 
 
-                        // If the target is within the root and “enter” is pressed,
+                        // If the target is within the rootModel and “enter” is pressed,
                         // prevent the default action and trigger a click on the target instead.
                         else if ( $.contains( P.$root[0], target ) && keycode == 13 ) {
                             event.preventDefault()
@@ -343,7 +343,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
                 setTimeout( function() {
 
-                    // Remove the “opened” and “focused” class from the picker root.
+                    // Remove the “opened” and “focused” class from the picker rootModel.
                     P.$root.removeClass( CLASSES.opened + ' ' + CLASSES.focused )
                     aria( P.$root[0], 'hidden', true )
 
@@ -611,7 +611,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
             $ELEMENT.
 
-                // On focus/click, focus onto the root to open it up.
+                // On focus/click, focus onto the rootModel to open it up.
                 on( 'focus.' + STATE.id + ' click.' + STATE.id, function( event ) {
                     event.preventDefault()
                     P.$root[0].focus()
@@ -633,7 +633,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
 
     /**
-     * Prepare the root picker element with all bindings.
+     * Prepare the rootModel picker element with all bindings.
      */
     function prepareElementRoot() {
 
@@ -644,20 +644,20 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 // For iOS8.
                 keydown: handleKeydownEvent,
 
-                // When something within the root is focused, stop from bubbling
-                // to the doc and remove the “focused” state from the root.
+                // When something within the rootModel is focused, stop from bubbling
+                // to the doc and remove the “focused” state from the rootModel.
                 focusin: function( event ) {
                     P.$root.removeClass( CLASSES.focused )
                     event.stopPropagation()
                 },
 
-                // When something within the root holder is clicked, stop it
+                // When something within the rootModel holder is clicked, stop it
                 // from bubbling to the doc.
                 'mousedown click': function( event ) {
 
                     var target = event.target
 
-                    // Make sure the target isn’t the root holder so it can bubble up.
+                    // Make sure the target isn’t the rootModel holder so it can bubble up.
                     if ( target != P.$root.children()[ 0 ] ) {
 
                         event.stopPropagation()
@@ -670,7 +670,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
                             event.preventDefault()
 
-                            // Re-focus onto the root so that users can click away
+                            // Re-focus onto the rootModel so that users can click away
                             // from elements focused within the picker.
                             P.$root[0].focus()
                         }
@@ -688,7 +688,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 }
             }).
 
-            // Open the picker and adjust the root “focused” state
+            // Open the picker and adjust the rootModel “focused” state
             on( 'focus.toOpen', handleFocusToOpenEvent ).
 
             // If there’s a click on an actionable element, carry out the actions.
@@ -727,7 +727,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     P.close( true )
                 }
 
-            }) //P.$root
+            }) //P.$rootModel
 
         aria( P.$root[0], 'hidden', true )
     }
@@ -819,7 +819,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         // Stop the event from propagating to the doc.
         event.stopPropagation()
 
-        // If it’s a focus event, add the “focused” class to the root.
+        // If it’s a focus event, add the “focused” class to the rootModel.
         if ( event.type == 'focus' ) {
             P.$root.addClass( CLASSES.focused )
         }

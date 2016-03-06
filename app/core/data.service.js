@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', "./folder", "./file"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,18 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, folder_1, file_1;
     var DataService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (folder_1_1) {
+                folder_1 = folder_1_1;
+            },
+            function (file_1_1) {
+                file_1 = file_1_1;
             }],
         execute: function() {
             DataService = (function () {
@@ -23,17 +29,31 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
                 DataService.prototype.readDirectory = function (directoryPath) {
                     var fs = require('fs');
+                    var dataItemsResult = [];
+                    console.log("1");
                     fs.readdir(directoryPath, function (err, dataItems) {
                         if (err)
                             throw err;
                         dataItems.forEach((function (dataItem) {
+                            dataItems.push(dataItem);
                             fs.stat(directoryPath + '/' + dataItem, function (err, stats) {
                                 if (err)
                                     throw err;
                                 console.log("name : " + dataItem + " is direcotyr" + stats.isDirectory());
+                                if (stats.isDirectory()) {
+                                    var folder = new folder_1.Folder(dataItem, stats);
+                                    dataItemsResult.push(folder);
+                                }
+                                else {
+                                    var file = new file_1.File(dataItem, stats);
+                                    dataItemsResult.push(file);
+                                }
+                                console.log("2");
                             });
                         }));
                     });
+                    console.log("3");
+                    return dataItemsResult;
                 };
                 DataService = __decorate([
                     core_1.Injectable(), 
