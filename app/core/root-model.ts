@@ -1,9 +1,9 @@
 import {Context} from './context'
-import {DataService} from './data.service'
 import {Operation} from './operation'
+import {Injectable} from "angular2/core";
 
-export class Root{
-    public shell:DataService;
+@Injectable()
+export class RootModel{
     public rootDirectory:string;
     public contextStack:Context[];
 }
