@@ -1,10 +1,10 @@
 <html>
   <head>
-    <title>Angular 2 QuickStart</title>
+    <title>FI.NE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
 	<!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
@@ -15,6 +15,15 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <!--<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>-->
+    <script>window.$ = window.jQuery = require('./js/jquery-2.1.1.min.js');</script>
+    <script>var Hammer = require('./js/hammer-2.0.6.min.js');</script>
+    <!--<script>-->
+      <!--var Hammer = require('hammerjs');-->
+      <!--console.log( [$, jQuery, Hammer ]);-->
+    <!--</script>-->
+      <script type="text/javascript" src="js/bin/materialize.min.js"></script>
 
     <!-- 2. Configure SystemJS -->
     <script>
@@ -28,12 +37,67 @@
       });
       System.import('app/boot')
             .then(null, console.error.bind(console));
+
+
+      //DOM ready for initializations
+      $(document).ready(function(){
+          $('.collapsible').collapsible({
+              accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+          });
+      });
     </script>
   </head>
 
   <!-- 3. Display the application -->
   <body>
     <!--<my-app>Loading...</my-app>-->
-	
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a class="btn-floating btn-med waves-effect waves-light red">
+                        <!--<i class="material-icons">add</i>-->
+                        +
+                    </a>
+                    <a href="#!" class="breadcrumb">First</a>
+                    <a href="#!" class="breadcrumb">Second</a>
+                    <a href="#!" class="breadcrumb">Third</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col s9">
+                <input id="tagField" type="text">
+                Selections
+            </div>
+            <div class="col s3">
+                <ul class="collapsible popout" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header">Rename</div>
+                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Group</div>
+                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Move</div>
+                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Copy</div>
+                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Delete</div>
+                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
   </body>
 </html>
