@@ -20,6 +20,6 @@ export class DataItemComponent {
     }
 
     openFile(file:File){
-        console.log("opening file"+file.name)
+        console.log("opening file"+file.name);
     }
 }

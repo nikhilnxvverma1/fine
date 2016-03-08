@@ -1,38 +1,26 @@
 <div class="row">
-    <breadcrumb [rootModel]="rootModel"></breadcrumb>
-
-    <div class="row">
-        <div class="col s9">
-            <selection-field></selection-field>
-
-            <div *ngIf="rootModel.contextStack[rootModel.contextStack.length-1]">
-                <data-area [context]="rootModel.contextStack[rootModel.contextStack.length-1]"></data-area>
-            </div>
-        </div>
-        <div class="col s3">
-            <ul class="collapsible popout" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header">Rename</div>
-                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">Group</div>
-                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">Move</div>
-                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">Copy</div>
-                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">Delete</div>
-                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-            </ul>
-            <info-box></info-box>
-        </div>
-    </div>
+    <breadcrumb [rootModel]="rootModel" [contextStack]="rootModel.contextStack" (opendir)="openDirectory($event)"></breadcrumb>
 </div>
+
+<ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header">Rename</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+        <div class="collapsible-header">Group</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+        <div class="collapsible-header">Move</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+        <div class="collapsible-header">Copy</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+        <div class="collapsible-header">Delete</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+</ul>

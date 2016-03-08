@@ -11,6 +11,7 @@ System.register([], function(exports_1, context_1) {
                     this.name = _name;
                     this.isDirectory = false;
                     this.stats = _stats;
+                    this.selected = false;
                 }
                 return File;
             }());

@@ -1,4 +1,4 @@
-System.register(['angular2/core', './core/data.service', "./info-box.component", "./data-area.component", "./breadcrumb.component", "./selection-field.component", "./core/root-model"], function(exports_1, context_1) {
+System.register(['angular2/core', './core/data.service', "./breadcrumb.component", "./core/root-model", "./core/context", "./context.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './core/data.service', "./info-box.component",
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_service_1, info_box_component_1, data_area_component_1, breadcrumb_component_1, selection_field_component_1, root_model_1;
+    var core_1, data_service_1, breadcrumb_component_1, root_model_1, context_2, context_component_1;
     var AppComponent;
     return {
         setters:[
@@ -20,36 +20,42 @@ System.register(['angular2/core', './core/data.service', "./info-box.component",
             function (data_service_1_1) {
                 data_service_1 = data_service_1_1;
             },
-            function (info_box_component_1_1) {
-                info_box_component_1 = info_box_component_1_1;
-            },
-            function (data_area_component_1_1) {
-                data_area_component_1 = data_area_component_1_1;
-            },
             function (breadcrumb_component_1_1) {
                 breadcrumb_component_1 = breadcrumb_component_1_1;
             },
-            function (selection_field_component_1_1) {
-                selection_field_component_1 = selection_field_component_1_1;
-            },
             function (root_model_1_1) {
                 root_model_1 = root_model_1_1;
+            },
+            function (context_2_1) {
+                context_2 = context_2_1;
+            },
+            function (context_component_1_1) {
+                context_component_1 = context_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
                     this.rootModel = new root_model_1.RootModel();
+                    //this is a patch for not having injections possible across multiple components
+                    //we should't "new" services
+                    this._dataService = new data_service_1.DataService();
                     this.rootModel = new root_model_1.RootModel();
                 }
-                //consuming the injection here will not make it available for its children
-                //constructor(private _dataService:DataService){}
                 AppComponent.prototype.ngOnInit = function () {
                     //dom initializations
                     //noinspection TypeScriptUnresolvedFunction
                     $('.collapsible').collapsible({
                         accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
                     });
-                    //this.rootModel=new RootModel();
+                };
+                AppComponent.prototype.openDirectory = function (folder) {
+                    console.log("about to open folder" + folder.name);
+                    var dataItems = this._dataService.readDirectory(this.rootModel.getFullPathTillEnd() + '/' + folder.name);
+                    var context = new context_2.Context(); //null context meaning root
+                    context.dataItems = dataItems;
+                    context.parentFolder = folder;
+                    //this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length);
+                    this.rootModel.contextStack.push(context);
                 };
                 AppComponent = __decorate([
                     core_1.Component({
@@ -58,9 +64,7 @@ System.register(['angular2/core', './core/data.service', "./info-box.component",
                         providers: [data_service_1.DataService],
                         directives: [
                             breadcrumb_component_1.BreadcrumbComponent,
-                            selection_field_component_1.SelectionFieldComponent,
-                            data_area_component_1.DataAreaComponent,
-                            info_box_component_1.InfoBoxComponent
+                            context_component_1.ContextComponent
                         ],
                     }), 
                     __metadata('design:paramtypes', [])

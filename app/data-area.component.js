@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./data-item.component", "./core/context"], function(exports_1, context_1) {
+System.register(['angular2/core', "./data-item.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,23 @@ System.register(['angular2/core', "./data-item.component", "./core/context"], fu
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_item_component_1, core_2, context_2;
+    var core_1, data_item_component_1, core_2, core_3, core_4;
     var DataAreaComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
                 core_2 = core_1_1;
+                core_3 = core_1_1;
+                core_4 = core_1_1;
             },
             function (data_item_component_1_1) {
                 data_item_component_1 = data_item_component_1_1;
-            },
-            function (context_2_1) {
-                context_2 = context_2_1;
             }],
         execute: function() {
             DataAreaComponent = (function () {
                 function DataAreaComponent() {
+                    this.openDir = new core_4.EventEmitter();
                 }
                 DataAreaComponent.prototype.ngOnChanges = function (changes) {
                     console.log("Changes made to the rootmodel");
@@ -36,12 +36,17 @@ System.register(['angular2/core', "./data-item.component", "./core/context"], fu
                     return undefined;
                 };
                 DataAreaComponent.prototype.addNewContext = function (folder) {
-                    console.log("will open folder" + folder);
+                    console.log("will open folder" + folder.name);
+                    this.openDir.emit(folder);
                 };
                 __decorate([
-                    core_2.Input('context'), 
-                    __metadata('design:type', context_2.Context)
-                ], DataAreaComponent.prototype, "context", void 0);
+                    core_2.Input('dataItems'), 
+                    __metadata('design:type', Array)
+                ], DataAreaComponent.prototype, "dataItems", void 0);
+                __decorate([
+                    core_3.Output('opendir'), 
+                    __metadata('design:type', core_4.EventEmitter)
+                ], DataAreaComponent.prototype, "openDir", void 0);
                 DataAreaComponent = __decorate([
                     core_1.Component({
                         selector: 'data-area',

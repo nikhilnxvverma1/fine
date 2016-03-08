@@ -1,18 +1,23 @@
+<span *ngFor="#single of message">
+    {{single}}
+</span>
 <nav>
     <div class="nav-wrapper">
-        <div class="col s12">
+        <span class="col s12">
             <a class="btn-floating btn-med waves-effect waves-light red" (click)="openRoot()">
                 <!--<i class="material-icons">add</i>-->
                 +
             </a>
-            <a href="#!" class="breadcrumb">First</a>
-            <a href="#!" class="breadcrumb">Second</a>
-            <a href="#!" class="breadcrumb">Third</a>
-        </div>
+            <a *ngFor="#context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">
+                <span *ngIf="!context.parentFolder">
+                    Root
+                </span>
+                <span *ngIf="context.parentFolder">
+                    {{context.parentFolder.name}}
+                    </span>
+            </a>
+            </span>
     </div>
-    <!--<div *ngIf="rootModel">-->
-        <!--<h1>dir</h1>-->
-        <!--<h2>={{rootModel.rootDirectory}}=</h2>-->
-    <!--</div>-->
-
 </nav>
+<folder-context *ngFor="#context of contextStack" [context]="context" (opendir)="addNewContext($event)">Loading...</folder-context>
+<!--<folder-context [context]="contextStack[contextStack.length-1]" (opendir)="addNewContext($event)">Loading...</folder-context>-->

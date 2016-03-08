@@ -5,6 +5,10 @@ import {DataAreaComponent} from "./data-area.component";
 import {BreadcrumbComponent} from "./breadcrumb.component";
 import {SelectionFieldComponent} from "./selection-field.component";
 import {RootModel} from "./core/root-model";
+import {Context} from "./core/context";
+import {DataItem} from "./core/data-item";
+import {Data} from "./core/data";
+import {ContextComponent} from "./context.component";
 
 @Component({
     selector: 'app',
@@ -12,20 +16,26 @@ import {RootModel} from "./core/root-model";
     providers: [DataService],
     directives: [
         BreadcrumbComponent,
-        SelectionFieldComponent,
-        DataAreaComponent,
-        InfoBoxComponent
+        ContextComponent
+        //SelectionFieldComponent,
+        //DataAreaComponent,
+        //InfoBoxComponent
     ],
 })
 export class AppComponent implements OnInit{
 
     public rootModel:RootModel=new RootModel();
 
+    //this is a patch for not having injections possible across multiple components
+    //we should't "new" services
+    private _dataService:DataService=new DataService();
     constructor(){
         this.rootModel=new RootModel();
+
     }
     //consuming the injection here will not make it available for its children
-    //constructor(private _dataService:DataService){}
+    constructor(private _dataService:DataService){}
+
     ngOnInit():any {
 
         //dom initializations
@@ -33,8 +43,19 @@ export class AppComponent implements OnInit{
         $('.collapsible').collapsible({//ignore the red, the method is loaded before
             accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
         });
-        //this.rootModel=new RootModel();
     }
+
+
+    openDirectory(folder){
+        console.log("about to open folder"+folder.name);
+        var dataItems:DataItem[]=this._dataService.readDirectory(this.rootModel.getFullPathTillEnd()+'/'+folder.name);
+        var context=new Context();//null context meaning root
+        context.dataItems=dataItems;
+        context.parentFolder=folder;
+        //this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length);
+        this.rootModel.contextStack.push(context);
+    }
+
 
 
 }

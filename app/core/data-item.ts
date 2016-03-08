@@ -3,4 +3,5 @@ export interface DataItem{
     name:string;
     isDirectory:boolean;
     stats:Stats;
+    selected:boolean;
 }
