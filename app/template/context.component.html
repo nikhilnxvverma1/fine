@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col s9">
-        <selection-field></selection-field>
+        <selection-field [tags]="context.tags" (tagadded)="incrementDataItemsQualifying($event)" (tagremoved)="decrementDataItemsQualifying($event)"></selection-field>
 
         <div *ngIf="context">
-            <data-area [dataItems]="context.dataItems" (opendir)="addNewContext($event)"></data-area>
+            <data-area [dataItems]="context.dataItems" (opendataitem)="openDataItem($event)"></data-area>
         </div>
     </div>
     <div class="col s3">

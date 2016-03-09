@@ -1,26 +1,3 @@
 <div class="row">
-    <breadcrumb [rootModel]="rootModel" [contextStack]="rootModel.contextStack" (opendir)="openDirectory($event)"></breadcrumb>
+    <breadcrumb [rootModel]="rootModel" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></breadcrumb>
 </div>
-
-<ul class="collapsible popout" data-collapsible="accordion">
-    <li>
-        <div class="collapsible-header">Rename</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-        <div class="collapsible-header">Group</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-        <div class="collapsible-header">Move</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-        <div class="collapsible-header">Copy</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-        <div class="collapsible-header">Delete</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-</ul>

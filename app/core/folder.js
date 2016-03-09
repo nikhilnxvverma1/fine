@@ -12,6 +12,7 @@ System.register([], function(exports_1, context_1) {
                     this.isDirectory = true;
                     this.stats = _stats;
                     this.selected = false;
+                    this.qualifyingTags = 0;
                 }
                 return Folder;
             }());

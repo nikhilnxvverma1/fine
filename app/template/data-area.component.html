@@ -1,5 +1,5 @@
 <div class="row">
     <div class="col s2" *ngFor="#dataItem of dataItems">
-        <data-item [dataItem]="dataItem" (openfolder)="addNewContext($event)"></data-item>
+        <data-item [dataItem]="dataItem" (opendataitem)="openDataItem($event)"></data-item>
     </div>
 </div>

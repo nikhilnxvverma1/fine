@@ -35,32 +35,17 @@ System.register(['angular2/core', "./core/data.service", "./core/root-model", ".
             }],
         execute: function() {
             BreadcrumbComponent = (function () {
-                //@Input('dataService') public _dataService:DataService;
-                function BreadcrumbComponent(_dataService, _changeDetectorRef, _zone) {
+                function BreadcrumbComponent(_dataService, _zone) {
                     this._dataService = _dataService;
-                    this._changeDetectorRef = _changeDetectorRef;
                     this._zone = _zone;
-                    this.openDir = new core_3.EventEmitter();
-                    this.message = [];
-                    //var timeOut = setInterval(()=> {
-                    //    this.message.push(Math.floor(Math.random() * 1000) + 1+": random");
-                    //}, 1000);
-                    //var dialog=require('dialog');
-                    //dialog.showErrorBox('test', 'test');
+                    this.openDataItemEvent = new core_3.EventEmitter();
                 }
-                BreadcrumbComponent.prototype.ngOnChanges = function (changes) {
-                    console.log("Changes made" + this.contextStack.length);
-                    return undefined;
-                };
                 BreadcrumbComponent.prototype.openRoot = function () {
                     var _this = this;
-                    //this.message.push(Math.floor(Math.random() * 1000) + 1+": random");
                     var remote = require('remote');
                     var dialog = remote.require('dialog');
-                    // /Users/NikhilVerma/Documents/Laying bricks
                     dialog.showOpenDialog({ properties: ['openDirectory'] }, function (folderToOpen) {
                         _this._zone.run(function () {
-                            //console.log("length of data items"+dataItems1.length);
                             if (folderToOpen == null)
                                 return;
                             var dataItems = _this._dataService.readDirectory(folderToOpen[0]); //this also needs to happen inside ng zone
@@ -73,8 +58,6 @@ System.register(['angular2/core', "./core/data.service", "./core/root-model", ".
                             _this.contextStack.splice(0, _this.rootModel.contextStack.length);
                             _this.contextStack.push(context);
                             console.log('RootModel Model folder: ' + _this.rootModel.rootDirectory);
-                            //this._changeDetectorRef.detectChanges();
-                            _this.message.push(Math.floor(Math.random() * 1000) + 1 + ": random");
                         });
                     });
                 };
@@ -84,9 +67,9 @@ System.register(['angular2/core', "./core/data.service", "./core/root-model", ".
                         return;
                     this.contextStack.splice(index + 1, this.contextStack.length);
                 };
-                BreadcrumbComponent.prototype.addNewContext = function (folder) {
-                    console.log("will open folder" + folder.name);
-                    this.openDir.emit(folder);
+                BreadcrumbComponent.prototype.openDataItem = function (dataItem) {
+                    console.log("will open data item" + dataItem.name);
+                    this.openDataItemEvent.emit(dataItem);
                 };
                 __decorate([
                     core_2.Input('rootModel'), 
@@ -97,18 +80,17 @@ System.register(['angular2/core', "./core/data.service", "./core/root-model", ".
                     __metadata('design:type', Array)
                 ], BreadcrumbComponent.prototype, "contextStack", void 0);
                 __decorate([
-                    core_3.Output('opendir'), 
+                    core_3.Output('opendataitem'), 
                     __metadata('design:type', core_3.EventEmitter)
-                ], BreadcrumbComponent.prototype, "openDir", void 0);
+                ], BreadcrumbComponent.prototype, "openDataItemEvent", void 0);
                 BreadcrumbComponent = __decorate([
                     core_1.Component({
-                        //inputs:['rootModel'],
                         selector: 'breadcrumb',
                         directives: [context_component_1.ContextComponent],
                         templateUrl: 'app/template/breadcrumb.component.html',
                         providers: [core_4.ChangeDetectorRef]
                     }), 
-                    __metadata('design:paramtypes', [data_service_1.DataService, core_4.ChangeDetectorRef, core_5.NgZone])
+                    __metadata('design:paramtypes', [data_service_1.DataService, core_5.NgZone])
                 ], BreadcrumbComponent);
                 return BreadcrumbComponent;
             }());

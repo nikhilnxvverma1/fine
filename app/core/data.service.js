@@ -37,7 +37,6 @@ System.register(['angular2/core', "./folder", "./file"], function(exports_1, con
                         if (err)
                             throw err;
                         dataItems.forEach((function (dataItem) {
-                            //dataItems.push(dataItem);
                             fs.stat(directoryPath + '/' + dataItem, function (err, stats) {
                                 _this._zone.run(function () {
                                     if (err)

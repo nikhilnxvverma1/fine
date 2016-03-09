@@ -12,14 +12,9 @@ import {EventEmitter} from "angular2/core";
 export class DataItemComponent {
 
     @Input('dataItem') dataItem:DataItem;
-    @Output('openfolder') openFolderEvent:EventEmitter<Folder>=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
 
-    openFolder(folder:Folder){
-        console.log("opening folder"+folder.name)
-        this.openFolderEvent.emit(folder);
-    }
-
-    openFile(file:File){
-        console.log("opening file"+file.name);
+    openDataItem(dataItem:DataItem){
+        this.openDataItemEvent.emit(dataItem);
     }
 }

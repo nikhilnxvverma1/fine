@@ -1,12 +1,12 @@
 <div style="{ display: inline-block;}">
     <div *ngIf="dataItem.isDirectory">
-        <div (dblclick)="openFolder(dataItem)">
-            {{dataItem.name|slice:0:5}}(Folder)
+        <div (dblclick)="openDataItem(dataItem)">
+            {{dataItem.name|slice:0:5}}(Fo){{dataItem.qualifyingTags}}|
         </div>
     </div>
     <div *ngIf="!dataItem.isDirectory">
-        <div (dblclick)="openFile(dataItem)">
-            {{dataItem.name|slice:0:5}}(File)
+        <div (dblclick)="openDataItem(dataItem)">
+            {{dataItem.name|slice:0:5}}(Fi){{dataItem.qualifyingTags}}|
         </div>
     </div>
 </div>

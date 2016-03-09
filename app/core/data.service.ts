@@ -21,8 +21,6 @@ export class DataService{
             if(err) throw err;
             dataItems.forEach((dataItem=>{
 
-                //dataItems.push(dataItem);
-
                 fs.stat(directoryPath+'/'+dataItem,(err,stats)=>{
                     this._zone.run(()=>{
                         if(err) throw err;

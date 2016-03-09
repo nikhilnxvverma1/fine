@@ -1,6 +1,3 @@
-<span *ngFor="#single of message">
-    {{single}}
-</span>
 <nav>
     <div class="nav-wrapper">
         <span class="col s12">
@@ -14,10 +11,9 @@
                 </span>
                 <span *ngIf="context.parentFolder">
                     {{context.parentFolder.name}}
-                    </span>
+                </span>
             </a>
             </span>
     </div>
 </nav>
-<folder-context *ngFor="#context of contextStack" [context]="context" (opendir)="addNewContext($event)">Loading...</folder-context>
-<!--<folder-context [context]="contextStack[contextStack.length-1]" (opendir)="addNewContext($event)">Loading...</folder-context>-->
+<folder-context *ngIf="contextStack[contextStack.length-1]" [context]="contextStack[contextStack.length-1]" (opendataitem)="openDataItem($event)">Loading...</folder-context>

@@ -6,11 +6,14 @@ export class Folder implements DataItem{
     isDirectory:boolean;
     stats:Stats;
     selected:boolean;
+    qualifyingTags:number;
+
     //metadata about folder
     constructor(_name:string,_stats:Stats){
         this.name=_name;
         this.isDirectory=true;
         this.stats=_stats;
         this.selected=false;
+        this.qualifyingTags=0;
     }
 }

@@ -1,1 +1,7 @@
-<input id="tagField" type="text">
+<div>
+    <div *ngFor="#tag of tags"  class="chip">
+        {{tag.name}}
+        <i class="material-icons" (click)="removeTag(tag)">X</i>
+    </div>
+    <input id="tagField" type="text" (keyup)="addTagOnSpace($event)" [(ngModel)]="currentInput">
+</div>

@@ -26,11 +26,11 @@ export class DataAreaComponent implements OnInit,OnChanges{
 
     //@Input('context') public context:Context;
     @Input('dataItems') public dataItems:DataItem[];
-    @Output('opendir') openDir:EventEmitter=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
 
-    addNewContext(folder){
-        console.log("will open folder"+folder.name);
-        this.openDir.emit(folder);
+    openDataItem(dataItem){
+        console.log("will open data item"+dataItem.name);
+        this.openDataItemEvent.emit(dataItem);
     }
 
 }

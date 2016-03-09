@@ -26,7 +26,7 @@ System.register(['angular2/core', "./data-item.component"], function(exports_1, 
         execute: function() {
             DataAreaComponent = (function () {
                 function DataAreaComponent() {
-                    this.openDir = new core_4.EventEmitter();
+                    this.openDataItemEvent = new core_4.EventEmitter();
                 }
                 DataAreaComponent.prototype.ngOnChanges = function (changes) {
                     console.log("Changes made to the rootmodel");
@@ -35,18 +35,18 @@ System.register(['angular2/core', "./data-item.component"], function(exports_1, 
                 DataAreaComponent.prototype.ngOnInit = function () {
                     return undefined;
                 };
-                DataAreaComponent.prototype.addNewContext = function (folder) {
-                    console.log("will open folder" + folder.name);
-                    this.openDir.emit(folder);
+                DataAreaComponent.prototype.openDataItem = function (dataItem) {
+                    console.log("will open data item" + dataItem.name);
+                    this.openDataItemEvent.emit(dataItem);
                 };
                 __decorate([
                     core_2.Input('dataItems'), 
                     __metadata('design:type', Array)
                 ], DataAreaComponent.prototype, "dataItems", void 0);
                 __decorate([
-                    core_3.Output('opendir'), 
+                    core_3.Output('opendataitem'), 
                     __metadata('design:type', core_4.EventEmitter)
-                ], DataAreaComponent.prototype, "openDir", void 0);
+                ], DataAreaComponent.prototype, "openDataItemEvent", void 0);
                 DataAreaComponent = __decorate([
                     core_1.Component({
                         selector: 'data-area',

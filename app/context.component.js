@@ -34,20 +34,44 @@ System.register(['angular2/core', "./core/context", "./selection-field.component
         execute: function() {
             ContextComponent = (function () {
                 function ContextComponent() {
-                    this.openDir = new core_3.EventEmitter();
+                    this.openDataItemEvent = new core_3.EventEmitter();
                 }
-                ContextComponent.prototype.addNewContext = function (folder) {
-                    console.log("will open folder" + folder.name);
-                    this.openDir.emit(folder);
+                ContextComponent.prototype.openDataItem = function (dataItem) {
+                    console.log("will open folder" + dataItem.name);
+                    this.openDataItemEvent.emit(dataItem);
+                };
+                ContextComponent.prototype.incrementDataItemsQualifying = function (tag) {
+                    console.log('will increment items qualifiying ' + tag.name);
+                    this.matchForTagAndAdd(tag, 1);
+                };
+                ContextComponent.prototype.decrementDataItemsQualifying = function (tag) {
+                    console.log('will decrement items qualifiying ' + tag.name);
+                    this.matchForTagAndAdd(tag, -1);
+                };
+                ContextComponent.prototype.matchForTagAndAdd = function (tag, increment) {
+                    for (var i = 0; i < this.context.dataItems.length; i++) {
+                        var dataItem = this.context.dataItems[i];
+                        var dataItemName = dataItem.name.toLowerCase();
+                        var tagName = tag.name.toLowerCase();
+                        var position = dataItemName.search(tagName);
+                        if (position != -1) {
+                            dataItem.qualifyingTags += increment;
+                        }
+                    }
+                    console.log("List o selected files are :");
+                    var selected = this.context.getSelectedFiles();
+                    for (var i = 0; i < selected.length; i++) {
+                        console.log(selected[i].name);
+                    }
                 };
                 __decorate([
                     core_2.Input('context'), 
                     __metadata('design:type', context_2.Context)
                 ], ContextComponent.prototype, "context", void 0);
                 __decorate([
-                    core_3.Output('opendir'), 
+                    core_3.Output('opendataitem'), 
                     __metadata('design:type', core_3.EventEmitter)
-                ], ContextComponent.prototype, "openDir", void 0);
+                ], ContextComponent.prototype, "openDataItemEvent", void 0);
                 ContextComponent = __decorate([
                     core_1.Component({
                         selector: 'folder-context',

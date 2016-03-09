@@ -23,23 +23,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             DataItemComponent = (function () {
                 function DataItemComponent() {
-                    this.openFolderEvent = new core_4.EventEmitter();
+                    this.openDataItemEvent = new core_4.EventEmitter();
                 }
-                DataItemComponent.prototype.openFolder = function (folder) {
-                    console.log("opening folder" + folder.name);
-                    this.openFolderEvent.emit(folder);
-                };
-                DataItemComponent.prototype.openFile = function (file) {
-                    console.log("opening file" + file.name);
+                DataItemComponent.prototype.openDataItem = function (dataItem) {
+                    this.openDataItemEvent.emit(dataItem);
                 };
                 __decorate([
                     core_2.Input('dataItem'), 
                     __metadata('design:type', Object)
                 ], DataItemComponent.prototype, "dataItem", void 0);
                 __decorate([
-                    core_3.Output('openfolder'), 
+                    core_3.Output('opendataitem'), 
                     __metadata('design:type', core_4.EventEmitter)
-                ], DataItemComponent.prototype, "openFolderEvent", void 0);
+                ], DataItemComponent.prototype, "openDataItemEvent", void 0);
                 DataItemComponent = __decorate([
                     core_1.Component({
                         selector: 'data-item',
