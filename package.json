@@ -1,39 +1,40 @@
 {
-  "name": "file-explorer",
-  "version": "1.0.0",
-  "description": "A neat file explorer",
+  "name": "fine",
+  "version": "0.1.0",
+  "description": "A neat file organizer",
   "main": "main.js",
   "scripts": {
-	"start": "electron main.js",    
+    "start": "electron main.js",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lite": "lite-server",
     "typings": "typings",
-    "postinstall": "typings install" 
+    "postinstall": "typings install"
   },
   "dependencies": {
-    "gulp-install": "^0.6.0",
-	
-	"angular2": "2.0.0-beta.8",
-    "systemjs": "0.19.22",
+    "angular2": "2.0.0-beta.8",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.22",
     "zone.js": "0.5.15"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.36.0",
-	
     "asar": "^0.10.0",
     "fs-jetpack": "^0.7.1",
-    "gulp": "^3.9.1",
     "q": "^1.4.1",
     "rcedit": "^0.4.0",
-	
-	"concurrently": "^2.0.0",
+    "concurrently": "^2.0.0",
     "lite-server": "^2.1.0",
     "typescript": "^1.8.2",
-    "typings":"^0.6.8"
+    "typings": "^0.6.8",
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.0",
+    "gulp-watch": "^4.3.5",
+    "gulp-sass": "^2.0.4",
+    "gulp-install": "^0.6.0",
+    "gulp-typescript": "^2.13.6",
   }
 }
