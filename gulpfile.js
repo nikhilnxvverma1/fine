@@ -17,10 +17,22 @@ var paths = {
     output: './css'
   },
   'typescript':{
-    src: './app-ts/**/*.ts',
-    output:'./app-js',
-    sourcemaps:'./sourcemaps'
+    src: ['./app/**/*.ts'],
+    rootTypescriptDir:'./app',
+    outputJavascriptDir:'./app/transpiled',
+    relativeSourcemaps:'./sourcemaps'
   }
+};
+
+var tsOptions={
+    noImplicitAny: false,
+    target:'es6',
+    module:'system',
+    moduleResolution:'node',
+    experimentalDecorators:true,
+    emitDecoratorMetadata:true,
+    rootDir:paths.typescript.rootTypescriptDir,
+    outDir:paths.typescript.outputJavascriptDir
 };
 
 gulp.task('watch:sass', function () {
@@ -38,15 +50,11 @@ gulp.task('watch:typescript',function(){
 });
 
 gulp.task('typescript',function(){
-  return gulp.src(paths.typescript.src)
-      .pipe(sourcemaps.init())
-      .pipe(ts({
-        noImplicitAny: false,
-        rootDir:'./app-ts',
-        outDir:'./app-js'
-      }))
-      .pipe(sourcemaps.write(paths.typescript.sourcemaps))
-      .pipe(gulp.dest(paths.typescript.output));
+    return gulp.src(paths.typescript.src)
+        .pipe(sourcemaps.init())
+        .pipe(ts(tsOptions))
+        .pipe(sourcemaps.write(paths.typescript.relativeSourcemaps))
+        .pipe(gulp.dest(paths.typescript.outputJavascriptDir));
 });
 
 // create the gulp task
