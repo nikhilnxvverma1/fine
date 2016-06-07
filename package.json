@@ -32,7 +32,7 @@
   "devDependencies": {
     "asar": "^0.10.0",
     "concurrently": "^2.0.0",
-    "electron-prebuilt": "^0.36.0",
+    "electron-prebuilt": "^1.2.0",
     "fs-jetpack": "^0.7.1",
     "gulp": "^3.9.1",
     "gulp-install": "^0.6.0",
