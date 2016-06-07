@@ -1,14 +1,14 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
-import {Input} from "angular2/core";
+import {Input} from "@angular/core";
 import {DataItem} from "./core/data-item";
 import {Context} from "./core/context";
 import {Data} from "./core/data";
 import {SelectionFieldComponent} from "./selection-field.component";
 import {DataAreaComponent} from "./data-area.component";
 import {InfoBoxComponent} from "./info-box.component";
-import {Output,EventEmitter} from "angular2/core";
+import {Output,EventEmitter} from "@angular/core";
 import {Tag} from "./core/tag";
 
 @Component({

@@ -1,4 +1,4 @@
-import {Component,OnInit} from 'angular2/core';
+import {Component,OnInit} from '@angular/core';
 import {DataService} from './core/data.service'
 import {InfoBoxComponent} from "./info-box.component";
 import {DataAreaComponent} from "./data-area.component";
@@ -9,7 +9,7 @@ import {Context} from "./core/context";
 import {DataItem} from "./core/data-item";
 import {Data} from "./core/data";
 import {ContextComponent} from "./context.component";
-import {Inject} from "angular2/core";
+import {Inject} from "@angular/core";
 import {Folder} from "./core/folder";
 
 @Component({
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit{
             this.rootModel.contextStack.push(context);
             //this.contextStack.splice(0,this.rootModel.contextStack.length);
             //this.contextStack.push(context);
-            console.log('RootModel Model folder: '+this.rootModel.rootDirectory);
+            console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
     }
 

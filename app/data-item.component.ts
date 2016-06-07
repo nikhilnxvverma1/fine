@@ -1,9 +1,9 @@
-import {Component} from 'angular2/core';
-import {Input} from "angular2/core";
+import {Component} from '@angular/core';
+import {Input} from "@angular/core";
 import {DataItem} from "./core/data-item";
 import {Folder} from "./core/folder";
-import {Output} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {Output} from "@angular/core";
+import {EventEmitter} from "@angular/core";
 
 @Component({
     selector: 'data-item',

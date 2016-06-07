@@ -1,6 +1,6 @@
 import {Context} from './context'
 import {Operation} from './operation'
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 //@Injectable()
 export class RootModel{

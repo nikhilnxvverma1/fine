@@ -1,8 +1,8 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {DataItem} from "./data-item";
 import {Folder} from "./folder";
 import {File} from "./file";
-import {NgZone} from "angular2/core";
+import {NgZone} from "@angular/core";
 
 @Injectable()
 export class DataService{

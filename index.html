@@ -9,23 +9,18 @@
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>   
-
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <!--Import jQuery before materialize.js-->
-    <!--<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>-->
     <script>window.$ = window.jQuery = require('./js/jquery-2.1.1.min.js');</script>
     <script>var Hammer = require('./js/hammer-2.0.6.min.js');</script>
-    <!--<script>-->
-      <!--var Hammer = require('hammerjs');-->
-      <!--console.log( [$, jQuery, Hammer ]);-->
-    <!--</script>-->
-      <script type="text/javascript" src="js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="js/bin/materialize.min.js"></script>
 
     <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
     <script>
       System.config({
         packages: {        

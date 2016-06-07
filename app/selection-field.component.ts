@@ -1,9 +1,9 @@
-import {Component} from 'angular2/core';
-import {Input} from "angular2/core";
+import {Component} from '@angular/core';
+import {Input} from "@angular/core";
 import {Tag} from "./core/tag";
 import {TextTag} from "./core/text-tag";
-import {Output} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {Output} from "@angular/core";
+import {EventEmitter} from "@angular/core";
 
 @Component({
     selector: 'selection-field',

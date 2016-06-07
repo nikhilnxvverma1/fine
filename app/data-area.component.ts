@@ -1,12 +1,12 @@
-import {Component,OnInit} from 'angular2/core';
+import {Component,OnInit} from '@angular/core';
 import {DataItemComponent} from "./data-item.component";
-import {Input} from "angular2/core";
+import {Input} from "@angular/core";
 import {Context} from "./core/context";
 import {RootModel} from "./core/root-model";
-import {OnChanges} from "angular2/core";
+import {OnChanges} from "@angular/core";
 import {Data} from "./core/data";
-import {Output} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {Output} from "@angular/core";
+import {EventEmitter} from "@angular/core";
 import {DataItem} from "./core/data-item";
 
 @Component({

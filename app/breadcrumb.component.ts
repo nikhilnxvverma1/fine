@@ -1,15 +1,15 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
-import {Input} from "angular2/core";
+import {Input} from "@angular/core";
 import {DataItem} from "./core/data-item";
 import {Context} from "./core/context";
 import {Data} from "./core/data";
-import {Output,EventEmitter} from "angular2/core";
+import {Output,EventEmitter} from "@angular/core";
 import {ContextComponent} from "./context.component";
-import {OnChanges} from "angular2/core";
-import {ChangeDetectorRef} from "angular2/core";
-import {NgZone} from "angular2/core";
+import {OnChanges} from "@angular/core";
+import {ChangeDetectorRef} from "@angular/core";
+import {NgZone} from "@angular/core";
 
 @Component({
     selector: 'breadcrumb',
