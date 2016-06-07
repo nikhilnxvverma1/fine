@@ -1,12 +1,17 @@
 <div style="{ display: inline-block;}">
     <div *ngIf="dataItem.isDirectory">
-        <div (dblclick)="openDataItem(dataItem)">
-            {{dataItem.name|slice:0:5}}(Fo){{dataItem.qualifyingTags}}|
+        <div>
+            <img src="images/folder.svg" (dblclick)="openDataItem(dataItem)"/>
+            <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
+            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:9}}</label>
         </div>
     </div>
     <div *ngIf="!dataItem.isDirectory">
-        <div (dblclick)="openDataItem(dataItem)">
-            {{dataItem.name|slice:0:5}}(Fi){{dataItem.qualifyingTags}}|
+        <div>
+            <img src="images/file.svg" (dblclick)="openDataItem(dataItem)"/>
+            <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
+            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:9}}</label>
         </div>
     </div>
+
 </div>

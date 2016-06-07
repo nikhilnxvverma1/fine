@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
 import {Input} from "@angular/core";
@@ -13,13 +13,22 @@ import {Tag} from "./core/tag";
 
 @Component({
     selector: 'folder-context',
-    directives:[SelectionFieldComponent,DataAreaComponent,InfoBoxComponent],
+    directives:[DataAreaComponent,InfoBoxComponent],
     templateUrl:'app/template/context.component.html',
 })
-export class ContextComponent {
+export class ContextComponent implements OnInit{
 
     @Input('context') public context:Context;
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+
+    ngOnInit():any {
+
+        //initialization of the collapsible popouts
+        //noinspection TypeScriptUnresolvedFunction
+        $('.collapsible').collapsible({//ignore the red, the method is loaded before
+            accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        });
+    }
 
     openDataItem(dataItem:DataItem){
         console.log("will open folder"+dataItem.name);

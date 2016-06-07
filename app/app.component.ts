@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DataService} from './core/data.service'
 import {InfoBoxComponent} from "./info-box.component";
 import {DataAreaComponent} from "./data-area.component";
@@ -21,7 +21,7 @@ import {Folder} from "./core/folder";
         ContextComponent
     ],
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
 
     public rootModel:RootModel=new RootModel();
 
@@ -41,15 +41,6 @@ export class AppComponent implements OnInit{
             //this.contextStack.push(context);
             console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
-    }
-
-    ngOnInit():any {
-
-        //dom initializations
-        //noinspection TypeScriptUnresolvedFunction
-        $('.collapsible').collapsible({//ignore the red, the method is loaded before
-            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-        });
     }
 
 
