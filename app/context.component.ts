@@ -10,16 +10,22 @@ import {DataAreaComponent} from "./data-area.component";
 import {InfoBoxComponent} from "./info-box.component";
 import {Output,EventEmitter} from "@angular/core";
 import {Tag} from "./core/tag";
+import {NgZone} from "@angular/core";
+import {SelectedDataItem} from "./pipe/selected-data-item.pipe";
+import {DeletionComponent} from "./deletion.component";
+import { FORM_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'folder-context',
-    directives:[DataAreaComponent,InfoBoxComponent],
+    directives:[DataAreaComponent,InfoBoxComponent,DeletionComponent,FORM_DIRECTIVES],
     templateUrl:'app/template/context.component.html',
 })
 export class ContextComponent implements OnInit{
 
     @Input('context') public context:Context;
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+
+    constructor(private _zone:NgZone) {}
 
     ngOnInit():any {
 
@@ -61,6 +67,21 @@ export class ContextComponent implements OnInit{
             console.log(selected[i].name);
         }
 
+    }
+
+    moveToLocation(){
+        var dialog=require('electron').remote.dialog;
+
+        dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
+            this._zone.run(()=>{
+                console.log('Will move to folder: '+folderToOpen);
+
+            });
+        });
+    }
+
+    confirmDeletingFiles(){
+        $('#confirmDeleteModal').openModal();
     }
 
 }

@@ -1,10 +1,10 @@
-<nav>
+<nav id="breadcrumbContainer">
     <div class="nav-wrapper">
         <span class="col s12">
             <a class="btn-floating btn-med waves-effect waves-light red" (click)="openRoot()">
                 <i class="material-icons">add</i>
             </a>
-            <a *ngFor="#context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">
+            <a *ngFor="let context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">
                 <span *ngIf="!context.parentFolder">
                     Root
                 </span>

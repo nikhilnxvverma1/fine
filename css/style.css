@@ -8523,3 +8523,24 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+
+body {
+  overflow-y: hidden; }
+
+#breadcrumbContainer {
+  height: 60px; }
+
+#dataAreaContainer {
+  height: 90%;
+  overflow-y: scroll; }
+
+.dataItemIcon {
+  display: block;
+  width: 65px;
+  height: 65px; }
+
+.dataItemContainer {
+  height: 130px; }
+
+.dataItemContainer label {
+  padding-left: 22px; }

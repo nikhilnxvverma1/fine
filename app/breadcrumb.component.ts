@@ -27,8 +27,7 @@ export class BreadcrumbComponent{
 
     openRoot(){
 
-        var remote=require('remote');
-        var dialog=remote.require('dialog');
+        var dialog=require('electron').remote.dialog;
 
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{

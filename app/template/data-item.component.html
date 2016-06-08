@@ -1,16 +1,16 @@
-<div style="{ display: inline-block;}">
+<div>
     <div *ngIf="dataItem.isDirectory">
         <div>
-            <img src="images/folder.svg" (dblclick)="openDataItem(dataItem)"/>
+            <img src="images/folder.svg" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
             <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
-            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:9}}</label>
+            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:15}}</label>
         </div>
     </div>
     <div *ngIf="!dataItem.isDirectory">
         <div>
-            <img src="images/file.svg" (dblclick)="openDataItem(dataItem)"/>
+            <img src="images/file.svg" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
             <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
-            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:9}}</label>
+            <label [attr.for]="dataItem.name">{{dataItem.name|slice:0:15}}</label>
         </div>
     </div>
 

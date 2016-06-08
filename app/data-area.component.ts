@@ -8,6 +8,7 @@ import {Data} from "./core/data";
 import {Output} from "@angular/core";
 import {EventEmitter} from "@angular/core";
 import {DataItem} from "./core/data-item";
+import {Folder} from "./core/folder";
 
 @Component({
     selector: 'data-area',
@@ -17,7 +18,7 @@ import {DataItem} from "./core/data-item";
 })
 export class DataAreaComponent implements OnInit,OnChanges{
     ngOnChanges(changes:{}):any {
-        console.log("Changes made to the rootmodel");
+        console.log("Changes made to the rootmodel len="+this.dataItems.length);
         return undefined;
     }
     ngOnInit():any {
@@ -27,6 +28,7 @@ export class DataAreaComponent implements OnInit,OnChanges{
     //@Input('context') public context:Context;
     @Input('dataItems') public dataItems:DataItem[];
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+    @Input('dummyFolder') public dummyFolder:Folder;
 
     openDataItem(dataItem){
         console.log("will open data item"+dataItem.name);

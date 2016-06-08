@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="col s2" *ngFor="#dataItem of dataItems">
+    <div class="col s4 m3 l2 dataItemContainer" *ngIf="dummyFolder.name!=null && dummyFolder.name.length>0">
+        <data-item [dataItem]="dummyFolder"></data-item>
+    </div>
+    <div class="col s4 m3 l2 dataItemContainer" *ngFor="let dataItem of dataItems">
         <data-item [dataItem]="dataItem" (opendataitem)="openDataItem($event)"></data-item>
     </div>
 </div>
