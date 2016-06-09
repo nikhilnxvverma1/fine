@@ -64,4 +64,4 @@ gulp.task('run-no-electron-env', function () {
 
 gulp.task('run',shell.task('electron main.js'));
 
-gulp.task('default',['watch:sass','watch:typescript','run']);
+gulp.task('default',['typescript','watch:sass','watch:typescript','run']);

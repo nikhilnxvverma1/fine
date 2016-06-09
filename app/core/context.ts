@@ -14,7 +14,7 @@ export class Context {
         var selectedDataItems:DataItem[]=[];
 
         for(var i=0;i<this.dataItems.length;i++){
-            if(this.dataItems[i].qualifyingTags>0){
+            if(this.dataItems[i].selected){
                 selectedDataItems.push(this.dataItems[i]);
             }
         }

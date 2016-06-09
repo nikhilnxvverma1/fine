@@ -6,10 +6,10 @@
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
         <div class="s4 col">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Move to trash</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="trashSelectedFiles()">Move to trash</a>
         </div>
         <div class="s4 col">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete Permanently</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="hardDeleteSelectedFiles()">Delete Permanently</a>
         </div>
     </div>
     <div class="modal-content">

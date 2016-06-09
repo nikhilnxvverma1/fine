@@ -10,10 +10,10 @@ import {DataAreaComponent} from "./data-area.component";
 import {InfoBoxComponent} from "./info-box.component";
 import {Output,EventEmitter} from "@angular/core";
 import {Tag} from "./core/tag";
-import {NgZone} from "@angular/core";
+import {Inject,NgZone} from "@angular/core";
 import {SelectedDataItem} from "./pipe/selected-data-item.pipe";
 import {DeletionComponent} from "./deletion.component";
-import { FORM_DIRECTIVES } from '@angular/common';
+import { FORM_DIRECTIVES } from '@angular/common';//TODO remove if unneeded
 
 @Component({
     selector: 'folder-context',
@@ -24,8 +24,9 @@ export class ContextComponent implements OnInit{
 
     @Input('context') public context:Context;
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+    rename:string='';
 
-    constructor(private _zone:NgZone) {}
+    constructor(@Inject private dataService:DataService,private _zone:NgZone) {}
 
     ngOnInit():any {
 
@@ -69,15 +70,44 @@ export class ContextComponent implements OnInit{
 
     }
 
-    moveToLocation(){
+    groupInFolder(folderName:string){
+        if(folderName==null||folderName.length==0){
+            return;
+        }
+        var selectedDataItems=this.context.getSelectedFiles();
+        if(selectedDataItems==null||selectedDataItems.length==0){
+            return;
+        }
+        var parentFolder:string=selectedDataItems[0].parentUrl;
+        var newDirectory=parentFolder+folderName+'/';
+        console.log("Moving selected files to Location: "+newDirectory);
+        this.dataService.moveFiles(selectedDataItems,newDirectory,true);
+    }
+
+    moveToLocation(deleteAfterMoving:boolean){
         var dialog=require('electron').remote.dialog;
 
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{
-                console.log('Will move to folder: '+folderToOpen);
-
+                console.log('Will move to folder: '+folderToOpen[0]+" delete after: "+deleteAfterMoving);
+                this.dataService.moveFiles(this.context.getSelectedFiles(),folderToOpen[0]+'/',deleteAfterMoving);
             });
         });
+    }
+
+    moveToTrash(){
+        console.log("Moving selected files to trash");
+        this.dataService.deleteFiles(this.context.getSelectedFiles(),false);
+    }
+
+    renameFiles(){
+        console.log("rename all selected files to "+this.rename);
+        this.dataService.renameFiles(this.context.getSelectedFiles(),this.rename);
+    }
+
+    deletePermenantly(){
+        console.log("Delete selected files");
+        this.dataService.deleteFiles(this.context.getSelectedFiles(),true);
     }
 
     confirmDeletingFiles(){

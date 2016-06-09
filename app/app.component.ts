@@ -49,7 +49,7 @@ export class AppComponent{
 
         if(dataItem.isDirectory){
 
-            let folderPath = this.rootModel.getFullPathTillEnd() + '/' + dataItem.name;
+            let folderPath = dataItem.getFullyQualifiedPath()+'/';
             var dataItems:DataItem[]=this._dataService.readDirectory(folderPath);
             var context=new Context();//null context meaning root
             context.dataItems=dataItems;
@@ -59,7 +59,7 @@ export class AppComponent{
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path
-            let filePath=this.rootModel.getFullPathTillEnd() + '/' + dataItem.name;
+            let filePath=dataItem.getFullyQualifiedPath();
             var spawn = require('child_process').spawn
             spawn('open', [filePath]);
         }

@@ -12,8 +12,8 @@
                 <div class="collapsible-header">Rename</div>
                 <div class="collapsible-body center-align">
                     <p>Change the name of selected files to</p>
-                    <input type="text" placeholder="New Name"/>
-                    <a class="waves-effect waves-light btn">Rename</a>
+                    <input type="text" placeholder="New Name" [(ngModel)]="rename"/>
+                    <a class="waves-effect waves-light btn" (click)="renameFiles()">Rename</a>
                 </div>
             </li>
             <li>
@@ -21,14 +21,15 @@
                 <div class="collapsible-body center-align">
                     <p>Group the selected files in a folder named:</p>
                     <input type="text" placeholder="Folder Name" [(ngModel)]="context.dummyFolder.name"/>
-                    <a class="waves-effect waves-light btn">Group</a>
+                    <a class="waves-effect waves-light btn" (click)="groupInFolder(context.dummyFolder.name)">Group</a>
                 </div>
             </li>
             <li>
                 <div class="collapsible-header">Move</div>
                 <div class="collapsible-body center-align">
                     <p>Move the selected files to a new location:</p>
-                    <a class="waves-effect waves-light btn" (click)="moveToLocation()">Browse</a>
+                    <a class="waves-effect waves-light btn" (click)="moveToLocation(true)">Move</a>
+                    <a class="waves-effect waves-light btn" (click)="moveToLocation(false)">Copy</a>
                 </div>
             </li>
             <li>
@@ -49,5 +50,5 @@
         <info-box></info-box>
     </div>
 </div>
-<deletion [dataItems]="context.dataItems"></deletion>
+<deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>
 
