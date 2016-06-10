@@ -2,16 +2,17 @@ import {Injectable} from '@angular/core';
 import {DataItem} from "./data-item";
 import {Folder} from "./folder";
 import {File} from "./file";
-import {NgZone} from "@angular/core";
+import {Inject,NgZone} from "@angular/core";
 import {Stats} from "fs";
+import {ServiceProgress} from "./service-progress";
+import {OperationProgressComponent} from "../operation-progress.component";
+import {DataOperation} from "./data-operation";
 /// <reference path="../../typings/main/ambient/node/node.d.ts" />
 //import fs=require('fs');
 @Injectable()
 export class DataService{
 
-    constructor(private _zone:NgZone){
-
-    }
+    constructor(private _zone:NgZone){}
 
     readDirectory(directoryPath:string):DataItem[]{
 
@@ -42,51 +43,109 @@ export class DataService{
         return dataItemsResult;
     }
 
-    moveFiles(dataItems:DataItem[],directory:string,deleteAfterMoving:boolean){
+    moveFiles(dataItems:DataItem[],
+              directory:string,
+              deleteAfterMoving:boolean,
+              serviceProgress:ServiceProgress,
+              dataOperation:DataOperation){
 
-        //var mv=require('mv');
+        serviceProgress.operationStarted(dataOperation);
+        var count=0;
+        var total=dataItems.length;
+
         var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
+                serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 fs.move(fullyQualifiedPath,newPath,(err)=>{
                     if(err) throw err;
                     console.log("moved file");
+                    this._zone.run(()=>{
+                        count++;
+                        serviceProgress.processedDataItem(count,total,dataOperation);
+                        if(count==total){
+                            serviceProgress.operationCompleted(total,dataOperation);
+                        }
+                    });
                 });
             }else{
                 //copy everything over
+                serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 fs.copy(fullyQualifiedPath,newPath,(err)=>{
                     if(err) throw err;
                     console.log("copied file");
+
+                    this._zone.run(()=>{
+                        count++;
+                        serviceProgress.processedDataItem(count,total,dataOperation);
+                        if(count==total){
+                            serviceProgress.operationCompleted(total,dataOperation);
+                        }
+                    });
+
                 });
             }
         }
+
     }
 
-    deleteFiles(dataItems:DataItem[],permenantly:boolean){
+    deleteFiles(dataItems:DataItem[],
+                permenantly:boolean,
+                serviceProgress:ServiceProgress,
+                dataOperation:DataOperation){
+        serviceProgress.operationStarted(dataOperation);
+        var count=0;
+        var total=dataItems.length;
+
         if(permenantly){
             var fs=require('fs-extra');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
+                serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 fs.remove(fullyQualifiedPath,(err)=>{
                    if(err)throw err;
                     console.log("Deleted item");
+
+                    this._zone.run(()=>{
+                        count++;
+                        serviceProgress.processedDataItem(count,total,dataOperation);
+                        if(count==total){
+                            serviceProgress.operationCompleted(total,dataOperation);
+                        }
+                    });
                 });
             }
         }else{
             var trash=require('trash');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
+                serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 trash([fullyQualifiedPath]).then(() => {//TODO consider doing it all in one go, for performance reasons
                     console.log('trashed item');
+
+                    this._zone.run(()=>{
+                        count++;
+                        serviceProgress.processedDataItem(count,total,dataOperation);
+                        if(count==total){
+                            serviceProgress.operationCompleted(total,dataOperation);
+                        }
+                    });
                 });
             }
         }
 
     }
 
-    renameFiles(dataItems:DataItem[],newName:string){
+    renameFiles(dataItems:DataItem[],
+                newName:string,
+                serviceProgress:ServiceProgress,
+                dataOperation:DataOperation){
+        serviceProgress.operationStarted(dataOperation);
+        var count=0;
+        var total=dataItems.length;
+
         var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
@@ -101,9 +160,21 @@ export class DataService{
             }else{
                 renamedPath = dataItems[i].parentUrl + newName+'_'+(i+1)+extension;
             }
+            serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
             fs.rename(fullyQualifiedPath,renamedPath,(err)=>{
                 if(err)throw err;
                 console.log("renamed item");
+
+                //serviceProgress.processedDataItem()
+
+                this._zone.run(()=>{
+                    count++;
+                    serviceProgress.processedDataItem(count,total,dataOperation);
+                    if(count==total){
+                        serviceProgress.operationCompleted(total,dataOperation);
+                    }
+                });
+
             });
         }
     }
