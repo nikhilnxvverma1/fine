@@ -1,6 +1,6 @@
 {
   "name": "fine",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A neat file organizer",
   "main": "main.js",
   "scripts": {
@@ -48,6 +48,7 @@
     "q": "^1.4.1",
     "rcedit": "^0.4.0",
     "typescript": "^1.8.2",
-    "typings": "^0.6.8"
+    "typings": "^0.6.8",
+    "yargs": "^4.7.1"
   }
 }

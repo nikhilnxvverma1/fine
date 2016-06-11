@@ -28,7 +28,7 @@ export class AppComponent{
     constructor(@Inject private _dataService:DataService){
         this.rootModel=new RootModel();
 
-            var folderToOpen=['/Users/NikhilVerma/Documents/'];
+            var folderToOpen=['/Users/NikhilVerma/Desktop/dummy/'];
             if(folderToOpen==null) return;
             var dataItems:DataItem[]=this._dataService.readDirectory(folderToOpen[0]);//this also needs to happen inside ng zone
             this.rootModel.rootDirectory=folderToOpen[0];
