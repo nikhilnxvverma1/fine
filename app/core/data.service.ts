@@ -160,23 +160,73 @@ export class DataService{
             }else{
                 renamedPath = dataItems[i].parentUrl + newName+'_'+(i+1)+extension;
             }
+
+
+
             serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-            fs.rename(fullyQualifiedPath,renamedPath,(err)=>{
-                if(err)throw err;
-                console.log("renamed item");
+            //fs.rename(fullyQualifiedPath,renamedPath,(err)=>{
+            //    if(err)throw err;
+            //    console.log("renamed item");
+            //
+            //    //serviceProgress.processedDataItem()
+            //
+            //    this._zone.run(()=>{
+            //        count++;
+            //        serviceProgress.processedDataItem(count,total,dataOperation);
+            //        if(count==total){
+            //            serviceProgress.operationCompleted(total,dataOperation);
+            //        }
+            //    });
+            //
+            //});
 
-                //serviceProgress.processedDataItem()
+            //var postExecution={
+            //    "dataItem":dataItems[i],
+            //    "index":i,
+            //    "callback":(err)=>{
+            //        if(err)throw err;
+            //        console.log("renamed item "+this.index);
+            //
+            //        this._zone.run(()=>{
+            //            count++;
+            //            serviceProgress.processedDataItem(count,total,dataOperation);
+            //            if(count==total){
+            //                serviceProgress.operationCompleted(total,dataOperation);
+            //            }
+            //        });
+            //    }
+            //};
 
-                this._zone.run(()=>{
-                    count++;
-                    serviceProgress.processedDataItem(count,total,dataOperation);
-                    if(count==total){
-                        serviceProgress.operationCompleted(total,dataOperation);
-                    }
-                });
+            var postExecution:PostExecution=new PostExecution(dataItems[i],i);
 
-            });
+            fs.rename(fullyQualifiedPath,renamedPath,postExecution.callback);
         }
     }
+}
 
+class PostExecution{
+    private dataItem:DataItem;
+    private index:number;
+
+    public callback;// <----IMPORTANT : callback should always be an ES6 arrow function defined in the constructor
+    //this is because it binds the value of "this"
+
+    constructor(_dataItem:DataItem,_index:number){
+        this.dataItem=_dataItem;
+        this.index=_index;
+
+        //arrow function that preserves the value of "this" context
+        this.callback=(err)=>{
+            if(err)throw err;
+            console.log("renamed item "+this.index);
+
+            //this._zone.run(()=>{
+            //    count++;
+            //    serviceProgress.processedDataItem(count,total,dataOperation);
+            //    if(count==total){
+            //        serviceProgress.operationCompleted(total,dataOperation);
+            //    }
+            //});
+        }
+    }
 }
