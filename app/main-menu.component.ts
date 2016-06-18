@@ -40,4 +40,8 @@ export class MainMenuComponent{
         console.log("Time to open the feedback form");
     }
 
+    closeMenu(){
+        console.log("Menu is now closing");
+    }
+
 }

@@ -1,7 +1,7 @@
 <nav id="breadcrumbContainer">
     <div class="nav-wrapper">
         <span class="col s12">
-            <a class="btn-floating btn-med waves-effect waves-light red" (click)="openRoot()">
+            <a class="btn-floating btn-med waves-effect waves-light red" onclick="openMainMenu()">
                 <i class="material-icons">add</i>
             </a>
             <a *ngFor="let context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">

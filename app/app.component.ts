@@ -12,6 +12,8 @@ import {ContextComponent} from "./context.component";
 import {Inject} from "@angular/core";
 import {Folder} from "./core/folder";
 import {MainMenuComponent} from "./main-menu.component";
+import {ScanTarget} from "./core/scan-target";
+import {DummyData} from "./core/dummy-data";
 
 @Component({
     selector: 'app',
@@ -26,6 +28,7 @@ import {MainMenuComponent} from "./main-menu.component";
 export class AppComponent{
 
     public rootModel:RootModel=new RootModel();
+    private _scanTargets:ScanTarget[];
 
     constructor(@Inject private _dataService:DataService){
         this.rootModel=new RootModel();
@@ -43,6 +46,7 @@ export class AppComponent{
             //this.contextStack.push(context);
             console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
+            this._scanTargets=new DummyData().dummyScanTargets();
     }
 
 

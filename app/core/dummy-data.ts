@@ -96,7 +96,7 @@ export class DummyData{
      * @param n number of scan targets to create
      * @returns list of scan targets
      */
-    public dummyScanTargets(n:number):ScanTarget[]{
+    public dummyScanTargets():ScanTarget[]{
 
         //3 dummy targets
         var list:ScanTarget[]=[];

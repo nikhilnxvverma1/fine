@@ -39,6 +39,20 @@
 
   <!-- 3. Display the application -->
   <body>
+  <!--Only experimental, will be removed soon-->
+  <script type="application/javascript">
+    function closeMainMenu(){
+      console.log("this is javascript closing the menu");
+      $("#mainMenu").css('left','-300px');
+      $("#menuDarkOverlay").css('visibility','collapse');
+    }
+
+    function openMainMenu(){
+      console.log("this is javascript opening the menu");
+      $("#mainMenu").css('left','0');
+      $("#menuDarkOverlay").css('visibility','initial');
+    }
+  </script>
   <app></app>
   </body>
 </html>
