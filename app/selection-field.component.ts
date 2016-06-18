@@ -11,8 +11,8 @@ import {EventEmitter} from "@angular/core";
 })
 export class SelectionFieldComponent {
     @Input('tags')public  tags:Tag[];
-    @Output('tagadded') tagAddedEvent:EventEmitter=new EventEmitter();
-    @Output('tagremoved') tagRemovedEvent:EventEmitter=new EventEmitter();
+    @Output('tagadded') tagAddedEvent:EventEmitter<Tag>=new EventEmitter();
+    @Output('tagremoved') tagRemovedEvent:EventEmitter<Tag>=new EventEmitter();
 
     currentInput:string;
 

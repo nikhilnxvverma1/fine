@@ -20,8 +20,8 @@ import {PrefixAndRemoveSpace} from "./pipe/prefix-remove-space.pipe";
 export class DeletionComponent implements OnChanges{
 
     @Input('dataItems') public dataItems:DataItem[];
-    @Output('trash') trash:EventEmitter=new EventEmitter();
-    @Output('hardDelete') hardDelete:EventEmitter=new EventEmitter();
+    @Output('trash') trash:EventEmitter<any>=new EventEmitter();
+    @Output('hardDelete') hardDelete:EventEmitter<any>=new EventEmitter();
 
     ngOnChanges(changes:{}):any {
         console.log("Changes made to the rootmodel(inside deletion) len="+this.dataItems.length);

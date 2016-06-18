@@ -21,7 +21,7 @@ export class BreadcrumbComponent{
 
     @Input('rootModel') public rootModel:RootModel;
     @Input('contextStack') public contextStack:Context[];
-    @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
 
     constructor(private _dataService: DataService,private _zone:NgZone) {}
 
@@ -56,7 +56,7 @@ export class BreadcrumbComponent{
         this.contextStack.splice(index+1,this.contextStack.length);
     }
 
-    openDataItem(dataItem){
+    openDataItem(dataItem:DataItem){
         console.log("will open data item"+dataItem.name);
         this.openDataItemEvent.emit(dataItem);
     }

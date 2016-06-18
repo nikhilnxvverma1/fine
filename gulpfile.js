@@ -33,7 +33,7 @@ gulp.task('dummy',function(){
         .alias('n','name')
         .describe('n','Name of the main dummy folder')
         .default('n','dummy')
-        .epilog('copyright 2016')
+        .epilog('This utility is used only for development and testing purposes.')
         .argv;
 
     if(argv.d!=undefined){

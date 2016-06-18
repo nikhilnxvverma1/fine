@@ -50,34 +50,6 @@ export class ContextComponent implements OnInit,AfterContentInit{
         this.openDataItemEvent.emit(dataItem);
     }
 
-    incrementDataItemsQualifying(tag:Tag){
-      console.log('will increment items qualifiying '+tag.name);
-        this.matchForTagAndAdd(tag,1);
-    }
-
-    decrementDataItemsQualifying(tag:Tag){
-        console.log('will decrement items qualifiying '+tag.name);
-        this.matchForTagAndAdd(tag,-1);
-    }
-
-    matchForTagAndAdd(tag:Tag, increment:number){
-        for(var i=0;i<this.context.dataItems.length;i++){
-            var dataItem:DataItem=this.context.dataItems[i];
-            var dataItemName=dataItem.name.toLowerCase();
-            var tagName=tag.name.toLowerCase();
-            var position =dataItemName.search(tagName);
-            if(position!=-1){
-                dataItem.qualifyingTags+=increment;
-            }
-        }
-        console.log("List o selected files are :");
-        var selected=this.context.getSelectedFiles();
-        for(var i=0;i<selected.length;i++){
-            console.log(selected[i].name);
-        }
-
-    }
-
     groupInFolder(folderName:string){
         if(folderName==null||folderName.length==0){
             return;

@@ -11,6 +11,7 @@ import {Data} from "./core/data";
 import {ContextComponent} from "./context.component";
 import {Inject} from "@angular/core";
 import {Folder} from "./core/folder";
+import {MainMenuComponent} from "./main-menu.component";
 
 @Component({
     selector: 'app',
@@ -18,7 +19,8 @@ import {Folder} from "./core/folder";
     providers: [DataService],
     directives: [
         BreadcrumbComponent,
-        ContextComponent
+        ContextComponent,
+        MainMenuComponent
     ],
 })
 export class AppComponent{
