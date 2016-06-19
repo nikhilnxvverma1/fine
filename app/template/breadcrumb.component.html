@@ -15,4 +15,4 @@
             </span>
     </div>
 </nav>
-<folder-context *ngIf="contextStack[contextStack.length-1]" [context]="contextStack[contextStack.length-1]" (opendataitem)="openDataItem($event)">Loading...</folder-context>
+<folder-context *ngIf="contextStack[contextStack.length-1]" [scanTargets]="_scanTargets" [context]="contextStack[contextStack.length-1]" (opendataitem)="openDataItem($event)">Loading...</folder-context>

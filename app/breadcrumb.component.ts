@@ -10,6 +10,7 @@ import {ContextComponent} from "./context.component";
 import {OnChanges} from "@angular/core";
 import {ChangeDetectorRef} from "@angular/core";
 import {NgZone} from "@angular/core";
+import {ScanTarget} from "./core/scan-target";
 
 @Component({
     selector: 'breadcrumb',
@@ -19,6 +20,7 @@ import {NgZone} from "@angular/core";
 })
 export class BreadcrumbComponent{
 
+    @Input('scanTargets') private _scanTargets:ScanTarget[];
     @Input('rootModel') public rootModel:RootModel;
     @Input('contextStack') public contextStack:Context[];
     @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();

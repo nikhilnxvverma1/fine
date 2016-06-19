@@ -1,0 +1,6 @@
+<h5>{{root.name}} : <b>{{root.size|unitSpace}}</b></h5>
+<ul>
+    <li *ngFor="let child of root.children">
+        {{ child.name|slice:0:9 }} : <b>{{child.size|unitSpace}}</b>
+    </li>
+</ul>

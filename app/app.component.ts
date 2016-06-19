@@ -46,7 +46,9 @@ export class AppComponent{
             //this.contextStack.push(context);
             console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
-            this._scanTargets=new DummyData().dummyScanTargets();
+        let dummyData = new DummyData();
+        this._scanTargets=dummyData.dummyScanTargets();
+            this._scanTargets[0].rootScanResult=dummyData.dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
     }
 
 

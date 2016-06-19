@@ -4,51 +4,20 @@
         <!--<selection-field [tags]="context.tags" (tagadded)="incrementDataItemsQualifying($event)" (tagremoved)="decrementDataItemsQualifying($event)"></selection-field>-->
 
         <div *ngIf="context">
-            <data-area [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
+            <sunburst *ngIf="!organizeFolder" [scanResult]="_scanTargets[0].rootScanResult"></sunburst>
+            <data-area *ngIf="organizeFolder" [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
         </div>
     </div>
     <div class="col s3">
-        <ul class="collapsible popout" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header">Rename</div>
-                <div class="collapsible-body center-align">
-                    <p>Change the name of selected files to</p>
-                    <input type="text" placeholder="New Name" [(ngModel)]="rename"/>
-                    <a class="waves-effect waves-light btn" (click)="renameFiles()">Rename</a>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Group</div>
-                <div class="collapsible-body center-align">
-                    <p>Group the selected files in a folder named:</p>
-                    <input type="text" placeholder="Folder Name" [(ngModel)]="context.dummyFolder.name"/>
-                    <a class="waves-effect waves-light btn" (click)="groupInFolder(context.dummyFolder.name)">Group</a>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Move</div>
-                <div class="collapsible-body center-align">
-                    <p>Move the selected files to a new location:</p>
-                    <a class="waves-effect waves-light btn" (click)="moveToLocation(true)">Move</a>
-                    <a class="waves-effect waves-light btn" (click)="moveToLocation(false)">Copy</a>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Delete</div>
-                <div class="collapsible-body center-align">
-                    <p>Delete the selected files</p>
-                    <a class="waves-effect waves-light btn" (click)="confirmDeletingFiles()">Delete</a>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">Cloud</div>
-                <div class="collapsible-body center-align">
-                    <p>Move the selected files to the cloud</p>
-                    <a class="waves-effect waves-light btn">Cloud</a>
-                </div>
-            </li>
-        </ul>
-        <info-box></info-box>
+        <usageDetail *ngIf="!organizeFolder" [scanResult]="_scanTargets[0].rootScanResult"></usageDetail>
+        <operation *ngIf="organizeFolder" [dummyFolder]="context.dummyFolder"
+                   (move)="moveToLocation($event)"
+                   (reviewDelete)="confirmDeletingFiles()"
+                   (rename)="renameFiles($event)"
+                   (group)="groupInFolder($event)"></operation>
+        <info-box *ngIf="organizeFolder" ></info-box>
+
+        <a class="btn" (click)="toggleView()">Toggle</a>
     </div>
 </div>
 <deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>

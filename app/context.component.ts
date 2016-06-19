@@ -16,31 +16,28 @@ import {DeletionComponent} from "./deletion.component";
 import { FORM_DIRECTIVES } from '@angular/common';
 import {OperationProgressComponent} from "./operation-progress.component";
 import {DataOperation} from './core/data-operation'
+import {SunburstComponent} from "./sunburst.component";
+import {UsageDetailComponent} from "./usage-detail.component";
+import {ScanTarget} from "./core/scan-target";
+import {OperationComponent} from "./operation.component";
 //TODO remove if unneeded
 
 @Component({
     selector: 'folder-context',
-    directives:[DataAreaComponent,InfoBoxComponent,DeletionComponent,OperationProgressComponent,FORM_DIRECTIVES],
+    directives:[DataAreaComponent,InfoBoxComponent,DeletionComponent,OperationProgressComponent,SunburstComponent,
+        OperationComponent,UsageDetailComponent,FORM_DIRECTIVES],
     templateUrl:'app/template/context.component.html',
 })
-export class ContextComponent implements OnInit,AfterContentInit{
+export class ContextComponent implements AfterContentInit{
 
+    @Input('scanTargets') private _scanTargets:ScanTarget[];
     @Input('context') public context:Context;
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
-    rename:string='';
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
-
+    organizeFolder=false;
 
     constructor(@Inject private dataService:DataService,private _zone:NgZone) {}
 
-    ngOnInit():any {
-
-        //initialization of the collapsible popouts
-        //noinspection TypeScriptUnresolvedFunction
-        $('.collapsible').collapsible({//ignore the red, the method is loaded before
-            accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-        });
-    }
     ngAfterContentInit() {
         // this.operationProgress is now with value set
     }
@@ -48,6 +45,10 @@ export class ContextComponent implements OnInit,AfterContentInit{
     openDataItem(dataItem:DataItem){
         console.log("will open folder"+dataItem.name);
         this.openDataItemEvent.emit(dataItem);
+    }
+
+    toggleView(){
+        this.organizeFolder=!this.organizeFolder;
     }
 
     groupInFolder(folderName:string){
@@ -98,11 +99,11 @@ export class ContextComponent implements OnInit,AfterContentInit{
             DataOperation.Trash);
     }
 
-    renameFiles(){
-        console.log("rename all selected files to "+this.rename);
+    renameFiles(newName:string){
+        console.log("rename all selected files to "+newName);
         //this.operationProgress.operationStarted(DataOperation.Rename);
         this.dataService.renameFiles(this.context.getSelectedFiles(),
-            this.rename,
+            newName,
             this.operationProgress,
             DataOperation.Rename);
     }

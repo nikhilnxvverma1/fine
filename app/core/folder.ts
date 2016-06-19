@@ -3,10 +3,11 @@ import {Stats} from "fs";
 
 export class Folder extends DataItem{
 
-    private _children:DataItem[];
+    private _children:DataItem[]=[];
 
     constructor(_parentUrl:string,_name:string,_stats:Stats){
         super(_parentUrl,_name,_stats);
+        this.isDirectory=true;
     }
 
     get children():DataItem[] {

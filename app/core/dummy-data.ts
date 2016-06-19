@@ -176,10 +176,13 @@ export class DummyData{
     private populate(path,node):DataItem{
         if(node.isFile){
             //console.log(">"+node.name);
-            return new File(path, node.name, null);
+            let file = new File(path, node.name, null);
+            file.size=this.random(9999999999);
+            return file;
         }else{
             //console.log("[]"+node.name);
             var folder=new Folder(path,node.name,null);
+            folder.size=this.random(9999999999);
             for(var i=0;i<node.children.length;i++){
                 folder.addDataItem(this.populate(path+node.name+'/',node.children[i]));
             }
