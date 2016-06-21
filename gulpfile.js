@@ -53,7 +53,7 @@ var paths = {
 
   ,
   'style': {
-    all: './sass/style.scss',
+    all: './sass/**/*.scss',
     output: './css'
   },
   'typescript':{

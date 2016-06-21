@@ -1,25 +1,25 @@
 app.coffee
-framer/backups/backup-2016-06-20 15.54.04.coffee
-framer/backups/backup-2016-06-20 15.55.04.coffee
-framer/backups/backup-2016-06-20 15.56.04.coffee
-framer/backups/backup-2016-06-20 15.57.04.coffee
-framer/backups/backup-2016-06-20 15.58.04.coffee
-framer/backups/backup-2016-06-20 15.59.04.coffee
-framer/backups/backup-2016-06-20 16.01.04.coffee
-framer/backups/backup-2016-06-20 16.03.04.coffee
-framer/backups/backup-2016-06-20 16.04.04.coffee
-framer/backups/backup-2016-06-20 16.05.04.coffee
-framer/backups/backup-2016-06-20 16.06.04.coffee
-framer/backups/backup-2016-06-20 16.07.04.coffee
-framer/backups/backup-2016-06-20 16.08.04.coffee
-framer/backups/backup-2016-06-20 16.09.04.coffee
-framer/backups/backup-2016-06-20 16.10.04.coffee
-framer/backups/backup-2016-06-20 16.11.04.coffee
-framer/backups/backup-2016-06-20 16.12.04.coffee
-framer/backups/backup-2016-06-20 16.13.04.coffee
-framer/backups/backup-2016-06-20 16.14.04.coffee
-framer/backups/backup-2016-06-20 16.15.04.coffee
-framer/backups/backup-2016-06-20 16.16.04.coffee
+framer/backups/backup-2016-06-21 13.19.58.coffee
+framer/backups/backup-2016-06-21 13.21.21.coffee
+framer/backups/backup-2016-06-21 13.21.58.coffee
+framer/backups/backup-2016-06-21 13.22.58.coffee
+framer/backups/backup-2016-06-21 13.23.58.coffee
+framer/backups/backup-2016-06-21 13.30.58.coffee
+framer/backups/backup-2016-06-21 13.31.58.coffee
+framer/backups/backup-2016-06-21 13.32.58.coffee
+framer/backups/backup-2016-06-21 13.33.58.coffee
+framer/backups/backup-2016-06-21 13.34.57.coffee
+framer/backups/backup-2016-06-21 13.36.57.coffee
+framer/backups/backup-2016-06-21 13.37.57.coffee
+framer/backups/backup-2016-06-21 13.38.57.coffee
+framer/backups/backup-2016-06-21 13.39.57.coffee
+framer/backups/backup-2016-06-21 13.40.58.coffee
+framer/backups/backup-2016-06-21 13.41.57.coffee
+framer/backups/backup-2016-06-21 13.42.57.coffee
+framer/backups/backup-2016-06-21 13.43.57.coffee
+framer/backups/backup-2016-06-21 13.44.57.coffee
+framer/backups/backup-2016-06-21 13.45.58.coffee
+framer/backups/backup-2016-06-21 13.48.57.coffee
 framer/coffee-script.js
 framer/config.json
 framer/framer.generated.js
@@ -51,10 +51,20 @@ framer/preview.png
 framer/style.css
 framer/version
 imported/design@1x/images/Layer-Analyze-revgmzk2.png
+imported/design@1x/images/Layer-AnalyzeLabel-rdzeqzje.png
 imported/design@1x/images/Layer-BottomOptions-qjvcmtnc.png
 imported/design@1x/images/Layer-Close-q0m4meiw.png
 imported/design@1x/images/Layer-Close-rdm1ntjg.png
+imported/design@1x/images/Layer-Color-mkq5mjjc.png
+imported/design@1x/images/Layer-Color-nkqynzrc.png
+imported/design@1x/images/Layer-Color-numzquq1.png
+imported/design@1x/images/Layer-Color-nzg1oezd.png
+imported/design@1x/images/Layer-Color-nzm3njuz.png
+imported/design@1x/images/Layer-Color-oeremjg1.png
+imported/design@1x/images/Layer-Color-qumyrkvf.png
 imported/design@1x/images/Layer-DarkOverlay-rjvdqzi3.png
+imported/design@1x/images/Layer-DataArea-mey1q0ex.png
+imported/design@1x/images/Layer-DataArea-reqym0vg.png
 imported/design@1x/images/Layer-Delete-qzjdm0jc.png
 imported/design@1x/images/Layer-Delete_Menu-mdu3rjy5.png
 imported/design@1x/images/Layer-Delete_Menu-mjrcntng.png
@@ -81,6 +91,13 @@ imported/design@1x/images/Layer-Header-mzk0mdk4.png
 imported/design@1x/images/Layer-Header-nzyxrjg1.png
 imported/design@1x/images/Layer-Header-quvertu3.png
 imported/design@1x/images/Layer-Header-quyxqju0.png
+imported/design@1x/images/Layer-Label-m0yyrtux.png
+imported/design@1x/images/Layer-Label-nda1oeng.png
+imported/design@1x/images/Layer-Label-ndq2quqz.png
+imported/design@1x/images/Layer-Label-nzywqkvd.png
+imported/design@1x/images/Layer-Label-qjzfneuw.png
+imported/design@1x/images/Layer-Label-revdndve.png
+imported/design@1x/images/Layer-Label-rjc2ntff.png
 imported/design@1x/images/Layer-MacintoshHD-rti1qtk4.png
 imported/design@1x/images/Layer-MainMenu-qtgyotnb.png
 imported/design@1x/images/Layer-Menu_Icon-murcmjnf.png
@@ -89,7 +106,10 @@ imported/design@1x/images/Layer-Menu_Icon-ruy2mejg.png
 imported/design@1x/images/Layer-MenuIcon-rkrgodre.png
 imported/design@1x/images/Layer-Move-ote1oeq5.png
 imported/design@1x/images/Layer-MyStick-qtrerjbc.png
+imported/design@1x/images/Layer-Operations-mzcynejb.png
+imported/design@1x/images/Layer-Operations-rda1rdqw.png
 imported/design@1x/images/Layer-OptionsIcon-oei0m0my.png
+imported/design@1x/images/Layer-OrganizeLabel-rkrfqjy5.png
 imported/design@1x/images/Layer-Organizer-njjenju4.png
 imported/design@1x/images/Layer-Rename-nzyxm0nb.png
 imported/design@1x/images/Layer-Right_Head-ntlertu3.png
@@ -105,16 +125,15 @@ imported/design@1x/images/Layer-Right_Head_Copy_2-nzzcotfd.png
 imported/design@1x/images/Layer-Right_Head_Copy_2-qkmymdy5.png
 imported/design@1x/images/Layer-Right_Head_Copy_2-rdi0qzvc.png
 imported/design@1x/images/Layer-ScanFolder-mzixmdqz.png
-imported/design@1x/images/Layer-Sort_by_Menu-odbgrky0.png
+imported/design@1x/images/Layer-SortButton-mdu0nkew.png
+imported/design@1x/images/Layer-SortButton-nzi5mjrg.png
+imported/design@1x/images/Layer-SortByBar-mtcyrtbd.png
+imported/design@1x/images/Layer-SortByBar-quzbnzqx.png
+imported/design@1x/images/Layer-SortByMenu-odbgrky0.png
+imported/design@1x/images/Layer-SortByMenu-qtq0qtmx.png
 imported/design@1x/images/Layer-SpeechBubble-ndu3rtm2.png
+imported/design@1x/images/Layer-ToggleAnalyze-nku4mduy.png
 imported/design@1x/images/Layer-ToggleView-qky2rkvf.png
-imported/design@1x/images/Layer-UsageDetail1-ouu4mdgy.png
-imported/design@1x/images/Layer-UsageDetail2-nezerdhf.png
-imported/design@1x/images/Layer-UsageDetail3-n0m1mza5.png
-imported/design@1x/images/Layer-UsageDetail4-n0e0n0i0.png
-imported/design@1x/images/Layer-UsageDetail5-meexqtm0.png
-imported/design@1x/images/Layer-UsageDetail6-n0e2mjjb.png
-imported/design@1x/images/Layer-WholeUsage-otazqzdd.png
 imported/design@1x/layers.json
 imported/design@1x/layers.json.js
 index.html
