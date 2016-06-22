@@ -1,24 +1,23 @@
 <!-- Modal Structure -->
 <div id="confirmDeleteModal" class="modal bottom-sheet">
 
-    <div class="row">
-        <div class="s4 col">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-        </div>
-        <div class="s4 col">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="trashSelectedFiles()">Move to trash</a>
-        </div>
-        <div class="s4 col">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="hardDeleteSelectedFiles()">Delete Permanently</a>
+    <div id="deleteBoxHeader">
+        <a id="deleteCancel" class="verticallyCenterAnchored modal-action modal-close "><i class="material-icons">close</i> </a>
+        <div id="deleteConfirmationMessage" class="verticallyCenterAnchored">Are you sure you want to delete these items?</div>
+        <div id="deleteActionContainer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn" (click)="trashSelectedFiles()">Move to trash</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn red" (click)="hardDeleteSelectedFiles()">Delete Permanently</a>
         </div>
     </div>
-    <div class="modal-content">
+    <div class="modal-content" id="deleteBoxContent">
         <div *ngFor="let dataItem of dataItems" >
-            <div class="row" *ngIf="dataItem.selected">
-                <div class="col s12">
+            <div class="deleteListRow" *ngIf="dataItem.selected">
                     <input type="checkbox" [attr.id]="dataItem.name|prefixRemoveSpace:'delete'" [(ngModel)]="dataItem.selected"/>
-                    <label [attr.for]="dataItem.name|prefixRemoveSpace:'delete'">{{dataItem.name}}</label>
-                </div>
+                    <label [attr.for]="dataItem.name|prefixRemoveSpace:'delete'">
+                        <img *ngIf="dataItem.isDirectory" src="images/my-folder.svg" class="dataItemIconForListView"/>
+                        <img *ngIf="!dataItem.isDirectory" src="images/my-file.svg" class="dataItemIconForListView"/>
+                    </label>
+                    <div class="dataItemNameInList">{{dataItem.name}}</div>
             </div>
         </div>
     </div>

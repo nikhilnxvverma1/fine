@@ -1,4 +1,4 @@
-<operation-progress (removeFromContext)="removeFromContext($event)"></operation-progress>
+
 <div class="row">
     <div class="col s9" id="dataAreaContainer">
         <!--<selection-field [tags]="context.tags" (tagadded)="incrementDataItemsQualifying($event)" (tagremoved)="decrementDataItemsQualifying($event)"></selection-field>-->
@@ -8,7 +8,7 @@
             <data-area *ngIf="organizeFolder" [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
         </div>
     </div>
-    <div class="col s3">
+    <div class="col s3" id="rightSideViewContainer">
         <usageDetail *ngIf="!organizeFolder" [scanResult]="_scanTargets[0].rootScanResult"></usageDetail>
         <operation *ngIf="organizeFolder" [dummyFolder]="context.dummyFolder"
                    (move)="moveToLocation($event)"
@@ -21,4 +21,4 @@
     </div>
 </div>
 <deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>
-
+<operation-progress (removeFromContext)="removeFromContext($event)"></operation-progress>
