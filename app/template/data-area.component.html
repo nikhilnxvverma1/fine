@@ -1,9 +1,18 @@
 <div id="subheader">
     <div class="row">
-        <div class="offset-s9 s3 col">
+        <div class="offset-s8 s3 col">
             <span class="subheaderItem smallPaddingRight">Sort By:</span>
-            <a class="subheaderItem underline">Name</a>
+            <a class="subheaderItem underline" (click)="toggleSortByMenu($event)">Name</a>
         </div>
+    </div>
+    <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
+        <ul>
+            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
+            <li (click)="selectSortOption($event)"><i [style.opacity]="true?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
+            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
+            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
+            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
+        </ul>
     </div>
 </div>
 <div class="row smallPaddingLeft">

@@ -34,6 +34,7 @@ export class ContextComponent implements AfterContentInit{
     @Input('context') public context:Context;
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
+    @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
     organizeFolder=false;
 
     constructor(@Inject private dataService:DataService,private _zone:NgZone) {}
@@ -49,6 +50,10 @@ export class ContextComponent implements AfterContentInit{
 
     toggleView(){
         this.organizeFolder=!this.organizeFolder;
+    }
+
+    closeSortByMenu(){
+        this._dataAreaComponent.isSortByMenuOpen=false;
     }
 
     groupInFolder(folderName:string){

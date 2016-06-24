@@ -3,7 +3,7 @@
  */
 
 
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {DataItem} from "./core/data-item";
 import {NgZone} from "@angular/core";
 import {Input} from "@angular/core";
@@ -45,7 +45,7 @@ export class MainMenuComponent{
     @Input('scanTargets') public scanTargets:ScanTarget[];
     private _isMenuOpen:boolean;
     constructor(private _zone:NgZone) {}
-
+    @ViewChild(FeedbackComponent)private  _feedback:FeedbackComponent;
 
     get isMenuOpen():boolean {
         return this._isMenuOpen;
@@ -71,20 +71,16 @@ export class MainMenuComponent{
 
     openFeedbackForm(){
         console.log("Time to open the feedback form");
-    }
-
-    closeMenu(){
-        console.log("Menu is now closing");
-
+        this._feedback.isFeedbackOpen=!this._feedback.isFeedbackOpen;
     }
 
     changeMenuStateToClose(){
         this.isMenuOpen=false;
+        this._feedback.isFeedbackOpen=false;
     }
 
     getMenuState(){
         return this.isMenuOpen?"open":"close";
     }
-
 
 }

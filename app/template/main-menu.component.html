@@ -47,8 +47,9 @@
             <div id="bottomOptions">
                 <a id="scanFolder" class="mainMenuActionButton smallGapFromLeft" (click)="openFolderForScan()">Scan folder</a>
                 <a class="verticallyCenterAnchored smallGapFromRight" (click)="openFeedbackForm()"><i class="material-icons scaleUpOnHover white-text small ">comment</i></a>
+                <feedback></feedback>
             </div>
-            <!--<feedback></feedback>-->
+
         </div>
     </div>
     <div id="menuDarkOverlay" @darkOverlayState="getMenuState()" (click)="changeMenuStateToClose()">
