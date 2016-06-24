@@ -20,10 +20,12 @@ import {ScanTarget} from "./core/scan-target";
 })
 export class BreadcrumbComponent{
 
+    //@Input('menuState') private _menuState:string;
     @Input('scanTargets') private _scanTargets:ScanTarget[];
     @Input('rootModel') public rootModel:RootModel;
     @Input('contextStack') public contextStack:Context[];
     @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
+    @Output('openMainMenu') openMainMenuEvent:EventEmitter<any>=new EventEmitter();
 
     constructor(private _dataService: DataService,private _zone:NgZone) {}
 
@@ -61,6 +63,10 @@ export class BreadcrumbComponent{
     openDataItem(dataItem:DataItem){
         console.log("will open data item"+dataItem.name);
         this.openDataItemEvent.emit(dataItem);
+    }
+
+    openMainMenu(){
+        this.openMainMenuEvent.emit(this);
     }
 
 }

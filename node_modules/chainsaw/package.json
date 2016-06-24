@@ -47,7 +47,7 @@
   "directories": {},
   "dist": {
     "shasum": "5eab50b28afe58074d0d58291388828b5e5fbc98",
-    "tarball": "http://registry.npmjs.org/chainsaw/-/chainsaw-0.1.0.tgz"
+    "tarball": "https://registry.npmjs.org/chainsaw/-/chainsaw-0.1.0.tgz"
   },
   "engine": {
     "node": ">=0.4.0"

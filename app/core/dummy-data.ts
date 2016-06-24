@@ -102,7 +102,7 @@ export class DummyData{
         var list:ScanTarget[]=[];
         list.push(new ScanTarget("Macintosh HD",ScanTargetType.HardDisk,12.4,101.4,50));
         list.push(new ScanTarget("Nikhil USB",ScanTargetType.USBStick,10.4,4.4,0));
-        list.push(new ScanTarget("Macintosh HD",ScanTargetType.Folder,12.4,0,0));
+        list.push(new ScanTarget("Local folder",ScanTargetType.Folder,12.4,0,0));
 
         return list;
     }

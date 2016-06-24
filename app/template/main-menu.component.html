@@ -1,27 +1,57 @@
 
-<div style="">
-    <div id="mainMenu" style="position: absolute;
-    top: 0;
-    left:0;
-    z-index:3;
-    height:100%;
-    width:30%;
-    ">
+<div>
+    <div id="mainMenu" @menuState="getMenuState()">
 
-        <div style="position: absolute;left:0;top:0;width:100%;height: 100%;background:navajowhite">
+        <div>
 
-            <a class="btn"  onclick="closeMainMenu()"><i class="material-icons">close</i></a>
-            <ul>
-                <li *ngFor="let scanTarget of scanTargets">
-                    {{ scanTarget.name }}
-                </li>
-            </ul>
-            <a class="btn" (click)="openFolderForScan()">Scan folder</a>
-            <a class="btn" (click)="openFeedbackForm()"><i class="material-icons">comment</i></a>
-            <feedback></feedback>
+            <a id="menuCloseLink" (click)="changeMenuStateToClose()"><i class="scaleUpOnHover white-text small material-icons">close</i></a>
+
+            <div id="scanTargetListContainer">
+                <div class="scanTargetContainer" *ngFor="let scanTarget of scanTargets">
+                    <div class="row tinyBottomMargin">
+                        <div class="s3 col">
+                            <img *ngIf="scanTarget.type==0" class="scanTargetIcon" src="images/harddisk.svg">
+                            <img *ngIf="scanTarget.type==1" class="scanTargetIcon" src="images/usb-stick.svg">
+                            <img *ngIf="scanTarget.type==2" class="scanTargetIcon" src="images/my-folder.svg">
+                        </div>
+                        <div class="s9 col">
+                            <div class="row scanTargetName">
+                                <div class="s12 col">
+                                    {{scanTarget.name}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="s12 col">
+                                    <a class="mainMenuActionButton">
+                                        Scan
+                                    </a>
+                                    <a class="mainMenuActionButton scanDropDown">
+                                        <i class="material-icons white-text">arrow_drop_down</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menuLoaderBackground">
+                        <div class="diskCapacity"></div>
+                        <label>
+                            73.4 GB used
+                        </label>
+                        <label class="floatRight">
+                            120.1 GB
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bottomOptions">
+                <a id="scanFolder" class="mainMenuActionButton smallGapFromLeft" (click)="openFolderForScan()">Scan folder</a>
+                <a class="verticallyCenterAnchored smallGapFromRight" (click)="openFeedbackForm()"><i class="material-icons scaleUpOnHover white-text small ">comment</i></a>
+            </div>
+            <!--<feedback></feedback>-->
         </div>
     </div>
-    <div id="menuDarkOverlay" style="position: absolute;width: 100%;height:100%;background: rgba(0, 0, 0, 0.35);left: 0;top: 0;z-index:2">
+    <div id="menuDarkOverlay" @darkOverlayState="getMenuState()" (click)="changeMenuStateToClose()">
         &nbsp;
     </div>
 

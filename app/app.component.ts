@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {DataService} from './core/data.service'
 import {InfoBoxComponent} from "./info-box.component";
 import {DataAreaComponent} from "./data-area.component";
@@ -29,6 +29,7 @@ export class AppComponent{
 
     public rootModel:RootModel=new RootModel();
     private _scanTargets:ScanTarget[];
+    @ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
 
     constructor(@Inject private _dataService:DataService){
         this.rootModel=new RootModel();
@@ -73,6 +74,10 @@ export class AppComponent{
         }
     }
 
+    changeMenuStateToOpen(){
+        //this._isMenuOpen=true;
+        this.mainMenu.isMenuOpen=true;
+    }
 
 
 }

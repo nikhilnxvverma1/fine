@@ -47,7 +47,7 @@
   "directories": {},
   "dist": {
     "shasum": "8e177206c3c80837d85632e8b9359dfe8b2f6eaf",
-    "tarball": "http://registry.npmjs.org/end-of-stream/-/end-of-stream-0.1.5.tgz"
+    "tarball": "https://registry.npmjs.org/end-of-stream/-/end-of-stream-0.1.5.tgz"
   },
   "homepage": "https://github.com/mafintosh/end-of-stream",
   "keywords": [

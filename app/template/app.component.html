@@ -1,4 +1,4 @@
 <main-menu [scanTargets]="_scanTargets"></main-menu>
 <div class="row">
-<breadcrumb [rootModel]="rootModel" [scanTargets]="_scanTargets" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></breadcrumb>
+<breadcrumb [rootModel]="rootModel" [scanTargets]="_scanTargets" (openMainMenu)="changeMenuStateToOpen()" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></breadcrumb>
 </div>

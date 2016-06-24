@@ -17,7 +17,7 @@
                    (group)="groupInFolder($event)"></operation>
         <info-box *ngIf="organizeFolder" ></info-box>
 
-        <a class="btn" (click)="toggleView()">Toggle</a>
+        <a id="toggleView" class="btn" (click)="toggleView()">Toggle</a>
     </div>
 </div>
 <deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>
