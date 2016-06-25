@@ -1,24 +1,25 @@
 
 <div class="row" (click)="closeSortByMenu()">
     <div class="col s9" id="dataAreaContainer">
-        <!--<selection-field [tags]="context.tags" (tagadded)="incrementDataItemsQualifying($event)" (tagremoved)="decrementDataItemsQualifying($event)"></selection-field>-->
 
-        <div *ngIf="context" >
-            <sunburst *ngIf="!organizeFolder" [scanResult]="_scanTargets[0].rootScanResult"></sunburst>
-            <data-area *ngIf="organizeFolder" [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
-        </div>
+            <sunburst id="sunburstComponent" @sunburstToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [scanResult]="_scanTargets[0].rootScanResult"></sunburst>
+            <data-area @dataAreaToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
+
     </div>
     <div class="col s3" id="rightSideViewContainer">
-        <usageDetail *ngIf="!organizeFolder" [scanResult]="_scanTargets[0].rootScanResult"></usageDetail>
-        <operation *ngIf="organizeFolder" [dummyFolder]="context.dummyFolder"
+        <usageDetail id="usageDetailComponent" @sunburstToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [scanResult]="_scanTargets[0].rootScanResult"></usageDetail>
+        <operation @dataAreaToggle="toggleStatus.getState()" [dummyFolder]="context.dummyFolder" [toggleStatus]="toggleStatus"
                    (move)="moveToLocation($event)"
                    (reviewDelete)="confirmDeletingFiles()"
                    (rename)="renameFiles($event)"
                    (group)="groupInFolder($event)"></operation>
         <info-box *ngIf="organizeFolder" ></info-box>
 
-        <a id="toggleView" class="btn" (click)="toggleView()">Toggle</a>
+        <a id="toggleView" class="btn" (click)="toggleView()">
+            <span @analyzeLabelToggle="toggleStatus.getState()">Analyze</span>
+            <span @organizeLabelToggle="toggleStatus.getState()">Organize</span>
+        </a>
     </div>
 </div>
 <deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>
-<operation-progress (removeFromContext)="removeFromContext($event)"></operation-progress>
+<operation-progress [toggleStatus]="toggleStatus" (removeFromContext)="removeFromContext($event)"></operation-progress>

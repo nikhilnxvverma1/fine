@@ -4,7 +4,7 @@
 
 import {Component,Injectable} from '@angular/core';
 import {DataItem} from "./core/data-item";
-import {Output,EventEmitter} from "@angular/core";
+import {Output,Input,EventEmitter} from "@angular/core";
 import {ServiceProgress} from './core/service-progress'
 import {DataOperation} from './core/data-operation'
 

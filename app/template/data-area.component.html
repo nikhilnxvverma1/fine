@@ -1,4 +1,4 @@
-<div id="subheader">
+<div id="subheader" @subheaderToggle="toggleStatus.getState()">
     <div class="row">
         <div class="offset-s8 s3 col">
             <span class="subheaderItem smallPaddingRight">Sort By:</span>
@@ -15,7 +15,7 @@
         </ul>
     </div>
 </div>
-<div class="row smallPaddingLeft">
+<div class="row smallPaddingLeft relativePosition" @dataAreaItemsToggle="toggleStatus.getState()">
     <div class="col s4 m3 l2 dataItemContainer" *ngIf="dummyFolder.name!=null && dummyFolder.name.length>0">
         <data-item [dataItem]="dummyFolder"></data-item>
     </div>

@@ -8532,7 +8532,9 @@ body {
 
 #dataAreaContainer {
   height: 90%;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  text-align: center;
+  position: relative; }
 
 .dataItemIconContainer {
   position: relative;
@@ -8589,8 +8591,13 @@ body {
   height: 10%; }
 
 #menuLink {
-  display: inline-block;
   padding-left: 10px; }
+
+#menuLink i {
+  line-height: 56px; }
+
+#menuLink i:hover {
+  color: white; }
 
 #menuCloseLink {
   position: absolute;
@@ -8606,6 +8613,7 @@ body {
 #rightSideViewContainer {
   background: #F4F4F4;
   padding-top: 20px;
+  padding-right: 4px;
   height: 90%;
   position: relative; }
 
@@ -8618,6 +8626,17 @@ body {
   bottom: 0px;
   left: 0px;
   font-size: x-large; }
+  #toggleView span {
+    color: #e8e8e8;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0); }
+  #toggleView span:hover {
+    color: white; }
 
 #subheader {
   width: 100%;
@@ -8635,7 +8654,8 @@ body {
   right: 50px;
   background-image: url("../images/sort-menu-box.svg");
   padding-top: 20px;
-  z-index: 1; }
+  z-index: 1;
+  text-align: left; }
 
 #sortByMenu ul li {
   line-height: 40px;
@@ -8665,11 +8685,17 @@ body {
 .tinyBottomMargin {
   margin-bottom: 3px; }
 
+.tinyLeftMargin {
+  margin-left: 3px; }
+
 .underline {
   text-decoration: underline; }
 
 .floatRight {
   float: right; }
+
+.inline {
+  display: inline; }
 
 .smallGapFromRight {
   position: absolute;
@@ -8839,3 +8865,50 @@ body {
 
 .variantColor {
   background: #2F3E4F; }
+
+#sunburst {
+  position: relative; }
+
+.usageLegendForHeader {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #40ffce; }
+
+.usageLegendForDetail {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #ffc6db;
+  margin-right: 8px; }
+
+.usageDetailItem:hover {
+  background: #e1e1e1; }
+
+.usageDetailItem .usageDetailName {
+  width: 50%;
+  display: inline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.relativePosition {
+  position: relative; }
+
+.absolutePosition {
+  position: absolute; }
+
+#sunburstComponent {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0); }
+
+#usageDetailComponent {
+  position: absolute;
+  width: 92%; }

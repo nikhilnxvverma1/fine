@@ -1,7 +1,8 @@
 <nav id="breadcrumbContainer">
+
     <div class="nav-wrapper">
-        <span class="col s12">
-            <a id="menuLink" class="scaleUpOnHover" (click)="openMainMenu()">
+        <div class="col s12">
+            <a id="menuLink" class="breadcrumb scaleUpOnHover" (click)="openMainMenu()">
                 <i class="material-icons">view_quilt</i>
             </a>
             <a *ngFor="let context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">
@@ -12,7 +13,7 @@
                     {{context.parentFolder.name}}
                 </span>
             </a>
-            </span>
+        </div>
     </div>
 </nav>
 <folder-context *ngIf="contextStack[contextStack.length-1]" [scanTargets]="_scanTargets" [context]="contextStack[contextStack.length-1]" (opendataitem)="openDataItem($event)">Loading...</folder-context>

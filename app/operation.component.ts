@@ -10,10 +10,28 @@ import {Output,EventEmitter} from "@angular/core";
 
 import {ScanTarget} from "./core/scan-target";
 import {Folder} from "./core/folder";
+import {ToggleStatus} from "./core/toggle-status";
+import {trigger,state,style,transition,animate} from "@angular/core";
 
 @Component({
     selector: 'operation',
-    templateUrl:'app/template/operation.component.html'
+    templateUrl:'app/template/operation.component.html',
+    animations:[
+        trigger("operationToggle",[
+            state("analyze",style({
+                top:"200px",
+                opacity:"0",
+                transform:"scale(0,0)"
+            })),
+            state("organize",style({
+                top:"0px",
+                opacity:"1",
+                transform:"scale(1,1)"
+            })),
+            transition("analyze => organize",animate("0.4s 0.4s ease-out")),
+            transition("organize => analyze",animate("0.4s ease-in"))
+        ]),
+    ]
 })
 export class OperationComponent implements OnInit{
 
@@ -22,6 +40,7 @@ export class OperationComponent implements OnInit{
     @Output("reviewDelete") deleteEvent:EventEmitter=new EventEmitter();
     @Output("rename") renameEvent:EventEmitter=new EventEmitter();
     @Output("group") groupEvent:EventEmitter=new EventEmitter();
+    @Input("toggleStatus") toggleStatus:ToggleStatus;
 
     private newName:string="";
 

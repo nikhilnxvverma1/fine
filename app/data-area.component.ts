@@ -10,6 +10,7 @@ import {EventEmitter} from "@angular/core";
 import {DataItem} from "./core/data-item";
 import {Folder} from "./core/folder";
 import {trigger,state,style,transition,animate} from "@angular/core";
+import {ToggleStatus} from "./core/toggle-status";
 
 @Component({
     selector: 'data-area',
@@ -18,20 +19,45 @@ import {trigger,state,style,transition,animate} from "@angular/core";
     animations:[
         trigger('sortByMenuState',[
             state('open',style({
-                visibility:"visible"
+                visibility:"visible",
+                opacity:"1"
             })),
             state('close',style({
-                visibility:"hidden"
+                visibility:"hidden",
+                opacity:"0"
             })),
-            transition('open => close',animate('100ms ease-in')),
-            transition('close => open',animate('100ms ease-out')),
-        ])
+            transition('open => close',[animate('100ms')]),
+            transition('close => open',[animate('100ms',style({opacity:"1",visibility:"visible"}))]),
+        ]),
+        trigger("dataAreaItemsToggle",[
+            state("analyze",style({
+                top:"100px",
+                opacity:"0"
+            })),
+            state("organize",style({
+                top:"0px",
+                opacity:"1"
+            })),
+            transition("analyze => organize",animate("0.4s 0.4s ease-out")),
+            transition("organize => analyze",animate("0.4s ease-in"))
+        ]),
+        trigger("subheaderToggle",[
+            state("analyze",style({
+                top:"-30px",
+            })),
+            state("organize",style({
+                top:"0px",
+            })),
+            transition("analyze => organize",animate("0.4s 0.4s ease-out")),
+            transition("organize => analyze",animate("0.4s ease-in"))
+        ]),
     ]
 
 })
 export class DataAreaComponent implements OnInit,OnChanges{
 
     private _isSortByMenuOpen=false;
+    @Input("toggleStatus") toggleStatus:ToggleStatus;
 
 
     get isSortByMenuOpen():boolean {

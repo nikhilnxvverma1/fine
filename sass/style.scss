@@ -15,6 +15,8 @@ body{
 #dataAreaContainer{
   height:90%;
   overflow-y: scroll;
+  text-align: center;
+  position: relative;
 }
 
 .dataItemIconContainer{
@@ -84,8 +86,16 @@ body{
 }
 
 #menuLink{
-  display: inline-block;
+  //display: inline-block;
   padding-left: 10px;
+}
+
+#menuLink i{
+  line-height: 56px;
+}
+
+#menuLink i:hover{
+  color:white;
 }
 
 #menuCloseLink{
@@ -104,6 +114,7 @@ body{
 #rightSideViewContainer{
   background:#F4F4F4;
   padding-top:20px;
+  padding-right:4px;
   height:90%;
   position:relative;
 }
@@ -117,6 +128,21 @@ body{
   bottom:0px;
   left:0px;
   font-size: x-large;
+
+  span{
+    color: #e8e8e8;
+    position: absolute;
+    left:50%;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+
+  span:hover{
+    color:white;
+  }
 }
 
 #subheader{
@@ -139,6 +165,7 @@ body{
   background-image: url('../images/sort-menu-box.svg');
   padding-top:20px;
   z-index: 1;
+  text-align: left;
 }
 
 #sortByMenu ul li{
@@ -182,12 +209,20 @@ body{
   margin-bottom:3px;
 }
 
+.tinyLeftMargin{
+  margin-left:3px;
+}
+
 .underline{
   text-decoration: underline;
 }
 
 .floatRight{
   float:right;
+}
+
+.inline{
+  display: inline;
 }
 
 .smallGapFromRight{
@@ -390,3 +425,58 @@ body{
   background:$primary-color-variant;
 }
 
+#sunburst{
+  position: relative;
+}
+
+.usageLegendForHeader{
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  display: inline-block;
+  background:#40ffce;
+}
+
+.usageLegendForDetail{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  display: inline-block;
+  background: #ffc6db;
+  margin-right:8px;
+}
+
+.usageDetailItem:hover{
+  background: #e1e1e1;
+}
+
+.usageDetailItem .usageDetailName{
+  width:50%;
+  display: inline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.relativePosition{
+  position: relative;
+}
+
+.absolutePosition{
+  position: absolute;
+}
+
+#sunburstComponent{
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+#usageDetailComponent{
+  position: absolute;
+  width: 92%;
+}

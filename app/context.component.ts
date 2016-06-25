@@ -20,13 +20,56 @@ import {SunburstComponent} from "./sunburst.component";
 import {UsageDetailComponent} from "./usage-detail.component";
 import {ScanTarget} from "./core/scan-target";
 import {OperationComponent} from "./operation.component";
-//TODO remove if unneeded
+import {ToggleStatus} from "./core/toggle-status";
+import {trigger,state,style,transition,animate,keyframes} from "@angular/core";
 
 @Component({
     selector: 'folder-context',
     directives:[DataAreaComponent,InfoBoxComponent,DeletionComponent,OperationProgressComponent,SunburstComponent,
         OperationComponent,UsageDetailComponent,FORM_DIRECTIVES],
     templateUrl:'app/template/context.component.html',
+    animations:[
+        trigger("dataAreaToggle",[
+            state("analyze",style({
+                visibility:"collapse",
+            })),
+            state("organize",style({
+                visibility:"visible"
+            })),
+            transition("analyze => organize",animate("0s 0.4s")),
+            transition("organize => analyze",animate("0.4s"))
+        ]),
+        trigger("sunburstToggle",[
+            state("analyze",style({
+                visibility:"visible"
+            })),
+            state("organize",style({
+                visibility:"collapse"
+            })),
+            transition("analyze => organize",animate("0.4s")),
+            transition("organize => analyze",animate("0s 0.4s"))
+        ]),
+        trigger("organizeLabelToggle",[
+            state("analyze",style({
+                top:"0px"
+            })),
+            state("organize",style({
+                top:"100px"
+            })),
+            transition("analyze => organize",animate("0.4s ease-out")),
+            transition("organize => analyze",animate("0.4s ease-in"))
+        ]),
+        trigger("analyzeLabelToggle",[
+            state("analyze",style({
+                top:"100px"
+            })),
+            state("organize",style({
+                top:"0px"
+            })),
+            transition("analyze => organize",animate("0.4s ease-out")),
+            transition("organize => analyze",animate("0.4s ease-in"))
+        ]),
+    ]
 })
 export class ContextComponent implements AfterContentInit{
 
@@ -36,6 +79,8 @@ export class ContextComponent implements AfterContentInit{
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
     organizeFolder=false;
+
+    toggleStatus=new ToggleStatus();
 
     constructor(@Inject private dataService:DataService,private _zone:NgZone) {}
 
@@ -50,6 +95,7 @@ export class ContextComponent implements AfterContentInit{
 
     toggleView(){
         this.organizeFolder=!this.organizeFolder;
+        this.toggleStatus.inOrganizeState=!this.toggleStatus.inOrganizeState;
     }
 
     closeSortByMenu(){
