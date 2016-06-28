@@ -21,4 +21,10 @@ export class Context {
 
         return selectedDataItems;
     }
+
+    public setSelectionForAll(selected:boolean){
+        for(var i=0;i<this.dataItems.length;i++){
+            this.dataItems[i].selected=selected;
+        }
+    }
 }

@@ -12,6 +12,7 @@ import {ScanTarget} from "./core/scan-target";
 import {UnitSpace} from "./pipe/unit-space.pipe";
 import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate} from "@angular/core";
+import {Folder} from "./core/folder";
 
 @Component({
     selector: 'usageDetail',
@@ -66,7 +67,26 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 })
 export class UsageDetailComponent {
 
-    @Input("scanResult") root:DataItem;
+    @Input("scanResult") root:Folder;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
+
+    openUsage(child:DataItem){
+        console.log("Open usage for "+child.name)
+    }
+
+    selectChild(dataItem:DataItem,event:MouseEvent){
+
+        if(event.shiftKey){
+            dataItem.selected=true;
+            this.root.selectPrecedingDataItems(dataItem);
+        }else{
+            if(event.metaKey){
+                dataItem.selected=!dataItem.selected;
+            }else{
+                this.root.setSelectionForAll(false);
+                dataItem.selected=true;
+            }
+        }
+    }
 }

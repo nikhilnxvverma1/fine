@@ -18,4 +18,24 @@ export class Folder extends DataItem{
         this._children.push(dataItem);
     }
 
+
+    public selectPrecedingDataItems(dataItem:DataItem){
+        var endIndex=this.children.indexOf(dataItem);
+        var i=endIndex-1;
+        while(i>=0){
+            if(!this.children[i].selected){
+                this.children[i].selected=true;
+            }else{
+                break;
+            }
+            i--;
+        }
+    }
+
+    public setSelectionForAll(selected:boolean){
+        for(var i=0;i<this.children.length;i++){
+            this.children[i].selected=selected;
+        }
+    }
+
 }

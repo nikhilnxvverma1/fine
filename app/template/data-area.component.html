@@ -2,7 +2,7 @@
     <div class="row">
         <div class="offset-s8 s3 col">
             <span class="subheaderItem smallPaddingRight">Sort By:</span>
-            <a class="subheaderItem underline" (click)="toggleSortByMenu($event)">Name</a>
+            <a class="subheaderItem underline" (mousedown)="toggleSortByMenu($event)">Name</a>
         </div>
     </div>
     <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
@@ -15,11 +15,40 @@
         </ul>
     </div>
 </div>
-<div class="row smallPaddingLeft relativePosition" @dataAreaItemsToggle="toggleStatus.getState()">
-    <div class="col s4 m3 l2 dataItemContainer" *ngIf="dummyFolder.name!=null && dummyFolder.name.length>0">
+<div #dataAreaContainer id="dataAreaContainer" class="row smallPaddingLeft relativePosition"
+     @dataAreaItemsToggle="toggleStatus.getState()">
+
+    <div style="
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;"
+         (mousedown)="mouseDown($event)"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)"
+    ></div>
+
+
+    <div class="col s4 m3 l2 dataItemContainer"
+         *ngIf="dummyFolder.name!=null && dummyFolder.name.length>0"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)">
         <data-item [dataItem]="dummyFolder"></data-item>
     </div>
-    <div class="col s4 m3 l2 dataItemContainer" *ngFor="let dataItem of dataItems">
-        <data-item [dataItem]="dataItem" (opendataitem)="openDataItem($event)"></data-item>
+    <div class="col s4 m3 l2 dataItemContainer"
+         *ngFor="let dataItem of dataItems"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)">
+        <data-item [dataItem]="dataItem"
+                   (deselectall)="deselectEvent.emit(this)"
+                   (selectpreceding)="selectPrecedingDataItems($event)"
+                   (opendataitem)="openDataItem($event)"></data-item>
     </div>
+    <div #selectionRect
+         id="selectionRect"
+         (mousedown)="mouseDown($event)"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)"
+    ></div>
 </div>

@@ -26,7 +26,7 @@ import {trigger,state,style,transition,animate} from "@angular/core";
                 top:"0",
                 opacity:"0"
             })),
-            transition("analyze => organize",animate("1.4s ease-out")),
+            transition("analyze => organize",animate("0.4s ease-out")),
             transition("organize => analyze",animate("0.4s 0.4s ease-in"))
         ]),
     ]

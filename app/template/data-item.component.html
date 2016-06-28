@@ -2,19 +2,21 @@
     <div *ngIf="dataItem.isDirectory">
         <div>
             <div class="dataItemIconContainer" [class.dataItemIconSelected]="dataItem.selected">
-                <img src="images/my-folder.svg" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
+                <img src="images/my-folder.svg" (click)="selectDataItem(dataItem,$event)" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
             </div>
-            <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
-            <label [attr.for]="dataItem.name" [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>
+            <!--<input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">-->
+            <!--<label [attr.for]="dataItem.name" [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>-->
+            <label [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>
         </div>
     </div>
     <div *ngIf="!dataItem.isDirectory">
         <div>
             <div class="dataItemIconContainer" [class.dataItemIconSelected]="dataItem.selected">
-                <img src="images/my-file.svg" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
+                <img src="images/my-file.svg" (click)="selectDataItem(dataItem,$event)" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
             </div>
-            <input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">
-            <label [attr.for]="dataItem.name" [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>
+            <!--<input [attr.id]="dataItem.name" [(ngModel)]="dataItem.selected" type="checkbox">-->
+            <!--<label [attr.for]="dataItem.name" [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>-->
+            <label [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>
         </div>
     </div>
 

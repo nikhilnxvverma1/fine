@@ -8530,12 +8530,6 @@ body {
 #breadcrumbContainer {
   height: 60px; }
 
-#dataAreaContainer {
-  height: 90%;
-  overflow-y: scroll;
-  text-align: center;
-  position: relative; }
-
 .dataItemIconContainer {
   position: relative;
   width: 80px;
@@ -8561,7 +8555,8 @@ body {
   height: 130px; }
 
 .dataItemContainer label {
-  padding-left: 22px; }
+  padding: 2px;
+  font-size: 1em; }
 
 .operation {
   padding: 10px 20px 10px 20px;
@@ -8604,11 +8599,19 @@ body {
   right: 15px;
   top: 15px; }
 
-#dataAreaContainer {
+#mainDataContainer {
+  height: 90%;
+  position: relative;
   background: #F9F9F9;
   padding-right: 0px;
   height: 90%;
-  padding-left: 0px; }
+  padding-left: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 #rightSideViewContainer {
   background: #F4F4F4;
@@ -8642,7 +8645,7 @@ body {
   width: 100%;
   background: white;
   height: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
   position: relative; }
 
 .subheaderItem {
@@ -8887,12 +8890,26 @@ body {
 .usageDetailItem:hover {
   background: #e1e1e1; }
 
+.selectedUsageDetail {
+  background: #1B5D99;
+  color: white; }
+
+.selectedUsageDetail:hover {
+  background: #5898ff;
+  color: white; }
+
 .usageDetailItem .usageDetailName {
   width: 50%;
   display: inline;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; }
+  text-overflow: ellipsis;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 .relativePosition {
   position: relative; }
@@ -8912,3 +8929,18 @@ body {
 #usageDetailComponent {
   position: absolute;
   width: 92%; }
+
+#selectionRect {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 0px;
+  left: 0px;
+  visibility: hidden;
+  background: rgba(37, 102, 255, 0.23);
+  border: 1px solid blue; }
+
+#dataAreaContainer {
+  overflow-y: scroll;
+  height: 100%;
+  padding-top: 18px; }

@@ -4,7 +4,12 @@
         <span class="right" @sizeToggle="toggleStatus.getState()">{{root.size|unitSpace}}</span>
 </h5>
 <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
-    <li class="usageDetailItem" *ngFor="let child of root.children">
+    <li class="usageDetailItem"
+        *ngFor="let child of root.children"
+        [class.selectedUsageDetail]="child.selected"
+        (click)="selectChild(child,$event)"
+        (dblclick)="openUsage(child)"
+    >
         <div class="usageLegendForDetail" @legendToggle="toggleStatus.getState()"></div>
         <div class="usageDetailName">{{ child.name|slice:0:13}}</div>
         <span class="right">{{child.size|unitSpace}}</span>

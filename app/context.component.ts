@@ -22,6 +22,7 @@ import {ScanTarget} from "./core/scan-target";
 import {OperationComponent} from "./operation.component";
 import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate,keyframes} from "@angular/core";
+import {Point} from "./core/point";
 
 @Component({
     selector: 'folder-context',
@@ -78,9 +79,11 @@ export class ContextComponent implements AfterContentInit{
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
+
     organizeFolder=false;
 
     toggleStatus=new ToggleStatus();
+
 
     constructor(@Inject private dataService:DataService,private _zone:NgZone) {}
 
@@ -178,4 +181,6 @@ export class ContextComponent implements AfterContentInit{
         console.log("removed data item from context index"+index);
     }
 
+
 }
+

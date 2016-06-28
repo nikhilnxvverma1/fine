@@ -1,9 +1,29 @@
 
-<div class="row" (click)="closeSortByMenu()">
-    <div class="col s9" id="dataAreaContainer">
+<div class="row" (mousedown)="closeSortByMenu()">
+    <div class="col s9"
+         id="mainDataContainer"
+         #mainDataContainer
+         >
+
+
 
             <sunburst id="sunburstComponent" @sunburstToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [scanResult]="_scanTargets[0].rootScanResult"></sunburst>
-            <data-area @dataAreaToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [dataItems]="context.dataItems" [dummyFolder]="context.dummyFolder" (opendataitem)="openDataItem($event)"></data-area>
+            <data-area @dataAreaToggle="toggleStatus.getState()"
+                       [toggleStatus]="toggleStatus"
+                       [dataItems]="context.dataItems"
+                       [dummyFolder]="context.dummyFolder"
+                       (opendataitem)="openDataItem($event)"
+                       (deselectall)="context.setSelectionForAll(false)"></data-area>
+
+        <!--<div style="background:orange;-->
+            <!--position: absolute;-->
+            <!--top:0;-->
+            <!--left:0;-->
+            <!--width:100%;-->
+            <!--height:100%;-->
+            <!--"-->
+             <!---->
+        <!--&gt;</div>-->
 
     </div>
     <div class="col s3" id="rightSideViewContainer">
