@@ -74,8 +74,8 @@ import {Point} from "./core/point";
 })
 export class ContextComponent implements AfterContentInit{
 
-    @Input('scanTargets') private _scanTargets:ScanTarget[];
-    @Input('context') public context:Context;
+    @Input('scanTarget') private _scanTarget:ScanTarget;
+    public context:Context=new Context();
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
@@ -103,6 +103,11 @@ export class ContextComponent implements AfterContentInit{
 
     closeSortByMenu(){
         this._dataAreaComponent.isSortByMenuOpen=false;
+    }
+
+    sortBy(sortOption){
+        this._scanTarget.sortOption=sortOption;
+        console.log("Sort Option is "+sortOption);
     }
 
     groupInFolder(folderName:string){

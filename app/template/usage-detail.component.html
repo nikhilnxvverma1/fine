@@ -1,11 +1,12 @@
-<div class="usageLegendForHeader" @legendToggle="toggleStatus.getState()"></div>
+<div *ngIf="scanTarget!=null">
+    <div class="usageLegendForHeader" @legendToggle="toggleStatus.getState()"></div>
 <h5 class="relativePosition inline" @usageHeaderToggle="toggleStatus.getState()">
-        {{root.name}}
-        <span class="right" @sizeToggle="toggleStatus.getState()">{{root.size|unitSpace}}</span>
+        {{scanTarget.folderStack[scanTarget.folderStack.length-1].name}}
+        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.folderStack[scanTarget.folderStack.length-1].size|unitSpace}}</span>
 </h5>
 <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
     <li class="usageDetailItem"
-        *ngFor="let child of root.children"
+        *ngFor="let child of scanTarget.folderStack[scanTarget.folderStack.length-1].children"
         [class.selectedUsageDetail]="child.selected"
         (click)="selectChild(child,$event)"
         (dblclick)="openUsage(child)"
@@ -15,3 +16,4 @@
         <span class="right">{{child.size|unitSpace}}</span>
     </li>
 </ul>
+</div>

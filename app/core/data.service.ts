@@ -9,6 +9,10 @@ import {OperationProgressComponent} from "../operation-progress.component";
 import {DataOperation} from "./data-operation";
 /// <reference path="../../typings/main/ambient/node/node.d.ts" />
 //import fs=require('fs');
+/// <reference path="../jslib/disk-usage.d.ts" />
+//import diskUsage=require("../../jslib/disk-usage.js")
+import {ScanTarget} from "./scan-target";
+import {ScanTargetType} from "./scan-target-type";
 @Injectable()
 export class DataService{
 
@@ -30,10 +34,14 @@ export class DataService{
                         if(err) throw err;
 
                         if(stats.isDirectory()){
-                            var folder=new Folder(directoryPath,dataItem,stats);
+                            var folder=new Folder(dataItem);
+                            folder.parentUrl=directoryPath;
+                            folder.setStatsInfo(stats);
                             dataItemsResult.push(folder);
                         }else{
-                            var file=new File(directoryPath,dataItem,stats);
+                            var file=new File(dataItem);
+                            file.parentUrl=directoryPath;
+                            file.setStatsInfo(stats);
                             dataItemsResult.push(file);
                         }
                     });
@@ -42,6 +50,51 @@ export class DataService{
         });
         return dataItemsResult;
     }
+
+    scanDirectoryRecursively(directoryPath:string,name:string,parentFolder:Folder):Folder{
+
+        var fs=require('fs-extra');
+
+        var folder:Folder=new Folder(name);
+        folder.parent=parentFolder;
+        folder.parentUrl=directoryPath;
+
+        let path = folder.getFullyQualifiedPath();
+        fs.readdir(path,(err, folderChildren)=>{
+            if(err) throw err;
+            folderChildren.forEach((item=>{
+
+                let childPath;
+
+                if (path=='/') {
+                    childPath = '/' + item;
+                }else{
+                    childPath = path + '/' + item;
+                }
+                fs.stat(childPath,(err, stats)=>{
+                    this._zone.run(()=>{
+                        if(err) throw err;
+
+                        let containerPath = path=='/'?path:path+'/';
+                        if(stats.isDirectory()){
+                            var childFolder=this.scanDirectoryRecursively(containerPath,item,folder);
+                            childFolder.setStatsInfo(stats);
+                            childFolder.parentUrl= containerPath;
+                            folder.addDataItem(childFolder);
+                        }else{
+                            var file=new File(item);
+                            file.setStatsInfo(stats);
+                            file.parentUrl=containerPath
+                            folder.addDataItem(file);
+                        }
+                    });
+                })
+            }));
+        });
+        return folder;
+    }
+
+
 
     moveFiles(dataItems:DataItem[],
               directory:string,
@@ -229,4 +282,14 @@ class PostExecution{
             //});
         }
     }
+}
+
+class DriveInfo{
+    mountPoint:string;
+    total:number;
+    used:number;
+    available:number;
+    name:string;
+    usedPercentage:number;
+    freePercentage:number;
 }

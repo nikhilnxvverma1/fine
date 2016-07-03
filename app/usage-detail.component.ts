@@ -67,7 +67,7 @@ import {Folder} from "./core/folder";
 })
 export class UsageDetailComponent {
 
-    @Input("scanResult") root:Folder;
+    @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
 
@@ -79,12 +79,12 @@ export class UsageDetailComponent {
 
         if(event.shiftKey){
             dataItem.selected=true;
-            this.root.selectPrecedingDataItems(dataItem);
+            this.scanTarget.rootScanResult.selectPrecedingDataItems(dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
             }else{
-                this.root.setSelectionForAll(false);
+                this.scanTarget.rootScanResult.setSelectionForAll(false);
                 dataItem.selected=true;
             }
         }

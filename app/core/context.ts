@@ -3,12 +3,23 @@ import {Tag} from './tag'
 import {Data} from "./data";
 import {DataItem} from "./data-item";
 import {TextTag} from "./text-tag";
+import {SortOption} from "./sort-option";
 
 export class Context {
+
     public parentFolder:Folder;//null means this is the root
     public tags:Tag[]=[];
     public dataItems:DataItem[];
     public dummyFolder:Folder=new Folder('','',null);//used for showing name of folder while filling 'group' textfield
+    private _sortOption:SortOption;
+
+    get sortOption():SortOption {
+        return this._sortOption;
+    }
+
+    set sortOption(value:SortOption) {
+        this._sortOption = value;
+    }
 
     public getSelectedFiles():DataItem[]{
         var selectedDataItems:DataItem[]=[];
@@ -27,4 +38,5 @@ export class Context {
             this.dataItems[i].selected=selected;
         }
     }
+
 }

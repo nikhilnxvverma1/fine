@@ -7,11 +7,11 @@
     </div>
     <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
         <ul>
-            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
-            <li (click)="selectSortOption($event)"><i [style.opacity]="true?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
-            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
-            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
-            <li (click)="selectSortOption($event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
+            <li (click)="selectSortOption(0,$event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
+            <li (click)="selectSortOption(1,$event)"><i [style.opacity]="true?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
+            <li (click)="selectSortOption(2,$event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
+            <li (click)="selectSortOption(3,$event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
+            <li (click)="selectSortOption(4,$event)"><i [style.opacity]="false?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
         </ul>
     </div>
 </div>

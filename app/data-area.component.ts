@@ -12,6 +12,7 @@ import {Folder} from "./core/folder";
 import {trigger,state,style,transition,animate} from "@angular/core";
 import {ToggleStatus} from "./core/toggle-status";
 import {Point} from "./core/point";
+import {SortOption} from "./core/sort-option";
 
 @Component({
     selector: 'data-area',
@@ -62,6 +63,7 @@ export class DataAreaComponent implements OnInit,OnChanges{
     @Input('dataItems') public dataItems:DataItem[];
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
     @Output('deselectall') deselectEvent:EventEmitter=new EventEmitter();
+    @Output('sortby') sortByEvent:EventEmitter=new EventEmitter();
     @Input('dummyFolder') public dummyFolder:Folder;
 
     @ViewChildren(DataItemComponent) dataItemComponents:QueryList<DataItemComponent>;
@@ -98,10 +100,12 @@ export class DataAreaComponent implements OnInit,OnChanges{
         event.stopPropagation()
     }
 
-    selectSortOption(event){
+    selectSortOption(sortOptionInt,event){
         console.log("sort option selected");
         this.isSortByMenuOpen=false;
-        event.stopPropagation()
+        event.stopPropagation();
+        var sortOption:SortOption=sortOptionInt;
+        this.sortByEvent.emit(sortOption);
     }
 
     getSortByMenuState(){

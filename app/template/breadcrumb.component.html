@@ -1,19 +1,13 @@
-<nav id="breadcrumbContainer">
-
+<nav id="breadcrumbContainer" *ngIf="_scanTarget">
     <div class="nav-wrapper">
-        <div class="col s12">
+        <div class="col s12" >
             <a id="menuLink" class="breadcrumb scaleUpOnHover" (click)="openMainMenu()">
                 <i class="material-icons">view_quilt</i>
             </a>
-            <a *ngFor="let context of contextStack" href="#!" class="breadcrumb" (click)="backTo(context)">
-                <span *ngIf="!context.parentFolder">
-                    Root
-                </span>
-                <span *ngIf="context.parentFolder">
-                    {{context.parentFolder.name}}
-                </span>
+            <a *ngFor="let folder of _scanTarget.folderStack" href="#!" class="breadcrumb" (click)="backTo(folder)">
+                {{folder.name}}
             </a>
         </div>
     </div>
 </nav>
-<folder-context *ngIf="contextStack[contextStack.length-1]" [scanTargets]="_scanTargets" [context]="contextStack[contextStack.length-1]" (opendataitem)="openDataItem($event)">Loading...</folder-context>
+<folder-context [scanTarget]="_scanTarget" (opendataitem)="openDataItem($event)">Loading...</folder-context>

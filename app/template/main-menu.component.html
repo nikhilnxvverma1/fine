@@ -33,12 +33,13 @@
                         </div>
                     </div>
                     <div class="menuLoaderBackground">
-                        <div class="diskCapacity"></div>
+                        <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
                         <label>
-                            73.4 GB used
+                            <!--73.4 GB used-->
+                            {{scanTarget.used|unitSpace}} used
                         </label>
                         <label class="floatRight">
-                            120.1 GB
+                            {{scanTarget.total|unitSpace}}
                         </label>
                     </div>
                 </div>

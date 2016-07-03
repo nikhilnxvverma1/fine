@@ -1,5 +1,6 @@
 import {Stats} from "fs";
 import {Timestamp} from "rxjs/Rx.KitchenSink";
+import {SortOption} from "./sort-option";
 export abstract class DataItem{
     private _parentUrl:string;
     private _name:string;
@@ -8,16 +9,11 @@ export abstract class DataItem{
 
     private _creationDate:Date;
     private _modifiedDate:Date;
-    private _size:number;
+    private _size:number=0;
 
-    constructor(parentUrl:string, name:string,stats:Stats) {
-        this.parentUrl = parentUrl;
-        this.name = name;
-        if(stats!=null){
-            this._creationDate=stats.birthtime;
-            this._modifiedDate=stats.mtime;
-            this._size=stats.blksize
-        }
+
+    constructor(name:string) {
+        this._name = name;
     }
 
     get parentUrl():string {
@@ -77,7 +73,90 @@ export abstract class DataItem{
         this._size = value;
     }
 
-    getFullyQualifiedPath():string{
+    /**
+     * @returns {string} gives the fully qualified path without the trailing slash
+     */
+    public getFullyQualifiedPath():string{
         return this._parentUrl+this._name;
+    }
+
+    public setStatsInfo(stats:Stats){
+        this._creationDate=stats.birthtime;
+        this._modifiedDate=stats.mtime;
+        this._size=stats.size;
+    }
+
+    public lessThan(dataItem:DataItem,sortOption:SortOption):boolean{
+        switch (sortOption){
+            case SortOption.Size:
+                return this.size<dataItem.size;
+            case SortOption.Type:
+            {
+                var thisExtension=this.getExtension().toLowerCase();
+                var otherExtension=dataItem.getExtension().toLowerCase();
+                return thisExtension.localeCompare(otherExtension)==-1;
+                //if(this._isDirectory){
+                //    return true;
+                //}else if(dataItem._isDirectory){
+                //    return false;
+                //}else{
+                //    var thisExtension=this.getExtension().toLowerCase();
+                //    var otherExtension=dataItem.getExtension().toLowerCase();
+                //    return thisExtension.localeCompare(otherExtension)==-1;
+                //}
+            }
+            case SortOption.Name:
+            {
+                var thisExtension=this.name.toLowerCase();
+                var otherExtension=dataItem.name.toLowerCase();
+                return this.name.localeCompare(dataItem.name)==-1;
+            }
+            case SortOption.CreationDate:
+                return this.creationDate<dataItem.creationDate;
+            case SortOption.ModificationDate:
+                return this.modifiedDate<dataItem.modifiedDate;
+        }
+    }
+
+    public greaterThan(dataItem:DataItem,sortOption:SortOption):boolean{
+        switch (sortOption){
+            case SortOption.Size:
+                return this.size>dataItem.size;
+            case SortOption.Type:
+            {
+                var thisExtension=this.getExtension().toLowerCase();
+                var otherExtension=dataItem.getExtension().toLowerCase();
+                return thisExtension.localeCompare(otherExtension)==1;
+
+                //if(this._isDirectory){
+                //    return false;
+                //}else if(dataItem._isDirectory){
+                //    return true;
+                //}else{
+                //    var thisExtension=this.getExtension().toLowerCase();
+                //    var otherExtension=dataItem.getExtension().toLowerCase();
+                //    return thisExtension.localeCompare(otherExtension)==1;
+                //}
+            }
+            case SortOption.Name:
+            {
+                var thisExtension=this.name.toLowerCase();
+                var otherExtension=dataItem.name.toLowerCase();
+                return this.name.localeCompare(dataItem.name)==1;
+            }
+            case SortOption.CreationDate:
+                return this.creationDate>dataItem.creationDate;
+            case SortOption.ModificationDate:
+                return this.modifiedDate>dataItem.modifiedDate;
+        }
+    }
+
+    public getExtension():string{
+        let extension='';
+        var parts=this.name.split('.');
+        if(parts.length>1){
+            extension='.'+parts.pop();
+        }
+        return extension;
     }
 }

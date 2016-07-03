@@ -11,6 +11,7 @@ import {OnChanges} from "@angular/core";
 import {ChangeDetectorRef} from "@angular/core";
 import {NgZone} from "@angular/core";
 import {ScanTarget} from "./core/scan-target";
+import {Folder} from "./core/folder";
 
 @Component({
     selector: 'breadcrumb',
@@ -21,11 +22,12 @@ import {ScanTarget} from "./core/scan-target";
 export class BreadcrumbComponent{
 
     //@Input('menuState') private _menuState:string;
-    @Input('scanTargets') private _scanTargets:ScanTarget[];
+    @Input('scanTarget') private _scanTarget:ScanTarget;
     @Input('rootModel') public rootModel:RootModel;
     @Input('contextStack') public contextStack:Context[];
     @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
     @Output('openMainMenu') openMainMenuEvent:EventEmitter<any>=new EventEmitter();
+    
 
     constructor(private _dataService: DataService,private _zone:NgZone) {}
 
@@ -52,17 +54,26 @@ export class BreadcrumbComponent{
         });
     }
 
-    backTo(context){
+    backTo(folder:Folder){
 
-        var index:number=this.contextStack.indexOf(context);
-        if(index==this.contextStack.length-1) return;
+        var index:number=this._scanTarget.folderStack.indexOf(folder);
+        if(index==this._scanTarget.folderStack.length-1) return;
 
-        this.contextStack.splice(index+1,this.contextStack.length);
+        this._scanTarget.folderStack.splice(index+1,this._scanTarget.folderStack.length);
     }
 
     openDataItem(dataItem:DataItem){
-        console.log("will open data item"+dataItem.name);
-        this.openDataItemEvent.emit(dataItem);
+
+        if(dataItem.isDirectory){
+            (<Folder>dataItem).sort(this._scanTarget.sortOption);
+            this._scanTarget.folderStack.push(dataItem);
+        }else{
+
+            //mind the subtle difference here. command line "open" requires those quotes for the full path
+            let filePath=dataItem.getFullyQualifiedPath();
+            var spawn = require('child_process').spawn
+            spawn('open', [filePath]);
+        }
     }
 
     openMainMenu(){

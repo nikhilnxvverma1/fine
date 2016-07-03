@@ -12,18 +12,20 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 
 import {ScanTarget} from "./core/scan-target";
 import {FeedbackComponent} from "./feedback.component";
+import {UnitSpace} from "./pipe/unit-space.pipe";
 
 @Component({
     selector: 'main-menu',
     templateUrl:'app/template/main-menu.component.html',
     directives: [FeedbackComponent],
+    pipes:[UnitSpace],
     animations:[
         trigger('menuState',[
             state('open',style({
-                left:"0px"
+                left:"0"
             })),
             state('close',style({
-                left:"-300px"
+                left:"-100%"
             })),
             transition('open => close',animate('200ms ease-in')),
             transition('close => open',animate('200ms ease-out')),

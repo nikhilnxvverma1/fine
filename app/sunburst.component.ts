@@ -34,7 +34,7 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 })
 export class SunburstComponent {
 
-    @Input("scanResult") root:DataItem;
+    @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
 }

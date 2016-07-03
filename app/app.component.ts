@@ -14,6 +14,7 @@ import {Folder} from "./core/folder";
 import {MainMenuComponent} from "./main-menu.component";
 import {ScanTarget} from "./core/scan-target";
 import {DummyData} from "./core/dummy-data";
+import {ScanTargetType} from "./core/scan-target-type";
 
 @Component({
     selector: 'app',
@@ -28,7 +29,7 @@ import {DummyData} from "./core/dummy-data";
 export class AppComponent{
 
     public rootModel:RootModel=new RootModel();
-    private _scanTargets:ScanTarget[];
+    private _scanTargets:ScanTarget[]=[];
     @ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
 
     constructor(@Inject private _dataService:DataService){
@@ -47,11 +48,73 @@ export class AppComponent{
             //this.contextStack.push(context);
             console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
+
         let dummyData = new DummyData();
-        this._scanTargets=dummyData.dummyScanTargets();
-            this._scanTargets[0].rootScanResult=dummyData.dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+        //this._scanTargets=dummyData.dummyScanTargets();
+        this.getScanTargets();
+
     }
 
+    getScanTargets(){
+        var scanTargets=this._scanTargets;
+        var freeDiskSpace = require('freediskspace');
+        var driveInfoList=[];
+        freeDiskSpace.driveList(
+            (err, drives) =>{
+                for(var i in drives){
+                    freeDiskSpace.detail(
+                        drives[i],
+                        (err, data) =>{
+
+                            var scanTarget=new ScanTarget(data.drive,ScanTargetType.HardDisk,data.total,data.used,0);
+                            scanTargets.push(scanTarget);
+                            console.log("scan target name : "+scanTarget.name);
+                            if(this._scanTargets.length==1){
+                                //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+                                var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
+                                scanTargets[0].folderStack.push(folder);
+                            }
+                        }
+                    );
+                }
+            }
+        );
+    }
+
+    getScanTargetsNodejsDisks(){
+        var scanTargets=this._scanTargets;
+        var njds = require('nodejs-disks');
+        var driveInfoList=[];
+        njds.drives(
+             (err, drives) =>{
+                njds.drivesDetail(
+                    drives,
+                    (err, data) =>{
+                        for(var i = 0; i<data.length; i++)
+                        {
+
+                            var scanTarget=new ScanTarget(data[i].drive,ScanTargetType.HardDisk,data[i].total,data[i].used,0)
+                            //var driveInfo={
+                            //    "mountPoint":data[i].mountpoint,
+                            //    "total":data[i].total,
+                            //    "used":data[i].used,
+                            //    "available":data[i].available,
+                            //    "name":data[i].drive,
+                            //    "usedPercentage":data[i].usedPer,
+                            //    "freePercentage":data[i].freePer,
+                            //};
+                            //driveInfoList.push(driveInfo);
+                            scanTargets.push(scanTarget);
+                            console.log("scan target name : "+scanTarget.name);
+                            if(this._scanTargets.length==1){
+                                scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+                            }
+                        }
+                    }
+                );
+            }
+        );
+    }
 
     openDataItem(dataItem:DataItem){
         console.log("about to open dataItem"+dataItem.name);

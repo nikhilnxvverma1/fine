@@ -5,30 +5,28 @@
          #mainDataContainer
          >
 
-
-
-            <sunburst id="sunburstComponent" @sunburstToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [scanResult]="_scanTargets[0].rootScanResult"></sunburst>
+            <sunburst id="sunburstComponent"
+                      @sunburstToggle="toggleStatus.getState()"
+                      [toggleStatus]="toggleStatus"
+                      [scanTarget]="_scanTarget"></sunburst>
             <data-area @dataAreaToggle="toggleStatus.getState()"
+                       *ngIf="_scanTarget"
                        [toggleStatus]="toggleStatus"
-                       [dataItems]="context.dataItems"
+                       [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
                        [dummyFolder]="context.dummyFolder"
                        (opendataitem)="openDataItem($event)"
-                       (deselectall)="context.setSelectionForAll(false)"></data-area>
+                       (deselectall)="_scanTarget.folderStack[_scanTarget.folderStack.length-1].setSelectionForAll(false)" (sortby)="sortBy($event)"></data-area>
 
-        <!--<div style="background:orange;-->
-            <!--position: absolute;-->
-            <!--top:0;-->
-            <!--left:0;-->
-            <!--width:100%;-->
-            <!--height:100%;-->
-            <!--"-->
-             <!---->
-        <!--&gt;</div>-->
 
     </div>
     <div class="col s3" id="rightSideViewContainer">
-        <usageDetail id="usageDetailComponent" @sunburstToggle="toggleStatus.getState()" [toggleStatus]="toggleStatus" [scanResult]="_scanTargets[0].rootScanResult"></usageDetail>
-        <operation @dataAreaToggle="toggleStatus.getState()" [dummyFolder]="context.dummyFolder" [toggleStatus]="toggleStatus"
+        <usageDetail id="usageDetailComponent"
+                     @sunburstToggle="toggleStatus.getState()"
+                     [toggleStatus]="toggleStatus"
+                     [scanTarget]="_scanTarget"></usageDetail>
+        <operation @dataAreaToggle="toggleStatus.getState()"
+                   [dummyFolder]="context.dummyFolder"
+                   [toggleStatus]="toggleStatus"
                    (move)="moveToLocation($event)"
                    (reviewDelete)="confirmDeletingFiles()"
                    (rename)="renameFiles($event)"
@@ -41,5 +39,10 @@
         </a>
     </div>
 </div>
-<deletion [dataItems]="context.dataItems" (trash)="moveToTrash()" (hardDelete)="deletePermenantly()"></deletion>
-<operation-progress [toggleStatus]="toggleStatus" (removeFromContext)="removeFromContext($event)"></operation-progress>
+<deletion [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
+          *ngIf="_scanTarget"
+          (trash)="moveToTrash()"
+          (hardDelete)="deletePermenantly()"></deletion>
+<operation-progress [toggleStatus]="toggleStatus"
+                    (removeFromContext)="removeFromContext($event)"
+></operation-progress>
