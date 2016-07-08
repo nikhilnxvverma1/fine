@@ -8,40 +8,38 @@
 
             <div id="scanTargetListContainer">
                 <div class="scanTargetContainer" *ngFor="let scanTarget of scanTargets">
-                    <div class="row tinyBottomMargin">
-                        <div class="s3 col">
+                    <div class="row tinyBottomMargin valign-wrapper">
+                        <div class="s1 col">
                             <img *ngIf="scanTarget.type==0" class="scanTargetIcon" src="images/harddisk.svg">
                             <img *ngIf="scanTarget.type==1" class="scanTargetIcon" src="images/usb-stick.svg">
                             <img *ngIf="scanTarget.type==2" class="scanTargetIcon" src="images/my-folder.svg">
                         </div>
-                        <div class="s9 col">
-                            <div class="row scanTargetName">
-                                <div class="s12 col">
-                                    {{scanTarget.name}}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="s12 col">
-                                    <a class="mainMenuActionButton">
-                                        Scan
-                                    </a>
-                                    <a class="mainMenuActionButton scanDropDown">
-                                        <i class="material-icons white-text">arrow_drop_down</i>
-                                    </a>
-                                </div>
+                        <div class="s2 col valign">
+                            {{scanTarget.name}}
+                        </div>
+                        <div class="s5 col offset-s2">
+                            <div class="menuLoaderBackground">
+                                <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
+                                <label>
+                                    <!--73.4 GB used-->
+                                    {{scanTarget.used|unitSpace}} used
+                                </label>
+                                <label class="floatRight">
+                                    {{scanTarget.total|unitSpace}}
+                                </label>
                             </div>
                         </div>
+                        <div class="s2 col">
+
+                            <a class="mainMenuActionButton">
+                                Scan
+                            </a>
+                            <a class="mainMenuActionButton scanDropDown">
+                                <i class="material-icons white-text">arrow_drop_down</i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="menuLoaderBackground">
-                        <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
-                        <label>
-                            <!--73.4 GB used-->
-                            {{scanTarget.used|unitSpace}} used
-                        </label>
-                        <label class="floatRight">
-                            {{scanTarget.total|unitSpace}}
-                        </label>
-                    </div>
+
                 </div>
             </div>
 

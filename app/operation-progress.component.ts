@@ -2,7 +2,7 @@
  * Created by NikhilVerma on 10/06/16.
  */
 
-import {Component,Injectable} from '@angular/core';
+import {Component,Injectable,OnInit} from '@angular/core';
 import {DataItem} from "./core/data-item";
 import {Output,Input,EventEmitter} from "@angular/core";
 import {ServiceProgress} from './core/service-progress'
@@ -12,7 +12,12 @@ import {DataOperation} from './core/data-operation'
     selector: 'operation-progress',
     templateUrl:'app/template/operation-progress.component.html',
 })
-export class OperationProgressComponent implements ServiceProgress{
+export class OperationProgressComponent implements ServiceProgress,OnInit{
+    ngOnInit():any {
+        //noinspection TypeScriptUnresolvedFunction
+        $('.tooltipped').tooltip({delay: 50});
+        return undefined;
+    }
 
     public hide:boolean=true;
     public progress=0;
@@ -45,7 +50,7 @@ export class OperationProgressComponent implements ServiceProgress{
         }
     }
 
-    processedDataItem(count:number,total:number, operation:DataOperation) {
+    processedDataItem(dataItem:DataItem,count:number,total:number, operation:DataOperation) {
         this.progress=(count / total)*100;
         console.log("Service Progress:processed item: "+this.progress+"%");
     }

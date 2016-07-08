@@ -11,7 +11,10 @@
         (click)="selectChild(child,$event)"
         (dblclick)="openUsage(child)"
     >
-        <div class="usageLegendForDetail" @legendToggle="toggleStatus.getState()"></div>
+        <div class="usageLegendForDetail"
+             @legendToggle="toggleStatus.getState()"
+             [style.background]="child.colorRGB()"
+        ></div>
         <div class="usageDetailName">{{ child.name|slice:0:13}}</div>
         <span class="right">{{child.size|unitSpace}}</span>
     </li>

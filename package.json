@@ -22,6 +22,7 @@
     "@angular/router-deprecated": "^2.0.0-rc.1",
     "@angular/upgrade": "^2.0.0-rc.1",
     "core-js": "^2.4.0",
+    "d3": "3.5.17",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.33.3",
     "freediskspace": "^0.1.2",

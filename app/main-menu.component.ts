@@ -45,7 +45,7 @@ import {UnitSpace} from "./pipe/unit-space.pipe";
 export class MainMenuComponent{
 
     @Input('scanTargets') public scanTargets:ScanTarget[];
-    private _isMenuOpen:boolean;
+    private _isMenuOpen:boolean=true;
     constructor(private _zone:NgZone) {}
     @ViewChild(FeedbackComponent)private  _feedback:FeedbackComponent;
 

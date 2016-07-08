@@ -79,6 +79,7 @@ export class ContextComponent implements AfterContentInit{
     @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
+    @ViewChild(SunburstComponent) private _sunburstComponent:SunburstComponent;
 
     organizeFolder=false;
 
@@ -108,6 +109,11 @@ export class ContextComponent implements AfterContentInit{
     sortBy(sortOption){
         this._scanTarget.sortOption=sortOption;
         console.log("Sort Option is "+sortOption);
+    }
+
+    createSunburst(){
+        console.log("Making sunburst now");
+        this._sunburstComponent.makeSunburst();
     }
 
     groupInFolder(folderName:string){

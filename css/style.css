@@ -8794,12 +8794,13 @@ body {
 
 #scanTargetListContainer {
   position: relative;
-  top: 70px;
-  padding-left: 20px; }
+  top: 70px; }
 
 .scanTargetContainer {
-  width: 90%;
   margin-bottom: 30px; }
+
+.scanTargetContainer:hover {
+  box-shadow: 0px 0px 5px #272727; }
 
 .scanTargetIcon {
   width: 65px;
@@ -8944,3 +8945,16 @@ body {
   overflow-y: scroll;
   height: 100%;
   padding-top: 18px; }
+
+.progress {
+  position: absolute;
+  bottom: 0px;
+  margin: 0px;
+  background-color: transparent; }
+
+@media only screen and (min-width: 993px) {
+  #toast-container {
+    bottom: 3%;
+    left: 3%;
+    top: initial;
+    right: initial; } }

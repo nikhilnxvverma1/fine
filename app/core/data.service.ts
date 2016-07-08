@@ -111,34 +111,16 @@ export class DataService{
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
+                var operationInfo=new OperationInfo(DataOperation.Move,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                fs.move(fullyQualifiedPath,newPath,(err)=>{
-                    if(err) throw err;
-                    console.log("moved file");
-                    this._zone.run(()=>{
-                        count++;
-                        serviceProgress.processedDataItem(count,total,dataOperation);
-                        if(count==total){
-                            serviceProgress.operationCompleted(total,dataOperation);
-                        }
-                    });
-                });
+                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                fs.move(fullyQualifiedPath,newPath,postExecution.callback);
             }else{
                 //copy everything over
+                var operationInfo=new OperationInfo(DataOperation.Copy,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                fs.copy(fullyQualifiedPath,newPath,(err)=>{
-                    if(err) throw err;
-                    console.log("copied file");
-
-                    this._zone.run(()=>{
-                        count++;
-                        serviceProgress.processedDataItem(count,total,dataOperation);
-                        if(count==total){
-                            serviceProgress.operationCompleted(total,dataOperation);
-                        }
-                    });
-
-                });
+                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                fs.copy(fullyQualifiedPath,newPath,postExecution.callback);
             }
         }
 
@@ -153,39 +135,23 @@ export class DataService{
         var total=dataItems.length;
 
         if(permenantly){
+            var operationInfo=new OperationInfo(DataOperation.HardDelete,total,serviceProgress,this._zone);
             var fs=require('fs-extra');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                fs.remove(fullyQualifiedPath,(err)=>{
-                   if(err)throw err;
-                    console.log("Deleted item");
-
-                    this._zone.run(()=>{
-                        count++;
-                        serviceProgress.processedDataItem(count,total,dataOperation);
-                        if(count==total){
-                            serviceProgress.operationCompleted(total,dataOperation);
-                        }
-                    });
-                });
+                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                fs.remove(fullyQualifiedPath,postExecution.callback);
             }
         }else{
+            var operationInfo=new OperationInfo(DataOperation.Trash,total,serviceProgress,this._zone);
             var trash=require('trash');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                trash([fullyQualifiedPath]).then(() => {//TODO consider doing it all in one go, for performance reasons
-                    console.log('trashed item');
-
-                    this._zone.run(()=>{
-                        count++;
-                        serviceProgress.processedDataItem(count,total,dataOperation);
-                        if(count==total){
-                            serviceProgress.operationCompleted(total,dataOperation);
-                        }
-                    });
-                });
+                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                //TODO consider doing it all in one go, for performance reasons
+                trash([fullyQualifiedPath]).then(postExecution.callback);
             }
         }
 
@@ -198,6 +164,8 @@ export class DataService{
         serviceProgress.operationStarted(dataOperation);
         var count=0;
         var total=dataItems.length;
+
+        var operationInfo=new OperationInfo(DataOperation.Rename,total,serviceProgress,this._zone);
 
         var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
@@ -214,82 +182,70 @@ export class DataService{
                 renamedPath = dataItems[i].parentUrl + newName+'_'+(i+1)+extension;
             }
 
-
-
             serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-            //fs.rename(fullyQualifiedPath,renamedPath,(err)=>{
-            //    if(err)throw err;
-            //    console.log("renamed item");
-            //
-            //    //serviceProgress.processedDataItem()
-            //
-            //    this._zone.run(()=>{
-            //        count++;
-            //        serviceProgress.processedDataItem(count,total,dataOperation);
-            //        if(count==total){
-            //            serviceProgress.operationCompleted(total,dataOperation);
-            //        }
-            //    });
-            //
-            //});
-
-            //var postExecution={
-            //    "dataItem":dataItems[i],
-            //    "index":i,
-            //    "callback":(err)=>{
-            //        if(err)throw err;
-            //        console.log("renamed item "+this.index);
-            //
-            //        this._zone.run(()=>{
-            //            count++;
-            //            serviceProgress.processedDataItem(count,total,dataOperation);
-            //            if(count==total){
-            //                serviceProgress.operationCompleted(total,dataOperation);
-            //            }
-            //        });
-            //    }
-            //};
-
-            var postExecution:PostExecution=new PostExecution(dataItems[i],i);
-
+            var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
             fs.rename(fullyQualifiedPath,renamedPath,postExecution.callback);
         }
     }
 }
 
+class OperationInfo{
+    private _dataOperation:DataOperation;
+    public count:number=0;
+    private _total:number;
+    public serviceProgress:ServiceProgress;
+    public zone:NgZone;
+
+    constructor(dataOperation:DataOperation,total:number,serviceProgress:ServiceProgress,zone:NgZone) {
+        this._dataOperation=dataOperation;
+        this._total=total;
+        this.serviceProgress = serviceProgress;
+        this.zone=zone;
+    }
+
+    get total():number {
+        return this._total;
+    }
+
+    get dataOperation():DataOperation {
+        return this._dataOperation;
+    }
+}
+
 class PostExecution{
-    private dataItem:DataItem;
-    private index:number;
+    private _operationInfo:OperationInfo;
+    private _dataItem:DataItem;
+    private _index:number;
 
     public callback;// <----IMPORTANT : callback should always be an ES6 arrow function defined in the constructor
     //this is because it binds the value of "this"
 
-    constructor(_dataItem:DataItem,_index:number){
-        this.dataItem=_dataItem;
-        this.index=_index;
-
+    constructor(_dataItem:DataItem,_index:number,_operationInfo:OperationInfo){
+        this._dataItem=_dataItem;
+        this._index=_index;
+        this._operationInfo=_operationInfo;
         //arrow function that preserves the value of "this" context
         this.callback=(err)=>{
-            if(err)throw err;
-            console.log("renamed item "+this.index);
+            console.log("performed operation on item "+this._operationInfo.dataOperation);
 
-            //this._zone.run(()=>{
-            //    count++;
-            //    serviceProgress.processedDataItem(count,total,dataOperation);
-            //    if(count==total){
-            //        serviceProgress.operationCompleted(total,dataOperation);
-            //    }
-            //});
+            this._operationInfo.zone.run(()=>{
+                if(err){
+                    this._operationInfo.serviceProgress.errorOnDataItem(
+                        err,
+                        this._dataItem,
+                        DataOperation.Rename);
+                }
+                this._operationInfo.count++;
+
+                this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
+                    this._operationInfo.count,
+                    this._operationInfo.total,
+                    DataOperation.Rename);
+
+                if(this._operationInfo.count==this._operationInfo.total){
+                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
+                }
+            });
         }
     }
-}
-
-class DriveInfo{
-    mountPoint:string;
-    total:number;
-    used:number;
-    available:number;
-    name:string;
-    usedPercentage:number;
-    freePercentage:number;
 }

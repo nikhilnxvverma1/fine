@@ -342,13 +342,18 @@ body{
 #scanTargetListContainer{
   position:relative;
   top:70px;
-  padding-left:20px;
+  //padding-left:20px;
 }
 
 .scanTargetContainer{
-  width:90%;
+  //width:90%;
   //background:magenta;
+  //box-shadow: 0px 0px 5px #272727;
   margin-bottom:30px;
+}
+
+.scanTargetContainer:hover{
+  box-shadow: 0px 0px 5px #272727;
 }
 
 .scanTargetIcon{
@@ -518,4 +523,21 @@ body{
   overflow-y: scroll;
   height:100%;
   padding-top:18px;
+}
+
+.progress{
+  position: absolute;
+  bottom:0px;
+  margin:0px;
+  background-color: transparent;
+}
+
+
+@media only screen and (min-width: 993px){
+  #toast-container{
+    bottom:3%;
+    left:3%;
+    top:initial;
+    right:initial;
+  }
 }

@@ -79,12 +79,12 @@ export class UsageDetailComponent {
 
         if(event.shiftKey){
             dataItem.selected=true;
-            this.scanTarget.rootScanResult.selectPrecedingDataItems(dataItem);
+            this.scanTarget.topFolder().selectPrecedingDataItems(dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
             }else{
-                this.scanTarget.rootScanResult.setSelectionForAll(false);
+                this.scanTarget.topFolder().setSelectionForAll(false);
                 dataItem.selected=true;
             }
         }

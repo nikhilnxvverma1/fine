@@ -13,7 +13,6 @@ export class ScanTarget{
     private _available:number;
     private _used:number;
     private _progress:number;
-    private _rootScanResult:Folder;
     private _folderStack:Folder[]=[];
     private _sortOption:SortOption;
 
@@ -67,15 +66,6 @@ export class ScanTarget{
         this._progress = value;
     }
 
-
-    get rootScanResult():Folder {
-        return this._rootScanResult;
-    }
-
-    set rootScanResult(value:Folder) {
-        this._rootScanResult = value;
-    }
-
     get folderStack():Folder[] {
         return this._folderStack;
     }
@@ -91,5 +81,9 @@ export class ScanTarget{
     set sortOption(value:SortOption) {
         this._sortOption = value;
         this.folderStack[this.folderStack.length-1].sort(this.sortOption);
+    }
+
+    public topFolder():Folder{
+        return this.folderStack[this.folderStack.length-1];
     }
 }
