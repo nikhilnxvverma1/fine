@@ -45,6 +45,8 @@ import {UnitSpace} from "./pipe/unit-space.pipe";
 export class MainMenuComponent{
 
     @Input('scanTargets') public scanTargets:ScanTarget[];
+    @Input('activeScanTarget') public activeScanTarget:ScanTarget;
+    @Output('addFolderToScanTargets') addFolderEvent=new EventEmitter<string>();
     private _isMenuOpen:boolean=true;
     constructor(private _zone:NgZone) {}
     @ViewChild(FeedbackComponent)private  _feedback:FeedbackComponent;
@@ -65,6 +67,7 @@ export class MainMenuComponent{
 
                 if(folderToOpen==null) return;
 
+                this.addFolderEvent.emit(folderToOpen[0]);
                 console.log('Folder to scan: '+folderToOpen);
 
             });

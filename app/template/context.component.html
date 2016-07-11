@@ -19,7 +19,8 @@
 
 
     </div>
-    <div class="col s3" id="rightSideViewContainer" (click)="createSunburst()">
+    <!--(click)="createSunburst()"-->
+    <div class="col s3" id="rightSideViewContainer" >
         <usageDetail id="usageDetailComponent"
                      @sunburstToggle="toggleStatus.getState()"
                      [toggleStatus]="toggleStatus"

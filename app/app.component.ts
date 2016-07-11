@@ -30,6 +30,7 @@ export class AppComponent{
 
     public rootModel:RootModel=new RootModel();
     private _scanTargets:ScanTarget[]=[];
+    private activeScanTarget:ScanTarget;
     @ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
 
     constructor(@Inject private _dataService:DataService){
@@ -65,15 +66,16 @@ export class AppComponent{
                     freeDiskSpace.detail(
                         drives[i],
                         (err, data) =>{
-
-                            var scanTarget=new ScanTarget(data.drive,ScanTargetType.HardDisk,data.total,data.used,0);
-                            scanTargets.push(scanTarget);
-                            console.log("scan target name : "+scanTarget.name);
-                            if(this._scanTargets.length==1){
-                                //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
-                                var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
-                                scanTargets[0].folderStack.push(folder);
-                            }
+                            this._dataService.zone.run(()=>{
+                                var scanTarget=new ScanTarget(data.drive,ScanTargetType.HardDisk,data.total,data.used);
+                                scanTargets.push(scanTarget);
+                                console.log("scan target name : "+scanTarget.name);
+                                //if(this._scanTargets.length==1){
+                                //    //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+                                //    var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
+                                //    scanTargets[0].folderStack.push(folder);
+                                //}
+                            });
                         }
                     );
                 }
@@ -93,7 +95,7 @@ export class AppComponent{
                         for(var i = 0; i<data.length; i++)
                         {
 
-                            var scanTarget=new ScanTarget(data[i].drive,ScanTargetType.HardDisk,data[i].total,data[i].used,0)
+                            var scanTarget=new ScanTarget(data[i].drive,ScanTargetType.HardDisk,data[i].total,data[i].used);
                             //var driveInfo={
                             //    "mountPoint":data[i].mountpoint,
                             //    "total":data[i].total,
@@ -105,15 +107,31 @@ export class AppComponent{
                             //};
                             //driveInfoList.push(driveInfo);
                             scanTargets.push(scanTarget);
-                            console.log("scan target name : "+scanTarget.name);
-                            if(this._scanTargets.length==1){
-                                scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
-                            }
+                            //console.log("scan target name : "+scanTarget.name);
+                            //if(this._scanTargets.length==1){
+                            //    scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+                            //}
                         }
                     }
                 );
             }
         );
+    }
+
+    addFolderToScanTargets(folderPath:string){
+        console.log("Will add folder:"+folderPath);
+        var lastSlash=folderPath.lastIndexOf('/');
+        var containerPath=folderPath.slice(0,lastSlash+1);
+        var name=folderPath.slice(lastSlash+1);
+        name=name==null?'':name;
+
+        var folder=new Folder(name);
+        folder.parentUrl=containerPath;
+        var folderScanTarget=new ScanTarget(name,ScanTargetType.Folder,-1,-1);
+        this._scanTargets.push(folderScanTarget);
+        folderScanTarget.folderStack.push(folder);
+        this._dataService.scanFolder(folder,folderScanTarget.tracker);
+
     }
 
     openDataItem(dataItem:DataItem){

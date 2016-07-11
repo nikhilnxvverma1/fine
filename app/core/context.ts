@@ -10,7 +10,7 @@ export class Context {
     public parentFolder:Folder;//null means this is the root
     public tags:Tag[]=[];
     public dataItems:DataItem[];
-    public dummyFolder:Folder=new Folder('','',null);//used for showing name of folder while filling 'group' textfield
+    public dummyFolder:Folder=new Folder('');//used for showing name of folder while filling 'group' textfield
     private _sortOption:SortOption;
 
     get sortOption():SortOption {

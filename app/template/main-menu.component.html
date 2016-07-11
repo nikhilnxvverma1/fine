@@ -4,10 +4,17 @@
 
         <div>
 
-            <a id="menuCloseLink" (click)="changeMenuStateToClose()"><i class="scaleUpOnHover white-text small material-icons">close</i></a>
+            <a id="menuCloseLink"
+               (click)="changeMenuStateToClose()"
+               *ngIf="activeScanTarget"
+            ><i class="scaleUpOnHover white-text small material-icons">close</i>
+            </a>
 
             <div id="scanTargetListContainer">
-                <div class="scanTargetContainer" *ngFor="let scanTarget of scanTargets">
+                <div class="scanTargetContainer"
+                     *ngFor="let scanTarget of scanTargets"
+                     [class.scanCompleted]="scanTarget.tracker.scanStatus==2"
+                >
                     <div class="row tinyBottomMargin valign-wrapper">
                         <div class="s1 col">
                             <img *ngIf="scanTarget.type==0" class="scanTargetIcon" src="images/harddisk.svg">
@@ -44,8 +51,15 @@
             </div>
 
             <div id="bottomOptions">
-                <a id="scanFolder" class="mainMenuActionButton smallGapFromLeft" (click)="openFolderForScan()">Scan folder</a>
-                <a class="verticallyCenterAnchored smallGapFromRight" (click)="openFeedbackForm()"><i class="material-icons scaleUpOnHover white-text small ">comment</i></a>
+                <a id="scanFolder"
+                   class="mainMenuActionButton smallGapFromLeft"
+                   (click)="openFolderForScan()"
+                >Scan folder
+                </a>
+                <a class="verticallyCenterAnchored smallGapFromRight clickable"
+                   (click)="openFeedbackForm()"
+                ><i class="material-icons scaleUpOnHover white-text small ">comment</i>
+                </a>
                 <feedback></feedback>
             </div>
 

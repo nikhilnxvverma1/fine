@@ -1,11 +1,13 @@
 import {Stats} from "fs";
 import {Timestamp} from "rxjs/Rx.KitchenSink";
 import {SortOption} from "./sort-option";
+import {Folder} from "./folder";
 export abstract class DataItem{
     private _parentUrl:string;
     private _name:string;
     private _isDirectory:boolean;
     private _selected:boolean;
+    protected _parent:Folder;
 
     private _creationDate:Date;
     private _modifiedDate:Date;
@@ -52,6 +54,13 @@ export abstract class DataItem{
         this._selected = value;
     }
 
+    get parent():Folder {
+        return this._parent;
+    }
+
+    set parent(value:Folder) {
+        this._parent = value;
+    }
 
     get creationDate():Date {
         return this._creationDate;

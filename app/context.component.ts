@@ -76,7 +76,7 @@ export class ContextComponent implements AfterContentInit{
 
     @Input('scanTarget') private _scanTarget:ScanTarget;
     public context:Context=new Context();
-    @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
     @ViewChild(SunburstComponent) private _sunburstComponent:SunburstComponent;

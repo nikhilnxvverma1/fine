@@ -61,9 +61,9 @@ export class DataAreaComponent implements OnInit,OnChanges{
     private _isSortByMenuOpen=false;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
     @Input('dataItems') public dataItems:DataItem[];
-    @Output('opendataitem') openDataItemEvent:EventEmitter=new EventEmitter();
-    @Output('deselectall') deselectEvent:EventEmitter=new EventEmitter();
-    @Output('sortby') sortByEvent:EventEmitter=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
+    @Output('deselectall') deselectEvent=new EventEmitter<DataAreaComponent>();
+    @Output('sortby') sortByEvent=new EventEmitter<SortOption>();
     @Input('dummyFolder') public dummyFolder:Folder;
 
     @ViewChildren(DataItemComponent) dataItemComponents:QueryList<DataItemComponent>;

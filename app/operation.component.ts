@@ -36,10 +36,10 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 export class OperationComponent implements OnInit{
 
     @Input("dummyFolder") dummyFolder:Folder;
-    @Output("move") moveEvent:EventEmitter=new EventEmitter();
-    @Output("reviewDelete") deleteEvent:EventEmitter=new EventEmitter();
-    @Output("rename") renameEvent:EventEmitter=new EventEmitter();
-    @Output("group") groupEvent:EventEmitter=new EventEmitter();
+    @Output("move") moveEvent=new EventEmitter<boolean>();
+    @Output("reviewDelete") deleteEvent=new EventEmitter();
+    @Output("rename") renameEvent=new EventEmitter<string>();
+    @Output("group") groupEvent=new EventEmitter<string>();
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
     private newName:string="";

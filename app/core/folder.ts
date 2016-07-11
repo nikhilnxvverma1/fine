@@ -1,12 +1,13 @@
 import {DataItem} from './data-item'
 import {Stats} from "fs";
 import {SortOption} from "./sort-option";
+import {DataService} from "./data.service";
 
 export class Folder extends DataItem{
 
     private _children:DataItem[]=[];
-    private _parent:Folder;
 
+    private _countOfChildrenLeft:number;
 
     constructor(name:string) {
         super(name);
@@ -15,6 +16,28 @@ export class Folder extends DataItem{
 
     get children():DataItem[] {
         return this._children;
+    }
+
+    get countOfChildrenLeft():number {
+        return this._countOfChildrenLeft;
+    }
+
+    set countOfChildrenLeft(value:number) {
+        this._countOfChildrenLeft = value;
+    }
+
+    public childScanned(child:DataItem):boolean{
+        this._countOfChildrenLeft--;
+        this._children.push(child);
+        this.size=this.size+child.size;
+        if(this._countOfChildrenLeft==0){
+            if (this.parent!=null) {
+                this.parent.childScanned(this);
+            }else{
+                console.log("Completed scan size : "+this.size+", ds :" +DataService.sizeCollected);
+            }
+        }
+        return this._countOfChildrenLeft==0;
     }
 
     addDataItem(dataItem:DataItem){
@@ -57,13 +80,7 @@ export class Folder extends DataItem{
     }
 
 
-    get parent():Folder {
-        return this._parent;
-    }
 
-    set parent(value:Folder) {
-        this._parent = value;
-    }
 
     /**
      * Adds specified size to this folder's existing size and calls the same method

@@ -71,8 +71,8 @@ export class SunburstComponent implements OnInit,OnChanges{
 
         var color = d3.scale.category20c();
 
-        var svg = d3.selectAll("sunburst")
-            .insert("svg")
+        var svg = d3.selectAll("#sunburst")
+            .insert("svg",null)
             .attr("width", width)
             .attr("height", height)
             .append("g")
@@ -131,7 +131,8 @@ export class SunburstComponent implements OnInit,OnChanges{
             .style("stroke", "#fff")
             .on('click',click)
             .style("fill", d=> {
-                return color(d.name)
+                //return color(d.name)
+                return d.colorRGB();
             });
 
 

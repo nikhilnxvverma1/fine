@@ -100,9 +100,9 @@ export class DummyData{
 
         //3 dummy targets
         var list:ScanTarget[]=[];
-        list.push(new ScanTarget("Macintosh HD",ScanTargetType.HardDisk,12.4,101.4,50));
-        list.push(new ScanTarget("Nikhil USB",ScanTargetType.USBStick,10.4,4.4,0));
-        list.push(new ScanTarget("Local folder",ScanTargetType.Folder,12.4,0,0));
+        list.push(new ScanTarget("Macintosh HD",ScanTargetType.HardDisk,12.4,101.4));
+        list.push(new ScanTarget("Nikhil USB",ScanTargetType.USBStick,10.4,4.4));
+        list.push(new ScanTarget("Local folder",ScanTargetType.Folder,12.4,0));
 
         return list;
     }
@@ -176,12 +176,14 @@ export class DummyData{
     private populate(path,node):DataItem{
         if(node.isFile){
             //console.log(">"+node.name);
-            let file = new File(path, node.name, null);
+            let file = new File(node.name);
+            file.parentUrl=path;
             file.size=this.random(9999999999);
             return file;
         }else{
             //console.log("[]"+node.name);
-            var folder=new Folder(path,node.name,null);
+            var folder=new Folder(node.name);
+            folder.parentUrl=path;
             folder.size=this.random(9999999999);
             for(var i=0;i<node.children.length;i++){
                 folder.addDataItem(this.populate(path+node.name+'/',node.children[i]));

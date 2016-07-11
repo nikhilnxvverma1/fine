@@ -1,4 +1,7 @@
-<main-menu [scanTargets]="_scanTargets"></main-menu>
-<div class="row">
-<breadcrumb [scanTarget]="_scanTargets[0]" (openMainMenu)="changeMenuStateToOpen()" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></breadcrumb>
+<main-menu [scanTargets]="_scanTargets"
+           [activeScanTarget]="activeScanTarget"
+           (addFolderToScanTargets)="addFolderToScanTargets($event)"
+></main-menu>
+<div class="row" *ngIf="activeScanTarget">
+<breadcrumb [scanTarget]="activeScanTarget" (openMainMenu)="changeMenuStateToOpen()" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></breadcrumb>
 </div>

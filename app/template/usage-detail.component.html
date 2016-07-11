@@ -1,5 +1,8 @@
 <div *ngIf="scanTarget!=null">
-    <div class="usageLegendForHeader" @legendToggle="toggleStatus.getState()"></div>
+    <div class="usageLegendForHeader"
+         @legendToggle="toggleStatus.getState()"
+         [style.background]="scanTarget.topFolder().colorRGB()"
+    ></div>
 <h5 class="relativePosition inline" @usageHeaderToggle="toggleStatus.getState()">
         {{scanTarget.folderStack[scanTarget.folderStack.length-1].name}}
         <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.folderStack[scanTarget.folderStack.length-1].size|unitSpace}}</span>

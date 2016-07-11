@@ -3,6 +3,7 @@ export class TextTag extends Tag{
     public text:string;
 
     constructor(t:string){
+        super();
         this.text=t;
         this.name=t;
     }

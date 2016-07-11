@@ -9,10 +9,6 @@ body{
   overflow-y: hidden;
 }
 
-#breadcrumbContainer{
-  height:60px;
-}
-
 .dataItemIconContainer{
   position: relative;
   width: 80px;
@@ -77,8 +73,8 @@ body{
 #breadcrumbContainer{
   line-height:56px;
   z-index: 1;
-  position: relative;
-  height:10%;
+  position: absolute;
+  height:60px;
 }
 
 #menuLink{
@@ -101,13 +97,13 @@ body{
 }
 
 #mainDataContainer{
-  height:90%;
+  height:100%;
   //overflow-y: scroll;
   //text-align: center;
   position: relative;
   background:#F9F9F9;
   padding-right: 0px;
-  height:90%;
+  padding-top:60px;
   padding-left:0px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -119,9 +115,9 @@ body{
 
 #rightSideViewContainer{
   background:#F4F4F4;
-  padding-top:20px;
+  padding-top:75px;
   padding-right:4px;
-  height:90%;
+  height:100%;
   position:relative;
 }
 
@@ -352,8 +348,18 @@ body{
   margin-bottom:30px;
 }
 
-.scanTargetContainer:hover{
+.scanCompleted{
+  background:#34465a;
+  -webkit-transition: box-shadow 0.2s ease-out;
+  -moz-transition: box-shadow 0.2s ease-out;
+  -ms-transition: box-shadow 0.2s ease-out;
+  -o-transition: box-shadow 0.2s ease-out;
+  transition: box-shadow 0.2s ease-out;
+}
+
+.scanCompleted:hover{
   box-shadow: 0px 0px 5px #272727;
+  cursor:pointer;
 }
 
 .scanTargetIcon{
@@ -378,6 +384,7 @@ body{
 }
 
 .mainMenuActionButton{
+  cursor:pointer;
   background: #E74C3C;
   text-align: center;
   color:white;
@@ -385,6 +392,20 @@ body{
   display:inline;
   width:90px;
   padding:7px 20px 5px 20px;
+
+  -webkit-transition: box-shadow 0.2s ease-out;
+  -moz-transition: box-shadow 0.2s ease-out;
+  -ms-transition: box-shadow 0.2s ease-out;
+  -o-transition: box-shadow 0.2s ease-out;
+  transition: box-shadow 0.2s ease-out;
+}
+
+.mainMenuActionButton:hover{
+  box-shadow: 0px 5px 10px #272727;
+}
+
+.clickable{
+  cursor:pointer;
 }
 
 .scanDropDown{
@@ -419,17 +440,20 @@ body{
 
 #feedbackContainer{
   position:absolute;
-  left:97%;
-  bottom:-8px;
+
+  //bottom:-8px;
   background-image: url('../images/feedback-box.svg');
   width:400px;
-  padding:10px 10px 10px 33px;
+  height:200px;
+  padding:15px 10px 10px 10px;
+  -webkit-background-size:100% 100%;
+  background-size:100% 100%;
 }
 
 #feedbackCloseLink{
   position: absolute;
   right:15px;
-  top:15px;
+  top:10px;
 }
 
 .variantColor{

@@ -5,6 +5,8 @@ import {ScanTargetType} from "./scan-target-type";
 import {DataItem} from "./data-item";
 import {Folder} from "./folder";
 import {SortOption} from "./sort-option";
+import {Tracker} from "./tracker";
+import {ScanStatus} from "./scan-status";
 
 export class ScanTarget{
     private _name:string;
@@ -12,18 +14,17 @@ export class ScanTarget{
     private _total:number;
     private _available:number;
     private _used:number;
-    private _progress:number;
     private _folderStack:Folder[]=[];
     private _sortOption:SortOption;
+    private _tracker:Tracker=new Tracker();
 
-
-    constructor(name:string, type:ScanTargetType, total:number, used:number, progress:number) {
+    constructor(name:string, type:ScanTargetType, total:number, used:number) {
         this._name = name;
         this._type = type;
         this.total=total;
         this.available = total-used;
         this.used = used;
-        this.progress = progress;
+        //this.tracker.scanStatus=ScanStatus.Scanned;
     }
 
     get name():string {
@@ -58,19 +59,11 @@ export class ScanTarget{
         this._used = value;
     }
 
-    get progress():number {
-        return this._progress;
-    }
-
-    set progress(value:number) {
-        this._progress = value;
-    }
-
     get folderStack():Folder[] {
         return this._folderStack;
     }
 
-    set folderStack(value:Array) {
+    set folderStack(value:Array<Folder>) {
         this._folderStack = value;
     }
 
@@ -80,7 +73,15 @@ export class ScanTarget{
 
     set sortOption(value:SortOption) {
         this._sortOption = value;
-        this.folderStack[this.folderStack.length-1].sort(this.sortOption);
+        this.topFolder().sort(this.sortOption);
+    }
+
+    get tracker():Tracker {
+        return this._tracker;
+    }
+
+    set tracker(value:Tracker) {
+        this._tracker = value;
     }
 
     public topFolder():Folder{

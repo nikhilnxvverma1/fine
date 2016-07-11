@@ -17,12 +17,14 @@ import {ScanTarget} from "./core/scan-target";
     animations:[
         trigger('feedbackState',[
             state('open',style({
-                left:"97%",
+                bottom:"30px",
+                right:"5px",
                 transform: "scale(1, 1)",
                 opacity: "1"
             })),
             state('close',style({
-                left:"30%",
+                bottom:"-100px",
+                right:"-200px",
                 transform: "scale(0, 0)",
                 opacity: "0"
             })),

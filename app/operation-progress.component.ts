@@ -21,7 +21,7 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
 
     public hide:boolean=true;
     public progress=0;
-    @Output('removeFromContext') removeFromContext:EventEmitter<DataItem>=new EventEmitter();
+    @Output('removeFromContext') removeFromContext=new EventEmitter<DataItem>();
 
     operationStarted(operation:DataOperation){
         console.log("Service Progress:operation started");

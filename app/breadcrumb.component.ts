@@ -25,8 +25,8 @@ export class BreadcrumbComponent{
     @Input('scanTarget') private _scanTarget:ScanTarget;
     @Input('rootModel') public rootModel:RootModel;
     @Input('contextStack') public contextStack:Context[];
-    @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
-    @Output('openMainMenu') openMainMenuEvent:EventEmitter<any>=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
+    @Output('openMainMenu') openMainMenuEvent=new EventEmitter<BreadcrumbComponent>();
     
 
     constructor(private _dataService: DataService,private _zone:NgZone) {}
@@ -66,7 +66,7 @@ export class BreadcrumbComponent{
 
         if(dataItem.isDirectory){
             (<Folder>dataItem).sort(this._scanTarget.sortOption);
-            this._scanTarget.folderStack.push(dataItem);
+            this._scanTarget.folderStack.push(<Folder>dataItem);
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path

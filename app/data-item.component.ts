@@ -12,9 +12,9 @@ import {EventEmitter} from "@angular/core";
 export class DataItemComponent {
 
     @Input('dataItem') dataItem:DataItem;
-    @Output('opendataitem') openDataItemEvent:EventEmitter<DataItem>=new EventEmitter();
-    @Output('deselectall') deselectEvent:EventEmitter<DataItem>=new EventEmitter();
-    @Output('selectpreceding') selectPrecedingEvent:EventEmitter<DataItem>=new EventEmitter();
+    @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
+    @Output('deselectall') deselectEvent=new EventEmitter<DataItem>();
+    @Output('selectpreceding') selectPrecedingEvent=new EventEmitter<DataItem>();
 
     constructor(private _elementRef:ElementRef) {
     }

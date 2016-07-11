@@ -13,12 +13,23 @@ import {DataOperation} from "./data-operation";
 //import diskUsage=require("../../jslib/disk-usage.js")
 import {ScanTarget} from "./scan-target";
 import {ScanTargetType} from "./scan-target-type";
+import {Tracker} from "./tracker";
+import {PostExecution} from "./post-execution";
+import {OperationInfo} from "./operation-info";
+import {ScanInfo} from "./scan-info";
+import {ScanCallback} from "./scan-callback";
 @Injectable()
 export class DataService{
 
+    public static sizeCollected:number=0;
+
     constructor(private _zone:NgZone){}
 
-    readDirectory(directoryPath:string):DataItem[]{
+    get zone():NgZone {
+        return this._zone;
+    }
+
+    public readDirectory(directoryPath:string):DataItem[]{
 
         var fs=require('fs-extra');
 
@@ -51,7 +62,7 @@ export class DataService{
         return dataItemsResult;
     }
 
-    scanDirectoryRecursively(directoryPath:string,name:string,parentFolder:Folder):Folder{
+    public scanDirectoryRecursively(directoryPath:string,name:string,parentFolder:Folder):Folder{
 
         var fs=require('fs-extra');
 
@@ -94,9 +105,33 @@ export class DataService{
         return folder;
     }
 
+    public scanFolder(folder:Folder,tracker:Tracker){
+
+        var fs=require('fs-extra');
+
+        let path = folder.getFullyQualifiedPath();
+        fs.readdir(path,(err, folderChildren:string[])=>{
+            if(err) throw err;
+
+            folder.countOfChildrenLeft=folderChildren.length;
+            var scanInfo=new ScanInfo(folder,this,tracker);
+            for(var i in folderChildren){
+                var name=folderChildren[i];
+                var scanCallback=new ScanCallback(name,scanInfo);
+
+                let childPath;
+                if (path=='/') {
+                    childPath = '/' + name;
+                }else{
+                    childPath = path + '/' + name;
+                }
+                fs.stat(childPath,scanCallback.callback);
+            }
+        });
+    }
 
 
-    moveFiles(dataItems:DataItem[],
+    public moveFiles(dataItems:DataItem[],
               directory:string,
               deleteAfterMoving:boolean,
               serviceProgress:ServiceProgress,
@@ -126,7 +161,7 @@ export class DataService{
 
     }
 
-    deleteFiles(dataItems:DataItem[],
+    public deleteFiles(dataItems:DataItem[],
                 permenantly:boolean,
                 serviceProgress:ServiceProgress,
                 dataOperation:DataOperation){
@@ -157,7 +192,7 @@ export class DataService{
 
     }
 
-    renameFiles(dataItems:DataItem[],
+    public renameFiles(dataItems:DataItem[],
                 newName:string,
                 serviceProgress:ServiceProgress,
                 dataOperation:DataOperation){
@@ -185,67 +220,6 @@ export class DataService{
             serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
             var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
             fs.rename(fullyQualifiedPath,renamedPath,postExecution.callback);
-        }
-    }
-}
-
-class OperationInfo{
-    private _dataOperation:DataOperation;
-    public count:number=0;
-    private _total:number;
-    public serviceProgress:ServiceProgress;
-    public zone:NgZone;
-
-    constructor(dataOperation:DataOperation,total:number,serviceProgress:ServiceProgress,zone:NgZone) {
-        this._dataOperation=dataOperation;
-        this._total=total;
-        this.serviceProgress = serviceProgress;
-        this.zone=zone;
-    }
-
-    get total():number {
-        return this._total;
-    }
-
-    get dataOperation():DataOperation {
-        return this._dataOperation;
-    }
-}
-
-class PostExecution{
-    private _operationInfo:OperationInfo;
-    private _dataItem:DataItem;
-    private _index:number;
-
-    public callback;// <----IMPORTANT : callback should always be an ES6 arrow function defined in the constructor
-    //this is because it binds the value of "this"
-
-    constructor(_dataItem:DataItem,_index:number,_operationInfo:OperationInfo){
-        this._dataItem=_dataItem;
-        this._index=_index;
-        this._operationInfo=_operationInfo;
-        //arrow function that preserves the value of "this" context
-        this.callback=(err)=>{
-            console.log("performed operation on item "+this._operationInfo.dataOperation);
-
-            this._operationInfo.zone.run(()=>{
-                if(err){
-                    this._operationInfo.serviceProgress.errorOnDataItem(
-                        err,
-                        this._dataItem,
-                        DataOperation.Rename);
-                }
-                this._operationInfo.count++;
-
-                this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
-                    this._operationInfo.count,
-                    this._operationInfo.total,
-                    DataOperation.Rename);
-
-                if(this._operationInfo.count==this._operationInfo.total){
-                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
-                }
-            });
         }
     }
 }
