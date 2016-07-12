@@ -114,19 +114,37 @@ export class DataService{
             if(err) throw err;
 
             folder.countOfChildrenLeft=folderChildren.length;
-            var scanInfo=new ScanInfo(folder,this,tracker);
-            for(var i in folderChildren){
-                var name=folderChildren[i];
-                var scanCallback=new ScanCallback(name,scanInfo);
-
-                let childPath;
-                if (path=='/') {
-                    childPath = '/' + name;
-                }else{
-                    childPath = path + '/' + name;
-                }
-                fs.stat(childPath,scanCallback.callback);
+            if(folder.parent==null){
+                this._zone.run(()=>{
+                    tracker.totalChildrenOfRoot=folder.countOfChildrenLeft;
+                });
             }
+
+            var scanInfo=new ScanInfo(folder,this,tracker);
+            if(folder.countOfChildrenLeft==0){
+                if(folder.parent!=null){
+                    folder.parent.childScanned(folder,scanInfo);
+                }else{
+                    this._zone.run(()=>{
+                        tracker.scanDidEnd();
+                    });
+                }
+            }else{
+
+                for(var i in folderChildren){
+                    var name=folderChildren[i];
+                    var scanCallback=new ScanCallback(name,scanInfo);
+
+                    let childPath;
+                    if (path=='/') {
+                        childPath = '/' + name;
+                    }else{
+                        childPath = path + '/' + name;
+                    }
+                    fs.stat(childPath,scanCallback.callback);
+                }
+            }
+
         });
     }
 

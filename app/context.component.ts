@@ -1,4 +1,4 @@
-import {Component,OnInit,ContentChild,ViewChild,AfterContentInit} from '@angular/core';
+import {Component,OnInit,ContentChild,ViewChild,AfterContentInit,OnChanges} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
 import {Input} from "@angular/core";
@@ -72,7 +72,7 @@ import {Point} from "./core/point";
         ]),
     ]
 })
-export class ContextComponent implements AfterContentInit{
+export class ContextComponent implements AfterContentInit,OnChanges{
 
     @Input('scanTarget') private _scanTarget:ScanTarget;
     public context:Context=new Context();
@@ -90,6 +90,11 @@ export class ContextComponent implements AfterContentInit{
 
     ngAfterContentInit() {
         // this.operationProgress is now with value set
+    }
+
+    ngOnChanges():any {
+        console.log("Content did change in sunburst");
+        return undefined;
     }
 
     openDataItem(dataItem:DataItem){

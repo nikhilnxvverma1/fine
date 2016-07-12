@@ -28,14 +28,14 @@ export class ScanCallback{
                 childFolder.parent=this._scanInfo.parent;
                 this._scanInfo.dataService.scanFolder(childFolder,this._scanInfo.tracker);
             }else{
-                this._scanInfo.parent.countOfChildrenLeft=this._scanInfo.parent.countOfChildrenLeft-1;
                 var file=new File(this.name);
                 file.setStatsInfo(stats);
                 file.parentUrl=containerPath;
                 file.parent=this._scanInfo.parent;
-                file.parent.childScanned(file);
+                file.parent.childScanned(file,this._scanInfo);
                 this._scanInfo.tracker.addSize(stats.size);
                 DataService.sizeCollected+=stats.size;
+                //console.log("size collected "+DataService.sizeCollected);
 
             }
         }

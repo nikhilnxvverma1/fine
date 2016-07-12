@@ -7,6 +7,7 @@ import {ScanStatus} from "./scan-status";
 export class Tracker{
     private _sizeScannedSoFar:number;
     private _scanStatus:ScanStatus;
+    private _totalChildrenOfRoot:number;
 
     constructor() {
         this.sizeScannedSoFar=0;
@@ -27,6 +28,14 @@ export class Tracker{
 
     set scanStatus(value:ScanStatus) {
         this._scanStatus = value;
+    }
+
+    get totalChildrenOfRoot():number {
+        return this._totalChildrenOfRoot;
+    }
+
+    set totalChildrenOfRoot(value:number) {
+        this._totalChildrenOfRoot = value;
     }
 
     public addSize(size:number){

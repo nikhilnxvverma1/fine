@@ -2,6 +2,8 @@ import {DataItem} from './data-item'
 import {Stats} from "fs";
 import {SortOption} from "./sort-option";
 import {DataService} from "./data.service";
+import {Tracker} from "./tracker";
+import {ScanInfo} from "./scan-info";
 
 export class Folder extends DataItem{
 
@@ -26,15 +28,23 @@ export class Folder extends DataItem{
         this._countOfChildrenLeft = value;
     }
 
-    public childScanned(child:DataItem):boolean{
-        this._countOfChildrenLeft--;
+    public childScanned(child:DataItem,scanInfo:ScanInfo):boolean{
+
+
         this._children.push(child);
-        this.size=this.size+child.size;
-        if(this._countOfChildrenLeft==0){
-            if (this.parent!=null) {
-                this.parent.childScanned(this);
-            }else{
-                console.log("Completed scan size : "+this.size+", ds :" +DataService.sizeCollected);
+        if(this.parent==null){
+            scanInfo.dataService.zone.run(()=>{
+                this._countOfChildrenLeft--;
+                this.size=this.size+child.size;
+                if(this._countOfChildrenLeft==0){
+                    scanInfo.tracker.scanDidEnd();
+                }
+            });
+        }else{
+            this._countOfChildrenLeft--;
+            this.size=this.size+child.size;
+            if(this._countOfChildrenLeft==0){
+                this.parent.childScanned(this,scanInfo);
             }
         }
         return this._countOfChildrenLeft==0;

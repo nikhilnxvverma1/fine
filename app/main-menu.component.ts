@@ -47,6 +47,7 @@ export class MainMenuComponent{
     @Input('scanTargets') public scanTargets:ScanTarget[];
     @Input('activeScanTarget') public activeScanTarget:ScanTarget;
     @Output('addFolderToScanTargets') addFolderEvent=new EventEmitter<string>();
+    @Output('openScanResult') openScanResultEvent=new EventEmitter<ScanTarget>();
     private _isMenuOpen:boolean=true;
     constructor(private _zone:NgZone) {}
     @ViewChild(FeedbackComponent)private  _feedback:FeedbackComponent;
@@ -86,6 +87,11 @@ export class MainMenuComponent{
 
     getMenuState(){
         return this.isMenuOpen?"open":"close";
+    }
+
+    scan(scanTarget:ScanTarget,event:Event){
+        event.stopPropagation();
+        console.log("scan target name "+scanTarget.name);
     }
 
 }

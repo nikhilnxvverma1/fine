@@ -34,31 +34,20 @@ import * as d3 from "d3"
     ]
 
 })
-export class SunburstComponent implements OnInit,OnChanges{
+export class SunburstComponent implements OnChanges{
 
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
-    ngOnInit():any {
-        if(this.scanTarget==null){
-            return;
-        }
-
-        this.makeSunburst.call(this);
-
-        // Keep track of the node that is currently being displayed as the root.
-        var node;
-        return undefined;
-    }
     ngOnChanges():any {
-        if(this.scanTarget==null){
-            return undefined;
-        }
+        this.makeSunburst();
         console.log("Content did change in sunburst");
         return undefined;
     }
 
     makeSunburst() {
+        console.log("making sunburst");
+        d3.selectAll("#sunburst svg").remove();
         var width = 760,
             height = 600,
             radius = Math.min(width, height) / 2;

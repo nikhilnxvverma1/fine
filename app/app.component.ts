@@ -69,7 +69,7 @@ export class AppComponent{
                             this._dataService.zone.run(()=>{
                                 var scanTarget=new ScanTarget(data.drive,ScanTargetType.HardDisk,data.total,data.used);
                                 scanTargets.push(scanTarget);
-                                console.log("scan target name : "+scanTarget.name);
+                                //console.log("scan target name : "+scanTarget.name);
                                 //if(this._scanTargets.length==1){
                                 //    //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
                                 //    var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
@@ -130,8 +130,15 @@ export class AppComponent{
         var folderScanTarget=new ScanTarget(name,ScanTargetType.Folder,-1,-1);
         this._scanTargets.push(folderScanTarget);
         folderScanTarget.folderStack.push(folder);
+        folderScanTarget.tracker.scanDidStart();
         this._dataService.scanFolder(folder,folderScanTarget.tracker);
 
+    }
+
+    openScanResult(scanTarget:ScanTarget){
+        console.log("Will open result for "+scanTarget.name);
+        this.activeScanTarget=scanTarget;
+        this.mainMenu.isMenuOpen=false;
     }
 
     openDataItem(dataItem:DataItem){

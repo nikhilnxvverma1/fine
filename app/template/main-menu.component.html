@@ -14,6 +14,7 @@
                 <div class="scanTargetContainer"
                      *ngFor="let scanTarget of scanTargets"
                      [class.scanCompleted]="scanTarget.tracker.scanStatus==2"
+                     (click)="scanTarget.tracker.scanStatus==2?openScanResultEvent.emit(scanTarget):1"
                 >
                     <div class="row tinyBottomMargin valign-wrapper">
                         <div class="s1 col">
@@ -25,20 +26,43 @@
                             {{scanTarget.name}}
                         </div>
                         <div class="s5 col offset-s2">
-                            <div class="menuLoaderBackground">
+                            <!--Unscanned-->
+                            <div class="menuLoaderBackground"
+                                 *ngIf="scanTarget.tracker.scanStatus==0">
                                 <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
                                 <label>
-                                    <!--73.4 GB used-->
                                     {{scanTarget.used|unitSpace}} used
                                 </label>
                                 <label class="floatRight">
                                     {{scanTarget.total|unitSpace}}
                                 </label>
                             </div>
+
+                            <!--Scanned and not folder-->
+                            <div class="menuLoaderBackground"
+                                 *ngIf="scanTarget.tracker.scanStatus!=0&&scanTarget.type!=2">
+                                <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
+                                <label>
+                                    {{scanTarget.used|unitSpace}} used
+                                </label>
+                                <label class="floatRight">
+                                    {{scanTarget.folderStack[0].size|unitSpace}}
+                                </label>
+                            </div>
+                            <div [class.menuLoaderBackground]="scanTarget.tracker.scanStatus==1"
+                                 *ngIf="scanTarget.tracker.scanStatus!=0&&scanTarget.type==2">
+                                <div class="diskCapacity"
+                                     *ngIf="scanTarget.tracker.scanStatus==1"
+                                     [style.width]="((scanTarget.tracker.totalChildrenOfRoot-scanTarget.folderStack[0].countOfChildrenLeft)/
+                                     scanTarget.tracker.totalChildrenOfRoot)*100+'%'"></div>
+                                <h6 *ngIf="scanTarget.tracker.scanStatus==2">
+                                    {{scanTarget.folderStack[0].size|unitSpace}}
+                                </h6>
+                            </div>
                         </div>
                         <div class="s2 col">
 
-                            <a class="mainMenuActionButton">
+                            <a class="mainMenuActionButton" (click)="scan(scanTarget,$event)">
                                 Scan
                             </a>
                             <a class="mainMenuActionButton scanDropDown">
