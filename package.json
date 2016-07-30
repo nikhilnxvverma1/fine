@@ -32,6 +32,7 @@
     "nodejs-disks": "^0.2.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
+    "snapsvg": "^0.4.0",
     "systemjs": "0.19.22",
     "trash": "^3.4.1",
     "zone.js": "^0.6.12"

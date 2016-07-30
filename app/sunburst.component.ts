@@ -15,6 +15,10 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 
 ///<reference path="../typings/d3.d.ts"/>
 import * as d3 from "d3"
+
+///<reference path="../typings/browser/definitions/snapsvg/snapsvg.d.ts"/>
+import snap=window.snap;
+//import * as snap from "snapsvg"
 @Component({
     selector: 'sunburst',
     templateUrl:'app/template/sunburst.component.html',
@@ -40,7 +44,8 @@ export class SunburstComponent implements OnChanges{
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
     ngOnChanges():any {
-        this.makeSunburst();
+        //this.makeSunburst();
+        this.makeCirclePack();
         console.log("Content did change in sunburst");
         return undefined;
     }
@@ -127,6 +132,40 @@ export class SunburstComponent implements OnChanges{
 
     }
 
+    makeCirclePack(){
+        console.log("Making circle pack");
+        var width = 760,
+            height = 600,
+            diameter=550;
+
+        var svg = d3.selectAll("#sunburst")
+            .insert("svg",null)
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+
+        d3.select("sunburstImg").remove();
+
+        let rootFolder = this.scanTarget.folderStack[0];
+        var pack = d3.layout.pack()
+            .size([diameter,diameter])
+            .value(function (d:DataItem) {
+                return d.size;
+            }).nodes(rootFolder);
+
+        console.log("Done packing rootFolder "+rootFolder);
+
+        var s=snap("#dataVisualiser");
+        var rootCircle:CircleShape=rootFolder as CircleShape;
+
+        s.circle(rootCircle.x,rootCircle.y,rootCircle.r).attr({fill:rootCircle.colorRGB()});
+        for(var i=0 ;i<rootFolder.children.length;i++){
+
+            var childCircle:CircleShape = rootFolder.children[i] as CircleShape;
+            s.circle(childCircle.x,childCircle.y,childCircle.r).attr({fill:childCircle.colorRGB()});
+        }
+    }
 }
 
 interface ArcItem{
@@ -134,4 +173,12 @@ interface ArcItem{
     y:number;
     dx:number;
     dy:number;
+}
+
+interface CircleShape{
+    x:number;
+    y:number;
+    r:number;
+
+    colorRGB():string;
 }

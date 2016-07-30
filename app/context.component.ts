@@ -118,7 +118,8 @@ export class ContextComponent implements AfterContentInit,OnChanges{
 
     createSunburst(){
         console.log("Making sunburst now");
-        this._sunburstComponent.makeSunburst();
+        //this._sunburstComponent.makeSunburst();
+        this._sunburstComponent.makeCirclePack();
     }
 
     groupInFolder(folderName:string){
