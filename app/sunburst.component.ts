@@ -17,7 +17,13 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 import * as d3 from "d3"
 
 ///<reference path="../typings/browser/definitions/snapsvg/snapsvg.d.ts"/>
-import snap=window.snap;
+import Snap=window.snap;
+import {Folder} from "./core/folder";
+import {root} from "rxjs/util/root";
+import {SortOption} from "./core/sort-option";
+import {GroupElement} from "./core/group-element";
+import {DisplayElement} from "./core/display-element";
+import {LeafElement} from "./core/leaf-element";
 //import * as snap from "snapsvg"
 @Component({
     selector: 'sunburst',
@@ -43,14 +49,66 @@ export class SunburstComponent implements OnChanges{
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
+    private static STARTING_CHILDREN_TO_SHOW=32;
+    private _totalRects=0;
+    private _displayElementRoot:GroupElement;
+    private _currentElement:GroupElement;
+
     ngOnChanges():any {
-        //this.makeSunburst();
-        this.makeCirclePack();
+        this.makeSunburst();
+        //this.makeCirclePack();
+        //this.makeIcicle();
         console.log("Content did change in sunburst");
         return undefined;
     }
 
-    makeSunburst() {
+    createDisplayElementTree():GroupElement{
+        var root=this.scanTarget.folderStack[0];
+        var depth=7;
+        return null;
+    }
+
+    upperDisplayElementsFor(groupElement:GroupElement,upperFew:number):DisplayElement[]{
+
+        var folder=groupElement.getDataItem();
+
+        //get depth information to calculate 'h'
+        var depth=folder.depth+1;
+        if(upperFew<1){
+            return null;
+        }
+        folder.sort(SortOption.Size);//sorts in ascending order
+        var childrenToShow:DisplayElement[]=[];
+        var sizeOfDisplayedElements=0;
+        for(var i=0;i<upperFew&&i<folder.children.length;i++){
+            var child=folder.children[folder.children.length-1-i];
+            sizeOfDisplayedElements+=child.size;
+            var childElement;
+            if(child.isDirectory()){
+                childElement=new GroupElement();
+                childElement.folder=<Folder>child;
+
+            }else{
+                childElement=new LeafElement();
+                childElement.file=<File>child;
+
+            }
+
+            childrenToShow.push(childElement);
+        }
+
+        groupElement.omissionCount=folder.children.length-childrenToShow.length;
+        groupElement.omissionSize=folder.size-sizeOfDisplayedElements;
+        groupElement.descendants=childrenToShow;
+        return childrenToShow;
+    }
+
+    makeSunburst(){
+        //create an secondary DisplayElement tree
+        this._displayElementRoot=this.createDisplayElementTree();
+    }
+
+    makeSunburstOld() {
         console.log("making sunburst");
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
@@ -76,12 +134,37 @@ export class SunburstComponent implements OnChanges{
 
     //.size([2 * Math.PI, radius*radius   ])
         var partition = d3.layout.partition()
-            .value(function (d:DataItem) {
+            .children(function(d:DataItem){
+                console.log("children accesor called");
+                if(!d.isDirectory()){
+                    return null;
+                }
+
+                var folder=<Folder>d;
+                //get depth information to calculate 'h'
+                var depth=folder.depth+1;
+                var h=SunburstComponent.STARTING_CHILDREN_TO_SHOW/depth;
+                if(h<1){
+                    return null;
+                }
+                folder.sort(SortOption.Size);//sorts in ascending order
+                var childrenToShow:DataItem[]=[];
+                for(var i=0;i<h&&i<folder.children.length;i++){
+                    childrenToShow.push(folder.children[folder.children.length-1-i]);
+                }
+
+                return childrenToShow;
+                //return folder.children;
+            }).value(function (d:DataItem) {
                 return d.size;
             });
 
+        //TODO check if the values are NANs or not
         var arc = d3.svg.arc<ArcItem>()
             .startAngle((d)=> {
+                if(isNaN((<ArcItem>d).x)){
+                    //console.log("It is NAN");
+                }
                 return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x)));
                 //return (<ArcItem>d).x;
             })
@@ -116,6 +199,8 @@ export class SunburstComponent implements OnChanges{
                 .attrTween("d", (d)=> { return () =>{ return arc(d); }; });
         };
 
+
+        //eliminated data items cause problems
         svg.datum(this.scanTarget.folderStack[0])
             .selectAll("path")
             .data(partition.nodes)
@@ -128,6 +213,17 @@ export class SunburstComponent implements OnChanges{
                 //return color(d.name)
                 return d.colorRGB();
             });
+        //svg.selectAll("path")
+        //    .data(partition)
+        //    .enter()
+        //    .append("path")
+        //    .attr("d", arc)
+        //    .style("stroke", "#fff")
+        //    .on('click',click)
+        //    .style("fill", d=> {
+        //        //return color(d.name)
+        //        return d.colorRGB();
+        //    });
 
 
     }
@@ -156,7 +252,7 @@ export class SunburstComponent implements OnChanges{
 
         console.log("Done packing rootFolder "+rootFolder);
 
-        var s=snap("#dataVisualiser");
+        var s=Snap("#dataVisualiser");
         var rootCircle:CircleShape=rootFolder as CircleShape;
 
         s.circle(rootCircle.x,rootCircle.y,rootCircle.r).attr({fill:rootCircle.colorRGB()});
@@ -164,6 +260,76 @@ export class SunburstComponent implements OnChanges{
 
             var childCircle:CircleShape = rootFolder.children[i] as CircleShape;
             s.circle(childCircle.x,childCircle.y,childCircle.r).attr({fill:childCircle.colorRGB()});
+        }
+    }
+
+    makeIcicle(){
+        var width = 900,
+            height = 800,
+            diameter=width;
+
+        var svg = d3.selectAll("#sunburst")
+            .insert("svg",null)
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+
+        d3.select("sunburstImg").remove();
+
+        let rootFolder = this.scanTarget.folderStack[0];
+        console.log("Making partition");
+        var partition = d3.layout.partition()
+            .size([width,height])
+            .value(function (d:DataItem) {
+                return d.size;
+            }).nodes(rootFolder);
+
+        console.log("Done Making partition");
+        var s=Snap("#dataVisualiser");
+        console.log("drawing now");
+        this.sortAndDrawMajor(s,rootFolder,4,16);
+        console.log("Done drawing "+this._totalRects+" rects");
+    }
+
+    private sortAndDrawMajor(s:any,root:Folder,depth:number,h:number){
+        var rootRect:RectShape=root as RectShape;
+
+        var rectSvg=s.rect(rootRect.x,rootRect.y,rootRect.dx,rootRect.dy).attr({fill:rootRect.colorRGB()});
+        this._totalRects++;
+        rectSvg.hover((mouseEvent:MouseEvent)=>{ //hover in handler
+            var element=mouseEvent.currentTarget as HTMLElement;
+            element.setAttribute("stroke","#000");
+
+        },(mouseEvent:MouseEvent)=>{//hover out handler
+            var element=mouseEvent.currentTarget as HTMLElement;
+            element.removeAttribute("stroke");
+
+        });
+        for(var i=0 ;i<root.children.length;i++){
+
+            var child=root.children[i];
+            var childRect:RectShape = child as RectShape;
+            var rectSvg=s.rect(childRect.x,childRect.y,childRect.dx,childRect.dy).attr({fill:childRect.colorRGB()});
+            var nodeElement=rectSvg.node;
+            nodeElement.setAttribute("data-name",child.name);
+            nodeElement.setAttribute("data-size",child.size);
+
+            rectSvg.hover((mouseEvent:MouseEvent)=>{ //hover in handler
+                var element=mouseEvent.currentTarget as HTMLElement;
+                element.setAttribute("stroke","#000");
+
+            },(mouseEvent:MouseEvent)=>{//hover out handler
+                var element=mouseEvent.currentTarget as HTMLElement;
+                element.removeAttribute("stroke");
+            });
+
+            this._totalRects++;
+
+            if(child.isDirectory() &&
+            depth>0){
+                this.sortAndDrawMajor(s,<Folder>child,depth-1,h/2);
+            }
         }
     }
 }
@@ -179,6 +345,15 @@ interface CircleShape{
     x:number;
     y:number;
     r:number;
+
+    colorRGB():string;
+}
+
+interface RectShape{
+    x:number;
+    y:number;
+    dx:number;
+    dy:number;
 
     colorRGB():string;
 }

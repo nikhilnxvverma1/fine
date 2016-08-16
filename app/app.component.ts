@@ -131,6 +131,7 @@ export class AppComponent{
         this._scanTargets.push(folderScanTarget);
         folderScanTarget.folderStack.push(folder);
         folderScanTarget.tracker.scanDidStart();
+        folder.depth=0;
         this._dataService.scanFolder(folder,folderScanTarget.tracker);
 
     }
@@ -144,7 +145,7 @@ export class AppComponent{
     openDataItem(dataItem:DataItem){
         console.log("about to open dataItem"+dataItem.name);
 
-        if(dataItem.isDirectory){
+        if(dataItem.isDirectory()){
 
             let folderPath = dataItem.getFullyQualifiedPath()+'/';
             var dataItems:DataItem[]=this._dataService.readDirectory(folderPath);

@@ -25,7 +25,7 @@ export class ScanCallback{
                 var childFolder=new Folder(this.name);
                 childFolder.setStatsInfo(stats);
                 childFolder.parentUrl= containerPath;
-                childFolder.parent=this._scanInfo.parent;
+                childFolder.parent=this._scanInfo.parent;//this takes care of depth information too
                 this._scanInfo.dataService.scanFolder(childFolder,this._scanInfo.tracker);
             }else{
                 var file=new File(this.name);

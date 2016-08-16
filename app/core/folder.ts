@@ -8,12 +8,12 @@ import {ScanInfo} from "./scan-info";
 export class Folder extends DataItem{
 
     private _children:DataItem[]=[];
+    private _depth:number;
 
     private _countOfChildrenLeft:number;
 
     constructor(name:string) {
         super(name);
-        this.isDirectory=true;
     }
 
     get children():DataItem[] {
@@ -26,6 +26,14 @@ export class Folder extends DataItem{
 
     set countOfChildrenLeft(value:number) {
         this._countOfChildrenLeft = value;
+    }
+
+    get depth():number {
+        return this._depth;
+    }
+
+    set depth(value:number) {
+        this._depth = value;
     }
 
     public childScanned(child:DataItem,scanInfo:ScanInfo):boolean{
@@ -89,8 +97,14 @@ export class Folder extends DataItem{
         this.modifiedDate=stats.mtime;
     }
 
+    isDirectory():boolean {
+        return true;
+    }
 
-
+    protected parentChangedTo(newParent:Folder) {
+        super.parentChangedTo(newParent);
+        this.depth=newParent.depth+1;
+    }
 
     /**
      * Adds specified size to this folder's existing size and calls the same method

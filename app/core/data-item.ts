@@ -5,21 +5,15 @@ import {Folder} from "./folder";
 export abstract class DataItem{
     private _parentUrl:string;
     private _name:string;
-    private _isDirectory:boolean;
     private _selected:boolean;
     protected _parent:Folder;
 
     private _creationDate:Date;
     private _modifiedDate:Date;
     private _size:number=0;
-    private _red:number;
-    private _green:number;
-    private _blue:number;
-
 
     constructor(name:string) {
         this._name = name;
-        this.computeRandomColor();
     }
 
     get parentUrl():string {
@@ -38,14 +32,6 @@ export abstract class DataItem{
         this._name = value;
     }
 
-    get isDirectory():boolean {
-        return this._isDirectory;
-    }
-
-    set isDirectory(value:boolean) {
-        this._isDirectory = value;
-    }
-
     get selected():boolean {
         return this._selected;
     }
@@ -60,6 +46,7 @@ export abstract class DataItem{
 
     set parent(value:Folder) {
         this._parent = value;
+        this.parentChangedTo(value);
     }
 
     get creationDate():Date {
@@ -86,29 +73,14 @@ export abstract class DataItem{
         this._size = value;
     }
 
-    get red():number {
-        return this._red;
+    isDirectory():boolean {
+        return false;
     }
 
-    set red(value:number) {
-        this._red = value;
+    protected parentChangedTo(newParent:Folder){
+        this.parentUrl=newParent.parentUrl+newParent.name+'/';
     }
 
-    get green():number {
-        return this._green;
-    }
-
-    set green(value:number) {
-        this._green = value;
-    }
-
-    get blue():number {
-        return this._blue;
-    }
-
-    set blue(value:number) {
-        this._blue = value;
-    }
 
     /**
      * @returns {string} gives the fully qualified path without the trailing slash
@@ -195,15 +167,5 @@ export abstract class DataItem{
             extension='.'+parts.pop();
         }
         return extension;
-    }
-
-    public colorRGB():string{
-        return "rgb("+this.red+","+this.green+","+this.blue+")";
-    }
-
-    public computeRandomColor(){
-        this.red=Math.floor(Math.random()*256+1);
-        this.green=Math.floor(Math.random()*256+1);
-        this.blue=Math.floor(Math.random()*256+1);
     }
 }

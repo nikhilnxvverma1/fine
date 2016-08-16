@@ -64,7 +64,7 @@ export class BreadcrumbComponent{
 
     openDataItem(dataItem:DataItem){
 
-        if(dataItem.isDirectory){
+        if(dataItem.isDirectory()){
             (<Folder>dataItem).sort(this._scanTarget.sortOption);
             this._scanTarget.folderStack.push(<Folder>dataItem);
         }else{
