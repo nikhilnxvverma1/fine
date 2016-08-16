@@ -11,9 +11,13 @@ export abstract class DataItem{
     private _creationDate:Date;
     private _modifiedDate:Date;
     private _size:number=0;
+    private _red:number;
+    private _green:number;
+    private _blue:number;
 
     constructor(name:string) {
         this._name = name;
+        this.computeRandomColor();
     }
 
     get parentUrl():string {
@@ -72,6 +76,41 @@ export abstract class DataItem{
     set size(value:number) {
         this._size = value;
     }
+
+    get red():number {
+        return this._red;
+    }
+
+    set red(value:number) {
+        this._red = value;
+    }
+
+    get green():number {
+        return this._green;
+    }
+
+    set green(value:number) {
+        this._green = value;
+    }
+
+    get blue():number {
+        return this._blue;
+    }
+
+    set blue(value:number) {
+        this._blue = value;
+    }
+
+    public computeRandomColor(){
+        this.red=Math.floor(Math.random()*256+1);
+        this.green=Math.floor(Math.random()*256+1);
+        this.blue=Math.floor(Math.random()*256+1);
+    }
+
+    public colorRGB():string{
+        return "rgb("+this.red+","+this.green+","+this.blue+")";
+    }
+
 
     isDirectory():boolean {
         return false;

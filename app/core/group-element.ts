@@ -7,7 +7,7 @@ import {Folder} from "./folder";
 export class GroupElement extends DisplayElement{
 
     private _folder:Folder;
-    private _descendants:DisplayElement[];
+    private _children:DisplayElement[];
     private _omissionSize:number;
     private _omissionCount:number;
 
@@ -16,7 +16,7 @@ export class GroupElement extends DisplayElement{
     }
 
     public isGroup():boolean {
-        return super.isGroup();
+        return true;
     }
 
     public getChildren():DisplayElement[] {
@@ -39,8 +39,12 @@ export class GroupElement extends DisplayElement{
         this._omissionCount = value;
     }
 
-    set descendants(value:Array) {
-        this._descendants = value;
+    set children(value:Array) {
+        this._children = value;
+    }
+
+    get children():DisplayElement[] {
+        return this._children;
     }
 
     public getDataItem():Folder {

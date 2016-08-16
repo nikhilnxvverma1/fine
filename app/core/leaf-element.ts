@@ -11,7 +11,7 @@ export class LeafElement extends DisplayElement{
     }
 
     getDataItem():File {
-        return undefined;
+        return this._file;
     }
 
 }

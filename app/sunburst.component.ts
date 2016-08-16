@@ -49,9 +49,11 @@ export class SunburstComponent implements OnChanges{
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
-    private static STARTING_CHILDREN_TO_SHOW=32;
-    private _totalRects=0;
-    private _displayElementRoot:GroupElement;
+    private static STARTING_CHILDREN_TO_SHOW=16;
+    private static HALF_TILL_DEPTH=4;
+    private static MAX_DEPTH=7;
+    private _totalElements=0;
+    private _rootGroupElement:GroupElement;
     private _currentElement:GroupElement;
 
     ngOnChanges():any {
@@ -64,8 +66,31 @@ export class SunburstComponent implements OnChanges{
 
     createDisplayElementTree():GroupElement{
         var root=this.scanTarget.folderStack[0];
-        var depth=7;
-        return null;
+        var depth=0;
+        this._rootGroupElement=new GroupElement();
+        this._rootGroupElement.folder=root;
+        this._totalElements=0;
+        this.traverseBigItems(this._rootGroupElement,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
+        return this._rootGroupElement;
+    }
+
+    traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number){
+        if(depth>SunburstComponent.MAX_DEPTH||upperFew<1){
+            return;
+        }
+        var displayElements=this.upperDisplayElementsFor(groupElement,upperFew);
+        var i=0;
+        for(i=0;i<displayElements.length;i++){
+            if(displayElements[i].isGroup()){
+                var reducedUpperFew:number;
+                if(depth<SunburstComponent.HALF_TILL_DEPTH){
+                    reducedUpperFew=upperFew/2;
+                }else{
+                    reducedUpperFew=upperFew-1;
+                }
+                this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1);
+            }
+        }
     }
 
     upperDisplayElementsFor(groupElement:GroupElement,upperFew:number):DisplayElement[]{
@@ -87,25 +112,100 @@ export class SunburstComponent implements OnChanges{
             if(child.isDirectory()){
                 childElement=new GroupElement();
                 childElement.folder=<Folder>child;
-
             }else{
                 childElement=new LeafElement();
                 childElement.file=<File>child;
-
             }
 
             childrenToShow.push(childElement);
+            this._totalElements++;
         }
 
         groupElement.omissionCount=folder.children.length-childrenToShow.length;
         groupElement.omissionSize=folder.size-sizeOfDisplayedElements;
-        groupElement.descendants=childrenToShow;
+        groupElement.children=childrenToShow;
         return childrenToShow;
     }
 
     makeSunburst(){
         //create an secondary DisplayElement tree
-        this._displayElementRoot=this.createDisplayElementTree();
+        this.createDisplayElementTree();
+        console.log("Total Elements to render: "+this._totalElements);
+        d3.selectAll("#sunburst svg").remove();
+        var width = 760,
+            height = 650,
+            radius = Math.min(width, height) / 2;
+
+        //var x = d3.scale.linear().domain([0, 2 * Math.PI]).range([0, 2 * Math.PI]);
+        var x = d3.scale.linear().range([0, 2 * Math.PI]);
+
+        //var y = d3.scale.sqrt().domain([0, radius*radius]).range([0, radius]);
+        var y = d3.scale.sqrt().range([0, radius]);
+
+        var color = d3.scale.category20c();
+
+        var svg = d3.selectAll("#sunburst")
+            .insert("svg",null)
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+
+        d3.select("sunburstImg").remove();
+
+        var partition = d3.layout.partition()
+            .value(function (d:DisplayElement) {
+                return d.getDataItem().size;
+            });
+
+        var arc = d3.svg.arc()
+            .startAngle((d)=> {
+                return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x)));
+                //return (<ArcItem>d).x;
+            })
+            .endAngle((d)=> {
+                return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x + (<ArcItem>d).dx)));
+                //return (<ArcItem>d).x+(<ArcItem>d).dx;
+            })
+            .innerRadius((d)=> {
+                return Math.max(0, y((<ArcItem>d).y));
+                //return Math.sqrt((<ArcItem>d).y);
+            })
+            .outerRadius((d)=> {
+                return Math.max(0, y((<ArcItem>d).y + (<ArcItem>d).dy));
+                //return Math.sqrt((<ArcItem>d).y + (<ArcItem>d).dy);
+            });
+
+        var click=(d)=>{
+            svg.transition()
+                .duration(350)
+                .tween("scale", ()=> {
+                    var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+                        yd = d3.interpolate(y.domain(), [d.y, 1]),
+                        yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+                    return (t)=> {
+                        x.domain(xd(t));
+                        y.domain(yd(t)).range(yr(t));
+                    };
+                })
+                .selectAll("path")
+                .attrTween("d", (d)=> { return () =>{ return arc(d); }; });
+        };
+
+
+        //eliminated data items cause problems
+        svg.datum(this._rootGroupElement)
+            .selectAll("path")
+            .data(partition.nodes)
+            .enter()
+            .append("path")
+            .attr("d", arc)
+            .style("stroke", "#fff")
+            .on('click',click)
+            .style("fill", d=> {
+                //return color(d.name)
+                return d.getDataItem().colorRGB();
+            });
     }
 
     makeSunburstOld() {
@@ -289,14 +389,14 @@ export class SunburstComponent implements OnChanges{
         var s=Snap("#dataVisualiser");
         console.log("drawing now");
         this.sortAndDrawMajor(s,rootFolder,4,16);
-        console.log("Done drawing "+this._totalRects+" rects");
+        console.log("Done drawing "+this._totalElements+" rects");
     }
 
     private sortAndDrawMajor(s:any,root:Folder,depth:number,h:number){
         var rootRect:RectShape=root as RectShape;
 
         var rectSvg=s.rect(rootRect.x,rootRect.y,rootRect.dx,rootRect.dy).attr({fill:rootRect.colorRGB()});
-        this._totalRects++;
+        this._totalElements++;
         rectSvg.hover((mouseEvent:MouseEvent)=>{ //hover in handler
             var element=mouseEvent.currentTarget as HTMLElement;
             element.setAttribute("stroke","#000");
@@ -324,7 +424,7 @@ export class SunburstComponent implements OnChanges{
                 element.removeAttribute("stroke");
             });
 
-            this._totalRects++;
+            this._totalElements++;
 
             if(child.isDirectory() &&
             depth>0){
