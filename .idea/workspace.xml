@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/data-item.ts" afterPath="$PROJECT_DIR$/app/core/data-item.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/display-element.ts" afterPath="$PROJECT_DIR$/app/core/display-element.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/group-element.ts" afterPath="$PROJECT_DIR$/app/core/group-element.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/leaf-element.ts" afterPath="$PROJECT_DIR$/app/core/leaf-element.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/sunburst.component.ts" afterPath="$PROJECT_DIR$/app/sunburst.component.ts" />
     </list>
     <ignored path="fi-ne.iws" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="sunburst.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44444445">
-              <caret line="139" column="57" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
+            <state vertical-scroll-proportion="2.1637428">
+              <caret line="205" column="5" selection-start-line="205" selection-start-column="5" selection-end-line="205" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -541,7 +537,13 @@
       <option name="project" value="LOCAL" />
       <updated>1471344156746</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Improved performance of the sunburst by using a compressed secondary display tree">
+      <created>1471350600615</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1471350600615</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -627,7 +629,8 @@
     <MESSAGE value="Completed scanning of folder targets with progress bar,clicking on a scan target opens its sunburst(works with multiple targets also)" />
     <MESSAGE value="Sunburst replaced with circle pack for just one layer" />
     <MESSAGE value="Reverted back to sunburst and added classes for secondary display tree for the sunburst" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reverted back to sunburst and added classes for secondary display tree for the sunburst" />
+    <MESSAGE value="Improved performance of the sunburst by using a compressed secondary display tree" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved performance of the sunburst by using a compressed secondary display tree" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1001,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44444445">
-          <caret line="139" column="57" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
+        <state vertical-scroll-proportion="2.1637428">
+          <caret line="205" column="5" selection-start-line="205" selection-start-column="5" selection-end-line="205" selection-end-column="5" />
           <folding />
         </state>
       </provider>

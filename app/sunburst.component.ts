@@ -49,8 +49,9 @@ export class SunburstComponent implements OnChanges{
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
-    private static STARTING_CHILDREN_TO_SHOW=16;
+    private static STARTING_CHILDREN_TO_SHOW=32;
     private static HALF_TILL_DEPTH=4;
+    private static MANDATORY_DEPTH=4;
     private static MAX_DEPTH=7;
     private _totalElements=0;
     private _rootGroupElement:GroupElement;
@@ -82,11 +83,11 @@ export class SunburstComponent implements OnChanges{
         var i=0;
         for(i=0;i<displayElements.length;i++){
             if(displayElements[i].isGroup()){
-                var reducedUpperFew:number;
-                if(depth<SunburstComponent.HALF_TILL_DEPTH){
-                    reducedUpperFew=upperFew/2;
-                }else{
-                    reducedUpperFew=upperFew-1;
+
+                var fraction=displayElements[i].getDataItem().size/groupElement.getDataItem().size;
+                var reducedUpperFew=upperFew*fraction;
+                if(reducedUpperFew<1&&depth<SunburstComponent.MANDATORY_DEPTH){
+                    reducedUpperFew=1;
                 }
                 this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1);
             }
@@ -161,19 +162,15 @@ export class SunburstComponent implements OnChanges{
         var arc = d3.svg.arc()
             .startAngle((d)=> {
                 return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x)));
-                //return (<ArcItem>d).x;
             })
             .endAngle((d)=> {
                 return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x + (<ArcItem>d).dx)));
-                //return (<ArcItem>d).x+(<ArcItem>d).dx;
             })
             .innerRadius((d)=> {
                 return Math.max(0, y((<ArcItem>d).y));
-                //return Math.sqrt((<ArcItem>d).y);
             })
             .outerRadius((d)=> {
                 return Math.max(0, y((<ArcItem>d).y + (<ArcItem>d).dy));
-                //return Math.sqrt((<ArcItem>d).y + (<ArcItem>d).dy);
             });
 
         var click=(d)=>{
@@ -200,7 +197,7 @@ export class SunburstComponent implements OnChanges{
             .enter()
             .append("path")
             .attr("d", arc)
-            .style("stroke", "#fff")
+            .style("stroke", "none")
             .on('click',click)
             .style("fill", d=> {
                 //return color(d.name)
