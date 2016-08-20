@@ -88,7 +88,13 @@ export class ScanTarget{
         return this.folderStack[this.folderStack.length-1];
     }
 
-    public jumpToFolder(folder:Folder){
+    /**
+     * jumps to the specified folder by adding relevant folders in the folder stack
+     * @param folder folder to jump to
+     * @returns {boolean} true if the folder is ahead of the
+     * current working directory,false otherwise
+     */
+    public jumpToFolder(folder:Folder):boolean{
         //go back till you find top folder
         var topFolder=this.topFolder();
         var foldersInBetween=[];
@@ -104,6 +110,7 @@ export class ScanTarget{
                 //push in the reverse order
                 this.folderStack.push(foldersInBetween[length-1-i]);
             }
+            return true;
         }else{
             //this means that the folders is before the current working directory
             //truncate the entire folder stack first
@@ -115,7 +122,7 @@ export class ScanTarget{
                 //push in the reverse order
                 this.folderStack.push(foldersInBetween[length-1-i]);
             }
-
+            return false;
         }
     }
 }

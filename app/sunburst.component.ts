@@ -148,10 +148,12 @@ export class SunburstComponent implements OnInit{
 
         var color = d3.scale.category20c();
 
-        var svg = d3.selectAll("#sunburst")
+        var svg=d3.selectAll("#sunburst")
             .insert("svg",null)
             .attr("width", width)
-            .attr("height", height)
+            .attr("height", height);
+
+        var group = svg
             .append("g")
             .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
 
@@ -162,7 +164,7 @@ export class SunburstComponent implements OnInit{
                 return d.getDataItem().size;
             });
 
-        var arc = d3.svg.arc()
+        var arc = d3.svg.arc<DisplayElement>()
             .startAngle((d)=> {
                 return Math.max(0, Math.min(2 * Math.PI, x((<ArcItem>d).x)));
             })
@@ -176,6 +178,31 @@ export class SunburstComponent implements OnInit{
                 return Math.max(0, y((<ArcItem>d).y + (<ArcItem>d).dy));
             });
 
+        var arcTween = d3.svg.arc<DisplayElement>()
+            .startAngle((d)=> {
+                var de=<DisplayElement>d;
+                return (1-de.t)*Math.max(0, Math.min(2 * Math.PI, x(this.x)))
+                + de.t * Math.max(0, Math.min(2 * Math.PI, x(de.x)));
+            })
+            .endAngle((d)=> {
+                var de=<DisplayElement>d;
+                return (1-de.t) * Math.max(0, Math.min(2 * Math.PI, x(this.x + this.dx)))
+                + de.t * Math.max(0, Math.min(2 * Math.PI, x(de.x + de.dx)));
+            })
+            .innerRadius((d)=> {
+                var de=<DisplayElement>d;
+                return Math.max(0, y(de.y));
+                //return (1-de.t) * Math.max(0, y(this.y))
+                //+ de.t * Math.max(0, y(de.y));
+            })
+            .outerRadius((d)=> {
+                var de=<DisplayElement>d;
+                return Math.max(0, y(de.y + de.dy));
+                //return (1-de.t) * Math.max(0, y(this.y + this.dy))
+                //+ de.t * Math.max(0, y(de.y + de.dy));
+            });
+
+        var newGroup=null;//reserved for the click callback
         var click=(d:GroupElement)=>{
             //remove all children
             d.children.splice(0,d.children.length);
@@ -187,55 +214,63 @@ export class SunburstComponent implements OnInit{
             this.y=d.y;
             this.dx=d.dx;
             this.dy=d.dy;
-            svg.transition()
+            group.transition()
                 .duration(350)
                 .selectAll("path")
                 .attrTween("opacity", (d)=> { return (t) =>{ return 1-t; }; })
                 .remove();
 
             setTimeout(()=>{
-                svg.datum(d)
-                    .selectAll("path")
-                    .data(partition.nodes)
-                    .enter()
-                    .append("path")
-                    .attr("d", arc)
-                    .style("stroke", "none")
-                    .on('click',click)
-                    .style("fill", d=> {
-                        //return color(d.name)
-                        return d.getDataItem().colorRGB();
-                    });
-            },370);
-            //svg.datum(d)
-            //    .selectAll("path")
-            //    .data(partition.nodes)
-            //    .enter()
-            //    .append("path")
-            //    .attr("d", arc)
-            //    .style("stroke", "none")
-            //    .on('click',click)
-            //    .style("fill", d=> {
-            //        //return color(d.name)
-            //        return d.getDataItem().colorRGB();
-            //    });
+                group.remove();
+                group=newGroup;
+            },360);
 
+            var newGroup=svg.append("g")
+                .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+            newGroup
+                .datum(d)
+                .selectAll("path")
+                .data(partition.nodes)
+                .enter()
+                .append("path")
+                .attr("d", arc)
+                .style("stroke", "none")
+                .on('click',click)
+                .style("fill", d=> {
+                    //return color(d.name)
+                    return d.getDataItem().colorRGB();
+                }).transition()
+                .duration(350)
+                .attrTween("d",(d:DisplayElement)=>{
+                    return (t)=>{
+                        d.t=t;
+                        return arcTween(d);
+                    }
+                })
         };
 
 
         //eliminated data items cause problems
-        svg.datum(this._rootGroupElement)
+        group.datum(this._rootGroupElement)
             .selectAll("path")
             .data(partition.nodes)
             .enter()
             .append("path")
-            .attr("d", arc)
+            .attr("d", arcTween)
             .style("stroke", "none")
             .on('click',click)
             .style("fill", d=> {
                 //return color(d.name)
                 return d.getDataItem().colorRGB();
-            });
+            }).transition()
+            .delay(600)             //TODO this is a bad idea
+            .duration(400)
+            .attrTween("d",(d:DisplayElement)=>{
+                return (t)=>{
+                    d.t=t;
+                    return arcTween(d);
+                }
+            })
     }
 
     makeSunburstOld() {
@@ -469,6 +504,7 @@ interface ArcItem{
     y:number;
     dx:number;
     dy:number;
+    t:number;
 }
 
 interface CircleShape{

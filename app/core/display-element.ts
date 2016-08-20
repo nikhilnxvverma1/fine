@@ -8,6 +8,7 @@ export abstract class DisplayElement{
     private _y:number;
     private _dx:number;
     private _dy:number;
+    private _t:number;//used for arc tweening
 
     get x():number {
         return this._x;
@@ -39,6 +40,14 @@ export abstract class DisplayElement{
 
     set dy(value:number) {
         this._dy = value;
+    }
+
+    get t():number {
+        return this._t;
+    }
+
+    set t(value:number) {
+        this._t = value;
     }
 
     public isGroup():boolean{
