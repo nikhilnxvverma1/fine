@@ -20,7 +20,7 @@ export class GroupElement extends DisplayElement{
     }
 
     public getChildren():DisplayElement[] {
-        return super.getChildren();
+        return this._children;
     }
 
     get omissionSize():number {

@@ -44,7 +44,7 @@ import {LeafElement} from "./core/leaf-element";
     ]
 
 })
-export class SunburstComponent implements OnChanges{
+export class SunburstComponent implements OnInit{
 
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
@@ -56,8 +56,14 @@ export class SunburstComponent implements OnChanges{
     private _totalElements=0;
     private _rootGroupElement:GroupElement;
     private _currentElement:GroupElement;
+    private x:number=0;
+    private y:number=0;
+    private dx:number=0;
+    private dy:number=0;
 
-    ngOnChanges():any {
+    ngOnInit():any {
+        this._rootGroupElement=new GroupElement();
+        this._rootGroupElement.folder=this.scanTarget.folderStack[0];
         this.makeSunburst();
         //this.makeCirclePack();
         //this.makeIcicle();
@@ -65,14 +71,11 @@ export class SunburstComponent implements OnChanges{
         return undefined;
     }
 
-    createDisplayElementTree():GroupElement{
-        var root=this.scanTarget.folderStack[0];
+    createDisplayElementTree(root:GroupElement):GroupElement{
         var depth=0;
-        this._rootGroupElement=new GroupElement();
-        this._rootGroupElement.folder=root;
         this._totalElements=0;
-        this.traverseBigItems(this._rootGroupElement,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
-        return this._rootGroupElement;
+        this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
+        return root;
     }
 
     traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number){
@@ -130,7 +133,7 @@ export class SunburstComponent implements OnChanges{
 
     makeSunburst(){
         //create an secondary DisplayElement tree
-        this.createDisplayElementTree();
+        this.createDisplayElementTree(this._rootGroupElement);
         console.log("Total Elements to render: "+this._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
@@ -174,20 +177,49 @@ export class SunburstComponent implements OnChanges{
             });
 
         var click=(d:GroupElement)=>{
+            //remove all children
+            d.children.splice(0,d.children.length);
+            //recreate the display tree starting at this root
+            this.createDisplayElementTree(d);
             this.scanTarget.jumpToFolder(d.getDataItem());
+            console.log("x:"+d.x+" y:"+d.y+" dx:"+d.dx+"dy:"+d.dy);
+            this.x=d.x;
+            this.y=d.y;
+            this.dx=d.dx;
+            this.dy=d.dy;
             svg.transition()
                 .duration(350)
-                .tween("scale", ()=> {
-                    var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-                        yd = d3.interpolate(y.domain(), [d.y, 1]),
-                        yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
-                    return (t)=> {
-                        x.domain(xd(t));
-                        y.domain(yd(t)).range(yr(t));
-                    };
-                })
                 .selectAll("path")
-                .attrTween("d", (d)=> { return () =>{ return arc(d); }; });
+                .attrTween("opacity", (d)=> { return (t) =>{ return 1-t; }; })
+                .remove();
+
+            setTimeout(()=>{
+                svg.datum(d)
+                    .selectAll("path")
+                    .data(partition.nodes)
+                    .enter()
+                    .append("path")
+                    .attr("d", arc)
+                    .style("stroke", "none")
+                    .on('click',click)
+                    .style("fill", d=> {
+                        //return color(d.name)
+                        return d.getDataItem().colorRGB();
+                    });
+            },370);
+            //svg.datum(d)
+            //    .selectAll("path")
+            //    .data(partition.nodes)
+            //    .enter()
+            //    .append("path")
+            //    .attr("d", arc)
+            //    .style("stroke", "none")
+            //    .on('click',click)
+            //    .style("fill", d=> {
+            //        //return color(d.name)
+            //        return d.getDataItem().colorRGB();
+            //    });
+
         };
 
 
