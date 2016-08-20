@@ -87,4 +87,35 @@ export class ScanTarget{
     public topFolder():Folder{
         return this.folderStack[this.folderStack.length-1];
     }
+
+    public jumpToFolder(folder:Folder){
+        //go back till you find top folder
+        var topFolder=this.topFolder();
+        var foldersInBetween=[];
+        var currentFolder=folder;
+
+        while(currentFolder!=null&&currentFolder!=topFolder){
+            foldersInBetween.push(currentFolder);
+            currentFolder=currentFolder.parent;
+        }
+        if(currentFolder!=null){
+            let length = foldersInBetween.length;
+            for(var i=0; i<length; i++){
+                //push in the reverse order
+                this.folderStack.push(foldersInBetween[length-1-i]);
+            }
+        }else{
+            //this means that the folders is before the current working directory
+            //truncate the entire folder stack first
+            this.folderStack.splice(0,this.folderStack.length);
+
+            //add in folders so far collected in the reverse order
+            let length = foldersInBetween.length;
+            for(var i=0; i<length; i++){
+                //push in the reverse order
+                this.folderStack.push(foldersInBetween[length-1-i]);
+            }
+
+        }
+    }
 }

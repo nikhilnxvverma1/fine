@@ -134,7 +134,7 @@ export class SunburstComponent implements OnChanges{
         console.log("Total Elements to render: "+this._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
-            height = 650,
+            height = 600,
             radius = Math.min(width, height) / 2;
 
         //var x = d3.scale.linear().domain([0, 2 * Math.PI]).range([0, 2 * Math.PI]);
@@ -173,7 +173,8 @@ export class SunburstComponent implements OnChanges{
                 return Math.max(0, y((<ArcItem>d).y + (<ArcItem>d).dy));
             });
 
-        var click=(d)=>{
+        var click=(d:GroupElement)=>{
+            this.scanTarget.jumpToFolder(d.getDataItem());
             svg.transition()
                 .duration(350)
                 .tween("scale", ()=> {

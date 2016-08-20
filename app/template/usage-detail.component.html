@@ -7,7 +7,7 @@
         {{scanTarget.folderStack[scanTarget.folderStack.length-1].name}}
         <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.folderStack[scanTarget.folderStack.length-1].size|unitSpace}}</span>
 </h5>
-<ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
+<div><ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
     <li class="usageDetailItem"
         *ngFor="let child of scanTarget.folderStack[scanTarget.folderStack.length-1].children"
         [class.selectedUsageDetail]="child.selected"
@@ -21,5 +21,5 @@
         <div class="usageDetailName">{{ child.name|slice:0:13}}</div>
         <span class="right">{{child.size|unitSpace}}</span>
     </li>
-</ul>
+</ul></div>
 </div>
