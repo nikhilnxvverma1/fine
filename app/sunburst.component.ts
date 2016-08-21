@@ -51,24 +51,20 @@ export class SunburstComponent implements OnInit{
     private static MANDATORY_DEPTH=4;
     private static MAX_DEPTH=7;
     private _totalElements=0;
-    private _rootGroupElement:GroupElement;
-    private _currentElement:GroupElement;
+    //private _rootGroupElement:GroupElement;
+    //private _currentElement:GroupElement;
     private x:number=0;
     private y:number=0;
     private dx:number=0;
     private dy:number=0;
 
     ngOnInit():any {
-        this._rootGroupElement=new GroupElement();
-        this._rootGroupElement.folder=this.scanTarget.folderStack[0];
         this.makeSunburst();
-        //this.makeCirclePack();
-        //this.makeIcicle();
-        console.log("Content did change in sunburst");
+        this.scanTarget.displayTreeCurrent=this.scanTarget.displayTreeRoot;
         return undefined;
     }
 
-    createDisplayElementTree(root:GroupElement):GroupElement{
+    populateDisplayElementTree(root:GroupElement):GroupElement{
         var depth=0;
         this._totalElements=0;
         this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
@@ -120,6 +116,7 @@ export class SunburstComponent implements OnInit{
                 childElement.file=<File>child;
             }
 
+            childElement.parent=groupElement;
             childrenToShow.push(childElement);
             this._totalElements++;
         }
@@ -132,12 +129,12 @@ export class SunburstComponent implements OnInit{
 
     makeSunburst(){
         //create an secondary DisplayElement tree
-        this.createDisplayElementTree(this._rootGroupElement);
+        this.populateDisplayElementTree(this.scanTarget.displayTreeRoot);
         console.log("Total Elements to render: "+this._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
             height = 600,
-            radius = Math.min(width, height) / 2;
+            radius = Math.min(width, height) / 2-20;//-20 otherwise it gets clipped
 
         //var x = d3.scale.linear().domain([0, 2 * Math.PI]).range([0, 2 * Math.PI]);
         var x = d3.scale.linear().range([0, 2 * Math.PI]);
@@ -181,7 +178,7 @@ export class SunburstComponent implements OnInit{
                 return Math.max(0, y(de.y + de.dy));
             });
 
-        var arcTween = d3.svg.arc<DisplayElement>()
+        var arcOpen = d3.svg.arc<DisplayElement>()
             .startAngle((d)=> {
                 var de=<DisplayElement>d;
                 return (1-de.t)*Math.max(0, Math.min(2 * Math.PI, x(this.x)))
@@ -205,64 +202,145 @@ export class SunburstComponent implements OnInit{
                 //+ de.t * Math.max(0, y(de.y + de.dy));
             });
 
+        var arcClose = d3.svg.arc<DisplayElement>()
+            .startAngle((d)=> {
+                var de=<DisplayElement>d;
+                return de.t*Math.max(0, Math.min(2 * Math.PI, x(this.x)))
+                    + (1-de.t) * Math.max(0, Math.min(2 * Math.PI, x(de.x)));
+            })
+            .endAngle((d)=> {
+                var de=<DisplayElement>d;
+                return de.t * Math.max(0, Math.min(2 * Math.PI, x(this.x + this.dx)))
+                    + (1-de.t) * Math.max(0, Math.min(2 * Math.PI, x(de.x + de.dx)));
+            })
+            .innerRadius((d)=> {
+                var de=<DisplayElement>d;
+                return Math.max(0, y(de.y));
+                //return (1-de.t) * Math.max(0, y(this.y))
+                //+ de.t * Math.max(0, y(de.y));
+            })
+            .outerRadius((d)=> {
+                var de=<DisplayElement>d;
+                return Math.max(0, y(de.y + de.dy));
+                //return (1-de.t) * Math.max(0, y(this.y + this.dy))
+                //+ de.t * Math.max(0, y(de.y + de.dy));
+            });
+
         var newGroup=null;//reserved for the click callback
         var click=(d:GroupElement)=>{
-            //remove all children if any
-            if (d.children!=null && d.children.length>0) {
-                d.children.splice(0, d.children.length);
-            }
-            //recreate the display tree starting at this root
-            this.createDisplayElementTree(d);
-            this.scanTarget.jumpToFolder(d.getDataItem());
-            console.log("x:"+d.x+" y:"+d.y+" dx:"+d.dx+"dy:"+d.dy);
-            this.x=d.x;
-            this.y=d.y;
-            this.dx=d.dx;
-            this.dy=d.dy;
-            group.transition()
-                .duration(350)
-                .selectAll("path")
-                .attrTween("opacity", (d)=> { return (t) =>{ return 1-t; }; })
-                .remove();
 
-            setTimeout(()=>{
-                group.remove();
-                group=newGroup;
-            },360);
-
-            var newGroup=svg.append("g")
-                .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-            newGroup
-                .datum(d)
-                .selectAll("path")
-                .data(partition.nodes)
-                .enter()
-                .append("path")
-                .attr("d", arc)
-                .style("stroke", "none")
-                .on('click',click)
-                .style("fill", d=> {
-                    //return color(d.name)
-                    return d.getDataItem().colorRGB();
-                }).transition()
-                .duration(350)
-                .attrTween("d",(d:DisplayElement)=>{
-                    return (t)=>{
-                        d.t=t;
-                        return arcTween(<Arc>d);
+            if(d==this.scanTarget.displayTreeCurrent){
+                if(d.parent!=null){
+                    //remove all children from parent
+                    if (d.parent.children!=null && d.parent.children.length>0) {
+                        d.parent.children.splice(0, d.parent.children.length);
                     }
-                })
+                    //populate the display tree back at the parent
+                    this.populateDisplayElementTree(d.parent);
+                    this.scanTarget.jumpToFolder(d.parent.getDataItem());
+                    this.scanTarget.displayTreeCurrent=d.parent;
+
+                    //fade out
+                    group.transition()
+                        .duration(350)
+                        .selectAll("path")
+                        //.attrTween("opacity", (d)=> { return (t) =>{ return 1-t; }; })
+                        .attrTween("d",(d:DisplayElement)=>{
+                            return (t)=>{
+                                d.t=t;
+                                return arcClose(<Arc>d);
+                            }
+                        })
+                        .remove();
+
+                    //remove entire group after
+                    setTimeout(()=>{
+                        group.remove();
+                        group=newGroup;
+                    },360);
+
+                    //show an arc closing animation
+                    var newGroup=svg.append("g")
+                        .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+                    newGroup
+                        .datum(d.parent)
+                        .selectAll("path")
+                        .data(partition.nodes)
+                        .enter()
+                        .append("path")
+                        .attr("d", arc)
+                        .style("stroke", "white")
+                        .style("stroke-width", "0.3px")
+                        .on('click',click)
+                        .style("fill", d=> {
+                            //return color(d.name)
+                            return d.getDataItem().colorRGB();
+                        }).transition()
+                        .duration(350)
+                        .attrTween("opacity", (d)=> { return (t) =>{ return t; }; })
+                }
+            }else{
+                //remove all children if any
+                if (d.children!=null && d.children.length>0) {
+                    d.children.splice(0, d.children.length);
+                }
+                //populate the display tree further starting at this node
+                this.populateDisplayElementTree(d);
+                this.scanTarget.jumpToFolder(d.getDataItem());
+                this.scanTarget.displayTreeCurrent=d;
+                console.log("x:"+d.x+" y:"+d.y+" dx:"+d.dx+"dy:"+d.dy);
+                this.x=d.x;
+                this.y=d.y;
+                this.dx=d.dx;
+                this.dy=d.dy;
+                group.transition()
+                    .duration(350)
+                    .selectAll("path")
+                    .attrTween("opacity", (d)=> { return (t) =>{ return 1-t; }; })
+                    .remove();
+
+                setTimeout(()=>{
+                    group.remove();
+                    group=newGroup;
+                },360);
+
+                var newGroup=svg.append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+                newGroup
+                    .datum(d)
+                    .selectAll("path")
+                    .data(partition.nodes)
+                    .enter()
+                    .append("path")
+                    .attr("d", arc)
+                    .style("stroke", "white")
+                    .style("stroke-width", "0.3px")
+                    .on('click',click)
+                    .style("fill", d=> {
+                        //return color(d.name)
+                        return d.getDataItem().colorRGB();
+                    }).transition()
+                    .duration(350)
+                    .attrTween("d",(d:DisplayElement)=>{
+                        return (t)=>{
+                            d.t=t;
+                            return arcOpen(<Arc>d);
+                        }
+                    })
+            }
+
         };
 
 
         //eliminated data items cause problems
-        group.datum(this._rootGroupElement)
+        group.datum(this.scanTarget.displayTreeRoot)
             .selectAll("path")
             .data(partition.nodes)
             .enter()
             .append("path")
-            .attr("d", arcTween)
-            .style("stroke", "none")
+            .attr("d", arcOpen)
+            .style("stroke","white" )
+            .style("stroke-width", "0.3px")
             .on('click',click)
             .style("fill", d=> {
                 //return color(d.name)
@@ -273,8 +351,9 @@ export class SunburstComponent implements OnInit{
             .attrTween("d",(d:DisplayElement)=>{
                 return (t)=>{
                     d.t=t;
-                    return arcTween(<Arc>d);
+                    return arcOpen(<Arc>d);
                 }
             })
+        //(d:DisplayElement)=>{return d.isGroup?"none":"white";}
     }
 }

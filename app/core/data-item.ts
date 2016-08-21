@@ -108,7 +108,12 @@ export abstract class DataItem{
     }
 
     public colorRGB():string{
-        return "rgb("+this.red+","+this.green+","+this.blue+")";
+        if(this.isDirectory()){
+            return "rgb("+this.red+","+this.green+","+this.blue+")";
+        }else{
+            //return a gray color for all files
+            return "rgb(121, 121, 121)";
+        }
     }
 
 

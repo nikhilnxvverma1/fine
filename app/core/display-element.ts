@@ -1,4 +1,5 @@
 import {DataItem} from "./data-item";
+import {GroupElement} from "./group-element";
 /**
  * Created by NikhilVerma on 16/08/16.
  */
@@ -9,6 +10,7 @@ export abstract class DisplayElement{
     private _dx:number;
     private _dy:number;
     private _t:number=0;//used for arc tweening
+    private _parent:GroupElement;
 
     get x():number {
         return this._x;
@@ -48,6 +50,14 @@ export abstract class DisplayElement{
 
     set t(value:number) {
         this._t = value;
+    }
+
+    get parent():GroupElement {
+        return this._parent;
+    }
+
+    set parent(value:GroupElement) {
+        this._parent = value;
     }
 
     public isGroup():boolean{

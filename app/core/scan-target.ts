@@ -7,6 +7,7 @@ import {Folder} from "./folder";
 import {SortOption} from "./sort-option";
 import {Tracker} from "./tracker";
 import {ScanStatus} from "./scan-status";
+import {GroupElement} from "./group-element";
 
 export class ScanTarget{
     private _name:string;
@@ -16,7 +17,9 @@ export class ScanTarget{
     private _used:number;
     private _folderStack:Folder[]=[];
     private _sortOption:SortOption;
-    private _tracker:Tracker=new Tracker();
+    private _tracker:Tracker=new Tracker(this);
+    private _displayTreeRoot:GroupElement;
+    private _displayTreeCurrent:GroupElement;
 
     constructor(name:string, type:ScanTargetType, total:number, used:number) {
         this._name = name;
@@ -82,6 +85,22 @@ export class ScanTarget{
 
     set tracker(value:Tracker) {
         this._tracker = value;
+    }
+
+    get displayTreeRoot():GroupElement {
+        return this._displayTreeRoot;
+    }
+
+    set displayTreeRoot(value:GroupElement) {
+        this._displayTreeRoot = value;
+    }
+
+    get displayTreeCurrent():GroupElement {
+        return this._displayTreeCurrent;
+    }
+
+    set displayTreeCurrent(value:GroupElement) {
+        this._displayTreeCurrent = value;
     }
 
     public topFolder():Folder{

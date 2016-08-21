@@ -3,15 +3,19 @@
  */
 
 import {ScanStatus} from "./scan-status";
+import {ScanTarget} from "./scan-target";
+import {GroupElement} from "./group-element";
 
 export class Tracker{
     private _sizeScannedSoFar:number;
     private _scanStatus:ScanStatus;
     private _totalChildrenOfRoot:number;
+    private _scanTarget:ScanTarget;
 
-    constructor() {
+    constructor(scanTarget:ScanTarget) {
         this.sizeScannedSoFar=0;
         this.scanStatus=ScanStatus.Unscanned;
+        this._scanTarget=scanTarget;
     }
 
     get sizeScannedSoFar():number {
@@ -48,5 +52,7 @@ export class Tracker{
 
     public scanDidEnd(){
         this.scanStatus=ScanStatus.Scanned;
+        this._scanTarget.displayTreeRoot=new GroupElement();
+        this._scanTarget.displayTreeRoot.folder=this._scanTarget.folderStack[0];
     }
 }
