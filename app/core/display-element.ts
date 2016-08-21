@@ -8,7 +8,7 @@ export abstract class DisplayElement{
     private _y:number;
     private _dx:number;
     private _dy:number;
-    private _t:number;//used for arc tweening
+    private _t:number=0;//used for arc tweening
 
     get x():number {
         return this._x;

@@ -17,16 +17,11 @@ import {PrefixAndRemoveSpace} from "./pipe/prefix-remove-space.pipe";
     templateUrl:'app/template/deletion.component.html',
     pipes: [SelectedDataItem,PrefixAndRemoveSpace]
 })
-export class DeletionComponent implements OnChanges{
+export class DeletionComponent{
 
     @Input('dataItems') public dataItems:DataItem[];
     @Output('trash') trash:EventEmitter<any>=new EventEmitter();
     @Output('hardDelete') hardDelete:EventEmitter<any>=new EventEmitter();
-
-    ngOnChanges(changes:{}):any {
-        console.log("Changes made to the rootmodel(inside deletion) len="+this.dataItems.length);
-        return undefined;
-    }
 
     constructor(private _zone:NgZone) {}
 

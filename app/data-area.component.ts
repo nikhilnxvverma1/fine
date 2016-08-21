@@ -56,7 +56,7 @@ import {SortOption} from "./core/sort-option";
     ]
 
 })
-export class DataAreaComponent implements OnInit,OnChanges{
+export class DataAreaComponent{
 
     private _isSortByMenuOpen=false;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
@@ -79,14 +79,6 @@ export class DataAreaComponent implements OnInit,OnChanges{
 
     set isSortByMenuOpen(value:boolean) {
         this._isSortByMenuOpen = value;
-    }
-
-    ngOnChanges(changes:{}):any {
-        console.log("Changes made to the rootmodel len="+this.dataItems.length);
-        return undefined;
-    }
-    ngOnInit():any {
-        return undefined;
     }
 
     openDataItem(dataItem){
