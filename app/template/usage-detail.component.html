@@ -1,25 +1,36 @@
 <div *ngIf="scanTarget!=null">
     <div class="usageLegendForHeader"
          @legendToggle="toggleStatus.getState()"
-         [style.background]="scanTarget.topFolder().colorRGB()"
+         [style.background]="scanTarget.displayTreeCurrent.getDataItem().colorRGB()"
     ></div>
 <h5 class="relativePosition inline" @usageHeaderToggle="toggleStatus.getState()">
-        {{scanTarget.folderStack[scanTarget.folderStack.length-1].name}}
-        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.folderStack[scanTarget.folderStack.length-1].size|unitSpace}}</span>
+        {{scanTarget.displayTreeCurrent.getDataItem().name}}
+        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeCurrent.getDataItem().size|unitSpace}}</span>
 </h5>
 <div><ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
     <li class="usageDetailItem"
-        *ngFor="let child of scanTarget.folderStack[scanTarget.folderStack.length-1].children"
-        [class.selectedUsageDetail]="child.selected"
-        (click)="selectChild(child,$event)"
-        (dblclick)="openUsage(child)"
+        *ngFor="let child of scanTarget.displayTreeCurrent.children"
+        [class.selectedUsageDetail]="child.getDataItem().selected"
+        (click)="selectChild(child.getDataItem(),$event)"
+        (dblclick)="openUsage(child.getDataItem())"
     >
         <div class="usageLegendForDetail"
              @legendToggle="toggleStatus.getState()"
-             [style.background]="child.colorRGB()"
+             [style.background]="child.getDataItem().colorRGB()"
         ></div>
-        <div class="usageDetailName">{{ child.name|slice:0:13}}</div>
-        <span class="right">{{child.size|unitSpace}}</span>
+        <div class="usageDetailName">{{ child.getDataItem().name|slice:0:13}}</div>
+        <span class="right">{{child.getDataItem().size|unitSpace}}</span>
+    </li>
+    <!--More items-->
+    <li *ngIf="scanTarget.displayTreeCurrent.omissionCount>0"
+        (click)="showMoreItems()"
+        class="usageDetailItem usageDetailMoreItems">
+        <div class="usageLegendForDetail"
+             @legendToggle="toggleStatus.getState()"
+             style="background:rgb(228, 228, 228)"
+        ></div>
+        <div class="usageDetailName">{{ scanTarget.displayTreeCurrent.omissionCount + " More items"|slice:0:13}}</div>
+        <span class="right">{{scanTarget.displayTreeCurrent.omissionSize|unitSpace}}</span>
     </li>
 </ul></div>
 </div>

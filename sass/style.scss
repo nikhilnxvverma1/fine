@@ -490,6 +490,16 @@ body{
   background: #e1e1e1;
 }
 
+.usageDetailMoreItems{
+  background: #828282;
+  color: white;
+  cursor: pointer;
+}
+
+.usageDetailMoreItems:hover{
+  background: rgb(221, 92, 129);
+}
+
 .selectedUsageDetail{
   background:$selection-label-color;
   color:white;

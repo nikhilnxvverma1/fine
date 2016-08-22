@@ -89,4 +89,8 @@ export class UsageDetailComponent {
             }
         }
     }
+
+    showMoreItems(){
+        console.log("Will show more items for "+this.scanTarget.displayTreeCurrent.getDataItem().name);
+    }
 }

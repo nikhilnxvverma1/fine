@@ -8913,6 +8913,14 @@ body {
 .usageDetailItem:hover {
   background: #e1e1e1; }
 
+.usageDetailMoreItems {
+  background: #828282;
+  color: white;
+  cursor: pointer; }
+
+.usageDetailMoreItems:hover {
+  background: #dd5c81; }
+
 .selectedUsageDetail {
   background: #1B5D99;
   color: white; }
