@@ -19,12 +19,13 @@
 
 
     </div>
-    <!--(click)="createSunburst()"-->
+    <!-- Height 100% needed for setting percentage based heights of children-->
     <div class="col s3" id="rightSideViewContainer" >
         <usageDetail id="usageDetailComponent"
                      @sunburstToggle="toggleStatus.getState()"
                      [toggleStatus]="toggleStatus"
-                     [scanTarget]="_scanTarget"></usageDetail>
+                     [scanTarget]="_scanTarget"
+                     style="height: 100%;"></usageDetail>
         <operation @dataAreaToggle="toggleStatus.getState()"
                    [dummyFolder]="context.dummyFolder"
                    [toggleStatus]="toggleStatus"

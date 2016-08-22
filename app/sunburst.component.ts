@@ -101,11 +101,11 @@ export class SunburstComponent implements OnInit{
         if(upperFew<1){
             return null;
         }
-        folder.sort(SortOption.Size);//sorts in ascending order
+        var sortedCopy=folder.sort(SortOption.Size,true);//sorts in ascending order
         var childrenToShow:DisplayElement[]=[];
         var sizeOfDisplayedElements=0;
-        for(var i=0;i<upperFew&&i<folder.children.length;i++){
-            var child=folder.children[folder.children.length-1-i];
+        for(var i=0;i<upperFew&&i<sortedCopy.length;i++){
+            var child=sortedCopy[sortedCopy.length-1-i];
             sizeOfDisplayedElements+=child.size;
             var childElement;
             if(child.isDirectory()){
@@ -121,7 +121,7 @@ export class SunburstComponent implements OnInit{
             this._totalElements++;
         }
 
-        groupElement.omissionCount=folder.children.length-childrenToShow.length;
+        groupElement.omissionCount=sortedCopy.length-childrenToShow.length;
         groupElement.omissionSize=folder.size-sizeOfDisplayedElements;
         groupElement.children=childrenToShow;
         return childrenToShow;

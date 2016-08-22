@@ -20,6 +20,7 @@ export class ScanTarget{
     private _tracker:Tracker=new Tracker(this);
     private _displayTreeRoot:GroupElement;
     private _displayTreeCurrent:GroupElement;
+    private _showAllItems:boolean=false;
 
     constructor(name:string, type:ScanTargetType, total:number, used:number) {
         this._name = name;
@@ -76,7 +77,7 @@ export class ScanTarget{
 
     set sortOption(value:SortOption) {
         this._sortOption = value;
-        this.topFolder().sort(this.sortOption);
+        this.topFolder().sort(this.sortOption,false);
     }
 
     get tracker():Tracker {
@@ -101,6 +102,15 @@ export class ScanTarget{
 
     set displayTreeCurrent(value:GroupElement) {
         this._displayTreeCurrent = value;
+        this._showAllItems=false;
+    }
+
+    get showAllItems():boolean {
+        return this._showAllItems;
+    }
+
+    set showAllItems(value:boolean) {
+        this._showAllItems = value;
     }
 
     public topFolder():Folder{

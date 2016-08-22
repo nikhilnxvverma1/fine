@@ -13,6 +13,7 @@ import {UnitSpace} from "./pipe/unit-space.pipe";
 import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate} from "@angular/core";
 import {Folder} from "./core/folder";
+import {SortOption} from "./core/sort-option";
 
 @Component({
     selector: 'usageDetail',
@@ -69,7 +70,7 @@ export class UsageDetailComponent {
 
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
-
+    private _moreItems:DataItem[]=[];
 
     openUsage(child:DataItem){
         console.log("Open usage for "+child.name)
@@ -91,6 +92,25 @@ export class UsageDetailComponent {
     }
 
     showMoreItems(){
-        console.log("Will show more items for "+this.scanTarget.displayTreeCurrent.getDataItem().name);
+
+        //sort a copy of the children of folder based on size in ascending order
+        var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true);
+
+        //clear the entire array first
+        this._moreItems.splice(0,this._moreItems.length);
+
+        //pick the last few elements that were omitted out
+        var i=this.scanTarget.displayTreeCurrent.omissionCount-1;
+        while(i>=0){
+            this._moreItems.push(sortedCopy[i]);
+            i--;
+        }
+        console.log("omission count "+this.scanTarget.displayTreeCurrent.omissionCount+" size "+this._moreItems.length);
+
+        for (i=0;i<this._moreItems.length;i++){
+            console.log("name " +this._moreItems[i].name);
+        }
+
+        this.scanTarget.showAllItems=true;
     }
 }

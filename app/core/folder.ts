@@ -118,8 +118,26 @@ export class Folder extends DataItem{
         }
     }
 
-    sort(sortOption:SortOption){
-        this.quickSort(this.children,0,this.children.length-1,sortOption);
+    /**
+     * Sorts the children based on the sort option
+     * @param sortOption size, modification date, name etc
+     * @param sortCopy if true, sorts a copy of the children array,
+     * leaving the order of the original array same
+     * @return returns the sorted array
+     */
+    sort(sortOption:SortOption,sortCopy:boolean):DataItem[]{
+        if(sortCopy){
+            //create a copy of the original children array
+            var childrenCopy=[];
+            for(var i=0;i<this.children.length;i++){
+                childrenCopy.push(this.children[i]);
+            }
+            this.quickSort(childrenCopy,0,this.children.length-1,sortOption);
+            return childrenCopy;
+        }else{
+            this.quickSort(this.children,0,this.children.length-1,sortOption);
+            return this.children;
+        }
     }
 
     private swap(items:DataItem[], firstIndex:number, secondIndex:number){

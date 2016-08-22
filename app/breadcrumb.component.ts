@@ -65,13 +65,13 @@ export class BreadcrumbComponent{
     openDataItem(dataItem:DataItem){
 
         if(dataItem.isDirectory()){
-            (<Folder>dataItem).sort(this._scanTarget.sortOption);
+            (<Folder>dataItem).sort(this._scanTarget.sortOption,false);
             this._scanTarget.folderStack.push(<Folder>dataItem);
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path
             let filePath=dataItem.getFullyQualifiedPath();
-            var spawn = require('child_process').spawn
+            var spawn = require('child_process').spawn;
             spawn('open', [filePath]);
         }
     }

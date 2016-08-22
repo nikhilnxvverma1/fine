@@ -1,4 +1,5 @@
-<div *ngIf="scanTarget!=null">
+<!-- Height 100% needed for setting percentage based heights of children-->
+<div *ngIf="scanTarget!=null" style="height: 100%;">
     <div class="usageLegendForHeader"
          @legendToggle="toggleStatus.getState()"
          [style.background]="scanTarget.displayTreeCurrent.getDataItem().colorRGB()"
@@ -7,30 +8,51 @@
         {{scanTarget.displayTreeCurrent.getDataItem().name}}
         <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeCurrent.getDataItem().size|unitSpace}}</span>
 </h5>
-<div><ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
-    <li class="usageDetailItem"
-        *ngFor="let child of scanTarget.displayTreeCurrent.children"
-        [class.selectedUsageDetail]="child.getDataItem().selected"
-        (click)="selectChild(child.getDataItem(),$event)"
-        (dblclick)="openUsage(child.getDataItem())"
-    >
-        <div class="usageLegendForDetail"
-             @legendToggle="toggleStatus.getState()"
-             [style.background]="child.getDataItem().colorRGB()"
-        ></div>
-        <div class="usageDetailName">{{ child.getDataItem().name|slice:0:13}}</div>
-        <span class="right">{{child.getDataItem().size|unitSpace}}</span>
-    </li>
-    <!--More items-->
-    <li *ngIf="scanTarget.displayTreeCurrent.omissionCount>0"
-        (click)="showMoreItems()"
-        class="usageDetailItem usageDetailMoreItems">
-        <div class="usageLegendForDetail"
-             @legendToggle="toggleStatus.getState()"
-             style="background:rgb(228, 228, 228)"
-        ></div>
-        <div class="usageDetailName">{{ scanTarget.displayTreeCurrent.omissionCount + " More items"|slice:0:13}}</div>
-        <span class="right">{{scanTarget.displayTreeCurrent.omissionSize|unitSpace}}</span>
-    </li>
-</ul></div>
+    <div id="usageListContainer">
+        <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
+            <li class="usageDetailItem"
+                *ngFor="let child of scanTarget.displayTreeCurrent.children"
+                [class.selectedUsageDetail]="child.getDataItem().selected"
+                (click)="selectChild(child.getDataItem(),$event)"
+                (dblclick)="openUsage(child.getDataItem())"
+            >
+                <div class="usageLegendForDetail"
+                     @legendToggle="toggleStatus.getState()"
+                     [style.background]="child.getDataItem().colorRGB()"
+                ></div>
+                <div class="usageDetailName">{{ child.getDataItem().name|slice:0:13}}</div>
+                <span class="right">{{child.getDataItem().size|unitSpace}}</span>
+            </li>
+            <!--More items-->
+            <li *ngIf="!scanTarget.showAllItems && scanTarget.displayTreeCurrent.omissionCount>0"
+                (click)="showMoreItems()"
+                class="usageDetailItem usageDetailMoreItems">
+                <div class="usageLegendForDetail"
+                     @legendToggle="toggleStatus.getState()"
+                     style="background:rgb(228, 228, 228)"
+                ></div>
+                <div class="usageDetailName">{{ scanTarget.displayTreeCurrent.omissionCount + " More
+                    items"|slice:0:13}}
+                </div>
+                <span class="right">{{scanTarget.displayTreeCurrent.omissionSize|unitSpace}}</span>
+            </li>
+            <!-- showMoreItems is not a new component, but just a wrapper for the if condition -->
+            <showMoreItems *ngIf="scanTarget.showAllItems">
+                <li class="usageDetailItem"
+                    *ngFor="let child of _moreItems"
+                    [class.selectedUsageDetail]="child.selected"
+                    (click)="selectChild(child,$event)"
+                    (dblclick)="openUsage(child)"
+                >
+                    <div class="usageLegendForDetail"
+                         @legendToggle="toggleStatus.getState()"
+                         [style.background]="child.colorRGB()"
+                    ></div>
+                    <div class="usageDetailName">{{ child.name|slice:0:13}}</div>
+                    <span class="right">{{child.size|unitSpace}}</span>
+                </li>
+            </showMoreItems>
+
+        </ul>
+    </div>
 </div>

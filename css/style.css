@@ -8942,6 +8942,10 @@ body {
   -ms-user-select: none;
   user-select: none; }
 
+#usageListContainer {
+  height: 80%;
+  overflow-y: scroll; }
+
 .relativePosition {
   position: relative; }
 
