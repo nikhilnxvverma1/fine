@@ -54,5 +54,6 @@ export class Tracker{
         this.scanStatus=ScanStatus.Scanned;
         this._scanTarget.displayTreeRoot=new GroupElement();
         this._scanTarget.displayTreeRoot.folder=this._scanTarget.folderStack[0];
+        this._scanTarget.sortDescendingBasedOnSize();
     }
 }

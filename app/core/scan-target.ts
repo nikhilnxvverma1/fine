@@ -17,6 +17,7 @@ export class ScanTarget{
     private _used:number;
     private _folderStack:Folder[]=[];
     private _sortOption:SortOption=SortOption.Size;
+    private _sortedInDescending:boolean=false;
     private _tracker:Tracker=new Tracker(this);
     private _displayTreeRoot:GroupElement;
     private _displayTreeCurrent:GroupElement;
@@ -76,8 +77,15 @@ export class ScanTarget{
     }
 
     set sortOption(value:SortOption) {
+        //toggle if the same option is chosen again
+        //(Warning: UI design logic inserted in core class)
+        if(value==this._sortOption){
+            this._sortedInDescending=!this._sortedInDescending;
+        }else{
+            this._sortedInDescending=false;
+        }
         this._sortOption = value;
-        this.topFolder().sort(this.sortOption,false,false);
+        this.topFolder().sort(this.sortOption,this._sortedInDescending,false);
     }
 
     get tracker():Tracker {
@@ -111,6 +119,12 @@ export class ScanTarget{
 
     set showAllItems(value:boolean) {
         this._showAllItems = value;
+    }
+
+    /** Sorts the topmost folder based on size in the descending order*/
+    public sortDescendingBasedOnSize(){
+        this._sortedInDescending=true;
+        this.topFolder().sort(this.sortOption,this._sortedInDescending,false);
     }
 
     public topFolder():Folder{
