@@ -101,7 +101,7 @@ export class SunburstComponent implements OnInit{
         if(upperFew<1){
             return null;
         }
-        var sortedCopy=folder.sort(SortOption.Size,true);//sorts in ascending order
+        var sortedCopy=folder.sort(SortOption.Size,false,true);//sorts in ascending order
         var childrenToShow:DisplayElement[]=[];
         var sizeOfDisplayedElements=0;
         for(var i=0;i<upperFew&&i<sortedCopy.length;i++){
@@ -156,8 +156,12 @@ export class SunburstComponent implements OnInit{
         d3.select("sunburstImg").remove();
 
         var partition = d3.layout.partition()
+            .sort((a:DisplayElement,b:DisplayElement)=>{
+                return b.getDataItem().size-a.getDataItem().size;
+            })
             .value(function (d:DisplayElement) {
-                return d.getDataItem().size;
+                //return d.getDataItem().size;
+                return 1;//apparently this is giving more accurate results
             });
 
         var arc = d3.svg.arc<DisplayElement>()
@@ -228,7 +232,7 @@ export class SunburstComponent implements OnInit{
 
         var newGroup=null;//reserved for the click callback
         var click=(d:GroupElement)=>{
-
+            console.log(" what clicked "+d.getDataItem().name);
             if(d==this.scanTarget.displayTreeCurrent){
                 if(d.parent!=null){
                     //remove all children from parent

@@ -121,21 +121,22 @@ export class Folder extends DataItem{
     /**
      * Sorts the children based on the sort option
      * @param sortOption size, modification date, name etc
+     * @param descending if true sorts the array in descending order
      * @param sortCopy if true, sorts a copy of the children array,
      * leaving the order of the original array same
      * @return returns the sorted array
      */
-    sort(sortOption:SortOption,sortCopy:boolean):DataItem[]{
+    sort(sortOption:SortOption,descending:boolean,sortCopy:boolean):DataItem[]{
         if(sortCopy){
             //create a copy of the original children array
             var childrenCopy=[];
             for(var i=0;i<this.children.length;i++){
                 childrenCopy.push(this.children[i]);
             }
-            this.quickSort(childrenCopy,0,this.children.length-1,sortOption);
+            this.quickSort(childrenCopy,0,this.children.length-1,sortOption,descending);
             return childrenCopy;
         }else{
-            this.quickSort(this.children,0,this.children.length-1,sortOption);
+            this.quickSort(this.children,0,this.children.length-1,sortOption,descending);
             return this.children;
         }
     }
@@ -146,7 +147,7 @@ export class Folder extends DataItem{
         items[secondIndex] = temp;
     }
 
-    private partition(items:DataItem[], left:number, right:number,sortOption:SortOption) {
+    private partition(items:DataItem[], left:number, right:number,sortOption:SortOption,descending:boolean) {
 
         var pivot   = items[Math.floor((right + left) / 2)],
             i       = left,
@@ -154,11 +155,20 @@ export class Folder extends DataItem{
 
         while (i <= j) {
 
-            while (items[i].lessThan(pivot,sortOption)) {
-                i++;
-            }
-            while (items[j].greaterThan(pivot,sortOption)) {
-                j--;
+            if (descending) {
+                while (items[i].greaterThan(pivot, sortOption)) {
+                    i++;
+                }
+                while (items[j].lessThan(pivot, sortOption)) {
+                    j--;
+                }
+            } else {
+                while (items[i].lessThan(pivot, sortOption)) {
+                    i++;
+                }
+                while (items[j].greaterThan(pivot, sortOption)) {
+                    j--;
+                }
             }
             if (i <= j) {
                 this.swap(items, i, j);
@@ -168,19 +178,19 @@ export class Folder extends DataItem{
         }
         return i;
     }
-    private quickSort(items:DataItem[], left:number, right:number,sortOption:SortOption) {
+    private quickSort(items:DataItem[], left:number, right:number,sortOption:SortOption,descending:boolean) {
 
         var index;
 
         if (items.length > 1) {
 
-            index = this.partition(items, left, right,sortOption);
+            index = this.partition(items, left, right,sortOption,descending);
             if (left < index - 1) {
-                this.quickSort(items, left, index - 1,sortOption);
+                this.quickSort(items, left, index - 1,sortOption,descending);
             }
 
             if (index < right) {
-                this.quickSort(items, index, right,sortOption);
+                this.quickSort(items, index, right,sortOption,descending);
             }
         }
         return items;

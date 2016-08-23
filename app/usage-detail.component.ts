@@ -78,12 +78,10 @@ export class UsageDetailComponent {
 
     selectChild(dataItem:DataItem,event:MouseEvent){
 
-        var sortedCopy=this.scanTarget.topFolder().sort(SortOption.Size,true);
-
-
         if(event.shiftKey){
+            var sortedCopy=this.scanTarget.topFolder().sort(SortOption.Size,true,true);
             dataItem.selected=true;
-            this.selectPrecedingDataItems(sortedCopy,dataItem);
+            UsageDetailComponent.selectPrecedingDataItems(sortedCopy,dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
@@ -94,7 +92,7 @@ export class UsageDetailComponent {
         }
     }
 
-    private selectPrecedingDataItems(array:DataItem[],dataItem:DataItem){
+    private static selectPrecedingDataItems(array:DataItem[],dataItem:DataItem){
         var endIndex=array.indexOf(dataItem);
         var i=endIndex-1;
         while(i>=0){
@@ -110,7 +108,7 @@ export class UsageDetailComponent {
     showMoreItems(){
 
         //sort a copy of the children of folder based on size in ascending order
-        var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true);
+        var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,false,true);
 
         //clear the entire array first
         this._moreItems.splice(0,this._moreItems.length);

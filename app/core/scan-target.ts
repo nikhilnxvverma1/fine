@@ -77,7 +77,7 @@ export class ScanTarget{
 
     set sortOption(value:SortOption) {
         this._sortOption = value;
-        this.topFolder().sort(this.sortOption,false);
+        this.topFolder().sort(this.sortOption,false,false);
     }
 
     get tracker():Tracker {
