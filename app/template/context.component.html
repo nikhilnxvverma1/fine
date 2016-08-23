@@ -12,6 +12,7 @@
             <data-area @dataAreaToggle="toggleStatus.getState()"
                        *ngIf="_scanTarget"
                        [toggleStatus]="toggleStatus"
+                       [sortOption]="_scanTarget.sortOption"
                        [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
                        [dummyFolder]="context.dummyFolder"
                        (opendataitem)="openDataItem($event)"

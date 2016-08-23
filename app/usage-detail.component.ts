@@ -78,9 +78,12 @@ export class UsageDetailComponent {
 
     selectChild(dataItem:DataItem,event:MouseEvent){
 
+        var sortedCopy=this.scanTarget.topFolder().sort(SortOption.Size,true);
+
+
         if(event.shiftKey){
             dataItem.selected=true;
-            this.scanTarget.topFolder().selectPrecedingDataItems(dataItem);
+            this.selectPrecedingDataItems(sortedCopy,dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
@@ -88,6 +91,19 @@ export class UsageDetailComponent {
                 this.scanTarget.topFolder().setSelectionForAll(false);
                 dataItem.selected=true;
             }
+        }
+    }
+
+    private selectPrecedingDataItems(array:DataItem[],dataItem:DataItem){
+        var endIndex=array.indexOf(dataItem);
+        var i=endIndex-1;
+        while(i>=0){
+            if(!array[i].selected){
+                array[i].selected=true;
+            }else{
+                break;
+            }
+            i--;
         }
     }
 

@@ -16,7 +16,7 @@ export class ScanTarget{
     private _available:number;
     private _used:number;
     private _folderStack:Folder[]=[];
-    private _sortOption:SortOption;
+    private _sortOption:SortOption=SortOption.Size;
     private _tracker:Tracker=new Tracker(this);
     private _displayTreeRoot:GroupElement;
     private _displayTreeCurrent:GroupElement;

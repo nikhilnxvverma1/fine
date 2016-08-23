@@ -512,7 +512,7 @@ body{
 
 .usageDetailItem .usageDetailName{
   width:50%;
-  display: inline;
+  display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -61,6 +61,7 @@ export class DataAreaComponent{
     private _isSortByMenuOpen=false;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
     @Input('dataItems') public dataItems:DataItem[];
+    @Input('sortOption') public sortOption:SortOption;
     @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
     @Output('deselectall') deselectEvent=new EventEmitter<DataAreaComponent>();
     @Output('sortby') sortByEvent=new EventEmitter<SortOption>();
