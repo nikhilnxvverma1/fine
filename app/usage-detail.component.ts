@@ -14,7 +14,7 @@ import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate} from "@angular/core";
 import {Folder} from "./core/folder";
 import {SortOption} from "./core/sort-option";
-
+declare var $:any;
 @Component({
     selector: 'usageDetail',
     templateUrl:'app/template/usage-detail.component.html',
@@ -126,5 +126,70 @@ export class UsageDetailComponent {
         }
 
         this.scanTarget.showAllItems=true;
+    }
+
+    mouseEnterDataName(event:MouseEvent){
+        //this event is defined on the parent
+        var divContainer=(<HTMLElement>event.target);
+
+        //but we will refer to the span child as element and
+        //the div container as parent here
+        var element=$(divContainer).find("span")[0];
+        var parent=divContainer;
+
+        //start a rolling animation if the element width
+        //is greater than the parent's width
+        let elementWidth:number=$(element).width();
+        let parentWidth:number = $(parent).width();
+        if(elementWidth>parentWidth){
+
+            //prevent the text overflow from showing dots ...
+            $(parent).css("text-overflow","clip");
+
+            //repeat a rolling animation
+            var rollLoop=(elementWidth:number,parentWidth:number,duration:number,firstIterationComplete:boolean)=>{
+                $(element).animate({
+                    "margin-left":"-"+elementWidth+"px"
+                    },
+                    duration,
+                    "linear",
+                    ()=>{
+                        $(element).css("margin-left",10+parentWidth+"px");//added extra so that the dots don't show up
+
+                        //second iteration onwards duration will be doubled
+                        //because its travelling twice the length
+                        var newDuration=firstIterationComplete?duration:duration*2;
+                        rollLoop(elementWidth,parentWidth,newDuration,true);
+                    });
+            };
+            rollLoop(elementWidth,parentWidth,3000,false);
+        }
+        event.stopPropagation();
+    }
+
+    mouseExitDataName(event:MouseEvent){
+
+        //this event is defined on the parent
+        var divContainer=(<HTMLElement>event.target);
+
+        //but we will refer to the span child as element and
+        //the div container as parent here
+        var element=$(divContainer).find("span")[0];
+        var parent=divContainer;
+
+        //stop rolling animations which will only be the case if
+        //the element width is greater than the parent
+        let elementWidth:number=$(element).width();
+        let parentWidth:number = $(parent).width();
+        if(elementWidth>parentWidth){
+
+            //revert back to dots for text overflow
+            $(parent).css("text-overflow","ellipsis");
+
+            //stop the animation and reset margin
+            $(element).css("margin-left","0px");
+            $(element).stop();
+        }
+        event.stopPropagation();
     }
 }

@@ -20,7 +20,11 @@
                      @legendToggle="toggleStatus.getState()"
                      [style.background]="child.getDataItem().colorRGB()"
                 ></div>
-                <div class="usageDetailName">{{ child.getDataItem().name}}</div>
+                <div class="usageDetailName"
+                     (mouseenter)="mouseEnterDataName($event)"
+                     (mouseleave)="mouseExitDataName($event)">
+                    <span>{{ child.getDataItem().name}}</span>
+                </div>
                 <span class="right">{{child.getDataItem().size|unitSpace}}</span>
             </li>
             <!--More items-->
@@ -31,8 +35,10 @@
                      @legendToggle="toggleStatus.getState()"
                      style="background:rgb(228, 228, 228)"
                 ></div>
-                <div class="usageDetailName">{{ scanTarget.displayTreeCurrent.omissionCount + " More
-                    items"}}
+                <div class="usageDetailName"
+                     (mouseenter)="mouseEnterDataName($event)"
+                     (mouseleave)="mouseExitDataName($event)">
+                    <span>{{ scanTarget.displayTreeCurrent.omissionCount + " More items"}}</span>
                 </div>
                 <span class="right">{{scanTarget.displayTreeCurrent.omissionSize|unitSpace}}</span>
             </li>
@@ -48,7 +54,11 @@
                          @legendToggle="toggleStatus.getState()"
                          [style.background]="child.colorRGB()"
                     ></div>
-                    <div class="usageDetailName">{{ child.name}}</div>
+                    <div class="usageDetailName"
+                         (mouseenter)="mouseEnterDataName($event)"
+                         (mouseleave)="mouseExitDataName($event)">
+                        <span>{{ child.name}}</span>
+                    </div>
                     <span class="right">{{child.size|unitSpace}}</span>
                 </li>
             </showMoreItems>
