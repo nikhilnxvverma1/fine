@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
+    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="Fixed selection box bug which selects nearby elements even when they are not overlapping">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/data-area.component.ts" afterPath="$PROJECT_DIR$/app/data-area.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/data-area.component.html" afterPath="$PROJECT_DIR$/app/template/data-area.component.html" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +25,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="data-area.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data-area.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6725146">
-              <caret line="177" column="32" selection-start-line="177" selection-start-column="32" selection-end-line="177" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="115" column="56" selection-start-line="115" selection-start-column="56" selection-end-line="115" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data-area.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/template/data-area.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.76687115">
+              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="point.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/core/point.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -99,7 +120,6 @@
         <option value="$PROJECT_DIR$/app/template/data-item.component.html" />
         <option value="$PROJECT_DIR$/app/core/display-element.ts" />
         <option value="$PROJECT_DIR$/app/template/context.component.html" />
-        <option value="$PROJECT_DIR$/app/template/data-area.component.html" />
         <option value="$PROJECT_DIR$/sass/style.scss" />
         <option value="$PROJECT_DIR$/app/core/folder.ts" />
         <option value="$PROJECT_DIR$/app/breadcrumb.component.ts" />
@@ -109,6 +129,7 @@
         <option value="$PROJECT_DIR$/app/usage-detail.component.ts" />
         <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
         <option value="$PROJECT_DIR$/app/data-area.component.ts" />
+        <option value="$PROJECT_DIR$/app/template/data-area.component.html" />
       </list>
     </option>
   </component>
@@ -583,7 +604,13 @@
       <option name="project" value="LOCAL" />
       <updated>1472049749660</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Fixed selection box bug which selects nearby elements even when they are not overlapping">
+      <created>1472050883567</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1472050883567</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -648,7 +675,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Refactored context component to introduce certain new components for sunburst chart, and its usage details along with a toggle view button." />
     <MESSAGE value="Integrated designs in the organize section particularly the popouts, delete box and the subheader. No animation yet though." />
     <MESSAGE value="Migrated to RC3 of angular2, integrated designs in the main menu (except feedback)" />
     <MESSAGE value="Implemented designs in the feedback section with animation and the sort by menu." />
@@ -673,7 +699,8 @@
     <MESSAGE value="Fixed multiple selection using shift in usage detail and incorrect size bug in sunburst" />
     <MESSAGE value="Implemented sort to toggle between ascending and descending when sort option is chosen repeatedly." />
     <MESSAGE value="Implemented rolling animation when hovered over data item name in usage detail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented rolling animation when hovered over data item name in usage detail" />
+    <MESSAGE value="Fixed selection box bug which selects nearby elements even when they are not overlapping" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed selection box bug which selects nearby elements even when they are not overlapping" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -682,13 +709,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/operation-progress.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="50" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/tag.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -994,14 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/template/data-area.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4601227">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/display-element.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.43274853">
@@ -1073,10 +1085,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/point.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6725146">
-          <caret line="177" column="32" selection-start-line="177" selection-start-column="32" selection-end-line="177" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="115" column="56" selection-start-line="115" selection-start-column="56" selection-end-line="115" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/template/data-area.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76687115">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
           <folding />
         </state>
       </provider>

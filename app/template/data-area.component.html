@@ -18,12 +18,14 @@
 <div #dataAreaContainer id="dataAreaContainer" class="row smallPaddingLeft relativePosition"
      @dataAreaItemsToggle="toggleStatus.getState()">
 
+    <!--Blank div used for capturing mouse events that happen in the background (as in the div behind the icons) -->
+    <!--adjusted for scrolled amount-->
     <div style="
     position: absolute;
-    top:0;
     left:0;
     width:100%;
     height:100%;"
+         [style.top]="dataAreaContainer.scrollTop+'px'"
          (mousedown)="mouseDown($event)"
          (mousemove)="mouseMove($event)"
          (mouseup)="mouseUp($event)"

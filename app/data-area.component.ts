@@ -109,10 +109,11 @@ export class DataAreaComponent{
     /**Mouse event**/
 
     mouseDown(event:MouseEvent){
-        var local=Point.pageToLocal(this._dataAreaContainer.nativeElement,event.pageX,event.pageY);
+        let element = this._dataAreaContainer.nativeElement;
+        var local=Point.pageToLocal(element,event.pageX,event.pageY);
         var selectionDiv=this._selectionRect.nativeElement;
         selectionDiv.style.visibility='visible';
-        selectionDiv.style.top=local.y;
+        selectionDiv.style.top=local.y+element.scrollTop;
         selectionDiv.style.left=local.x;
         selectionDiv.style.width=0;
         selectionDiv.style.height=0;
