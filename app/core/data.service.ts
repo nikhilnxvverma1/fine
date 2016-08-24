@@ -141,7 +141,7 @@ export class DataService{
                     }else{
                         childPath = path + '/' + name;
                     }
-                    fs.stat(childPath,scanCallback.callback);
+                    fs.lstat(childPath,scanCallback.callback);
                 }
             }
 

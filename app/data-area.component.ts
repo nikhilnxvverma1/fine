@@ -82,9 +82,12 @@ export class DataAreaComponent{
         this._isSortByMenuOpen = value;
     }
 
-    openDataItem(dataItem){
+    openDataItem(dataItem:DataItem){
         console.log("will open data item"+dataItem.name);
         this.openDataItemEvent.emit(dataItem);
+        if(dataItem.isDirectory()){
+            this._dataAreaContainer.nativeElement.scrollTop=0;
+        }
     }
 
     toggleSortByMenu(event){

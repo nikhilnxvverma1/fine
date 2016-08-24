@@ -18,7 +18,9 @@ export class ScanCallback{
         this.name=name;
         this._scanInfo=scanInfo;
         this.callback=(err,stats:Stats)=>{
-            if(err) throw err;
+            if(err) {
+                throw err;
+            }
             let path = this._scanInfo.parent.getFullyQualifiedPath();
             let containerPath = path=='/'?path:path+'/';
             if(stats.isDirectory()){
