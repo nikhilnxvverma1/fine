@@ -13,7 +13,7 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 import {ToggleStatus} from "./core/toggle-status";
 import {Point} from "./core/point";
 import {SortOption} from "./core/sort-option";
-
+declare var $:any;
 @Component({
     selector: 'data-area',
     templateUrl:'app/template/data-area.component.html',
@@ -168,8 +168,9 @@ export class DataAreaComponent{
     private selectOverlappingDataItems(rect:ClientRect,metaKeyDown:boolean):number{
         var totalSelected=0;
         this.dataItemComponents.forEach(function (dataItemComponent:DataItemComponent,i:number){
-           var element=dataItemComponent.elementRef.nativeElement.firstChild;
-            var dataItemRect=element.getBoundingClientRect();
+            var element=dataItemComponent.elementRef.nativeElement.firstChild;
+            var span=$(element).find("img")[0];
+            var dataItemRect=span.getBoundingClientRect();
             if(DataAreaComponent.overlaps(rect,dataItemRect)){
 
                 //dataItemComponent.dataItem.selected=metaKeyDown?!dataItemComponent.dataItem.selected:true;
