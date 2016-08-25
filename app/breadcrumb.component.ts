@@ -68,7 +68,12 @@ export class BreadcrumbComponent{
         if(dataItem.isDirectory()){
             (<Folder>dataItem).sort(this._scanTarget.sortOption,false,false);
             this._scanTarget.folderStack.push(<Folder>dataItem);
-            //this._scanTarget.displayTreeCurrent=
+            var newGroupElement=<GroupElement>this._scanTarget.displayElementFor(dataItem);
+            if(newGroupElement==null){
+                newGroupElement=this._scanTarget.createNewGroupElementUnderCurrent(<Folder>dataItem);
+            }
+            this._scanTarget.displayTreeCurrent=newGroupElement;
+
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path

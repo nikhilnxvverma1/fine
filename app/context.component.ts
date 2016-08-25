@@ -100,6 +100,11 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     openDataItem(dataItem:DataItem){
         console.log("will open folder"+dataItem.name);
         this.openDataItemEvent.emit(dataItem);
+        //if it came in the analyze section, the sunburst chart
+        //this new sunburst chart will be applicable
+        if(dataItem.isDirectory()){
+            this._sunburstComponent.makeSunburst(this._scanTarget.displayTreeCurrent,false);
+        }
     }
 
     toggleView(){
@@ -116,12 +121,12 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         console.log("Sort Option is "+sortOption);
     }
 
-    createSunburst(){
-        console.log("Making sunburst now");
-        this._sunburstComponent.makeSunburst();
-        //this._sunburstComponent.makeCirclePack();
-        //this._sunburstComponent.makeIcicle();
-    }
+    //createSunburst(){
+    //    console.log("Making sunburst now");
+    //    this._sunburstComponent.makeSunburst();
+    //    //this._sunburstComponent.makeCirclePack();
+    //    //this._sunburstComponent.makeIcicle();
+    //}
 
     groupInFolder(folderName:string){
         if(folderName==null||folderName.length==0){

@@ -59,17 +59,15 @@ export class SunburstComponent implements OnInit{
     private dy:number=0;
 
     ngOnInit():any {
-        this.makeSunburst();
         this.scanTarget.displayTreeCurrent=this.scanTarget.displayTreeRoot;
+        this.makeSunburst(this.scanTarget.displayTreeCurrent,true);
         return undefined;
     }
 
-
-
-    makeSunburst(){
+    makeSunburst(groupElement:GroupElement,entryAnimation:boolean){
         //create an secondary DisplayElement tree
-        this.scanTarget.populateDisplayElementTree(this.scanTarget.displayTreeRoot);
-        console.log("Total Elements to render: "+this._totalElements);
+        this.scanTarget.populateDisplayElementTree(groupElement);
+        console.log("Total Elements to render: "+this.scanTarget._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
             height = 600,
@@ -249,7 +247,7 @@ export class SunburstComponent implements OnInit{
 
                 var newGroup=svg.append("g")
                     .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-                newGroup
+                var sunburstSvg=newGroup
                     .datum(d)
                     .selectAll("path")
                     .data(partition.nodes)
@@ -262,21 +260,25 @@ export class SunburstComponent implements OnInit{
                     .style("fill", d=> {
                         //return color(d.name)
                         return d.getDataItem().colorRGB();
-                    }).transition()
-                    .duration(350)
-                    .attrTween("d",(d:DisplayElement)=>{
-                        return (t)=>{
-                            d.t=t;
-                            return arcOpen(<Arc>d);
-                        }
-                    })
+                    });
+
+                if (entryAnimation) {
+                    sunburstSvg.transition()
+                        .duration(350)
+                        .attrTween("d", (d:DisplayElement)=> {
+                            return (t)=> {
+                                d.t = t;
+                                return arcOpen(<Arc>d);
+                            }
+                        });
+                }
             }
 
         };
 
 
         //eliminated data items cause problems
-        group.datum(this.scanTarget.displayTreeRoot)
+        group.datum(groupElement)
             .selectAll("path")
             .data(partition.nodes)
             .enter()

@@ -236,15 +236,26 @@ export class ScanTarget{
         return childrenToShow;
     }
 
-    groupElementFor(folder:Folder):GroupElement{
+    /**
+     * Looks up under the current display element to find
+     * a matching display element for the folder
+     * @param dataItem the data item for whose display element is needed
+     * @returns matching display element, null if not found
+     */
+    displayElementFor(dataItem:DataItem):DisplayElement{
+        for(var i=0;i<this.displayTreeCurrent.children.length;i++){
+            if (this.displayTreeCurrent.children[i].getDataItem() == dataItem) {
+                return this.displayTreeCurrent.children[i];
+            }
+        }
         return null;
     }
 
-    leafElementFor(file:File):LeafElement{
-        return null;
-    }
-
-    makeGroupElementFor(folder:Folder){
-
+    createNewGroupElementUnderCurrent(folder:Folder):GroupElement{
+        let groupElement = new GroupElement();
+        groupElement.parent=this.displayTreeCurrent;
+        groupElement.folder=folder;
+        this.populateDisplayElementTree(groupElement);
+        return groupElement;
     }
 }
