@@ -12,6 +12,7 @@ import {ChangeDetectorRef} from "@angular/core";
 import {NgZone} from "@angular/core";
 import {ScanTarget} from "./core/scan-target";
 import {Folder} from "./core/folder";
+import {GroupElement} from "./core/group-element";
 
 @Component({
     selector: 'breadcrumb',
@@ -67,6 +68,7 @@ export class BreadcrumbComponent{
         if(dataItem.isDirectory()){
             (<Folder>dataItem).sort(this._scanTarget.sortOption,false,false);
             this._scanTarget.folderStack.push(<Folder>dataItem);
+            //this._scanTarget.displayTreeCurrent=
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path

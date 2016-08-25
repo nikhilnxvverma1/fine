@@ -46,10 +46,10 @@ export class SunburstComponent implements OnInit{
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
 
-    private static STARTING_CHILDREN_TO_SHOW=32;
-    private static HALF_TILL_DEPTH=4;
-    private static MANDATORY_DEPTH=4;
-    private static MAX_DEPTH=7;
+    static STARTING_CHILDREN_TO_SHOW=32;
+    static HALF_TILL_DEPTH=4;
+    static MANDATORY_DEPTH=4;
+    static MAX_DEPTH=7;
     private _totalElements=0;
     //private _rootGroupElement:GroupElement;
     //private _currentElement:GroupElement;
@@ -64,72 +64,11 @@ export class SunburstComponent implements OnInit{
         return undefined;
     }
 
-    populateDisplayElementTree(root:GroupElement):GroupElement{
-        var depth=0;
-        this._totalElements=0;
-        this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
-        return root;
-    }
 
-    traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number){
-        if(depth>SunburstComponent.MAX_DEPTH||
-            upperFew<1||
-            !groupElement.getDataItem().isDirectory()){
-            return;
-        }
-        var displayElements=this.upperDisplayElementsFor(groupElement,upperFew);
-        var i=0;
-        for(i=0;i<displayElements.length;i++){
-            if(displayElements[i].isGroup()){
-
-                var fraction=displayElements[i].getDataItem().size/groupElement.getDataItem().size;
-                var reducedUpperFew=upperFew*fraction;
-                if(reducedUpperFew<1&&depth<SunburstComponent.MANDATORY_DEPTH){
-                    reducedUpperFew=1;
-                }
-                this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1);
-            }
-        }
-    }
-
-    upperDisplayElementsFor(groupElement:GroupElement,upperFew:number):DisplayElement[]{
-
-        var folder=groupElement.getDataItem();
-
-        //get depth information to calculate 'h'
-        var depth=folder.depth+1;
-        if(upperFew<1){
-            return null;
-        }
-        var sortedCopy=folder.sort(SortOption.Size,false,true);//sorts in ascending order
-        var childrenToShow:DisplayElement[]=[];
-        var sizeOfDisplayedElements=0;
-        for(var i=0;i<upperFew&&i<sortedCopy.length;i++){
-            var child=sortedCopy[sortedCopy.length-1-i];
-            sizeOfDisplayedElements+=child.size;
-            var childElement;
-            if(child.isDirectory()){
-                childElement=new GroupElement();
-                childElement.folder=<Folder>child;
-            }else{
-                childElement=new LeafElement();
-                childElement.file=<File>child;
-            }
-
-            childElement.parent=groupElement;
-            childrenToShow.push(childElement);
-            this._totalElements++;
-        }
-
-        groupElement.omissionCount=sortedCopy.length-childrenToShow.length;
-        groupElement.omissionSize=folder.size-sizeOfDisplayedElements;
-        groupElement.children=childrenToShow;
-        return childrenToShow;
-    }
 
     makeSunburst(){
         //create an secondary DisplayElement tree
-        this.populateDisplayElementTree(this.scanTarget.displayTreeRoot);
+        this.scanTarget.populateDisplayElementTree(this.scanTarget.displayTreeRoot);
         console.log("Total Elements to render: "+this._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
@@ -240,7 +179,7 @@ export class SunburstComponent implements OnInit{
                         d.parent.children.splice(0, d.parent.children.length);
                     }
                     //populate the display tree back at the parent
-                    this.populateDisplayElementTree(d.parent);
+                    this.scanTarget.populateDisplayElementTree(d.parent);
                     this.scanTarget.jumpToFolder(d.parent.getDataItem());
                     this.scanTarget.displayTreeCurrent=d.parent;
 
@@ -289,7 +228,7 @@ export class SunburstComponent implements OnInit{
                     d.children.splice(0, d.children.length);
                 }
                 //populate the display tree further starting at this node
-                this.populateDisplayElementTree(d);
+                this.scanTarget.populateDisplayElementTree(d);
                 this.scanTarget.jumpToFolder(d.getDataItem());
                 this.scanTarget.displayTreeCurrent=d;
                 console.log("x:"+d.x+" y:"+d.y+" dx:"+d.dx+"dy:"+d.dy);
@@ -357,7 +296,7 @@ export class SunburstComponent implements OnInit{
                     d.t=t;
                     return arcOpen(<Arc>d);
                 }
-            })
+            });
         //(d:DisplayElement)=>{return d.isGroup?"none":"white";}
     }
 }

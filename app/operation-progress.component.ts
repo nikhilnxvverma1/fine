@@ -7,6 +7,8 @@ import {DataItem} from "./core/data-item";
 import {Output,Input,EventEmitter} from "@angular/core";
 import {ServiceProgress} from './core/service-progress'
 import {DataOperation} from './core/data-operation'
+declare var $:any;
+declare var Materialize:any;
 
 @Component({
     selector: 'operation-progress',

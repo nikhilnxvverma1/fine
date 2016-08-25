@@ -39,7 +39,7 @@ export class GroupElement extends DisplayElement{
         this._omissionCount = value;
     }
 
-    set children(value:Array) {
+    set children(value:DisplayElement[]) {
         this._children = value;
     }
 

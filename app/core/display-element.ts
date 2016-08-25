@@ -1,5 +1,6 @@
 import {DataItem} from "./data-item";
 import {GroupElement} from "./group-element";
+import {Folder} from "./folder";
 /**
  * Created by NikhilVerma on 16/08/16.
  */

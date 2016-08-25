@@ -68,6 +68,8 @@ declare var $:any;
 })
 export class UsageDetailComponent {
 
+    //Important note : instead of using topFolder() we use displayTreeCurrent here everywhere
+
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
     private _moreItems:DataItem[]=[];
@@ -79,7 +81,7 @@ export class UsageDetailComponent {
     selectChild(dataItem:DataItem,event:MouseEvent){
 
         if(event.shiftKey){
-            var sortedCopy=this.scanTarget.topFolder().sort(SortOption.Size,true,true);
+            var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true,true);
             dataItem.selected=true;
             UsageDetailComponent.selectPrecedingDataItems(sortedCopy,dataItem);
         }else{

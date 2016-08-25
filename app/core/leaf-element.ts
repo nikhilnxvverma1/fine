@@ -1,4 +1,6 @@
 import {DisplayElement} from "./display-element";
+import {DataItem} from "./data-item";
+import {File} from "./file";
 /**
  * Created by NikhilVerma on 16/08/16.
  */
@@ -6,8 +8,8 @@ import {DisplayElement} from "./display-element";
 export class LeafElement extends DisplayElement{
     private _file:File;
 
-    set file(value:File) {
-        this._file = value;
+    set file(value:DataItem) {
+        this._file = <File>value;
     }
 
     getDataItem():File {

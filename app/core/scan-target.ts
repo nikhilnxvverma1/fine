@@ -8,8 +8,12 @@ import {SortOption} from "./sort-option";
 import {Tracker} from "./tracker";
 import {ScanStatus} from "./scan-status";
 import {GroupElement} from "./group-element";
+import {LeafElement} from "./leaf-element";
+import {DisplayElement} from "./display-element";
+import {SunburstComponent} from "../sunburst.component";
 
 export class ScanTarget{
+    _totalElements=0;
     private _name:string;
     private _type:ScanTargetType;
     private _total:number;
@@ -167,5 +171,80 @@ export class ScanTarget{
             }
             return false;
         }
+    }
+
+    populateDisplayElementTree(root:GroupElement):GroupElement{
+        var depth=0;
+        this._totalElements=0;
+        this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
+        return root;
+    }
+
+    traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number){
+        if(depth>SunburstComponent.MAX_DEPTH||
+            upperFew<1||
+            !groupElement.getDataItem().isDirectory()){
+            return;
+        }
+        var displayElements=this.upperDisplayElementsFor(groupElement,upperFew);
+        var i=0;
+        for(i=0;i<displayElements.length;i++){
+            if(displayElements[i].isGroup()){
+
+                var fraction=displayElements[i].getDataItem().size/groupElement.getDataItem().size;
+                var reducedUpperFew=upperFew*fraction;
+                if(reducedUpperFew<1&&depth<SunburstComponent.MANDATORY_DEPTH){
+                    reducedUpperFew=1;
+                }
+                this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1);
+            }
+        }
+    }
+
+    upperDisplayElementsFor(groupElement:GroupElement,upperFew:number):DisplayElement[]{
+
+        var folder=groupElement.getDataItem();
+
+        //get depth information to calculate 'h'
+        var depth=folder.depth+1;
+        if(upperFew<1){
+            return null;
+        }
+        var sortedCopy=folder.sort(SortOption.Size,false,true);//sorts in ascending order
+        var childrenToShow:DisplayElement[]=[];
+        var sizeOfDisplayedElements=0;
+        for(var i=0;i<upperFew&&i<sortedCopy.length;i++){
+            var child=sortedCopy[sortedCopy.length-1-i];
+            sizeOfDisplayedElements+=child.size;
+            var childElement;
+            if(child.isDirectory()){
+                childElement=new GroupElement();
+                childElement.folder=<Folder>child;
+            }else{
+                childElement=new LeafElement();
+                childElement.file=child;
+            }
+
+            childElement.parent=groupElement;
+            childrenToShow.push(childElement);
+            this._totalElements++;
+        }
+
+        groupElement.omissionCount=sortedCopy.length-childrenToShow.length;
+        groupElement.omissionSize=folder.size-sizeOfDisplayedElements;
+        groupElement.children=childrenToShow;
+        return childrenToShow;
+    }
+
+    groupElementFor(folder:Folder):GroupElement{
+        return null;
+    }
+
+    leafElementFor(file:File):LeafElement{
+        return null;
+    }
+
+    makeGroupElementFor(folder:Folder){
+
     }
 }
