@@ -66,7 +66,9 @@ export class SunburstComponent implements OnInit{
 
     makeSunburst(groupElement:GroupElement,entryAnimation:boolean){
         //create an secondary DisplayElement tree
+        groupElement.destroyAllChildren();
         this.scanTarget.populateDisplayElementTree(groupElement);
+        console.log("Group element: "+groupElement.getDataItem().name);
         console.log("Total Elements to render: "+this.scanTarget._totalElements);
         d3.selectAll("#sunburst svg").remove();
         var width = 760,
@@ -247,7 +249,7 @@ export class SunburstComponent implements OnInit{
 
                 var newGroup=svg.append("g")
                     .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-                var sunburstSvg=newGroup
+                newGroup
                     .datum(d)
                     .selectAll("path")
                     .data(partition.nodes)
@@ -260,45 +262,46 @@ export class SunburstComponent implements OnInit{
                     .style("fill", d=> {
                         //return color(d.name)
                         return d.getDataItem().colorRGB();
-                    });
-
-                if (entryAnimation) {
-                    sunburstSvg.transition()
-                        .duration(350)
-                        .attrTween("d", (d:DisplayElement)=> {
+                    }).transition()
+                    .duration(350)
+                    .attrTween("d", (d:DisplayElement)=> {
                             return (t)=> {
                                 d.t = t;
                                 return arcOpen(<Arc>d);
                             }
-                        });
-                }
+                    });
+
             }
 
         };
 
 
         //eliminated data items cause problems
-        group.datum(groupElement)
+        var sunburstSvg=group.datum(groupElement)
             .selectAll("path")
             .data(partition.nodes)
             .enter()
             .append("path")
-            .attr("d", arcOpen)
+            .attr("d", entryAnimation?arcOpen:arc) //we use arc open only if we need to animate
             .style("stroke","white" )
             .style("stroke-width", "0.3px")
             .on('click',click)
             .style("fill", d=> {
                 //return color(d.name)
                 return d.getDataItem().colorRGB();
-            }).transition()
-            .delay(600)             //TODO this is a bad idea
-            .duration(400)
-            .attrTween("d",(d:DisplayElement)=>{
-                return (t)=>{
-                    d.t=t;
-                    return arcOpen(<Arc>d);
-                }
             });
-        //(d:DisplayElement)=>{return d.isGroup?"none":"white";}
+
+        if (entryAnimation) {
+            sunburstSvg.transition()
+                .delay(600)
+                .duration(400)
+                .attrTween("d", (d:DisplayElement)=> {
+                    return (t)=> {
+                        d.t = t;
+                        return arcOpen(<Arc>d);
+                    }
+                });
+        }
+
     }
 }

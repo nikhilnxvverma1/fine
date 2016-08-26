@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
 import {Input} from "@angular/core";
@@ -28,6 +28,7 @@ export class BreadcrumbComponent{
     @Input('contextStack') public contextStack:Context[];
     @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
     @Output('openMainMenu') openMainMenuEvent=new EventEmitter<BreadcrumbComponent>();
+    @ViewChild(ContextComponent) private _contextComponent:ContextComponent;
     
 
     constructor(private _dataService: DataService,private _zone:NgZone) {}
@@ -60,7 +61,20 @@ export class BreadcrumbComponent{
         var index:number=this._scanTarget.folderStack.indexOf(folder);
         if(index==this._scanTarget.folderStack.length-1) return;
 
+        //going back by that much amount
+        var parentsToSkip=this._scanTarget.folderStack.length-(index+1);
+
         this._scanTarget.folderStack.splice(index+1,this._scanTarget.folderStack.length);
+
+        //go up the hierarchy by skipping those many parents
+        var i=0;
+        while(i<parentsToSkip){
+            this._scanTarget.displayTreeCurrent=this._scanTarget.displayTreeCurrent.parent;
+            i++;
+        }
+
+        //for the new current working directory, rebuild the sunburst
+        this._contextComponent.getSunburstComponent().makeSunburst(this._scanTarget.displayTreeCurrent,false);
     }
 
     openDataItem(dataItem:DataItem){

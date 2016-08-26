@@ -23,6 +23,7 @@ import {OperationComponent} from "./operation.component";
 import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate,keyframes} from "@angular/core";
 import {Point} from "./core/point";
+declare var $:any;
 
 @Component({
     selector: 'folder-context',
@@ -77,6 +78,7 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     @Input('scanTarget') private _scanTarget:ScanTarget;
     public context:Context=new Context();
     @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
+
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;
     @ViewChild(SunburstComponent) private _sunburstComponent:SunburstComponent;
@@ -95,6 +97,10 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     ngOnChanges():any {
         console.log("Content did change in sunburst");
         return undefined;
+    }
+
+    getSunburstComponent():SunburstComponent{
+        return this._sunburstComponent;
     }
 
     openDataItem(dataItem:DataItem){
@@ -120,13 +126,6 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         this._scanTarget.sortOption=sortOption;
         console.log("Sort Option is "+sortOption);
     }
-
-    //createSunburst(){
-    //    console.log("Making sunburst now");
-    //    this._sunburstComponent.makeSunburst();
-    //    //this._sunburstComponent.makeCirclePack();
-    //    //this._sunburstComponent.makeIcicle();
-    //}
 
     groupInFolder(folderName:string){
         if(folderName==null||folderName.length==0){

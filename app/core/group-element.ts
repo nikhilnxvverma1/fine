@@ -50,4 +50,10 @@ export class GroupElement extends DisplayElement{
     public getDataItem():Folder {
         return this._folder;
     }
+
+    public destroyAllChildren(){
+        if (this._children!=null) {
+            this._children.splice(0, this._children.length);
+        }
+    }
 }
