@@ -309,8 +309,7 @@ body{
   z-index:3;
   height:100%;
   width:100%;
-  //background: $primary-color-variant;
-  background-image: linear-gradient(0deg, #172538 0%, #000000 100%);
+  background-image: linear-gradient(45deg, #1c8262 0%, #00336d 100%);
   color:white;
 }
 
@@ -354,7 +353,7 @@ body{
 }
 
 .scanCompleted{
-  background:#1c1f23;
+  background:#4f8680;
   -webkit-transition: box-shadow 0.2s ease-out;
   -moz-transition: box-shadow 0.2s ease-out;
   -ms-transition: box-shadow 0.2s ease-out;
@@ -390,7 +389,7 @@ body{
 
 .mainMenuActionButton{
   cursor:pointer;
-  background: #E74C3C;
+  background: #ab2d64;
   text-align: center;
   color:white;
   //line-height:30px;
