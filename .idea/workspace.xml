@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/data-item.ts" afterPath="$PROJECT_DIR$/app/core/data-item.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/group-element.ts" afterPath="$PROJECT_DIR$/app/core/group-element.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/scan-target.ts" afterPath="$PROJECT_DIR$/app/core/scan-target.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/sunburst.component.ts" afterPath="$PROJECT_DIR$/app/sunburst.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/usage-detail.component.html" afterPath="$PROJECT_DIR$/app/template/usage-detail.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/usage-detail.component.ts" afterPath="$PROJECT_DIR$/app/usage-detail.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/data-area.component.ts" afterPath="$PROJECT_DIR$/app/data-area.component.ts" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,63 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sunburst.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
+      <file leaf-file-name="data-area.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="216" column="35" selection-start-line="216" selection-start-column="35" selection-end-line="216" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="group-element.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/core/group-element.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data-item.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/core/data-item.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scan-target.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="192" column="48" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="usage-detail.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/usage-detail.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="38" />
-              <folding>
-                <marker date="1472334328000" expanded="true" signature="2463:2483" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="usage-detail.component.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/template/usage-detail.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81595093">
-              <caret line="67" column="10" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.46783626">
+              <caret line="148" column="25" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -150,7 +93,6 @@
         <option value="$PROJECT_DIR$/app/template/data-area.component.html" />
         <option value="$PROJECT_DIR$/app/core/scan-callback.ts" />
         <option value="$PROJECT_DIR$/app/core/data.service.ts" />
-        <option value="$PROJECT_DIR$/app/data-area.component.ts" />
         <option value="$PROJECT_DIR$/app/core/display-element.ts" />
         <option value="$PROJECT_DIR$/app/core/leaf-element.ts" />
         <option value="$PROJECT_DIR$/app/operation-progress.component.ts" />
@@ -166,6 +108,7 @@
         <option value="$PROJECT_DIR$/app/core/scan-target.ts" />
         <option value="$PROJECT_DIR$/app/usage-detail.component.ts" />
         <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
+        <option value="$PROJECT_DIR$/app/data-area.component.ts" />
       </list>
     </option>
   </component>
@@ -688,7 +631,13 @@
       <option name="project" value="LOCAL" />
       <updated>1472215842465</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Implemented rainbow coloring in the sunburst chart">
+      <created>1472334488067</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1472334488067</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -753,7 +702,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Implemented sunburst chart, redesign the main menu,fixed the callbacks of the operations and fixed progress bar to show at the bottom." />
     <MESSAGE value="Fixed a few ui issues(breadcrumb,data area),implemeted improved scanning algorithm, organized data service callback classes." />
     <MESSAGE value="Completed scanning of folder targets with progress bar,clicking on a scan target opens its sunburst(works with multiple targets also)" />
     <MESSAGE value="Sunburst replaced with circle pack for just one layer" />
@@ -778,7 +726,8 @@
     <MESSAGE value="Made sunburst chart in sync with navigation in the organise section while opening folders" />
     <MESSAGE value="Navigation through the breadcrumb now affects the sunburst chart" />
     <MESSAGE value="Minor redesign of the main menu and certain action buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor redesign of the main menu and certain action buttons" />
+    <MESSAGE value="Implemented rainbow coloring in the sunburst chart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented rainbow coloring in the sunburst chart" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -990,14 +939,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/point.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.023391813">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/scan-info.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38011697">
@@ -1013,14 +954,6 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1182,8 +1115,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/template/usage-detail.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81595093">
-          <caret line="67" column="10" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.601227">
+          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/point.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7076023">
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46783626">
+          <caret line="148" column="25" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="25" />
           <folding />
         </state>
       </provider>

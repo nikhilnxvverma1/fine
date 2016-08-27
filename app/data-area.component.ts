@@ -147,8 +147,9 @@ export class DataAreaComponent{
 
             var height=(local.y-this._initialY);
             if(height<0){
-                selectionDiv.style.top=local.y;
-                selectionDiv.style.height=height*-1;
+                let element = this._dataAreaContainer.nativeElement;
+                selectionDiv.style.top=local.y+element.scrollTop;;
+                selectionDiv.style.height=height*-1;//just making it positive
             }else{
                 selectionDiv.style.height=height;
             }
