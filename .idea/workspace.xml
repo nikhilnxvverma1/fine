@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
+    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="Fixed upward drag in the selection box after the user has scrolled down.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/data-area.component.ts" afterPath="$PROJECT_DIR$/app/data-area.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/scan-target.ts" afterPath="$PROJECT_DIR$/app/core/scan-target.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/sunburst.component.ts" afterPath="$PROJECT_DIR$/app/sunburst.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/usage-detail.component.html" afterPath="$PROJECT_DIR$/app/template/usage-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/style.scss" afterPath="$PROJECT_DIR$/sass/style.scss" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +28,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="data-area.component.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
+      <file leaf-file-name="sunburst.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46783626">
-              <caret line="148" column="25" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.44444445">
+              <caret line="242" column="62" selection-start-line="242" selection-start-column="62" selection-end-line="242" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sass/style.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.625">
+              <caret line="578" column="19" selection-start-line="578" selection-start-column="19" selection-end-line="578" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usage-detail.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/template/usage-detail.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.5">
+              <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scan-target.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="47" selection-start-line="125" selection-start-column="47" selection-end-line="125" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -100,15 +134,15 @@
         <option value="$PROJECT_DIR$/app/breadcrumb.component.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/sass/components/_variables.scss" />
-        <option value="$PROJECT_DIR$/sass/style.scss" />
         <option value="$PROJECT_DIR$/app/core/tracker.ts" />
-        <option value="$PROJECT_DIR$/app/sunburst.component.ts" />
         <option value="$PROJECT_DIR$/app/core/data-item.ts" />
         <option value="$PROJECT_DIR$/app/core/group-element.ts" />
-        <option value="$PROJECT_DIR$/app/core/scan-target.ts" />
         <option value="$PROJECT_DIR$/app/usage-detail.component.ts" />
-        <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
         <option value="$PROJECT_DIR$/app/data-area.component.ts" />
+        <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
+        <option value="$PROJECT_DIR$/app/core/scan-target.ts" />
+        <option value="$PROJECT_DIR$/sass/style.scss" />
+        <option value="$PROJECT_DIR$/app/sunburst.component.ts" />
       </list>
     </option>
   </component>
@@ -637,7 +671,13 @@
       <option name="project" value="LOCAL" />
       <updated>1472334488067</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Fixed upward drag in the selection box after the user has scrolled down.">
+      <created>1472335237098</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1472335237098</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -702,7 +742,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed a few ui issues(breadcrumb,data area),implemeted improved scanning algorithm, organized data service callback classes." />
     <MESSAGE value="Completed scanning of folder targets with progress bar,clicking on a scan target opens its sunburst(works with multiple targets also)" />
     <MESSAGE value="Sunburst replaced with circle pack for just one layer" />
     <MESSAGE value="Reverted back to sunburst and added classes for secondary display tree for the sunburst" />
@@ -727,7 +766,8 @@
     <MESSAGE value="Navigation through the breadcrumb now affects the sunburst chart" />
     <MESSAGE value="Minor redesign of the main menu and certain action buttons" />
     <MESSAGE value="Implemented rainbow coloring in the sunburst chart" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented rainbow coloring in the sunburst chart" />
+    <MESSAGE value="Fixed upward drag in the selection box after the user has scrolled down." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed upward drag in the selection box after the user has scrolled down." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1023,14 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sass/style.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60940695">
-          <caret line="398" column="0" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/folder.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1079,44 +1111,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="216" column="35" selection-start-line="216" selection-start-column="35" selection-end-line="216" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/group-element.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="192" column="48" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/usage-detail.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="38" />
-          <folding>
-            <marker date="1472334328000" expanded="true" signature="2463:2483" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/template/usage-detail.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.601227">
-          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1131,8 +1129,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/data-area.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46783626">
-          <caret line="148" column="25" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.14619882">
+          <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/usage-detail.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029239766">
+          <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="38" />
+          <folding>
+            <marker date="1472334328000" expanded="true" signature="2463:2483" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="47" selection-start-line="125" selection-start-column="47" selection-end-line="125" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/template/usage-detail.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.5">
+          <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sass/style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.625">
+          <caret line="578" column="19" selection-start-line="578" selection-start-column="19" selection-end-line="578" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44444445">
+          <caret line="242" column="62" selection-start-line="242" selection-start-column="62" selection-end-line="242" selection-end-column="62" />
           <folding />
         </state>
       </provider>

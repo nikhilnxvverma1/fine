@@ -169,6 +169,18 @@ export class SunburstComponent implements OnInit{
                 //+ de.t * Math.max(0, y(de.y + de.dy));
             });
 
+        //element is actually the entire suburst chart but it should ideally be the path element being hovered
+        var hoveredOnElement=(element,d:DisplayElement)=>{
+            this.scanTarget.displayTreeHovered=d;
+        };
+
+        var hoveredOutOfElement=(element,d:DisplayElement)=>{
+            console.log("left element "+element);
+        };
+        var leftEntireSVG=(d:DisplayElement)=>{
+            this.scanTarget.displayTreeHovered=this.scanTarget.displayTreeCurrent;
+        };
+
         var newGroup=null;//reserved for the click callback
         var click=(d:GroupElement)=>{
             console.log(" what clicked "+d.getDataItem().name);
@@ -205,20 +217,24 @@ export class SunburstComponent implements OnInit{
                     //show an arc closing animation
                     var newGroup=svg.append("g")
                         .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-                    newGroup
+                    var zoomedOutSvg=newGroup
                         .datum(d.parent)
                         .selectAll("path")
                         .data(partition.nodes)
                         .enter()
                         .append("path")
                         .attr("d", arc)
+                        .attr('class','displayElementPath')
+                        .on('mouseover',(d:DisplayElement)=>{ hoveredOnElement(this,d);})
                         .style("stroke", "white")
                         .style("stroke-width", "0.3px")
                         .on('click',click)
                         .style("fill", d=> {
                             //return color(d.name)
                             return d.getDataItem().colorRGB();
-                        }).transition()
+                        });
+                    zoomedOutSvg.on('mouseleave',leftEntireSVG);
+                    zoomedOutSvg.transition()
                         .duration(350)
                         .attrTween("opacity", (d)=> { return (t) =>{ return t; }; })
                 }
@@ -249,20 +265,26 @@ export class SunburstComponent implements OnInit{
 
                 var newGroup=svg.append("g")
                     .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-                newGroup
+                var zoomedSvg=newGroup
                     .datum(d)
                     .selectAll("path")
                     .data(partition.nodes)
                     .enter()
                     .append("path")
                     .attr("d", arc)
+                    .attr('class','displayElementPath')
+                    .on('mouseover',(d:DisplayElement)=>{ hoveredOnElement(this,d);})
                     .style("stroke", "white")
                     .style("stroke-width", "0.3px")
                     .on('click',click)
                     .style("fill", d=> {
                         //return color(d.name)
                         return d.getDataItem().colorRGB();
-                    }).transition()
+                    });
+
+                zoomedSvg.on('mouseleave',leftEntireSVG);
+
+                zoomedSvg.transition()
                     .duration(350)
                     .attrTween("d", (d:DisplayElement)=> {
                             return (t)=> {
@@ -283,6 +305,8 @@ export class SunburstComponent implements OnInit{
             .enter()
             .append("path")
             .attr("d", entryAnimation?arcOpen:arc) //we use arc open only if we need to animate
+            .attr('class','displayElementPath')
+            .on('mouseover',(d:DisplayElement)=>{ hoveredOnElement(this,d);})
             .style("stroke","white" )
             .style("stroke-width", "0.3px")
             .on('click',click)
@@ -290,6 +314,8 @@ export class SunburstComponent implements OnInit{
                 //return color(d.name)
                 return d.getDataItem().colorRGB();
             });
+
+        sunburstSvg.on('mouseleave',leftEntireSVG);
 
         if (entryAnimation) {
             sunburstSvg.transition()
@@ -304,4 +330,5 @@ export class SunburstComponent implements OnInit{
         }
 
     }
+
 }

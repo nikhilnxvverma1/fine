@@ -2,16 +2,16 @@
 <div *ngIf="scanTarget!=null" style="height: 100%;">
     <div class="usageLegendForHeader"
          @legendToggle="toggleStatus.getState()"
-         [style.background]="scanTarget.displayTreeCurrent.getDataItem().colorRGB()"
+         [style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"
     ></div>
 <h5 class="relativePosition inline" @usageHeaderToggle="toggleStatus.getState()">
-        {{scanTarget.displayTreeCurrent.getDataItem().name}}
-        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeCurrent.getDataItem().size|unitSpace}}</span>
+        {{scanTarget.displayTreeHovered.getDataItem().name}}
+        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
 </h5>
     <div id="usageListContainer">
         <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
             <li class="usageDetailItem"
-                *ngFor="let child of scanTarget.displayTreeCurrent.children"
+                *ngFor="let child of scanTarget.displayTreeHovered.children"
                 [class.selectedUsageDetail]="child.getDataItem().selected"
                 (click)="selectChild(child.getDataItem(),$event)"
                 (dblclick)="openUsage(child.getDataItem())"
@@ -27,8 +27,10 @@
                 </div>
                 <span class="right">{{child.getDataItem().size|unitSpace}}</span>
             </li>
-            <!--More items-->
-            <li *ngIf="!scanTarget.showAllItems && scanTarget.displayTreeCurrent.omissionCount>0"
+            <!--More items (either collapsed on current or showing different hovered group element)-->
+            <li *ngIf="scanTarget.displayTreeHovered.omissionCount>0 &&
+            (scanTarget.displayTreeHovered!=scanTarget.displayTreeCurrent ||
+             !scanTarget.showAllItems)"
                 (click)="showMoreItems()"
                 class="usageDetailItem usageDetailMoreItems">
                 <div class="usageLegendForDetail"
@@ -38,12 +40,12 @@
                 <div class="usageDetailName"
                      (mouseenter)="mouseEnterDataName($event)"
                      (mouseleave)="mouseExitDataName($event)">
-                    <span>{{ scanTarget.displayTreeCurrent.omissionCount + " More items"}}</span>
+                    <span>{{ scanTarget.displayTreeHovered.omissionCount + " More items"}}</span>
                 </div>
-                <span class="right">{{scanTarget.displayTreeCurrent.omissionSize|unitSpace}}</span>
+                <span class="right">{{scanTarget.displayTreeHovered.omissionSize|unitSpace}}</span>
             </li>
             <!-- showMoreItems is not a new component, but just a wrapper for the if condition -->
-            <showMoreItems *ngIf="scanTarget.showAllItems">
+            <showMoreItems *ngIf="scanTarget.showAllItems && scanTarget.displayTreeHovered==scanTarget.displayTreeCurrent">
                 <li class="usageDetailItem"
                     *ngFor="let child of _moreItems"
                     [class.selectedUsageDetail]="child.selected"

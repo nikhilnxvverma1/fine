@@ -25,6 +25,7 @@ export class ScanTarget{
     private _tracker:Tracker=new Tracker(this);
     private _displayTreeRoot:GroupElement;
     private _displayTreeCurrent:GroupElement;
+    private _displayTreeHovered:DisplayElement;
     private _showAllItems:boolean=false;
 
     constructor(name:string, type:ScanTargetType, total:number, used:number) {
@@ -114,7 +115,16 @@ export class ScanTarget{
 
     set displayTreeCurrent(value:GroupElement) {
         this._displayTreeCurrent = value;
+        this._displayTreeHovered = value;//we reset the hovered element because we always anchor on the current
         this._showAllItems=false;
+    }
+
+    get displayTreeHovered():DisplayElement {
+        return this._displayTreeHovered;
+    }
+
+    set displayTreeHovered(value:DisplayElement) {
+        this._displayTreeHovered = value;
     }
 
     get showAllItems():boolean {
