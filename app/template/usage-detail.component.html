@@ -50,9 +50,10 @@
                     (click)="selectChild(child,$event)"
                     (dblclick)="openUsage(child)"
                 >
+                    <!--For the extended list, we show the color of the last group list item-->
                     <div class="usageLegendForDetail"
                          @legendToggle="toggleStatus.getState()"
-                         [style.background]="child.colorRGB()"
+                         [style.background]="child.isDirectory()?_lastGroupElement.getDataItem().colorRGB():child.colorRGB()"
                     ></div>
                     <div class="usageDetailName"
                          (mouseenter)="mouseEnterDataName($event)"

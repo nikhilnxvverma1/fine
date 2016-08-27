@@ -112,7 +112,7 @@ export abstract class DataItem{
             return "rgb("+this.red+","+this.green+","+this.blue+")";
         }else{
             //return a gray color for all files
-            return "rgb(121, 121, 121)";
+            return "rgb(70,70,70)";
         }
     }
 
@@ -211,5 +211,11 @@ export abstract class DataItem{
             extension='.'+parts.pop();
         }
         return extension;
+    }
+
+    public setRgb(r:number,g:number,b:number){
+        this.red=r;
+        this.green=g;
+        this.blue=b;
     }
 }

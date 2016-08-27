@@ -99,7 +99,7 @@ export class SunburstComponent implements OnInit{
                 return b.getDataItem().size-a.getDataItem().size;
             })
             .value(function (d:DisplayElement) {
-                //return d.getDataItem().size;
+                //return d.isGroup()?d.getDataItem().size-(<GroupElement>d).omissionSize:d.getDataItem().size;
                 return 1;//apparently this is giving more accurate results
             });
 

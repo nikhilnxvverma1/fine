@@ -10,6 +10,7 @@ export class GroupElement extends DisplayElement{
     private _children:DisplayElement[];
     private _omissionSize:number;
     private _omissionCount:number;
+    private _hueAmount:number=0;
 
     set folder(value:Folder) {
         this._folder = value;
@@ -45,6 +46,14 @@ export class GroupElement extends DisplayElement{
 
     get children():DisplayElement[] {
         return this._children;
+    }
+
+    get hueAmount():number {
+        return this._hueAmount;
+    }
+
+    set hueAmount(value:number) {
+        this._hueAmount = value;
     }
 
     public getDataItem():Folder {

@@ -176,29 +176,65 @@ export class ScanTarget{
     populateDisplayElementTree(root:GroupElement):GroupElement{
         var depth=0;
         this._totalElements=0;
-        this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth);
+        var startingHue,endingHue;
+        if(root.parent==null){
+            startingHue=0;
+            endingHue=1;
+            root.getDataItem().setRgb(200,200,200);
+        }else{
+
+            //calculate the hue of this root which is will be at the mid point of the spectrum
+            var parentHue=ScanTarget.rgbToHsl(
+                root.getDataItem().red,
+                root.getDataItem().green,
+                root.getDataItem().blue)[0];
+
+            //subtract half the hue amount for starting
+            //add half the hue amount for ending
+            startingHue=parentHue-root.hueAmount/2;
+            endingHue=parentHue+root.hueAmount/2;
+        }
+        this.traverseBigItems(root,SunburstComponent.STARTING_CHILDREN_TO_SHOW,depth,startingHue,endingHue);
         return root;
     }
 
-    traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number){
+    traverseBigItems(groupElement:GroupElement,upperFew:number,depth:number,startingHue:number,endingHue:number){
         if(depth>SunburstComponent.MAX_DEPTH||
             upperFew<1||
             !groupElement.getDataItem().isDirectory()){
-            return;
+            return ;
         }
         var displayElements=this.upperDisplayElementsFor(groupElement,upperFew);
-        var i=0;
-        for(i=0;i<displayElements.length;i++){
+        var allGroupSize=0;
+        for (var i=0;i<displayElements.length;i++){
+            if (displayElements[i].isGroup()) {
+                allGroupSize += displayElements[i].getDataItem().size;
+            }
+        }
+
+        var hueProgress=startingHue;
+        for(var i=0;i<displayElements.length;i++){
             if(displayElements[i].isGroup()){
+
+                //color calculation
+                var proportion=  displayElements[i].getDataItem().size/allGroupSize;
+                var hueAmount=proportion*(endingHue-startingHue);
+                var hue=hueProgress+hueAmount/2;//hue will be set at the mid point of the slot size
+                var rgb=ScanTarget.hslToRgb(hue,0.7,0.5);
+                displayElements[i].getDataItem().setRgb(rgb[0],rgb[1],rgb[2]);
+                (<GroupElement>displayElements[i]).hueAmount=hueAmount;
 
                 var fraction=displayElements[i].getDataItem().size/groupElement.getDataItem().size;
                 var reducedUpperFew=upperFew*fraction;
                 if(reducedUpperFew<1&&depth<SunburstComponent.MANDATORY_DEPTH){
                     reducedUpperFew=1;
                 }
-                this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1);
+                this.traverseBigItems((<GroupElement>displayElements[i]),reducedUpperFew,depth+1,hueProgress,hueProgress+hueAmount);
+                hueProgress+=hueAmount;
+
             }
         }
+
     }
 
     upperDisplayElementsFor(groupElement:GroupElement,upperFew:number):DisplayElement[]{
@@ -257,5 +293,77 @@ export class ScanTarget{
         groupElement.folder=folder;
         this.populateDisplayElementTree(groupElement);
         return groupElement;
+    }
+
+    /**
+     * Converts an HSL color value to RGB. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes h, s, and l are contained in the set [0, 1] and
+     * returns r, g, and b in the set [0, 255].
+     *
+     * Taken from : http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
+     *
+     * @param   {number}  h       The hue between [0,1]
+     * @param   {number}  s       The saturation between [0,1]
+     * @param   {number}  l       The lightness between [0,1]
+     * @return  {Array}           The RGB representation between [0,255]
+     */
+    static hslToRgb(h, s, l){
+        var r, g, b;
+
+        if(s == 0){
+            r = g = b = l; // achromatic
+        }else{
+            var hue2rgb = function hue2rgb(p, q, t){
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+
+    /**
+     * Converts an RGB color value to HSL. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes r, g, and b are contained in the set [0, 255] and
+     * returns h, s, and l in the set [0, 1].
+     *
+     * Taken from : http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
+     *
+     * @param   {number}  r       The red color value between [0,255]
+     * @param   {number}  g       The green color value between [0,255]
+     * @param   {number}  b       The blue color value between [0,255]
+     * @return  {Array}           The HSL representation between [0,1]
+     */
+    static rgbToHsl(r, g, b){
+        r /= 255, g /= 255, b /= 255;
+        var max = Math.max(r, g, b), min = Math.min(r, g, b);
+        var h, s, l = (max + min) / 2;
+
+        if(max == min){
+            h = s = 0; // achromatic
+        }else{
+            var d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch(max){
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                case b: h = (r - g) / d + 4; break;
+            }
+            h /= 6;
+        }
+
+        return [h, s, l];
     }
 }

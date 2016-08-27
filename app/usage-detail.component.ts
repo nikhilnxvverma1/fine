@@ -14,6 +14,7 @@ import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate} from "@angular/core";
 import {Folder} from "./core/folder";
 import {SortOption} from "./core/sort-option";
+import {GroupElement} from "./core/group-element";
 declare var $:any;
 @Component({
     selector: 'usageDetail',
@@ -73,6 +74,7 @@ export class UsageDetailComponent {
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
     private _moreItems:DataItem[]=[];
+    private _lastGroupElement:GroupElement;
 
     openUsage(child:DataItem){
         console.log("Open usage for "+child.name)
@@ -121,10 +123,12 @@ export class UsageDetailComponent {
             this._moreItems.push(sortedCopy[i]);
             i--;
         }
-        console.log("omission count "+this.scanTarget.displayTreeCurrent.omissionCount+" size "+this._moreItems.length);
 
-        for (i=0;i<this._moreItems.length;i++){
-            console.log("name " +this._moreItems[i].name);
+        //find and set the last group element from the display list
+        for (var i=0;i<this.scanTarget.displayTreeCurrent.children.length;i++){
+            if(this.scanTarget.displayTreeCurrent.children[i].isGroup()){
+                this._lastGroupElement=<GroupElement>this.scanTarget.displayTreeCurrent.children[i];
+            }
         }
 
         this.scanTarget.showAllItems=true;
