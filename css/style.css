@@ -8654,7 +8654,6 @@ body {
 #sortByMenu {
   position: absolute;
   top: 100%;
-  right: 50px;
   background-image: url("../images/sort-menu-box.svg");
   padding-top: 20px;
   z-index: 1;

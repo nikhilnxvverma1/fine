@@ -1,18 +1,18 @@
 <div id="subheader" @subheaderToggle="toggleStatus.getState()">
     <div class="row">
-        <div class="offset-s8 s4 col">
+        <div class="offset-s8 s4 col relativePosition">
             <span class="subheaderItem smallPaddingRight">Sort By:</span>
             <a class="subheaderItem underline" (mousedown)="toggleSortByMenu($event)">Name</a>
+            <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
+                <ul>
+                    <li (click)="selectSortOption(0,$event)"><i [style.opacity]="sortOption==0?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
+                    <li (click)="selectSortOption(1,$event)"><i [style.opacity]="sortOption==1?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
+                    <li (click)="selectSortOption(2,$event)"><i [style.opacity]="sortOption==2?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
+                    <li (click)="selectSortOption(3,$event)"><i [style.opacity]="sortOption==3?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
+                    <li (click)="selectSortOption(4,$event)"><i [style.opacity]="sortOption==4?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
-        <ul>
-            <li (click)="selectSortOption(0,$event)"><i [style.opacity]="sortOption==0?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
-            <li (click)="selectSortOption(1,$event)"><i [style.opacity]="sortOption==1?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
-            <li (click)="selectSortOption(2,$event)"><i [style.opacity]="sortOption==2?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
-            <li (click)="selectSortOption(3,$event)"><i [style.opacity]="sortOption==3?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
-            <li (click)="selectSortOption(4,$event)"><i [style.opacity]="sortOption==4?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
-        </ul>
     </div>
 </div>
 <div #dataAreaContainer id="dataAreaContainer" class="row smallPaddingLeft relativePosition"
