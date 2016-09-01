@@ -4,7 +4,6 @@
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource-development/design.sketch" afterPath="$PROJECT_DIR$/resource-development/design.sketch" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/sunburst.component.ts" afterPath="$PROJECT_DIR$/app/sunburst.component.ts" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,8 +67,8 @@
       <file leaf-file-name="sunburst.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5263158">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.64327484">
+              <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -678,7 +677,13 @@
       <option name="project" value="LOCAL" />
       <updated>1472343377702</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Iconography work for  different file types">
+      <created>1472746285542</created>
+      <option name="number" value="00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1472746285542</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -688,6 +693,7 @@
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2248062" sideWeight="0.56746763" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2248062" sideWeight="0.43253234" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34819278" sideWeight="0.50528544" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2248062" sideWeight="0.56171733" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.49753347" order="10" side_tool="false" content_ui="tabs" />
@@ -697,7 +703,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2248062" sideWeight="0.56171733" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="100" width="1240" height="700" />
@@ -743,7 +748,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Reverted back to sunburst and added classes for secondary display tree for the sunburst" />
     <MESSAGE value="Improved performance of the sunburst by using a compressed secondary display tree" />
     <MESSAGE value="Further reduced count of elements in the sunburst chart" />
     <MESSAGE value="Implemented folder navigation during sunburst transitions" />
@@ -768,7 +772,8 @@
     <MESSAGE value="Fixed upward drag in the selection box after the user has scrolled down." />
     <MESSAGE value="Implemented hover effect on sunburst elements resulting in respective usage details being shown." />
     <MESSAGE value="Fixed position of the sort by menu to be right under the link" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed position of the sort by menu to be right under the link" />
+    <MESSAGE value="Iconography work for  different file types" />
+    <option name="LAST_COMMIT_MESSAGE" value="Iconography work for  different file types" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1138,8 +1143,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/sunburst.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5263158">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.64327484">
+          <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
           <folding />
         </state>
       </provider>
