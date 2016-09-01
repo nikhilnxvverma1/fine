@@ -28,7 +28,7 @@ import Arc = d3.svg.arc.Arc;
     animations:[
         trigger("sunburstChartToggle",[
             state("analyze",style({
-                top:"100px",
+                top:"50px",
                 opacity:"1"
             })),
             state("organize",style({
