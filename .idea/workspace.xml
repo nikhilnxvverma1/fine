@@ -683,7 +683,13 @@
       <option name="project" value="LOCAL" />
       <updated>1472746285542</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="More Iconography for code files">
+      <created>1472751739776</created>
+      <option name="number" value="00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1472751739776</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -748,7 +754,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Improved performance of the sunburst by using a compressed secondary display tree" />
     <MESSAGE value="Further reduced count of elements in the sunburst chart" />
     <MESSAGE value="Implemented folder navigation during sunburst transitions" />
     <MESSAGE value="Zoomable navigation works with more details added to the display tree in the click handler" />
@@ -773,7 +778,8 @@
     <MESSAGE value="Implemented hover effect on sunburst elements resulting in respective usage details being shown." />
     <MESSAGE value="Fixed position of the sort by menu to be right under the link" />
     <MESSAGE value="Iconography work for  different file types" />
-    <option name="LAST_COMMIT_MESSAGE" value="Iconography work for  different file types" />
+    <MESSAGE value="More Iconography for code files" />
+    <option name="LAST_COMMIT_MESSAGE" value="More Iconography for code files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
