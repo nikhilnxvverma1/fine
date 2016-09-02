@@ -4,10 +4,12 @@ import {DataItem} from "./core/data-item";
 import {Folder} from "./core/folder";
 import {Output} from "@angular/core";
 import {EventEmitter} from "@angular/core";
+import {IconFile} from "./pipe/icon-file.pipe";
 
 @Component({
     selector: 'data-item',
-    templateUrl:'app/template/data-item.component.html'
+    templateUrl:'app/template/data-item.component.html',
+    pipes:[IconFile],
 })
 export class DataItemComponent {
 

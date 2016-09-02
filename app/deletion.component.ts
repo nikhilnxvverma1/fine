@@ -11,11 +11,12 @@ import {Output,EventEmitter} from "@angular/core";
 
 import {SelectedDataItem} from "./pipe/selected-data-item.pipe";
 import {PrefixAndRemoveSpace} from "./pipe/prefix-remove-space.pipe";
+import {IconFile} from "./pipe/icon-file.pipe";
 
 @Component({
     selector: 'deletion',
     templateUrl:'app/template/deletion.component.html',
-    pipes: [SelectedDataItem,PrefixAndRemoveSpace]
+    pipes: [SelectedDataItem,PrefixAndRemoveSpace,IconFile]
 })
 export class DeletionComponent{
 

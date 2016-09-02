@@ -13,6 +13,11 @@ export class Context {
     public dummyFolder:Folder=new Folder('');//used for showing name of folder while filling 'group' textfield
     private _sortOption:SortOption;
 
+
+    constructor() {
+        this.dummyFolder.depth=-100;
+    }
+
     get sortOption():SortOption {
         return this._sortOption;
     }
