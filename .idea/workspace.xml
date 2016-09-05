@@ -4,9 +4,6 @@
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/breadcrumb.component.ts" afterPath="$PROJECT_DIR$/app/breadcrumb.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/breadcrumb.component.html" afterPath="$PROJECT_DIR$/app/template/breadcrumb.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/style.scss" afterPath="$PROJECT_DIR$/sass/style.scss" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="breadcrumb.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/breadcrumb.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.6666667">
-              <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.4093567">
+              <caret line="48" column="47" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -433,12 +430,6 @@
       <option name="number" value="Default" />
       <updated>1457217139212</updated>
     </task>
-    <task id="LOCAL-00005" summary="Completed basic file operations:move,copy,rename,delete and group. A few new dependencies added: fs-extra,trash and mv.Refresh of file explorer and error handling pending.">
-      <created>1465473044383</created>
-      <option name="number" value="00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1465473044383</updated>
-    </task>
     <task id="LOCAL-00006" summary="Added progress bar with functional backend,notification at the end of each file operation,and deletion/move now removes files from the UI.">
       <created>1465548223291</created>
       <option name="number" value="00006" />
@@ -727,7 +718,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473087927654</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Bredcrumb contraction responds to window resize and contracted breadcrumb item expand on hover">
+      <created>1473091312043</created>
+      <option name="number" value="00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1473091312043</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -792,7 +789,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Usage detail now uses display tree and displays a &quot;more&quot; button for omitted items." />
     <MESSAGE value="&quot;more&quot; button functionality implemented and usage detail is now scrollable." />
     <MESSAGE value="Formatted the design of the usage details to be more &quot;spaced out&quot;" />
     <MESSAGE value="Fixed multiple selection using shift in usage detail and incorrect size bug in sunburst" />
@@ -817,7 +813,8 @@
     <MESSAGE value="Working on breadcrumb item contraction, checking in untested code" />
     <MESSAGE value="Fixed minor issue with breadcrumb clipping in CSS" />
     <MESSAGE value="Implemented main breadcrumb contraction algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented main breadcrumb contraction algorithm" />
+    <MESSAGE value="Bredcrumb contraction responds to window resize and contracted breadcrumb item expand on hover" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bredcrumb contraction responds to window resize and contracted breadcrumb item expand on hover" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1233,8 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/breadcrumb.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.6666667">
-          <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.4093567">
+          <caret line="48" column="47" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
           <folding />
         </state>
       </provider>

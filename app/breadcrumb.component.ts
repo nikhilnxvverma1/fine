@@ -42,8 +42,11 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
     private _hoveredElement:HTMLElement;
 
-    private _animationTimeLimit=0;
+    //the time is in milliseconds
+    private _breadcrumbContractionAnimationTimeLimit=100;
+    private _animationIntervalDelay=5;
     private _currentAnimationTime=0;
+    private _breadcrumbAnimationTimerId:number;
     private _breadcrumbChanged=false;
     private _doBreadcrumbItemsNeedToContract=false;
 
@@ -169,7 +172,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
         }
     }
 
-    updateBreadcrumbWidths(animate:boolean){
+    updateBreadcrumbWidths(shouldAnimate:boolean){
         console.log("updating widts of breadcrumbs");
         this.shrinkWidthArraysIfNeeded();
 
@@ -237,11 +240,17 @@ export class BreadcrumbComponent implements AfterViewChecked{
                         : fullWidth;
                 }
 
-                this.changeWidthAtIndex(breadcrumbItemWidth,i-1,false);//subtracting the first menu link for index
+                this.changeWidthAtIndex(breadcrumbItemWidth,i-1,shouldAnimate);//subtracting the first menu link for index
 
             }
         }
 
+        //clear the previous animation if any
+        clearInterval(this._breadcrumbAnimationTimerId);
+
+        if(shouldAnimate){
+            this._breadcrumbAnimationTimerId=setInterval(()=>{this.animateBreadcrumbWidthsToTarget()},this._animationIntervalDelay);
+        }
 
     }
 
@@ -267,6 +276,23 @@ export class BreadcrumbComponent implements AfterViewChecked{
                 this._breadcrumbWidths[index] = width;
             }
             return true;
+        }
+    }
+
+    private animateBreadcrumbWidthsToTarget(){
+        this._currentAnimationTime+=this._animationIntervalDelay;
+        var fraction=this._currentAnimationTime/this._breadcrumbContractionAnimationTimeLimit;
+
+        //loop through each width and progress it to as much fractional part has reached
+        for(var i=0;i<this._breadcrumbWidths.length;i++){
+            var difference=this._targetBreadcrumbWidths[i]-this._breadcrumbWidths[i];
+            this._breadcrumbWidths[i]+=fraction*difference;
+        }
+
+        //stop the interval once the timer reaches the limit
+        if(this._currentAnimationTime>this._breadcrumbContractionAnimationTimeLimit){
+            clearInterval(this._breadcrumbAnimationTimerId);
+            this._currentAnimationTime=0;
         }
     }
 
