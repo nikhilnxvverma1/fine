@@ -53,7 +53,10 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
     ngAfterViewChecked(){
         if (this._breadcrumbChanged) {
-            this.updateBreadcrumbWidths();
+            this._breadcrumbChanged=false;
+            //triggering another change after change detection is not allowed in angular 2
+            //because of potential cascading effects, therefore using setTimeout
+            window.setTimeout(()=>{this.updateBreadcrumbWidths()});
         }
     }
 
@@ -151,9 +154,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
     }
 
     updateBreadcrumbWidths(){
-        if (true) {
-            return;
-        }
+        console.log("updating widts of breadcrumbs");
         this.shrinkWidthArraysIfNeeded();
 
         //get the native container and its width
@@ -162,13 +163,16 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
         //subtract the padding and the menu link to get the actual available width
         var availableWidth=containerWidth
-            -$(container).css('padding-left')
-            -$(container).css('padding-right')
+            -this.pixelsToNumbers($(container).css('padding-left'))
+            -this.pixelsToNumbers($(container).css('padding-right'))
             -(<HTMLElement>this._menuLink.nativeElement).offsetWidth;
 
         //element with full width will either be the hovered element(if exists) otherwise the last element
-        var fullWidthElement=<HTMLDivElement>(this._hoveredElement!=null?this._hoveredElement:container.lastChild);
-        var reservedWidth=(<HTMLSpanElement>fullWidthElement.firstChild).offsetWidth;
+        var fullWidthElement=<HTMLDivElement>(this._hoveredElement!=null?this._hoveredElement:this.lastChildElement(container));
+        var reservedWidth=(<HTMLSpanElement>this.firstChildElement(fullWidthElement)).offsetWidth;
+        //if (2<3) {//dev purposes only
+        //    return;
+        //}
 
         //in order to accommodate the reserved width, we will need to fit everything
         //else in the remaining space
@@ -178,12 +182,17 @@ export class BreadcrumbComponent implements AfterViewChecked{
         var neededWidth=0;
         for(var i=0;i<container.children.length;i++) {
             //exclude the menu link and the fullWidthElement
-            let child = container.children[i];
+            let child = <HTMLElement>container.children[i];
             if ((child != this._menuLink.nativeElement)&&
                 (child!=fullWidthElement)){
-                neededWidth+=(<HTMLSpanElement>(child.firstChild)).offsetWidth;
+                neededWidth+=(<HTMLSpanElement>(this.firstChildElement(child))).offsetWidth;
             }
         }
+
+        //Important: due to floating point round off and minor differences in widths
+        //between child and container parent, we throw in some more extra
+        //width for a safe measure
+        neededWidth+=100;
 
         //set a flag if items need to contract, this is used at the template
         this._doBreadcrumbItemsNeedToContract=neededWidth>remainingWidth;
@@ -195,7 +204,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
         for(var i=0;i<container.children.length;i++){
 
             //exclude the menu link
-            let child = container.children[i];
+            let child = <HTMLElement>container.children[i];
             if(child!=this._menuLink.nativeElement){
 
                 var breadcrumbItemWidth=0;
@@ -205,14 +214,14 @@ export class BreadcrumbComponent implements AfterViewChecked{
                 }else{
 
                     //get the width of the child which is indicates the width occupied content
-                    var fullWidth = (<HTMLSpanElement>(child.firstChild)).offsetWidth;
+                    var fullWidth = (<HTMLSpanElement>(this.firstChildElement(child))).offsetWidth;
 
                     breadcrumbItemWidth = this._doBreadcrumbItemsNeedToContract
                         ? fullWidth * reduceByFraction
                         : fullWidth;
                 }
 
-                this.changeWidthAtIndex(breadcrumbItemWidth,i);
+                this.changeWidthAtIndex(breadcrumbItemWidth,i-1);//subtracting the first menu link for index
 
             }
         }
@@ -255,6 +264,27 @@ export class BreadcrumbComponent implements AfterViewChecked{
             array[index]=value;
             return true;
         }
+    }
+
+    /** returns last child element of parent,null if container has no child*/
+    private lastChildElement(element:HTMLElement):Element{
+        return element.children.length>0?element.children[element.children.length-1]:null;
+    }
+
+    /** returns first child element of parent,null if container has no child*/
+    private firstChildElement(element:HTMLElement):Element{
+        return element.children.length>0?element.children[0]:null;
+    }
+
+
+    /**
+     * Parses pixel string value to number
+     * @param pixelValue value in number suffixed with px (ex: '23px')
+     * @returns {number} absolute number example '23px' to 23
+     */
+    private pixelsToNumbers(pixelValue:string):number{
+        var numberString=pixelValue.substr(0,pixelValue.length-2);
+        return parseFloat(numberString);
     }
 
 }
