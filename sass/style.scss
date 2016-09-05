@@ -475,6 +475,32 @@ body{
   border-radius:50%;
   display: inline-block;
   background:#40ffce;
+  margin-right:5px;
+}
+
+.usageDetailHeader{
+  display: list-item;
+  list-style: none;
+}
+
+.usageDetailHeaderName{
+  display: inline-block;
+  width:50%;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  position: relative;
+  top: 6px;
+  font-weight: 500;
+  font-size: 1.4em;
+  white-space: nowrap;
+}
+
+.usageDetailHeaderSize{
+  position: relative;
+  top: 6px;
+  font-size: 1.4em;
+  font-weight: 500;
 }
 
 .usageLegendForDetail{

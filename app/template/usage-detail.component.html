@@ -1,13 +1,25 @@
 <!-- Height 100% needed for setting percentage based heights of children-->
 <div *ngIf="scanTarget!=null" style="height: 100%;">
+    <!--<div class="usageLegendForHeader"-->
+         <!--@legendToggle="toggleStatus.getState()"-->
+         <!--[style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"-->
+    <!--&gt;</div>-->
+<div class="usageDetailHeader"
+    @usageHeaderToggle="toggleStatus.getState()">
+        <!--<span>{{scanTarget.displayTreeHovered.getDataItem().name}}</span>-->
+        <!--<span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>-->
+
     <div class="usageLegendForHeader"
          @legendToggle="toggleStatus.getState()"
          [style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"
     ></div>
-<h5 class="relativePosition inline" @usageHeaderToggle="toggleStatus.getState()">
-        {{scanTarget.displayTreeHovered.getDataItem().name}}
-        <span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
-</h5>
+    <div class="usageDetailHeaderName"
+         (mouseenter)="mouseEnterDataName($event)"
+         (mouseleave)="mouseExitDataName($event)">
+        <span>{{scanTarget.displayTreeHovered.getDataItem().name}}</span>
+    </div>
+    <span class="right usageDetailHeaderSize">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
+</div>
     <div id="usageListContainer">
         <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
             <li class="usageDetailItem"
