@@ -611,28 +611,26 @@ body{
     display: inline-block;
     line-height:60px;
     vertical-align: middle;
-    margin:0px 4px 0px 4px;
+    margin:0px 0px 0px 4px;
     font-size:2em;
   }
 }
 
 .breadcrumbItem{
-  display: inline-block;
   overflow: hidden;
   text-overflow: clip;
-  position: relative;
-  height:60px;
-  //-webkit-transition: width 1s linear;
-  //-moz-transition: width 1s linear;
-  //-ms-transition: width 1s linear;
-  //-o-transition: width 1s linear;
-  //transition: width 1s linear;
-}
+  white-space:nowrap;
 
-.breadcrumbItem div{
-  display: inline-block;
+  &:before {
+    content: '\E5CC';
+    color: rgba(255,255,255, .7);
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 25px;
+    margin: 0 0px 0 4px;
+    -webkit-font-smoothing: antialiased;
+  }
 }
-
-//.breadcrumbItem:hover{
-//  width:auto;
-//}

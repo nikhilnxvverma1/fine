@@ -18,10 +18,9 @@
                ?(index<_targetBreadcrumbWidths.length?_targetBreadcrumbWidths[index]+'px':'0px')
                :'auto'"
                (click)="backTo(folder)">
-                <span class="breadcrumbItem"
-
-                >
-                    <i class="material-icons">keyboard_arrow_right</i>
+                <span class="breadcrumbItem">
+                    <!-- Using before selector instead in CSS-->
+                <!--<i class="material-icons">keyboard_arrow_right</i>-->
                     <span>{{folder.name}}</span>
                 </span>
             </div>
