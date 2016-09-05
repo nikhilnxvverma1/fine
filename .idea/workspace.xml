@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/usage-detail.component.html" afterPath="$PROJECT_DIR$/app/template/usage-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/main-menu.component.ts" afterPath="$PROJECT_DIR$/app/main-menu.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/main-menu.component.html" afterPath="$PROJECT_DIR$/app/template/main-menu.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/style.scss" afterPath="$PROJECT_DIR$/sass/style.scss" />
     </list>
@@ -38,12 +39,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sass/style.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35582823">
-              <caret line="479" column="0" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.041667">
+              <caret line="374" column="16" selection-start-line="374" selection-start-column="16" selection-end-line="374" selection-end-column="16" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main-menu.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/template/main-menu.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.25">
+              <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main-menu.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/main-menu.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.21052632">
+              <caret line="85" column="44" selection-start-line="85" selection-start-column="44" selection-end-line="85" selection-end-column="44" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scan-status.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/core/scan-status.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,8 +130,6 @@
         <option value="$PROJECT_DIR$/app/core/operation-info.ts" />
         <option value="$PROJECT_DIR$/app/core/post-execution.ts" />
         <option value="$PROJECT_DIR$/app/template/app.component.html" />
-        <option value="$PROJECT_DIR$/app/main-menu.component.ts" />
-        <option value="$PROJECT_DIR$/app/template/main-menu.component.html" />
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/app/template/sunburst.component.html" />
         <option value="$PROJECT_DIR$/systemjs.config.js" />
@@ -135,6 +168,8 @@
         <option value="$PROJECT_DIR$/app/breadcrumb.component.ts" />
         <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
         <option value="$PROJECT_DIR$/sass/style.scss" />
+        <option value="$PROJECT_DIR$/app/main-menu.component.ts" />
+        <option value="$PROJECT_DIR$/app/template/main-menu.component.html" />
       </list>
     </option>
   </component>
@@ -426,12 +461,6 @@
       <option name="number" value="Default" />
       <updated>1457217139212</updated>
     </task>
-    <task id="LOCAL-00007" summary="Added a dummy generator command line utility(as a gulp task) that generates random file structure on disk for testing purposes.">
-      <created>1465647957419</created>
-      <option name="number" value="00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1465647957419</updated>
-    </task>
     <task id="LOCAL-00008" summary="Introduced scan targets and updated data items with dummy data generation(untested) utility, also introduced menu and feedback components.">
       <created>1466258256995</created>
       <option name="number" value="00008" />
@@ -720,7 +749,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473094319913</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Fixed long headers in the usage detail by adding rolling animation">
+      <created>1473106079202</created>
+      <option name="number" value="00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1473106079203</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -785,7 +820,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Formatted the design of the usage details to be more &quot;spaced out&quot;" />
     <MESSAGE value="Fixed multiple selection using shift in usage detail and incorrect size bug in sunburst" />
     <MESSAGE value="Implemented sort to toggle between ascending and descending when sort option is chosen repeatedly." />
     <MESSAGE value="Implemented rolling animation when hovered over data item name in usage detail" />
@@ -810,7 +844,8 @@
     <MESSAGE value="Implemented main breadcrumb contraction algorithm" />
     <MESSAGE value="Bredcrumb contraction responds to window resize and contracted breadcrumb item expand on hover" />
     <MESSAGE value="Implemented breadcrumb contraction animation for navigation and hover effects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented breadcrumb contraction animation for navigation and hover effects" />
+    <MESSAGE value="Fixed long headers in the usage detail by adding rolling animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed long headers in the usage detail by adding rolling animation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -819,21 +854,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/typings/browser/definitions/snapsvg/snapsvg.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.13207547">
-          <caret line="328" column="8" selection-start-line="328" selection-start-column="8" selection-end-line="328" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/template/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.088757396">
@@ -1078,14 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/template/main-menu.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/data-item.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1226,11 +1238,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/scan-status.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sass/style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35582823">
-          <caret line="479" column="0" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.041667">
+          <caret line="374" column="16" selection-start-line="374" selection-start-column="16" selection-end-line="374" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/template/main-menu.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.25">
+          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main-menu.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21052632">
+          <caret line="85" column="44" selection-start-line="85" selection-start-column="44" selection-end-line="85" selection-end-column="44" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

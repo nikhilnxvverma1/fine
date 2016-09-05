@@ -62,10 +62,16 @@
                         </div>
                         <div class="s2 col">
 
-                            <a class="mainMenuActionButton" (click)="scan(scanTarget,$event)">
-                                Scan
+                            <!--Already Scanned targets will have different colors-->
+                            <a class="mainMenuActionButton"
+                               [style.background]="scanTarget.tracker.scanStatus==2?'#436186':'#ab2d64'"
+                               (click)="actOnScanTarget(scanTarget,$event)">
+                                <span *ngIf="scanTarget.tracker.scanStatus==0">Scan</span>
+                                <span *ngIf="scanTarget.tracker.scanStatus==1">Cancel</span>
+                                <span *ngIf="scanTarget.tracker.scanStatus==2">View</span>
                             </a>
-                            <a class="mainMenuActionButton scanDropDown">
+                            <a class="mainMenuActionButton scanDropDown"
+                               [style.background]="scanTarget.tracker.scanStatus==2?'#436186':'#ab2d64'">
                                 <i class="material-icons white-text">arrow_drop_down</i>
                             </a>
                         </div>

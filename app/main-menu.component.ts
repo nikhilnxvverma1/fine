@@ -13,6 +13,7 @@ import {trigger,state,style,transition,animate} from "@angular/core";
 import {ScanTarget} from "./core/scan-target";
 import {FeedbackComponent} from "./feedback.component";
 import {UnitSpace} from "./pipe/unit-space.pipe";
+import {ScanStatus} from "./core/scan-status";
 
 @Component({
     selector: 'main-menu',
@@ -89,9 +90,18 @@ export class MainMenuComponent{
         return this.isMenuOpen?"open":"close";
     }
 
-    scan(scanTarget:ScanTarget,event:Event){
+    actOnScanTarget(scanTarget:ScanTarget,event:Event){
+        switch(scanTarget.tracker.scanStatus){
+            case ScanStatus.Unscanned:
+                break;
+            case ScanStatus.CurrentlyScanning:
+                break;
+            case ScanStatus.Scanned:
+                this.openScanResultEvent.emit(scanTarget)
+                break;
+        }
         event.stopPropagation();
-        console.log("scan target name "+scanTarget.name);
+        console.log("acting on scan target : "+scanTarget.name);
     }
 
 }

@@ -8807,7 +8807,7 @@ body {
   transition: box-shadow 0.2s ease-out; }
 
 .scanCompleted:hover {
-  box-shadow: 0px 0px 5px #272727;
+  box-shadow: 0px 0px 25px rgba(39, 39, 39, 0.48);
   cursor: pointer; }
 
 .scanTargetIcon {
