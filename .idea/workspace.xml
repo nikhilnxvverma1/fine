@@ -4,6 +4,7 @@
     <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/breadcrumb.component.ts" afterPath="$PROJECT_DIR$/app/breadcrumb.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/breadcrumb.component.html" afterPath="$PROJECT_DIR$/app/template/breadcrumb.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/style.scss" afterPath="$PROJECT_DIR$/sass/style.scss" />
     </list>
@@ -29,8 +30,8 @@
       <file leaf-file-name="breadcrumb.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/breadcrumb.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15204678">
-              <caret line="174" column="11" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="11" />
+            <state vertical-scroll-proportion="2.6666667">
+              <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -39,8 +40,8 @@
       <file leaf-file-name="style.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sass/style.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.0">
-              <caret line="593" column="22" selection-start-line="593" selection-start-column="22" selection-end-line="593" selection-end-column="22" />
+            <state vertical-scroll-proportion="-14.875">
+              <caret line="596" column="4" selection-start-line="596" selection-start-column="4" selection-end-line="596" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -49,8 +50,8 @@
       <file leaf-file-name="breadcrumb.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/template/breadcrumb.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.125">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="41" />
+            <state vertical-scroll-proportion="-10.0">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -137,9 +138,9 @@
         <option value="$PROJECT_DIR$/app/sunburst.component.ts" />
         <option value="$PROJECT_DIR$/app/context.component.ts" />
         <option value="$PROJECT_DIR$/app/template/context.component.html" />
-        <option value="$PROJECT_DIR$/app/template/breadcrumb.component.html" />
         <option value="$PROJECT_DIR$/sass/components/_navbar.scss" />
         <option value="$PROJECT_DIR$/sass/style.scss" />
+        <option value="$PROJECT_DIR$/app/template/breadcrumb.component.html" />
         <option value="$PROJECT_DIR$/app/breadcrumb.component.ts" />
       </list>
     </option>
@@ -432,12 +433,6 @@
       <option name="number" value="Default" />
       <updated>1457217139212</updated>
     </task>
-    <task id="LOCAL-00004" summary="Completed prototype interface including UI of the popouts,delete confirmation modal,file dialog on browse of move, and folder name as being typed in the group popout.">
-      <created>1465372530991</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1465372530991</updated>
-    </task>
     <task id="LOCAL-00005" summary="Completed basic file operations:move,copy,rename,delete and group. A few new dependencies added: fs-extra,trash and mv.Refresh of file explorer and error handling pending.">
       <created>1465473044383</created>
       <option name="number" value="00005" />
@@ -726,7 +721,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473044425361</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Implemented main breadcrumb contraction algorithm">
+      <created>1473087927653</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1473087927654</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -791,7 +792,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Moved display tree ownership to scan target and implemented move back animation in sunburst chart" />
     <MESSAGE value="Usage detail now uses display tree and displays a &quot;more&quot; button for omitted items." />
     <MESSAGE value="&quot;more&quot; button functionality implemented and usage detail is now scrollable." />
     <MESSAGE value="Formatted the design of the usage details to be more &quot;spaced out&quot;" />
@@ -816,7 +816,8 @@
     <MESSAGE value="Integrated file iconography artwork via a new pipe (which also allowed for cleaner code and minor bug fix)" />
     <MESSAGE value="Working on breadcrumb item contraction, checking in untested code" />
     <MESSAGE value="Fixed minor issue with breadcrumb clipping in CSS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor issue with breadcrumb clipping in CSS" />
+    <MESSAGE value="Implemented main breadcrumb contraction algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented main breadcrumb contraction algorithm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1216,24 +1217,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/template/breadcrumb.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.125">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="41" />
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.0">
-          <caret line="593" column="22" selection-start-line="593" selection-start-column="22" selection-end-line="593" selection-end-column="22" />
+        <state vertical-scroll-proportion="-14.875">
+          <caret line="596" column="4" selection-start-line="596" selection-start-column="4" selection-end-line="596" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/breadcrumb.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15204678">
-          <caret line="174" column="11" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="11" />
+        <state vertical-scroll-proportion="2.6666667">
+          <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
           <folding />
         </state>
       </provider>

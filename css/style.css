@@ -8996,7 +8996,8 @@ body {
     right: initial; } }
 
 #breadcrumbContainerStrip {
-  white-space: nowrap; }
+  white-space: nowrap;
+  height: 60px; }
 
 .breadcrumbItemContainer {
   height: 60px;

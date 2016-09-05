@@ -4,6 +4,7 @@
         <!--get the reference to this element using view child -->
         <div #breadcrumbContainerStrip
              id="breadcrumbContainerStrip"
+             (mouseleave)="hoveredOutOfBreadcrumbArea()"
              class="col s12" >
             <a #menuLink
                id="menuLink"
@@ -13,9 +14,10 @@
             </a>
             <div *ngFor="let folder of _scanTarget.folderStack; let last=last,let index=index"
                class="breadcrumbItemContainer"
+               (mouseenter)="hoveredOverBreadcrumbItem($event)"
                [style.color]="last?'#ffffff':'#e6e6e6'"
                [style.width]="_doBreadcrumbItemsNeedToContract
-               ?(index<_targetBreadcrumbWidths.length?_targetBreadcrumbWidths[index]+'px':'0px')
+               ?(index<_breadcrumbWidths.length?_breadcrumbWidths[index]+'px':'0px')
                :'auto'"
                (click)="backTo(folder)">
                 <span class="breadcrumbItem">

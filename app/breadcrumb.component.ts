@@ -1,4 +1,4 @@
-import {Component,ViewChild,ElementRef} from '@angular/core';
+import {Component,ViewChild,ElementRef,HostListener} from '@angular/core';
 import {DataService} from "./core/data.service";
 import {RootModel} from "./core/root-model";
 import {Input} from "@angular/core";
@@ -56,8 +56,14 @@ export class BreadcrumbComponent implements AfterViewChecked{
             this._breadcrumbChanged=false;
             //triggering another change after change detection is not allowed in angular 2
             //because of potential cascading effects, therefore using setTimeout
-            window.setTimeout(()=>{this.updateBreadcrumbWidths()});
+            window.setTimeout(()=>{this.updateBreadcrumbWidths(true)});
         }
+    }
+
+    @HostListener('window:resize',['$event'])
+    onResize(event:Event){
+        //relayout the breadcrumb without the animation
+        this.updateBreadcrumbWidths(false);
     }
 
     openRoot(){
@@ -139,6 +145,16 @@ export class BreadcrumbComponent implements AfterViewChecked{
         this._breadcrumbChanged=true;
     }
 
+    hoveredOverBreadcrumbItem(event:Event){
+        this._hoveredElement=<HTMLElement>event.target;
+        this.updateBreadcrumbWidths(true);
+    }
+
+    hoveredOutOfBreadcrumbArea(){
+        this._hoveredElement=null;
+        this.updateBreadcrumbWidths(true);
+    }
+
     private shrinkWidthArraysIfNeeded(){
         var totalBreadcrumbItems=this._scanTarget.folderStack.length;
 
@@ -153,7 +169,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
         }
     }
 
-    updateBreadcrumbWidths(){
+    updateBreadcrumbWidths(animate:boolean){
         console.log("updating widts of breadcrumbs");
         this.shrinkWidthArraysIfNeeded();
 
@@ -221,7 +237,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
                         : fullWidth;
                 }
 
-                this.changeWidthAtIndex(breadcrumbItemWidth,i-1);//subtracting the first menu link for index
+                this.changeWidthAtIndex(breadcrumbItemWidth,i-1,false);//subtracting the first menu link for index
 
             }
         }
@@ -229,9 +245,13 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
     }
 
-    private changeWidthAtIndex(width:number, index:number):boolean{
+    private changeWidthAtIndex(width:number, index:number,setOnTarget:boolean):boolean{
         if(index<this._targetBreadcrumbWidths.length){
-            this._targetBreadcrumbWidths[index]=width;
+            if (setOnTarget) {
+                this._targetBreadcrumbWidths[index] = width;
+            }else{
+                this._breadcrumbWidths[index] = width;
+            }
             return false;
         }else{
             var difference=this._targetBreadcrumbWidths.length-(index+1);
@@ -239,7 +259,13 @@ export class BreadcrumbComponent implements AfterViewChecked{
                 this._targetBreadcrumbWidths.push(0);
                 this._breadcrumbWidths.push(0);
             }
-            this._targetBreadcrumbWidths[index]=width;
+            if (setOnTarget) {
+                this._targetBreadcrumbWidths[index] = width;
+                this._breadcrumbWidths[index] = 0;
+            }else{
+                this._targetBreadcrumbWidths[index] = 0;
+                this._breadcrumbWidths[index] = width;
+            }
             return true;
         }
     }

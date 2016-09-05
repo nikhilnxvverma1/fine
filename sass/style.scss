@@ -592,6 +592,10 @@ body{
 
 #breadcrumbContainerStrip{
   white-space: nowrap;
+
+  //height already mentioned in the parent of this,
+  //but mentioned here also for the sake of mouseleave event
+  height:60px;
 }
 
 .breadcrumbItemContainer{
