@@ -83,9 +83,10 @@ export class UsageDetailComponent {
     selectChild(dataItem:DataItem,event:MouseEvent){
 
         if(event.shiftKey){
-            var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true,true);
+            //var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true,true);
+            var sortedCopy=this.concatenatedDataItemList();
             dataItem.selected=true;
-            UsageDetailComponent.selectPrecedingDataItems(sortedCopy,dataItem);
+            UsageDetailComponent.selectContinuousDataItems(sortedCopy,dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
@@ -96,16 +97,55 @@ export class UsageDetailComponent {
         }
     }
 
-    private static selectPrecedingDataItems(array:DataItem[],dataItem:DataItem){
-        var endIndex=array.indexOf(dataItem);
-        var i=endIndex-1;
-        while(i>=0){
-            if(!array[i].selected){
-                array[i].selected=true;
-            }else{
+    /**
+     * Makes a list of data items that have the same order has that of the usage detail list.
+     * This is done by merging the display tree list of the hovered element with the internal list(_moreItems)
+     * @returns {null} list of data items that have the same order has that of the usage detail list
+     */
+    private concatenatedDataItemList():DataItem[]{
+        let mergedList:DataItem[]=[];
+        let children = this.scanTarget.displayTreeHovered.getChildren();
+        for (var i=0; i<children.length; i++){
+            mergedList.push(children[i].getDataItem());
+        }
+
+        for (var i=0; i<this._moreItems.length; i++){
+            mergedList.push(this._moreItems[i]);
+        }
+        return mergedList;
+    }
+
+    private static selectContinuousDataItems(array:DataItem[], dataItem:DataItem){
+
+        var thisIndex=array.indexOf(dataItem);
+
+        //check if there are any selected items going forwards in index
+        var selectionExistsForwardss=false;
+        for(var i=thisIndex+1;i<array.length;i++){
+            if(array[i].selected){
+                selectionExistsForwardss=true;
                 break;
             }
-            i--;
+        }
+
+        //if there are select everything going forwards until the selection is met
+        if (selectionExistsForwardss) {
+            for(var i=thisIndex+1;i<array.length;i++){
+                if (!array[i].selected) {
+                    array[i].selected = true;
+                } else {
+                    break;
+                }
+            }
+        }else{
+            //go backwards
+            for(var i=thisIndex-1;i>=0;i--){
+                if (!array[i].selected) {
+                    array[i].selected = true;
+                } else {
+                    break;
+                }
+            }
         }
     }
 

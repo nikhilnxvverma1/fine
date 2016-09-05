@@ -37,7 +37,7 @@
                    (group)="groupInFolder($event)"></operation>
         <info-box *ngIf="organizeFolder" ></info-box>
 
-        <a id="toggleView" class="btn" (click)="toggleView()">
+        <a id="toggleView" class="btn noTextHighlight" (click)="toggleView()">
             <span @analyzeLabelToggle="toggleStatus.getState()">Analyze</span>
             <span @organizeLabelToggle="toggleStatus.getState()">Organize</span>
         </a>

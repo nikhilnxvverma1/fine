@@ -20,7 +20,7 @@
     </div>
     <span class="right usageDetailHeaderSize">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
 </div>
-    <div id="usageListContainer">
+    <div id="usageListContainer" class="noTextHighlight">
         <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
             <li class="usageDetailItem"
                 *ngFor="let child of scanTarget.displayTreeHovered.children"
