@@ -1,13 +1,34 @@
 <nav id="breadcrumbContainer" *ngIf="_scanTarget">
     <div class="nav-wrapper">
-        <div class="col s12" >
-            <a id="menuLink" class="breadcrumb scaleUpOnHover" (click)="openMainMenu()">
+
+        <!--get the reference to this element using view child -->
+        <div #breadcrumbContainerStrip
+             id="breadcrumbContainerStrip"
+             class="col s12" >
+            <a #menuLink
+               id="menuLink"
+               class="breadcrumb scaleUpOnHover"
+               (click)="openMainMenu()">
                 <i class="material-icons">view_quilt</i>
             </a>
-            <a *ngFor="let folder of _scanTarget.folderStack" href="#!" class="breadcrumb" (click)="backTo(folder)">
-                {{folder.name}}
-            </a>
+            <div *ngFor="let folder of _scanTarget.folderStack; let last=last,let index=index"
+               class="breadcrumbItemContainer"
+               [style.color]="last?'#ffffff':'#e6e6e6'"
+               [style.width]="_doBreadcrumbItemsNeedToContract
+               ?(index<_targetBreadcrumbWidths.length?_targetBreadcrumbWidths[index]+'px':'0px')
+               :'auto'"
+               (click)="backTo(folder)">
+                <span class="breadcrumbItem"
+
+                >
+                    <i class="material-icons">keyboard_arrow_right</i>
+                    <span>{{folder.name}}</span>
+                </span>
+            </div>
         </div>
     </div>
 </nav>
-<folder-context [scanTarget]="_scanTarget" (opendataitem)="openDataItem($event)">Loading...</folder-context>
+
+<folder-context [scanTarget]="_scanTarget"
+                (jumpedToFolder)="jumpedToFolder($event)"
+                (opendataitem)="openDataItem($event)">Loading...</folder-context>

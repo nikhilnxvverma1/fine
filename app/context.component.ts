@@ -78,6 +78,7 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     @Input('scanTarget') private _scanTarget:ScanTarget;
     public context:Context=new Context();
     @Output('opendataitem') openDataItemEvent=new EventEmitter<DataItem>();
+    @Output('jumpedToFolder') jumpedToFolderEvent=new EventEmitter<DataItem>();
 
     @ViewChild(OperationProgressComponent) operationProgress:OperationProgressComponent;
     @ViewChild(DataAreaComponent) private _dataAreaComponent:DataAreaComponent;

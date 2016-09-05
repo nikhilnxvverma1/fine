@@ -8,6 +8,7 @@
             <sunburst id="sunburstComponent"
                       @sunburstToggle="toggleStatus.getState()"
                       [toggleStatus]="toggleStatus"
+                      (jumpedToFolder)="jumpedToFolderEvent.emit($event)"
                       [scanTarget]="_scanTarget"></sunburst>
             <data-area @dataAreaToggle="toggleStatus.getState()"
                        *ngIf="_scanTarget"

@@ -114,6 +114,7 @@ body{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  //background: red;//dev purposes
 }
 
 #rightSideViewContainer{
@@ -587,3 +588,51 @@ body{
     right:initial;
   }
 }
+
+.breadcrumbItemContainer{
+  height:60px;
+  line-height:60px;
+  display:inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  color: #e6e6e6;
+}
+
+//this will work only on the child of breadcrumbItemContainer because
+//there are inline styles attached in the template for breadcrumbItemContainer
+//which are procedurally computed
+.breadcrumbItem:hover{
+  color: #f7f6f6;
+}
+
+//only using this here for specificity reasons
+@media only screen and (min-width: 601px){
+  nav .nav-wrapper .breadcrumbItemContainer i{
+    display: inline-block;
+    line-height:60px;
+    vertical-align: middle;
+    margin:0px 4px 0px 4px;
+    font-size:2em;
+  }
+}
+
+.breadcrumbItem{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
+  position: relative;
+  height:60px;
+  //-webkit-transition: width 1s linear;
+  //-moz-transition: width 1s linear;
+  //-ms-transition: width 1s linear;
+  //-o-transition: width 1s linear;
+  //transition: width 1s linear;
+}
+
+.breadcrumbItem div{
+  display: inline-block;
+}
+
+//.breadcrumbItem:hover{
+//  width:auto;
+//}

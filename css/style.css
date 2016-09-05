@@ -8994,3 +8994,32 @@ body {
     left: 3%;
     top: initial;
     right: initial; } }
+
+.breadcrumbItemContainer {
+  height: 60px;
+  line-height: 60px;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  color: #e6e6e6; }
+
+.breadcrumbItem:hover {
+  color: #f7f6f6; }
+
+@media only screen and (min-width: 601px) {
+  nav .nav-wrapper .breadcrumbItemContainer i {
+    display: inline-block;
+    line-height: 60px;
+    vertical-align: middle;
+    margin: 0px 4px 0px 4px;
+    font-size: 2em; } }
+
+.breadcrumbItem {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
+  position: relative;
+  height: 60px; }
+
+.breadcrumbItem div {
+  display: inline-block; }

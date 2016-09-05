@@ -45,6 +45,7 @@ export class SunburstComponent implements OnInit{
 
     @Input("scanTarget") scanTarget:ScanTarget;
     @Input("toggleStatus") toggleStatus:ToggleStatus;
+    @Output('jumpedToFolder') jumpedToFolderEvent=new EventEmitter<DataItem>();
 
     static STARTING_CHILDREN_TO_SHOW=32;
     static HALF_TILL_DEPTH=4;
@@ -193,6 +194,7 @@ export class SunburstComponent implements OnInit{
                     //populate the display tree back at the parent
                     this.scanTarget.populateDisplayElementTree(d.parent);
                     this.scanTarget.jumpToFolder(d.parent.getDataItem());
+                    this.jumpedToFolderEvent.emit(d.getDataItem());
                     this.scanTarget.displayTreeCurrent=d.parent;
 
                     //fade out
@@ -246,6 +248,7 @@ export class SunburstComponent implements OnInit{
                 //populate the display tree further starting at this node
                 this.scanTarget.populateDisplayElementTree(d);
                 this.scanTarget.jumpToFolder(d.getDataItem());
+                this.jumpedToFolderEvent.emit(d.getDataItem());
                 this.scanTarget.displayTreeCurrent=d;
                 console.log("x:"+d.x+" y:"+d.y+" dx:"+d.dx+"dy:"+d.dy);
                 this.x=d.x;
