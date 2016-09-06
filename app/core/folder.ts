@@ -106,6 +106,19 @@ export class Folder extends DataItem{
         this.depth=newParent.depth+1;
     }
 
+    /** Returns a new list of selected data items*/
+    public getSelectedFiles():DataItem[]{
+        var selectedDataItems:DataItem[]=[];
+
+        for(var i=0;i<this.children.length;i++){
+            if(this.children[i].selected){
+                selectedDataItems.push(this.children[i]);
+            }
+        }
+
+        return selectedDataItems;
+    }
+
     /**
      * Adds specified size to this folder's existing size and calls the same method
      * on its parent folder so that the effect is propogated upwards in the heirarchy

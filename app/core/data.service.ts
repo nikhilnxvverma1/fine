@@ -18,6 +18,9 @@ import {PostExecution} from "./post-execution";
 import {OperationInfo} from "./operation-info";
 import {ScanInfo} from "./scan-info";
 import {ScanCallback} from "./scan-callback";
+import {RenamePostExecution} from "./post-execution";
+import {DeletePostExecution} from "./post-execution";
+import {MovePostExecution} from "./post-execution";
 @Injectable()
 export class DataService{
 
@@ -150,10 +153,11 @@ export class DataService{
 
 
     public moveFiles(dataItems:DataItem[],
-              directory:string,
-              deleteAfterMoving:boolean,
-              serviceProgress:ServiceProgress,
-              dataOperation:DataOperation){
+                     scanTarget:ScanTarget,
+                     directory:string,
+                     deleteAfterMoving:boolean,
+                     serviceProgress:ServiceProgress,
+                     dataOperation:DataOperation){
 
         serviceProgress.operationStarted(dataOperation);
         var count=0;
@@ -164,15 +168,15 @@ export class DataService{
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
-                var operationInfo=new OperationInfo(DataOperation.Move,total,serviceProgress,this._zone);
+                var operationInfo=new OperationInfo(DataOperation.Move,scanTarget,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.move(fullyQualifiedPath,newPath,postExecution.callback);
             }else{
                 //copy everything over
-                var operationInfo=new OperationInfo(DataOperation.Copy,total,serviceProgress,this._zone);
+                var operationInfo=new OperationInfo(DataOperation.Copy,scanTarget,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.copy(fullyQualifiedPath,newPath,postExecution.callback);
             }
         }
@@ -180,29 +184,30 @@ export class DataService{
     }
 
     public deleteFiles(dataItems:DataItem[],
-                permenantly:boolean,
-                serviceProgress:ServiceProgress,
-                dataOperation:DataOperation){
+                       scanTarget:ScanTarget,
+                       permenantly:boolean,
+                       serviceProgress:ServiceProgress,
+                       dataOperation:DataOperation) {
         serviceProgress.operationStarted(dataOperation);
         var count=0;
         var total=dataItems.length;
 
         if(permenantly){
-            var operationInfo=new OperationInfo(DataOperation.HardDelete,total,serviceProgress,this._zone);
+            var operationInfo=new OperationInfo(DataOperation.HardDelete,scanTarget,total,serviceProgress,this._zone);
             var fs=require('fs-extra');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                var postExecution:PostExecution=new DeletePostExecution(dataItems[i],i,operationInfo);
                 fs.remove(fullyQualifiedPath,postExecution.callback);
             }
         }else{
-            var operationInfo=new OperationInfo(DataOperation.Trash,total,serviceProgress,this._zone);
+            var operationInfo=new OperationInfo(DataOperation.Trash,scanTarget,total,serviceProgress,this._zone);
             var trash=require('trash');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-                var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+                var postExecution:PostExecution=new DeletePostExecution(dataItems[i],i,operationInfo);
                 //TODO consider doing it all in one go, for performance reasons
                 trash([fullyQualifiedPath]).then(postExecution.callback);
             }
@@ -211,14 +216,15 @@ export class DataService{
     }
 
     public renameFiles(dataItems:DataItem[],
-                newName:string,
-                serviceProgress:ServiceProgress,
-                dataOperation:DataOperation){
+                       scanTarget:ScanTarget,
+                       newName:string,
+                       serviceProgress:ServiceProgress,
+                       dataOperation:DataOperation){
         serviceProgress.operationStarted(dataOperation);
         var count=0;
         var total=dataItems.length;
 
-        var operationInfo=new OperationInfo(DataOperation.Rename,total,serviceProgress,this._zone);
+        var operationInfo=new OperationInfo(DataOperation.Rename,scanTarget,total,serviceProgress,this._zone);
 
         var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
@@ -236,7 +242,7 @@ export class DataService{
             }
 
             serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-            var postExecution:PostExecution=new PostExecution(dataItems[i],i,operationInfo);
+            var postExecution:PostExecution=new RenamePostExecution(dataItems[i],i,operationInfo);
             fs.rename(fullyQualifiedPath,renamedPath,postExecution.callback);
         }
     }

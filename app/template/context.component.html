@@ -48,5 +48,6 @@
           (trash)="moveToTrash()"
           (hardDelete)="deletePermenantly()"></deletion>
 <operation-progress [toggleStatus]="toggleStatus"
+                    [scanTarget]="_scanTarget"
                     (removeFromContext)="removeFromContext($event)"
 ></operation-progress>

@@ -5,6 +5,7 @@ import {DataItem} from "./data-item";
 import {TextTag} from "./text-tag";
 import {SortOption} from "./sort-option";
 
+/**@Deprecated*/
 export class Context {
 
     public parentFolder:Folder;//null means this is the root
@@ -26,7 +27,8 @@ export class Context {
         this._sortOption = value;
     }
 
-    public getSelectedFiles():DataItem[]{
+    /**@Deprecated*/
+    private getSelectedFiles():DataItem[]{
         var selectedDataItems:DataItem[]=[];
 
         for(var i=0;i<this.dataItems.length;i++){

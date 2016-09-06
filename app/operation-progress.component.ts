@@ -7,6 +7,7 @@ import {DataItem} from "./core/data-item";
 import {Output,Input,EventEmitter} from "@angular/core";
 import {ServiceProgress} from './core/service-progress'
 import {DataOperation} from './core/data-operation'
+import {ScanTarget} from "./core/scan-target";
 declare var $:any;
 declare var Materialize:any;
 
@@ -21,6 +22,7 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
         return undefined;
     }
 
+    @Input('scanTarget') private _scanTarget:ScanTarget;
     public hide:boolean=true;
     public progress=0;
     @Output('removeFromContext') removeFromContext=new EventEmitter<DataItem>();
@@ -36,24 +38,43 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
             case DataOperation.Rename:
                 break;
             case DataOperation.Group:
-                this.removeFromContext.emit(dataItem);
+                //this.removeFromContext.emit(dataItem);
                 break;
             case DataOperation.Move:
-                this.removeFromContext.emit(dataItem);
+                //this.removeFromContext.emit(dataItem);
                 break;
             case DataOperation.Copy:
                 break;
             case DataOperation.Trash:
-                this.removeFromContext.emit(dataItem);
+                //this.removeFromContext.emit(dataItem);
                 break;
             case DataOperation.HardDelete:
-                this.removeFromContext.emit(dataItem);
+                //this.removeFromContext.emit(dataItem);
                 break;
         }
     }
 
     processedDataItem(dataItem:DataItem,count:number,total:number, operation:DataOperation) {
         this.progress=(count / total)*100;
+
+        switch(operation){
+            case DataOperation.Rename:
+                break;
+            case DataOperation.Group:
+                this.removeFromParent(dataItem);
+                break;
+            case DataOperation.Move:
+                this.removeFromParent(dataItem);
+                break;
+            case DataOperation.Copy:
+                break;
+            case DataOperation.Trash:
+                this.removeFromParent(dataItem);
+                break;
+            case DataOperation.HardDelete:
+                this.removeFromParent(dataItem);
+                break;
+        }
         console.log("Service Progress:processed item: "+this.progress+"%");
     }
 
@@ -90,5 +111,11 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
 
     alertToast(message:string,delay:number){
         Materialize.toast(message, delay);
+    }
+
+    private removeFromParent(dataItem:DataItem){
+        var parent=dataItem.parent;
+        var index=parent.children.indexOf(dataItem);
+        parent.children.splice(index,1);
     }
 }

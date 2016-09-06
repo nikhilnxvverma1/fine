@@ -132,7 +132,7 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         if(folderName==null||folderName.length==0){
             return;
         }
-        var selectedDataItems=this.context.getSelectedFiles();
+        var selectedDataItems=this._scanTarget.topFolder().getSelectedFiles();
         if(selectedDataItems==null||selectedDataItems.length==0){
             return;
         }
@@ -140,6 +140,7 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         var newDirectory=parentFolder+folderName+'/';
         console.log("Moving selected files to Location: "+newDirectory);
         this.dataService.moveFiles(selectedDataItems,
+            this._scanTarget,
             newDirectory,
             true,
             this.operationProgress,
@@ -159,7 +160,8 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{
                 console.log('Will move to folder: '+folderToOpen[0]+" delete after: "+deleteAfterMoving);
-                this.dataService.moveFiles(this.context.getSelectedFiles(),
+                this.dataService.moveFiles(this._scanTarget.topFolder().getSelectedFiles(),
+                    this._scanTarget,
                     folderToOpen[0]+'/',
                     deleteAfterMoving,
                     this.operationProgress,
@@ -170,7 +172,8 @@ export class ContextComponent implements AfterContentInit,OnChanges{
 
     moveToTrash(){
         console.log("Moving selected files to trash");
-        this.dataService.deleteFiles(this.context.getSelectedFiles(),
+        this.dataService.deleteFiles(this._scanTarget.topFolder().getSelectedFiles(),
+            this._scanTarget,
             false,
             this.operationProgress,
             DataOperation.Trash);
@@ -179,7 +182,8 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     renameFiles(newName:string){
         console.log("rename all selected files to "+newName);
         //this.operationProgress.operationStarted(DataOperation.Rename);
-        this.dataService.renameFiles(this.context.getSelectedFiles(),
+        this.dataService.renameFiles(this._scanTarget.topFolder().getSelectedFiles(),
+            this._scanTarget,
             newName,
             this.operationProgress,
             DataOperation.Rename);
@@ -187,7 +191,8 @@ export class ContextComponent implements AfterContentInit,OnChanges{
 
     deletePermenantly(){
         console.log("Delete selected files");
-        this.dataService.deleteFiles(this.context.getSelectedFiles(),
+        this.dataService.deleteFiles(this._scanTarget.topFolder().getSelectedFiles(),
+            this._scanTarget,
             true,
             this.operationProgress,
             DataOperation.HardDelete);
@@ -198,9 +203,10 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         $('#confirmDeleteModal').openModal();
     }
 
+    /**@Deprecated*/
     removeFromContext(dataItem:DataItem){
-        var index=this.context.dataItems.indexOf(dataItem);
-        this.context.dataItems.splice(index,1);
+        var index=this._scanTarget.topFolder().children.indexOf(dataItem);
+        this._scanTarget.topFolder().children.splice(index,1);
         console.log("removed data item from context index"+index);
     }
 
