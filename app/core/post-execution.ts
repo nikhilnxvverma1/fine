@@ -42,15 +42,31 @@ export abstract class PostExecution{
             });
         }
     }
+
+    protected updateAndNotifyProgress(dataOperation:DataOperation){
+        this._operationInfo.count++;
+        this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
+            this._operationInfo.count,
+            this._operationInfo.total,
+            DataOperation.Rename);
+
+        if(this._operationInfo.count==this._operationInfo.total){
+            this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
+        }
+    }
+
+    protected allDataItemsProcessed():boolean{
+        return this._operationInfo.count==this._operationInfo.total
+    }
 }
 
 export class RenamePostExecution extends PostExecution{
-    constructor(_dataItem:DataItem,_index:number,_operationInfo:OperationInfo){
+    private _newName:string;
+    constructor(_dataItem:DataItem,_index:number,_operationInfo:OperationInfo,_newName:string){
         super(_dataItem,_index,_operationInfo);
+        this._newName=_newName;
         //arrow function that preserves the value of "this" context
         this.callback=(err)=>{
-            console.log("performed operation on item "+this._operationInfo.dataOperation);
-
             this._operationInfo.zone.run(()=>{
                 if(err){
                     this._operationInfo.serviceProgress.errorOnDataItem(
@@ -58,16 +74,8 @@ export class RenamePostExecution extends PostExecution{
                         this._dataItem,
                         DataOperation.Rename);
                 }
-                this._operationInfo.count++;
-
-                this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
-                    this._operationInfo.count,
-                    this._operationInfo.total,
-                    DataOperation.Rename);
-
-                if(this._operationInfo.count==this._operationInfo.total){
-                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
-                }
+                this._dataItem.name=this._newName;
+                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
             });
         }
     }

@@ -23,59 +23,25 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
     }
 
     @Input('scanTarget') private _scanTarget:ScanTarget;
+    private _currentOperation:string;
     public hide:boolean=true;
     public progress=0;
     @Output('removeFromContext') removeFromContext=new EventEmitter<DataItem>();
 
     operationStarted(operation:DataOperation){
-        console.log("Service Progress:operation started");
         this.hide=false;
         this.progress=0;
     }
 
     beganProcessingDataItem(dataItem:DataItem,operation:DataOperation){
-        switch(operation){
-            case DataOperation.Rename:
-                break;
-            case DataOperation.Group:
-                //this.removeFromContext.emit(dataItem);
-                break;
-            case DataOperation.Move:
-                //this.removeFromContext.emit(dataItem);
-                break;
-            case DataOperation.Copy:
-                break;
-            case DataOperation.Trash:
-                //this.removeFromContext.emit(dataItem);
-                break;
-            case DataOperation.HardDelete:
-                //this.removeFromContext.emit(dataItem);
-                break;
-        }
+        this._currentOperation=this.stringForOperation(operation);
+        $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
     }
 
     processedDataItem(dataItem:DataItem,count:number,total:number, operation:DataOperation) {
         this.progress=(count / total)*100;
-
-        switch(operation){
-            case DataOperation.Rename:
-                break;
-            case DataOperation.Group:
-                this.removeFromParent(dataItem);
-                break;
-            case DataOperation.Move:
-                this.removeFromParent(dataItem);
-                break;
-            case DataOperation.Copy:
-                break;
-            case DataOperation.Trash:
-                this.removeFromParent(dataItem);
-                break;
-            case DataOperation.HardDelete:
-                this.removeFromParent(dataItem);
-                break;
-        }
-        console.log("Service Progress:processed item: "+this.progress+"%");
+        this._currentOperation=this.stringForOperation(operation)+ " : "+Math.floor(this.progress)+"%";
+        $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
     }
 
     operationCompleted(total:number,operation:DataOperation) {
@@ -83,24 +49,23 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
         this.hide=true;
         switch(operation){
             case DataOperation.Rename:
-                this.alertToast(total+' Files Renamed', 4000);
+                this.alertToast(total+' Files Renamed', 2000);
                 break;
             case DataOperation.Group:
-                this.alertToast(total+' Files Grouped', 4000);
+                this.alertToast(total+' Files Grouped', 2000);
                 break;
             case DataOperation.Move:
-                this.alertToast('Finished Moving '+total+' Files', 4000);
+                this.alertToast('Finished Moving '+total+' Files', 2000);
                 break;
             case DataOperation.Copy:
                 break;
             case DataOperation.Trash:
-                this.alertToast(total+' Files Moved to Trash', 4000);
+                this.alertToast(total+' Files Moved to Trash', 2000);
                 break;
             case DataOperation.HardDelete:
-                this.alertToast(total+' Files Deleted permanently', 4000);
+                this.alertToast(total+' Files Deleted permanently', 2000);
                 break;
         }
-        console.log("Service Progress:operation completed");
     }
 
     errorOnDataItem(err, dataItem:DataItem, operation:DataOperation) {
@@ -113,9 +78,28 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
         Materialize.toast(message, delay);
     }
 
-    private removeFromParent(dataItem:DataItem){
-        var parent=dataItem.parent;
-        var index=parent.children.indexOf(dataItem);
-        parent.children.splice(index,1);
-    }
+    private stringForOperation(operation):string {
+        var operationString:string;
+        switch (operation) {
+            case DataOperation.Rename:
+                operationString = "Rename";
+                break;
+            case DataOperation.Move:
+                operationString = "Move";
+                break;
+            case DataOperation.Copy:
+                operationString = "Copy";
+                break;
+            case DataOperation.Group:
+                operationString = "Group";
+                break;
+            case DataOperation.Trash:
+                operationString = "Trash";
+                break;
+            case DataOperation.HardDelete:
+                operationString = "Delete";
+                break;
+        }
+        return operationString;
+    };
 }

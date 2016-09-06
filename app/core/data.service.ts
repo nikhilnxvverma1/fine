@@ -235,14 +235,16 @@ export class DataService{
             if(parts.length>1){
                 extension='.'+parts.pop();
             }
+            var newDataItemName:string;
             if(dataItems.length==1){
-                renamedPath = dataItems[i].parentUrl + newName+extension;
+                newDataItemName=newName+extension;
             }else{
-                renamedPath = dataItems[i].parentUrl + newName+'_'+(i+1)+extension;
+                newDataItemName=newName+'_'+(i+1)+extension;
             }
+            renamedPath = dataItems[i].parentUrl + newDataItemName;
 
             serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
-            var postExecution:PostExecution=new RenamePostExecution(dataItems[i],i,operationInfo);
+            var postExecution:PostExecution=new RenamePostExecution(dataItems[i],i,operationInfo,newDataItemName);
             fs.rename(fullyQualifiedPath,renamedPath,postExecution.callback);
         }
     }
