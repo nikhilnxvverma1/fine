@@ -58,6 +58,7 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
                 this.alertToast('Finished Moving '+total+' '+this.filePlural(total), 2000);
                 break;
             case DataOperation.Copy:
+                this.alertToast('Finished Copying '+total+' '+this.filePlural(total), 2000);
                 break;
             case DataOperation.Trash:
                 this.alertToast(total+' '+this.filePlural(total)+' Moved to Trash', 2000);

@@ -217,4 +217,22 @@ export class Folder extends DataItem{
         }
         return null;
     }
+
+    deepCopy():DataItem {
+        var deepCopy=new Folder(name);
+        deepCopy.copyAttributesFrom(this);
+        deepCopy._depth=this._depth;
+        deepCopy._countOfChildrenLeft=this._countOfChildrenLeft;
+        deepCopy._children=this.deepCopyChildren(); //warning: this will trigger recursive deep copy calls
+        return deepCopy;
+    }
+
+    /** Makes a new list which contains a deep copies of each child */
+    private deepCopyChildren():DataItem[]{
+        var copy=[];
+        for (var i=0;i<this.children.length;i++){
+            copy.push(this.children[i].deepCopy());
+        }
+        return copy;
+    }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="114px" height="102px" viewBox="0 0 114 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>new-folder</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#2C995A" offset="0%"></stop>
+            <stop stop-color="#261D0C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#54EB9A" offset="0%"></stop>
+            <stop stop-color="#0B7871" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="new-folder">
+            <path d="M30.6256039,6.66133815e-16 L4.00386462,6.66133815e-16 C1.78920413,6.66133815e-16 0,1.79019878 0,3.99852088 L0,98.0014791 C0,100.208015 1.79259125,102 4.00386462,102 L109.902955,102 C112.117615,102 113.90682,100.209801 113.90682,98.0014791 L113.90682,9.17266187 L38.6849471,9.17266187 C36.477818,9.17266187 33.9604839,7.52888463 33.0702974,5.51918372 L30.6256039,-6.66133815e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <rect id="Rectangle-7" fill="#FFFFFF" x="4.05202125" y="16.8776978" width="105.952852" height="21.8309353"></rect>
+            <rect id="Rectangle-4" fill="url(#linearGradient-2)" x="0" y="23.573741" width="113.90682" height="78.426259"></rect>
+        </g>
+    </g>
+</svg>

@@ -7,6 +7,7 @@ import {DataItem} from "./data-item";
 import {DataOperation} from "./data-operation";
 import {DeleteOperationInfo} from "./operation-info";
 import {MoveOperationInfo} from "./operation-info";
+import {Folder} from "./folder";
 
 export abstract class PostExecution{
     protected _operationInfo:OperationInfo;
@@ -29,28 +30,19 @@ export abstract class PostExecution{
                     this._operationInfo.serviceProgress.errorOnDataItem(
                         err,
                         this._dataItem,
-                        DataOperation.Rename);
+                        this._operationInfo.dataOperation);
                 }
-                this._operationInfo.count++;
-
-                this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
-                    this._operationInfo.count,
-                    this._operationInfo.total,
-                    DataOperation.Rename);
-
-                if(this._operationInfo.count==this._operationInfo.total){
-                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,this._operationInfo.dataOperation);
-                }
+                this.updateAndNotifyProgress();
             });
         }
     }
 
-    protected updateAndNotifyProgress(dataOperation:DataOperation){
+    protected updateAndNotifyProgress(){
         this._operationInfo.count++;
         this._operationInfo.serviceProgress.processedDataItem(this._dataItem,
             this._operationInfo.count,
             this._operationInfo.total,
-            DataOperation.Rename);
+            this._operationInfo.dataOperation);
 
         if(this._operationInfo.count==this._operationInfo.total){
             this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,this._operationInfo.dataOperation);
@@ -82,10 +74,10 @@ export class RenamePostExecution extends PostExecution{
                     this._operationInfo.serviceProgress.errorOnDataItem(
                         err,
                         this._dataItem,
-                        DataOperation.Rename);
+                        this._operationInfo.dataOperation);
                 }
                 this._dataItem.name=this._newName;
-                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
+                this.updateAndNotifyProgress();
             });
         }
     }
@@ -101,21 +93,33 @@ export class MovePostExecution extends PostExecution {
                     this._operationInfo.serviceProgress.errorOnDataItem(
                         err,
                         this._dataItem,
-                        DataOperation.Rename);
+                        this._operationInfo.dataOperation);
                 }
 
                 (<MoveOperationInfo>this._operationInfo).totalSizeSoFar+=this._dataItem.size;
-                (<MoveOperationInfo>this._operationInfo).movedDataItems.push(this._dataItem);
 
 
-                if (this._operationInfo.dataOperation==DataOperation.Move) {
+                if (this._operationInfo.dataOperation==DataOperation.Move||
+                    this._operationInfo.dataOperation==DataOperation.Group) {
                     this.removeFromParent(this._dataItem);
+                    this._dataItem.selected=false;
+                    (<MoveOperationInfo>this._operationInfo).movedDataItems.push(this._dataItem);
+                }else if(this._operationInfo.dataOperation==DataOperation.Copy){
+                    //create a clone of this and push that into the moved items
+                    var clone=this._dataItem.deepCopy();
+                    clone.selected=false;
+                    var folderToMoveTo=(<MoveOperationInfo>this._operationInfo).folderToMoveTo;
+                    if(folderToMoveTo!=null && clone.isDirectory()){
+                        (<Folder>clone).depth=folderToMoveTo.depth+1;
+                    }
+                    (<MoveOperationInfo>this._operationInfo).movedDataItems.push(clone);
                 }
 
-                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
+                this.updateAndNotifyProgress();
                 if(this.allDataItemsProcessed()){
                     //reduce the size from its parent all the way up to root
-                    if (this._operationInfo.dataOperation==DataOperation.Move) {
+                    if (this._operationInfo.dataOperation==DataOperation.Move||
+                        this._operationInfo.dataOperation==DataOperation.Group) {
                         this._dataItem.parent.addSize(-(<MoveOperationInfo>this._operationInfo).totalSizeSoFar);
                     }
 
@@ -126,6 +130,7 @@ export class MovePostExecution extends PostExecution {
                         var movedItems=(<MoveOperationInfo>this._operationInfo).movedDataItems;
                         for(var i=0;i<movedItems.length;i++){
                             folderToMoveTo.children.push(movedItems[i]);
+                            movedItems[i].parent=folderToMoveTo;
                         }
 
                         //add their cumulative size too
@@ -148,11 +153,11 @@ export class DeletePostExecution extends PostExecution {
                     this._operationInfo.serviceProgress.errorOnDataItem(
                         err,
                         this._dataItem,
-                        DataOperation.Rename);
+                        this._operationInfo.dataOperation);
                 }
                 this.removeFromParent(this._dataItem);
                 (<DeleteOperationInfo>this._operationInfo).totalSizeDeletedSoFar+=this._dataItem.size;
-                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
+                this.updateAndNotifyProgress();
                 if(this.allDataItemsProcessed()){
                     //reduce the size from its parent all the way up to root
                     this._dataItem.parent.addSize(-(<DeleteOperationInfo>this._operationInfo).totalSizeDeletedSoFar);

@@ -166,20 +166,19 @@ export class DataService{
         var count=0;
         var total=dataItems.length;
 
+        var operationInfo=new MoveOperationInfo(dataOperation,scanTarget,total,
+            serviceProgress,this._zone,folderToMoveTo);
+
         var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
-                var operationInfo=new MoveOperationInfo(DataOperation.Move,scanTarget,total,
-                    serviceProgress,this._zone,folderToMoveTo);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.move(fullyQualifiedPath,newPath,postExecution.callback);
             }else{
                 //copy everything over
-                var operationInfo=new MoveOperationInfo(DataOperation.Copy,scanTarget,total,
-                    serviceProgress,this._zone,folderToMoveTo);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.copy(fullyQualifiedPath,newPath,postExecution.callback);

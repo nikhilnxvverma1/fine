@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="83px" height="102px" viewBox="0 0 83 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>avi</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F6F6F6" offset="0%"></stop>
+            <stop stop-color="#CECECE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="21.3994966%" y1="80.1338005%" x2="50%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#E5E4E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="16.2715595%" y1="13.0657051%" x2="82.4785747%" y2="86.1872241%" id="linearGradient-3">
+            <stop stop-color="#A7A7A7" offset="0%"></stop>
+            <stop stop-color="#828282" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="16.2715595%" y1="13.0657051%" x2="82.4785747%" y2="86.1872241%" id="linearGradient-4">
+            <stop stop-color="#D2CFCF" offset="0%"></stop>
+            <stop stop-color="#E7E7E7" offset="39.8118622%"></stop>
+            <stop stop-color="#F4F4F4" offset="66.6952328%"></stop>
+            <stop stop-color="#C5C5C5" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="16.2715595%" y1="13.0657051%" x2="82.4785747%" y2="86.1872241%" id="linearGradient-5">
+            <stop stop-color="#D5D5D5" offset="0%"></stop>
+            <stop stop-color="#C5C5C5" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="86.8487141%" y1="20.5809132%" x2="17.40168%" y2="82.841864%" id="linearGradient-6">
+            <stop stop-color="#5A5A5A" offset="0%"></stop>
+            <stop stop-color="#989898" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="avi">
+            <path d="M53.9462592,0 L0,0 L0,102 L83,102 L83,28.0763718 L53.9462592,28.076373 L53.9462592,-1.11022302e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <polygon id="Path-2-Copy" fill="url(#linearGradient-2)" points="56.4957983 0 56.4957983 25.6054138 82.9155003 25.6054127"></polygon>
+            <text id="AVI" font-family="SourceSansPro-Light, Source Sans Pro" font-size="20" font-weight="300" fill="#6B6B6B">
+                <tspan x="30" y="90">AVI</tspan>
+            </text>
+            <g id="MovieReel" transform="translate(21.000000, 30.000000)">
+                <circle id="Oval-7" fill="url(#linearGradient-3)" cx="21" cy="21" r="21"></circle>
+                <circle id="Oval-7" fill="url(#linearGradient-4)" cx="21" cy="21" r="19"></circle>
+                <circle id="Oval-7" fill="url(#linearGradient-5)" cx="21.5" cy="21.5" r="3.5"></circle>
+                <circle id="Oval-7" fill="#797979" cx="21.5" cy="21.5" r="1.5"></circle>
+                <circle id="Oval-8" fill="url(#linearGradient-6)" cx="18" cy="11" r="4"></circle>
+                <circle id="Oval-8-Copy-2" fill="url(#linearGradient-6)" cx="10" cy="21" r="4"></circle>
+                <path d="M31,18 C33.209139,18 35,16.209139 35,14 C35,11.790861 33.209139,10 31,10 C28.790861,10 27,11.790861 27,14 C27,16.209139 28.790861,18 31,18 Z" id="Oval-8-Copy" fill="url(#linearGradient-6)"></path>
+                <circle id="Oval-8-Copy-4" fill="url(#linearGradient-6)" cx="31" cy="28" r="4"></circle>
+                <circle id="Oval-8-Copy-3" fill="url(#linearGradient-6)" cx="18" cy="32" r="4"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -218,4 +218,19 @@ export abstract class DataItem{
         this.green=g;
         this.blue=b;
     }
+    
+    protected copyAttributesFrom(dataItem:DataItem){
+        this._parentUrl=dataItem._parentUrl;
+        this._name=dataItem._name;
+        this._selected=dataItem._selected;
+        this._parent=dataItem._parent;
+        this._creationDate=dataItem._creationDate;
+        this._modifiedDate=dataItem._modifiedDate;
+        this._size=dataItem._size;
+        this._red=dataItem._red;
+        this._green=dataItem._green;
+        this._blue=dataItem._blue;
+    }
+    
+    public abstract deepCopy():DataItem;
 }

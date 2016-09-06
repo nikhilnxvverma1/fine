@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="83px" height="102px" viewBox="0 0 83 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>bmp</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F6F6F6" offset="0%"></stop>
+            <stop stop-color="#CECECE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="21.3994966%" y1="80.1338005%" x2="50%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#E5E4E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-3">
+            <stop stop-color="#C7AB80" offset="0%"></stop>
+            <stop stop-color="#967249" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-1.11022302e-14%" y1="50%" x2="100%" y2="50%" id="linearGradient-4">
+            <stop stop-color="#213754" offset="0%"></stop>
+            <stop stop-color="#0E192A" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bmp">
+            <path d="M53.9462592,0 L0,0 L0,102 L83,102 L83,28.0763718 L53.9462592,28.076373 L53.9462592,-1.11022302e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <polygon id="Path-2-Copy" fill="url(#linearGradient-2)" points="56.4957983 0 56.4957983 25.6054138 82.9155003 25.6054127"></polygon>
+            <text id="BMP" font-family="SourceSansPro-Light, Source Sans Pro" font-size="20" font-weight="300" fill="#6B6B6B">
+                <tspan x="24" y="94">BMP</tspan>
+            </text>
+            <g id="Brush" transform="translate(41.584201, 55.211935) rotate(-319.000000) translate(-41.584201, -55.211935) translate(36.084201, 33.211935)">
+                <path d="M9.4547629,2.80554472 L8.03832981,23.4102076 C7.94542581,24.9596672 7.11203699,26.2157523 6.17942733,26.2157523 C5.24491613,26.2157523 4.41345716,24.9601441 4.32052485,23.4102076 L2.90409177,2.80554472 C2.78396576,1.25608516 4.25353852,8.01136935e-13 6.17942733,8.01136935e-13 C8.10924294,8.01136935e-13 9.57492617,1.25560823 9.4547629,2.80554472 Z" id="Rectangle-3" fill="url(#linearGradient-3)"></path>
+                <rect id="Rectangle-5" fill="#B06969" x="3.74510747" y="26.9647738" width="5.24315046" height="1.49804299" rx="0.749021495"></rect>
+                <path d="M4.06326957,29.5863491 L9.04532742,29.5863491 C9.04532742,29.5863491 10.8003528,33.9469727 10.3310057,36.5231005 C9.86165866,39.0992282 3.22079185,41.1573138 3.68075174,43.500724 C4.14071164,45.8441341 -0.495457513,38.457592 0.0437046919,35.3550134 C0.582866897,32.2524348 4.06326957,29.5863491 4.06326957,29.5863491 Z" id="Path-3" fill="url(#linearGradient-4)"></path>
+                <path d="M4.86863972,40.4471607 C4.86863972,40.4471607 7.42395855,38.8682816 8.17536755,38.1324153 C8.92677655,37.396549 9.47383299,36.0828135 9.83245113,35.3742344 C10.1910693,34.6656553 8.48609989,36.3241131 7.51079371,37.5012181 C6.53548752,38.6783231 4.86863972,40.4471607 4.86863972,40.4471607 Z" id="Path-4" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

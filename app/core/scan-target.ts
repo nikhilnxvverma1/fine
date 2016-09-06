@@ -410,9 +410,14 @@ export class ScanTarget{
         }
 
         if(isInThisTree){
-            //start looking for that data item by searching recursively each element
-            //index will lead in path elements to look under a folder
-            return this.searchDataItem(this.folderStack[0],pathElements,rootElements.length);
+            //if both path elements are same, that means its the root
+            if(rootElements.length==pathElements.length){
+                return this.folderStack[0];
+            }else{
+                //start looking for that data item by searching recursively each element
+                //index will lead in path elements to look under a folder
+                return this.searchUnderFolder(this.folderStack[0],pathElements,rootElements.length);
+            }
         }else{
             return null;
         }
@@ -431,7 +436,7 @@ export class ScanTarget{
         return elements;
     }
 
-    private searchDataItem(folder:Folder,pathElements:string[],index:number):DataItem{
+    private searchUnderFolder(folder:Folder, pathElements:string[], index:number):DataItem{
         if(index>=pathElements.length){
             return null;
         }
@@ -440,7 +445,7 @@ export class ScanTarget{
 
         if(index+1<pathElements.length){
             if(dataItem!=null && dataItem.isDirectory()){
-                return this.searchDataItem(<Folder>dataItem,pathElements,index+1);
+                return this.searchUnderFolder(<Folder>dataItem,pathElements,index+1);
             }else{
                 return null;
             }
