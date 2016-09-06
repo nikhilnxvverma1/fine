@@ -67,7 +67,7 @@ export class AppComponent{
                         drives[i],
                         (err, data) =>{
                             this._dataService.zone.run(()=>{
-                                var scanTarget=new ScanTarget(data.drive,ScanTargetType.HardDisk,data.total,data.used);
+                                var scanTarget=new ScanTarget(data.drive,'/',ScanTargetType.HardDisk,data.total,data.used);
                                 scanTargets.push(scanTarget);
                                 //console.log("scan target name : "+scanTarget.name);
                                 //if(this._scanTargets.length==1){
@@ -95,7 +95,7 @@ export class AppComponent{
                         for(var i = 0; i<data.length; i++)
                         {
 
-                            var scanTarget=new ScanTarget(data[i].drive,ScanTargetType.HardDisk,data[i].total,data[i].used);
+                            var scanTarget=new ScanTarget(data[i].drive,'/',ScanTargetType.HardDisk,data[i].total,data[i].used);
                             //var driveInfo={
                             //    "mountPoint":data[i].mountpoint,
                             //    "total":data[i].total,
@@ -127,7 +127,7 @@ export class AppComponent{
 
         var folder=new Folder(name);
         folder.parentUrl=containerPath;
-        var folderScanTarget=new ScanTarget(name,ScanTargetType.Folder,-1,-1);
+        var folderScanTarget=new ScanTarget(name,folderPath,ScanTargetType.Folder,-1,-1);
         this._scanTargets.push(folderScanTarget);
         folderScanTarget.folderStack.push(folder);
         folderScanTarget.tracker.scanDidStart();

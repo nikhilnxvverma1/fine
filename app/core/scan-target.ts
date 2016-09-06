@@ -14,6 +14,7 @@ import {SunburstComponent} from "../sunburst.component";
 
 export class ScanTarget{
     _totalElements=0;
+    private _rootPath:string;
     private _name:string;
     private _type:ScanTargetType;
     private _total:number;
@@ -28,13 +29,23 @@ export class ScanTarget{
     private _displayTreeHovered:DisplayElement;
     private _showAllItems:boolean=false;
 
-    constructor(name:string, type:ScanTargetType, total:number, used:number) {
+    constructor(name:string,rootPath:string, type:ScanTargetType, total:number, used:number) {
+        this._rootPath=rootPath;
         this._name = name;
         this._type = type;
         this.total=total;
         this.available = total-used;
         this.used = used;
         //this.tracker.scanStatus=ScanStatus.Scanned;
+    }
+
+
+    get rootPath():string {
+        return this._rootPath;
+    }
+
+    set rootPath(value:string) {
+        this._rootPath = value;
     }
 
     get name():string {
@@ -375,5 +386,67 @@ export class ScanTarget{
         }
 
         return [h, s, l];
+    }
+
+    /**
+     * Looks for data item with the specified string path
+     * @param path the path to the data item
+     * @returns {null} returns the data item if it exists under hierarchy, null otherwise
+     */
+    public findDataItemForPath(path:string):DataItem{
+
+        //split the path and root path by delimiters giving elements array
+        var pathElements=this.getPathElements(path);
+        var rootElements=this.getPathElements(this.rootPath);
+
+        //check if this path is in this tree
+        //start comparing the path with the root as they both should have common start
+        var isInThisTree=true;
+        for (var i=0;i<rootElements.length;i++){
+            if(pathElements[i]!=rootElements[i]){
+                isInThisTree=false;
+                break;
+            }
+        }
+
+        if(isInThisTree){
+            //start looking for that data item by searching recursively each element
+            //index will lead in path elements to look under a folder
+            return this.searchDataItem(this.folderStack[0],pathElements,rootElements.length);
+        }else{
+            return null;
+        }
+    }
+
+    private getPathElements(path:string):string[]{
+        var delimiter=path[0];
+        var elements=path.split(delimiter);
+        //trim the start an the end if they are empty strings
+        if(elements[0].trim()==""){
+            elements.splice(0,1);
+        }
+        if(elements[elements.length-1].trim()==""){
+            elements.splice(elements.length-1,1);
+        }
+        return elements;
+    }
+
+    private searchDataItem(folder:Folder,pathElements:string[],index:number):DataItem{
+        if(index>=pathElements.length){
+            return null;
+        }
+
+        var dataItem=folder.dataItemByName(pathElements[index]);
+
+        if(index+1<pathElements.length){
+            if(dataItem!=null && dataItem.isDirectory()){
+                return this.searchDataItem(<Folder>dataItem,pathElements,index+1);
+            }else{
+                return null;
+            }
+        }else{
+            //found data item(this still could be null)
+            return dataItem;
+        }
     }
 }

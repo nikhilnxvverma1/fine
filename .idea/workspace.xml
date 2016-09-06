@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="Refactored operation progress to display tooltips and percentages, rename operation working fine now">
+    <list default="true" id="1580cd1e-7e7d-48c0-980f-9f0529afa4be" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.component.ts" afterPath="$PROJECT_DIR$/app/app.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/context.component.ts" afterPath="$PROJECT_DIR$/app/context.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/data.service.ts" afterPath="$PROJECT_DIR$/app/core/data.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/dummy-data.ts" afterPath="$PROJECT_DIR$/app/core/dummy-data.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/folder.ts" afterPath="$PROJECT_DIR$/app/core/folder.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/operation-info.ts" afterPath="$PROJECT_DIR$/app/core/operation-info.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/post-execution.ts" afterPath="$PROJECT_DIR$/app/core/post-execution.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/operation-progress.component.ts" afterPath="$PROJECT_DIR$/app/operation-progress.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/core/scan-target.ts" afterPath="$PROJECT_DIR$/app/core/scan-target.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/operation.component.ts" afterPath="$PROJECT_DIR$/app/operation.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/template/main-menu.component.html" afterPath="$PROJECT_DIR$/app/template/main-menu.component.html" />
     </list>
     <ignored path="fi-ne.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/app/core/data.service.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="179" column="43" selection-start-line="179" selection-start-column="43" selection-end-line="179" selection-end-column="43" />
+              <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -41,17 +47,57 @@
         <entry file="file://$PROJECT_DIR$/app/context.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="164" column="24" selection-start-line="164" selection-start-column="24" selection-end-line="164" selection-end-column="24" />
+              <caret line="152" column="25" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="post-execution.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scan-target.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="407" column="22" selection-start-line="407" selection-start-column="22" selection-end-line="407" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="operation.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/operation.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.64912283">
+              <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dummy-data.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/core/dummy-data.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="104" column="51" selection-start-line="104" selection-start-column="51" selection-end-line="104" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post-execution.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/core/post-execution.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5906433">
-              <caret line="118" column="68" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -63,19 +109,7 @@
         <entry file="file://$PROJECT_DIR$/app/core/operation-info.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="operation-progress.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/operation-progress.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -105,12 +139,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/operation.component.ts" />
         <option value="$PROJECT_DIR$/app/selection-field.component.ts" />
         <option value="$PROJECT_DIR$/app/core/selection-tag.ts" />
         <option value="$PROJECT_DIR$/app/core/text-tag.ts" />
         <option value="$PROJECT_DIR$/app/core/scan-status.ts" />
-        <option value="$PROJECT_DIR$/app/core/dummy-data.ts" />
         <option value="$PROJECT_DIR$/app/template/app.component.html" />
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/app/template/sunburst.component.html" />
@@ -118,7 +150,6 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/app/core/data-group.ts" />
         <option value="$PROJECT_DIR$/app/core/scan-info.ts" />
-        <option value="$PROJECT_DIR$/app/app.component.ts" />
         <option value="$PROJECT_DIR$/app/core/LeafElement.ts" />
         <option value="$PROJECT_DIR$/app/core/info-element.ts" />
         <option value="$PROJECT_DIR$/app/core/scan-callback.ts" />
@@ -128,7 +159,6 @@
         <option value="$PROJECT_DIR$/app/core/tracker.ts" />
         <option value="$PROJECT_DIR$/app/core/data-item.ts" />
         <option value="$PROJECT_DIR$/app/core/group-element.ts" />
-        <option value="$PROJECT_DIR$/app/core/scan-target.ts" />
         <option value="$PROJECT_DIR$/app/template/data-area.component.html" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/data-item.component.ts" />
@@ -142,20 +172,24 @@
         <option value="$PROJECT_DIR$/app/template/breadcrumb.component.html" />
         <option value="$PROJECT_DIR$/app/breadcrumb.component.ts" />
         <option value="$PROJECT_DIR$/app/main-menu.component.ts" />
-        <option value="$PROJECT_DIR$/app/template/main-menu.component.html" />
         <option value="$PROJECT_DIR$/app/usage-detail.component.ts" />
         <option value="$PROJECT_DIR$/sass/style.scss" />
         <option value="$PROJECT_DIR$/app/template/usage-detail.component.html" />
-        <option value="$PROJECT_DIR$/app/core/folder.ts" />
         <option value="$PROJECT_DIR$/app/core/context.ts" />
         <option value="$PROJECT_DIR$/app/template/context.component.html" />
-        <option value="$PROJECT_DIR$/app/context.component.ts" />
         <option value="$PROJECT_DIR$/app/template/operation-progress.component.html" />
         <option value="$PROJECT_DIR$/app/core/data-operation.ts" />
         <option value="$PROJECT_DIR$/app/operation-progress.component.ts" />
-        <option value="$PROJECT_DIR$/app/core/data.service.ts" />
+        <option value="$PROJECT_DIR$/app/template/main-menu.component.html" />
+        <option value="$PROJECT_DIR$/app/core/folder.ts" />
+        <option value="$PROJECT_DIR$/app/core/dummy-data.ts" />
+        <option value="$PROJECT_DIR$/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/app/core/scan-target.ts" />
+        <option value="$PROJECT_DIR$/app/context.component.ts" />
         <option value="$PROJECT_DIR$/app/core/operation-info.ts" />
+        <option value="$PROJECT_DIR$/app/core/data.service.ts" />
         <option value="$PROJECT_DIR$/app/core/post-execution.ts" />
+        <option value="$PROJECT_DIR$/app/operation.component.ts" />
       </list>
     </option>
   </component>
@@ -419,12 +453,6 @@
       <created>1457217139212</created>
       <option name="number" value="Default" />
       <updated>1457217139212</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Migrated to RC3 of angular2, integrated designs in the main menu (except feedback)">
-      <created>1466742102879</created>
-      <option name="number" value="00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1466742102879</updated>
     </task>
     <task id="LOCAL-00013" summary="Implemented designs in the feedback section with animation and the sort by menu.">
       <created>1466758298653</created>
@@ -714,7 +742,13 @@
       <option name="project" value="LOCAL" />
       <updated>1473126531806</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Delete and trash operation working fine now with icons removed on the fly">
+      <created>1473129815310</created>
+      <option name="number" value="00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1473129815310</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -779,7 +813,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed buggy selection box preventing selection of items after scrolling down" />
     <MESSAGE value="Fixed scanning algorithm that failed earlier on symlinks" />
     <MESSAGE value="Moved Display element tree population to scan target and cleaned up a few typescript errors" />
     <MESSAGE value="Made sunburst chart in sync with navigation in the organise section while opening folders" />
@@ -804,7 +837,8 @@
     <MESSAGE value="Fixed issue with shift selection of equally sized items in usage detail" />
     <MESSAGE value="Integrated scan targets in operations to fix major bug while performing file operations" />
     <MESSAGE value="Refactored operation progress to display tooltips and percentages, rename operation working fine now" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored operation progress to display tooltips and percentages, rename operation working fine now" />
+    <MESSAGE value="Delete and trash operation working fine now with icons removed on the fly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete and trash operation working fine now with icons removed on the fly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -813,30 +847,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sass/components/_variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.5">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/tracker.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29239765">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/scan-callback.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71929824">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/file.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1043,14 +1053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/template/main-menu.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.25">
-          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/main-menu.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35672516">
@@ -1113,28 +1115,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/operation.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/node-sass/src/libsass/src/util.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.308642">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1173,14 +1157,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/folder.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.029239766">
-          <caret line="109" column="24" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1197,10 +1173,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/operation-progress.component.ts">
+    <entry file="file://$PROJECT_DIR$/app/core/tracker.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29239765">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/template/main-menu.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.75">
+          <caret line="69" column="87" selection-start-line="69" selection-start-column="87" selection-end-line="69" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/folder.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.754386">
+          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/scan-target.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+          <caret line="407" column="22" selection-start-line="407" selection-start-column="22" selection-end-line="407" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/dummy-data.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="51" selection-start-line="104" selection-start-column="51" selection-end-line="104" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1208,17 +1224,7 @@
     <entry file="file://$PROJECT_DIR$/app/core/operation-info.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/data.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="179" column="43" selection-start-line="179" selection-start-column="43" selection-end-line="179" selection-end-column="43" />
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1226,18 +1232,42 @@
     <entry file="file://$PROJECT_DIR$/app/context.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="164" column="24" selection-start-line="164" selection-start-column="24" selection-end-line="164" selection-end-column="24" />
+          <caret line="152" column="25" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/data.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/operation-progress.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029239766">
+          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/core/post-execution.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5906433">
-          <caret line="118" column="68" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/operation.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64912283">
+          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

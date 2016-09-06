@@ -157,6 +157,7 @@ export class DataService{
     public moveFiles(dataItems:DataItem[],
                      scanTarget:ScanTarget,
                      directory:string,
+                     folderToMoveTo:Folder,//this can be null in case the folder is outside the scan target's hierarchy
                      deleteAfterMoving:boolean,
                      serviceProgress:ServiceProgress,
                      dataOperation:DataOperation){
@@ -170,13 +171,15 @@ export class DataService{
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
-                var operationInfo=new MoveOperationInfo(DataOperation.Move,scanTarget,total,serviceProgress,this._zone);
+                var operationInfo=new MoveOperationInfo(DataOperation.Move,scanTarget,total,
+                    serviceProgress,this._zone,folderToMoveTo);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.move(fullyQualifiedPath,newPath,postExecution.callback);
             }else{
                 //copy everything over
-                var operationInfo=new MoveOperationInfo(DataOperation.Copy,scanTarget,total,serviceProgress,this._zone);
+                var operationInfo=new MoveOperationInfo(DataOperation.Copy,scanTarget,total,
+                    serviceProgress,this._zone,folderToMoveTo);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.copy(fullyQualifiedPath,newPath,postExecution.callback);

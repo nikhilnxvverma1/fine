@@ -66,6 +66,7 @@ export class OperationComponent implements OnInit{
     }
     private group(){
         this.groupEvent.emit(this.dummyFolder.name);
+        this.dummyFolder.name='';
     }
 
 }

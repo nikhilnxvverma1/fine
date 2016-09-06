@@ -104,8 +104,8 @@ export class MovePostExecution extends PostExecution {
                         DataOperation.Rename);
                 }
 
-                (<MoveOperationInfo>_operationInfo).totalSizeSoFar+=this._dataItem.size;
-                (<MoveOperationInfo>_operationInfo).movedDataItems.push(this._dataItem);
+                (<MoveOperationInfo>this._operationInfo).totalSizeSoFar+=this._dataItem.size;
+                (<MoveOperationInfo>this._operationInfo).movedDataItems.push(this._dataItem);
 
 
                 if (this._operationInfo.dataOperation==DataOperation.Move) {
@@ -116,10 +116,22 @@ export class MovePostExecution extends PostExecution {
                 if(this.allDataItemsProcessed()){
                     //reduce the size from its parent all the way up to root
                     if (this._operationInfo.dataOperation==DataOperation.Move) {
-                        this._dataItem.parent.addSize(-(<MoveOperationInfo>_operationInfo).totalSizeSoFar);
+                        this._dataItem.parent.addSize(-(<MoveOperationInfo>this._operationInfo).totalSizeSoFar);
                     }
 
-                    //TODO whichever place got moved should also be adjusted
+                    //whichever place got moved should also be adjusted to add these moved items
+                    var folderToMoveTo=(<MoveOperationInfo>this._operationInfo).folderToMoveTo;
+                    if(folderToMoveTo!=null){
+                        //add them as children
+                        var movedItems=(<MoveOperationInfo>this._operationInfo).movedDataItems;
+                        for(var i=0;i<movedItems.length;i++){
+                            folderToMoveTo.children.push(movedItems[i]);
+                        }
+
+                        //add their cumulative size too
+                        folderToMoveTo.addSize((<MoveOperationInfo>this._operationInfo).totalSizeSoFar);
+                    }
+
                 }
             });
         }
@@ -139,11 +151,11 @@ export class DeletePostExecution extends PostExecution {
                         DataOperation.Rename);
                 }
                 this.removeFromParent(this._dataItem);
-                (<DeleteOperationInfo>_operationInfo).totalSizeDeletedSoFar+=this._dataItem.size;
+                (<DeleteOperationInfo>this._operationInfo).totalSizeDeletedSoFar+=this._dataItem.size;
                 this.updateAndNotifyProgress(this._operationInfo.dataOperation);
                 if(this.allDataItemsProcessed()){
                     //reduce the size from its parent all the way up to root
-                    this._dataItem.parent.addSize(-(<DeleteOperationInfo>_operationInfo).totalSizeDeletedSoFar);
+                    this._dataItem.parent.addSize(-(<DeleteOperationInfo>this._operationInfo).totalSizeDeletedSoFar);
                 }
             });
         }

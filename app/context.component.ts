@@ -23,6 +23,7 @@ import {OperationComponent} from "./operation.component";
 import {ToggleStatus} from "./core/toggle-status";
 import {trigger,state,style,transition,animate,keyframes} from "@angular/core";
 import {Point} from "./core/point";
+import {Folder} from "./core/folder";
 declare var $:any;
 
 @Component({
@@ -138,10 +139,19 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         }
         var parentFolder:string=selectedDataItems[0].parentUrl;
         var newDirectory=parentFolder+folderName+'/';
+
+        //make a new folder and add it as child to top folder
+        var newFolder=new Folder(folderName);
+        newFolder.depth=this._scanTarget.topFolder().depth+1;
+
+        //we avoid addDataItem because we don't want size propogation here
+        this._scanTarget.topFolder().children.push(newFolder);
+
         console.log("Moving selected files to Location: "+newDirectory);
         this.dataService.moveFiles(selectedDataItems,
             this._scanTarget,
             newDirectory,
+            newFolder,
             true,
             this.operationProgress,
             DataOperation.Group
@@ -159,10 +169,13 @@ export class ContextComponent implements AfterContentInit,OnChanges{
 
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{
+                //search for folder (we assert that this is going to be a folder)
+                var folderToMoveTo=<Folder>this._scanTarget.findDataItemForPath(folderToOpen[0]);
                 console.log('Will move to folder: '+folderToOpen[0]+" delete after: "+deleteAfterMoving);
                 this.dataService.moveFiles(this._scanTarget.topFolder().getSelectedFiles(),
                     this._scanTarget,
                     folderToOpen[0]+'/',
+                    folderToMoveTo,
                     deleteAfterMoving,
                     this.operationProgress,
                     moveOrCopy);

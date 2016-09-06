@@ -67,7 +67,7 @@
                                [style.background]="scanTarget.tracker.scanStatus==2?'#436186':'#ab2d64'"
                                (click)="actOnScanTarget(scanTarget,$event)">
                                 <span *ngIf="scanTarget.tracker.scanStatus==0">Scan</span>
-                                <span *ngIf="scanTarget.tracker.scanStatus==1">Cancel</span>
+                                <span *ngIf="scanTarget.tracker.scanStatus==1">Scanning</span>
                                 <span *ngIf="scanTarget.tracker.scanStatus==2">View</span>
                             </a>
                             <a class="mainMenuActionButton scanDropDown"

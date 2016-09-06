@@ -7,6 +7,7 @@ import {DataOperation} from "./data-operation";
 import {ServiceProgress} from "./service-progress";
 import {ScanTarget} from "./scan-target";
 import {DataItem} from "./data-item";
+import {Folder} from "./folder";
 
 export class OperationInfo{
     protected _dataOperation:DataOperation;
@@ -38,6 +39,13 @@ export class DeleteOperationInfo extends OperationInfo{
 }
 
 export class MoveOperationInfo extends OperationInfo{
+    folderToMoveTo:Folder;
     movedDataItems:DataItem[]=[];
     totalSizeSoFar=0;
+
+    constructor(dataOperation:DataOperation,scanTarget:ScanTarget,
+                total:number,serviceProgress:ServiceProgress,zone:NgZone,folderToMoveTo:Folder) {
+        super(dataOperation,scanTarget,total,serviceProgress,zone);
+        this.folderToMoveTo=folderToMoveTo;
+    }
 }

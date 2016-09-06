@@ -208,4 +208,13 @@ export class Folder extends DataItem{
         }
         return items;
     }
+
+    dataItemByName(name:string):DataItem{
+        for(var i=0;i<this.children.length;i++){
+            if(this.children[i].name==name){
+                return this.children[i];
+            }
+        }
+        return null;
+    }
 }
