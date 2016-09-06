@@ -21,6 +21,8 @@ import {ScanCallback} from "./scan-callback";
 import {RenamePostExecution} from "./post-execution";
 import {DeletePostExecution} from "./post-execution";
 import {MovePostExecution} from "./post-execution";
+import {DeleteOperationInfo} from "./operation-info";
+import {MoveOperationInfo} from "./operation-info";
 @Injectable()
 export class DataService{
 
@@ -168,13 +170,13 @@ export class DataService{
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
             if(deleteAfterMoving){
-                var operationInfo=new OperationInfo(DataOperation.Move,scanTarget,total,serviceProgress,this._zone);
+                var operationInfo=new MoveOperationInfo(DataOperation.Move,scanTarget,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.move(fullyQualifiedPath,newPath,postExecution.callback);
             }else{
                 //copy everything over
-                var operationInfo=new OperationInfo(DataOperation.Copy,scanTarget,total,serviceProgress,this._zone);
+                var operationInfo=new MoveOperationInfo(DataOperation.Copy,scanTarget,total,serviceProgress,this._zone);
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
                 var postExecution:PostExecution=new MovePostExecution(dataItems[i],i,operationInfo);
                 fs.copy(fullyQualifiedPath,newPath,postExecution.callback);
@@ -193,7 +195,7 @@ export class DataService{
         var total=dataItems.length;
 
         if(permenantly){
-            var operationInfo=new OperationInfo(DataOperation.HardDelete,scanTarget,total,serviceProgress,this._zone);
+            var operationInfo=new DeleteOperationInfo(DataOperation.HardDelete,scanTarget,total,serviceProgress,this._zone);
             var fs=require('fs-extra');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
@@ -202,7 +204,7 @@ export class DataService{
                 fs.remove(fullyQualifiedPath,postExecution.callback);
             }
         }else{
-            var operationInfo=new OperationInfo(DataOperation.Trash,scanTarget,total,serviceProgress,this._zone);
+            var operationInfo=new DeleteOperationInfo(DataOperation.Trash,scanTarget,total,serviceProgress,this._zone);
             var trash=require('trash');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();

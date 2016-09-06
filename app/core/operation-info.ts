@@ -6,6 +6,7 @@ import {Inject,NgZone} from "@angular/core";
 import {DataOperation} from "./data-operation";
 import {ServiceProgress} from "./service-progress";
 import {ScanTarget} from "./scan-target";
+import {DataItem} from "./data-item";
 
 export class OperationInfo{
     protected _dataOperation:DataOperation;
@@ -32,3 +33,11 @@ export class OperationInfo{
     }
 }
 
+export class DeleteOperationInfo extends OperationInfo{
+    totalSizeDeletedSoFar=0;
+}
+
+export class MoveOperationInfo extends OperationInfo{
+    movedDataItems:DataItem[]=[];
+    totalSizeSoFar=0;
+}

@@ -49,23 +49,27 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
         this.hide=true;
         switch(operation){
             case DataOperation.Rename:
-                this.alertToast(total+' Files Renamed', 2000);
+                this.alertToast(total+' '+this.filePlural(total)+' Renamed', 2000);
                 break;
             case DataOperation.Group:
-                this.alertToast(total+' Files Grouped', 2000);
+                this.alertToast(total+' '+this.filePlural(total)+' Grouped', 2000);
                 break;
             case DataOperation.Move:
-                this.alertToast('Finished Moving '+total+' Files', 2000);
+                this.alertToast('Finished Moving '+total+' '+this.filePlural(total), 2000);
                 break;
             case DataOperation.Copy:
                 break;
             case DataOperation.Trash:
-                this.alertToast(total+' Files Moved to Trash', 2000);
+                this.alertToast(total+' '+this.filePlural(total)+' Moved to Trash', 2000);
                 break;
             case DataOperation.HardDelete:
-                this.alertToast(total+' Files Deleted permanently', 2000);
+                this.alertToast(total+' '+this.filePlural(total)+' Deleted permanently', 2000);
                 break;
         }
+    }
+
+    private filePlural(n:number):string{
+        return n==1?"File":"Files";
     }
 
     errorOnDataItem(err, dataItem:DataItem, operation:DataOperation) {

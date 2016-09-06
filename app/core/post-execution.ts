@@ -5,6 +5,8 @@
 import {OperationInfo} from "./operation-info";
 import {DataItem} from "./data-item";
 import {DataOperation} from "./data-operation";
+import {DeleteOperationInfo} from "./operation-info";
+import {MoveOperationInfo} from "./operation-info";
 
 export abstract class PostExecution{
     protected _operationInfo:OperationInfo;
@@ -37,7 +39,7 @@ export abstract class PostExecution{
                     DataOperation.Rename);
 
                 if(this._operationInfo.count==this._operationInfo.total){
-                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
+                    this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,this._operationInfo.dataOperation);
                 }
             });
         }
@@ -51,12 +53,20 @@ export abstract class PostExecution{
             DataOperation.Rename);
 
         if(this._operationInfo.count==this._operationInfo.total){
-            this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,DataOperation.Rename);
+            this._operationInfo.serviceProgress.operationCompleted(this._operationInfo.total,this._operationInfo.dataOperation);
         }
     }
 
     protected allDataItemsProcessed():boolean{
         return this._operationInfo.count==this._operationInfo.total
+    }
+
+    protected  removeFromParent(dataItem:DataItem){
+        var parent=dataItem.parent;
+        if(parent!=null){
+            var index=parent.children.indexOf(dataItem);
+            parent.children.splice(index,1);
+        }
     }
 }
 
@@ -82,13 +92,60 @@ export class RenamePostExecution extends PostExecution{
 }
 
 export class MovePostExecution extends PostExecution {
-    constructor(_dataItem:DataItem, _index:number, _operationInfo:OperationInfo) {
+    constructor(_dataItem:DataItem, _index:number, _operationInfo:MoveOperationInfo) {
         super(_dataItem, _index, _operationInfo);
+        //arrow function that preserves the value of "this" context
+        this.callback=(err)=>{
+            this._operationInfo.zone.run(()=>{
+                if(err){
+                    this._operationInfo.serviceProgress.errorOnDataItem(
+                        err,
+                        this._dataItem,
+                        DataOperation.Rename);
+                }
+
+                (<MoveOperationInfo>_operationInfo).totalSizeSoFar+=this._dataItem.size;
+                (<MoveOperationInfo>_operationInfo).movedDataItems.push(this._dataItem);
+
+
+                if (this._operationInfo.dataOperation==DataOperation.Move) {
+                    this.removeFromParent(this._dataItem);
+                }
+
+                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
+                if(this.allDataItemsProcessed()){
+                    //reduce the size from its parent all the way up to root
+                    if (this._operationInfo.dataOperation==DataOperation.Move) {
+                        this._dataItem.parent.addSize(-(<MoveOperationInfo>_operationInfo).totalSizeSoFar);
+                    }
+
+                    //TODO whichever place got moved should also be adjusted
+                }
+            });
+        }
     }
 }
 
 export class DeletePostExecution extends PostExecution {
-    constructor(_dataItem:DataItem, _index:number, _operationInfo:OperationInfo) {
+    constructor(_dataItem:DataItem, _index:number, _operationInfo:DeleteOperationInfo) {
         super(_dataItem, _index, _operationInfo);
+        //arrow function that preserves the value of "this" context
+        this.callback=(err)=>{
+            this._operationInfo.zone.run(()=>{
+                if(err){
+                    this._operationInfo.serviceProgress.errorOnDataItem(
+                        err,
+                        this._dataItem,
+                        DataOperation.Rename);
+                }
+                this.removeFromParent(this._dataItem);
+                (<DeleteOperationInfo>_operationInfo).totalSizeDeletedSoFar+=this._dataItem.size;
+                this.updateAndNotifyProgress(this._operationInfo.dataOperation);
+                if(this.allDataItemsProcessed()){
+                    //reduce the size from its parent all the way up to root
+                    this._dataItem.parent.addSize(-(<DeleteOperationInfo>_operationInfo).totalSizeDeletedSoFar);
+                }
+            });
+        }
     }
 }
