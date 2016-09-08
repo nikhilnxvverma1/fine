@@ -144,6 +144,9 @@ export class ContextComponent implements AfterContentInit,OnChanges{
         var newFolder=new Folder(folderName);
         newFolder.depth=this._scanTarget.topFolder().depth+1;
 
+        //make it selected so that it is highlighted after grouping
+        newFolder.selected=true;
+
         //we avoid addDataItem because we don't want size propogation here
         this._scanTarget.topFolder().children.push(newFolder);
 

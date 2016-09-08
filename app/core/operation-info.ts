@@ -11,7 +11,7 @@ import {Folder} from "./folder";
 
 export class OperationInfo{
     protected _dataOperation:DataOperation;
-    protected _scanTarget:ScanTarget;
+    private _scanTarget:ScanTarget;
     public count:number=0;
     private _total:number;
     public serviceProgress:ServiceProgress;
@@ -31,6 +31,10 @@ export class OperationInfo{
 
     get dataOperation():DataOperation {
         return this._dataOperation;
+    }
+
+    get scanTarget():ScanTarget {
+        return this._scanTarget;
     }
 }
 

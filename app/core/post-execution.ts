@@ -117,6 +117,7 @@ export class MovePostExecution extends PostExecution {
 
                 this.updateAndNotifyProgress();
                 if(this.allDataItemsProcessed()){
+
                     //reduce the size from its parent all the way up to root
                     if (this._operationInfo.dataOperation==DataOperation.Move||
                         this._operationInfo.dataOperation==DataOperation.Group) {
@@ -136,6 +137,9 @@ export class MovePostExecution extends PostExecution {
                         //add their cumulative size too
                         folderToMoveTo.addSize((<MoveOperationInfo>this._operationInfo).totalSizeSoFar);
                     }
+
+                    //make sure to resort the top folder after all these changes
+                    this._operationInfo.scanTarget.resortCurrentWorkingDirectory();
 
                 }
             });

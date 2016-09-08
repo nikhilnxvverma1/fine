@@ -156,6 +156,10 @@ export class ScanTarget{
         return this.folderStack[this.folderStack.length-1];
     }
 
+    public resortCurrentWorkingDirectory(){
+        this.topFolder().sort(this.sortOption,this._sortedInDescending,false);
+    }
+
     /**
      * jumps to the specified folder by adding relevant folders in the folder stack
      * @param folder folder to jump to
