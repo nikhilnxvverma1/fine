@@ -1,6 +1,6 @@
 {
   "name": "fine",
-  "version": "alpha",
+  "version": "0.6.0",
   "description": "A neat file organizer",
   "main": "main.js",
   "scripts": {

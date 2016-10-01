@@ -13,3 +13,14 @@ After scanning a directory, you get a **sunburst** chart that gives you an overv
 Colored elements represent folders that can be clicked to zoom and show further details. Hovering over any element reveals further information about that element.Files and folders that are too small are intentionally omitted out for the sake of brevity.
 
 Once you have found a directory you would like to work with, just hit **_Organize_**. This takes you to the file browser that can be used to perform several operations on a group of selected items. No need to perform operations out of the application and rescan the directory again. FI.NE provides everything you need under one roof. Clicking the **_Analyze_** button at the bottom right takes you back to the sunburst chart.
+
+### Instructions for running:
+
+If you would like to check out this project, do the following:
+ 
+1. npm install (make sure your **node environment is not set to production**. It should be development)
+2. gulp typescript (to convert typescript into javascript)
+3. gulp sass
+4. gulp
+
+If you still face issues, just let me know. Please keep in mind that File Neat is still in alpha. 
