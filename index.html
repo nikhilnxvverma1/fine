@@ -1,50 +1,19 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>FI.NE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-	<!--Import materialize.css-->
-    <!--<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>-->
-    <link href="font/font.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/d3/d3.js"></script>
-    <script>
-      window.snap = require('snapsvg');
-//      var stage = snap(100, 100);
-//      var circle = stage.el("circle",{cx:50, cy:50, r:25, fill:"#0af"});
-    </script>
-    <!--Import jQuery before materialize.js-->
-    <script>window.$ = window.jQuery = require('./js/jquery-2.1.1.min.js');</script>
-    <script>var Hammer = require('./js/hammer-2.0.6.min.js');</script>
-    <script type="text/javascript" src="js/bin/materialize.min.js"></script>
-
-    <!-- 2. Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/transpiled/boot')
-            .then(null, console.error.bind(console));
-
-    </script>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
   </head>
-
-  <!-- 3. Display the application -->
   <body>
-  <app></app>
+    <h1>Hello World!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
   </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
 </html>
