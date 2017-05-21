@@ -3,3 +3,17 @@ app/transpiled
 .idea
 .vscode
 npm-debug.log
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
