@@ -1,0 +1,27 @@
+<!-- Modal Structure -->
+<div id="confirmDeleteModal" class="modal bottom-sheet">
+
+    <div id="deleteBoxHeader">
+        <a id="deleteCancel" class="verticallyCenterAnchored modal-action modal-close "><i class="material-icons">close</i> </a>
+        <div id="deleteConfirmationMessage" class="verticallyCenterAnchored">Are you sure you want to delete these items?</div>
+        <div id="deleteActionContainer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn" (click)="trashSelectedFiles()">Move to trash</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn red" (click)="hardDeleteSelectedFiles()">Delete Permanently</a>
+        </div>
+    </div>
+    <div class="modal-content" id="deleteBoxContent">
+        <div *ngFor="let dataItem of dataItems" >
+            <div class="deleteListRow" *ngIf="dataItem.selected">
+                    <input type="checkbox" [attr.id]="dataItem.name|prefixRemoveSpace:'delete'" [(ngModel)]="dataItem.selected"/>
+                    <label [attr.for]="dataItem.name|prefixRemoveSpace:'delete'">
+                        <img src="{{dataItem|iconFile}}" class="dataItemIconForListView"/>
+                    </label>
+                    <div class="dataItemNameInList">{{dataItem.name}}</div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal-footer">-->
+
+        <!--<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>-->
+    <!--</div>-->
+</div>

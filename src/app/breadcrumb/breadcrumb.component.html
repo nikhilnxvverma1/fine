@@ -1,0 +1,35 @@
+<nav id="breadcrumbContainer" *ngIf="_scanTarget">
+    <div class="nav-wrapper">
+
+        <!--get the reference to this element using view child -->
+        <div #breadcrumbContainerStrip
+             id="breadcrumbContainerStrip"
+             (mouseleave)="hoveredOutOfBreadcrumbArea()"
+             class="col s12" >
+            <a #menuLink
+               id="menuLink"
+               class="breadcrumb scaleUpOnHover"
+               (click)="openMainMenu()">
+                <i class="material-icons">view_quilt</i>
+            </a>
+            <div *ngFor="let folder of _scanTarget.folderStack; let last=last,let index=index"
+               class="breadcrumbItemContainer"
+               (mouseenter)="hoveredOverBreadcrumbItem($event)"
+               [style.color]="last?'#ffffff':'#e6e6e6'"
+               [style.width]="_doBreadcrumbItemsNeedToContract
+               ?(index<_breadcrumbWidths.length?_breadcrumbWidths[index]+'px':'0px')
+               :'auto'"
+               (click)="backTo(folder)">
+                <span class="breadcrumbItem">
+                    <!-- Using before selector instead in CSS-->
+                <!--<i class="material-icons">keyboard_arrow_right</i>-->
+                    <span>{{folder.name}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<folder-context [scanTarget]="_scanTarget"
+                (jumpedToFolder)="jumpedToFolder($event)"
+                (opendataitem)="openDataItem($event)">Loading...</folder-context>

@@ -1,0 +1,49 @@
+<ul class="collapsible popout relativePosition" data-collapsible="accordion" @operationToggle="toggleStatus.getState()">
+    <li>
+        <div class="collapsible-header">Rename</div>
+        <div class="collapsible-body operation">
+            <div class="mediumVerticalPadding">Rename selected files as :</div>
+            <div class="input-field">
+                <input type="text" id="newNameInput" [(ngModel)]="newName"/>
+                <label style="left: 0px;" for="newNameInput">New Name</label>
+            </div>
+            <div class="center-align mediumVerticalPadding">
+                <a class="waves-effect waves-light btn" (click)="rename()">Rename</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Group</div>
+        <div class="collapsible-body operation">
+            <div class="mediumVerticalPadding">Group selected items in a new folder named:</div>
+            <div class="input-field">
+                <input type="text" id="dummyFolderInput" [(ngModel)]="dummyFolder.name"/>
+                <label style="left: 0px;" for="dummyFolderInput">Folder name</label>
+            </div>
+            <div class="center-align mediumVerticalPadding">
+                <a class="waves-effect waves-light btn" (click)="group()">Group</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Move</div>
+        <div class="collapsible-body operation">
+            <div class="mediumVerticalPadding">Move or copy selected items to a new location</div>
+            <div class="center-align mediumVerticalPadding">
+                <a class="waves-effect waves-light btn" (click)="move(true)">Move</a>
+            </div>
+            <div class="center-align mediumLowerPadding">
+                <a class="waves-effect waves-light btn" (click)="move(false)">Copy</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Delete</div>
+        <div class="collapsible-body operation">
+            <div class="mediumVerticalPadding">Delete selected files and folders:</div>
+            <div class="center-align mediumVerticalPadding">
+                <a class="waves-effect waves-light btn" (click)="reviewDelete()">Review</a>
+            </div>
+        </div>
+    </li>
+</ul>

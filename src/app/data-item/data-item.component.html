@@ -1,0 +1,8 @@
+<div>
+    <div>
+        <div class="dataItemIconContainer" [class.dataItemIconSelected]="dataItem.selected">
+            <img src="{{dataItem|iconFile}}" (click)="selectDataItem(dataItem,$event)" (dblclick)="openDataItem(dataItem)" class="dataItemIcon"/>
+        </div>
+        <label [class.dataItemLabelSelected]="dataItem.selected">{{dataItem.name|slice:0:15}}</label>
+    </div>
+</div>

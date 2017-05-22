@@ -1,0 +1,83 @@
+<!-- Height 100% needed for setting percentage based heights of children-->
+<div *ngIf="scanTarget!=null" style="height: 100%;">
+    <!--<div class="usageLegendForHeader"-->
+         <!--@legendToggle="toggleStatus.getState()"-->
+         <!--[style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"-->
+    <!--&gt;</div>-->
+<div class="usageDetailHeader"
+    @usageHeaderToggle="toggleStatus.getState()">
+        <!--<span>{{scanTarget.displayTreeHovered.getDataItem().name}}</span>-->
+        <!--<span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>-->
+
+    <div class="usageLegendForHeader"
+         @legendToggle="toggleStatus.getState()"
+         [style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"
+    ></div>
+    <div class="usageDetailHeaderName"
+         (mouseenter)="mouseEnterDataName($event)"
+         (mouseleave)="mouseExitDataName($event)">
+        <span>{{scanTarget.displayTreeHovered.getDataItem().name}}</span>
+    </div>
+    <span class="right usageDetailHeaderSize">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
+</div>
+    <div id="usageListContainer" class="noTextHighlight">
+        <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
+            <li class="usageDetailItem"
+                *ngFor="let child of scanTarget.displayTreeHovered.children"
+                [class.selectedUsageDetail]="child.getDataItem().selected"
+                (click)="selectChild(child.getDataItem(),$event)"
+                (dblclick)="openUsage(child.getDataItem())"
+            >
+                <div class="usageLegendForDetail"
+                     @legendToggle="toggleStatus.getState()"
+                     [style.background]="child.getDataItem().colorRGB()"
+                ></div>
+                <div class="usageDetailName"
+                     (mouseenter)="mouseEnterDataName($event)"
+                     (mouseleave)="mouseExitDataName($event)">
+                    <span>{{ child.getDataItem().name}}</span>
+                </div>
+                <span class="right">{{child.getDataItem().size|unitSpace}}</span>
+            </li>
+            <!--More items (either collapsed on current or showing different hovered group element)-->
+            <li *ngIf="scanTarget.displayTreeHovered.omissionCount>0 &&
+            (scanTarget.displayTreeHovered!=scanTarget.displayTreeCurrent ||
+             !scanTarget.showAllItems)"
+                (click)="showMoreItems()"
+                class="usageDetailItem usageDetailMoreItems">
+                <div class="usageLegendForDetail"
+                     @legendToggle="toggleStatus.getState()"
+                     style="background:rgb(228, 228, 228)"
+                ></div>
+                <div class="usageDetailName"
+                     (mouseenter)="mouseEnterDataName($event)"
+                     (mouseleave)="mouseExitDataName($event)">
+                    <span>{{ scanTarget.displayTreeHovered.omissionCount + " More items"}}</span>
+                </div>
+                <span class="right">{{scanTarget.displayTreeHovered.omissionSize|unitSpace}}</span>
+            </li>
+            <!-- showMoreItems is not a new component, but just a wrapper for the if condition -->
+            <showMoreItems *ngIf="scanTarget.showAllItems && scanTarget.displayTreeHovered==scanTarget.displayTreeCurrent">
+                <li class="usageDetailItem"
+                    *ngFor="let child of _moreItems"
+                    [class.selectedUsageDetail]="child.selected"
+                    (click)="selectChild(child,$event)"
+                    (dblclick)="openUsage(child)"
+                >
+                    <!--For the extended list, we show the color of the last group list item-->
+                    <div class="usageLegendForDetail"
+                         @legendToggle="toggleStatus.getState()"
+                         [style.background]="child.isDirectory()?_lastGroupElement.getDataItem().colorRGB():child.colorRGB()"
+                    ></div>
+                    <div class="usageDetailName"
+                         (mouseenter)="mouseEnterDataName($event)"
+                         (mouseleave)="mouseExitDataName($event)">
+                        <span>{{ child.name}}</span>
+                    </div>
+                    <span class="right">{{child.size|unitSpace}}</span>
+                </li>
+            </showMoreItems>
+
+        </ul>
+    </div>
+</div>

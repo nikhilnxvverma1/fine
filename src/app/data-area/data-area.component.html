@@ -1,0 +1,59 @@
+<p>
+  data-area works!
+</p>
+<div id="subheader" @subheaderToggle="toggleStatus.getState()">
+    <div class="row">
+        <div class="offset-s8 s4 col relativePosition">
+            <span class="subheaderItem smallPaddingRight">Sort By:</span>
+            <a class="subheaderItem underline" (mousedown)="toggleSortByMenu($event)">Name</a>
+            <div id="sortByMenu" @sortByMenuState="getSortByMenuState()">
+                <ul>
+                    <li (click)="selectSortOption(0,$event)"><i [style.opacity]="sortOption==0?'1':'0'" class="material-icons selectedSortOption">done</i>Size</li>
+                    <li (click)="selectSortOption(1,$event)"><i [style.opacity]="sortOption==1?'1':'0'" class="material-icons selectedSortOption">done</i>Name</li>
+                    <li (click)="selectSortOption(2,$event)"><i [style.opacity]="sortOption==2?'1':'0'" class="material-icons selectedSortOption">done</i>Type</li>
+                    <li (click)="selectSortOption(3,$event)"><i [style.opacity]="sortOption==3?'1':'0'" class="material-icons selectedSortOption">done</i>Modified Date</li>
+                    <li (click)="selectSortOption(4,$event)"><i [style.opacity]="sortOption==4?'1':'0'" class="material-icons selectedSortOption">done</i>Creation Date</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div #dataAreaContainer id="dataAreaContainer" class="row smallPaddingLeft relativePosition"
+     @dataAreaItemsToggle="toggleStatus.getState()">
+
+    <!--Blank div used for capturing mouse events that happen in the background (as in the div behind the icons) -->
+    <!--adjusted for scrolled amount-->
+    <div style="
+    position: absolute;
+    left:0;
+    width:100%;
+    height:100%;"
+         [style.top]="dataAreaContainer.scrollTop+'px'"
+         (mousedown)="mouseDown($event)"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)"
+    ></div>
+
+
+    <div class="col s4 m3 l2 dataItemContainer"
+         *ngIf="dummyFolder.name!=null && dummyFolder.name.length>0"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)">
+        <data-item [dataItem]="dummyFolder"></data-item>
+    </div>
+    <div class="col s4 m3 l2 dataItemContainer"
+         *ngFor="let dataItem of dataItems"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)">
+        <data-item [dataItem]="dataItem"
+                   (deselectall)="deselectEvent.emit(this)"
+                   (selectpreceding)="selectPrecedingDataItems($event)"
+                   (opendataitem)="openDataItem($event)"></data-item>
+    </div>
+    <div #selectionRect
+         id="selectionRect"
+         (mousedown)="mouseDown($event)"
+         (mousemove)="mouseMove($event)"
+         (mouseup)="mouseUp($event)"
+    ></div>
+</div>

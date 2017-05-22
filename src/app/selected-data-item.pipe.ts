@@ -13,7 +13,7 @@ import {DataItem} from '../core/data-item';
  *   formats to: 1024
  */
 @Pipe({name: 'selectedDataItems'})
-export class SelectedDataItem implements PipeTransform {
+export class SelectedDataItemPipe implements PipeTransform {
     transform(value: DataItem[],args?) {
         console.log("executing pipe");
         return value.filter(dataItem=>{

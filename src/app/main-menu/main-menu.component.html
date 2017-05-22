@@ -1,0 +1,103 @@
+
+<div>
+    <div id="mainMenu" @menuState="getMenuState()">
+
+        <div>
+
+            <a id="menuCloseLink"
+               (click)="changeMenuStateToClose()"
+               *ngIf="activeScanTarget"
+            ><i class="scaleUpOnHover white-text small material-icons">close</i>
+            </a>
+
+            <div id="scanTargetListContainer">
+                <div class="scanTargetContainer"
+                     *ngFor="let scanTarget of scanTargets"
+                     [class.scanCompleted]="scanTarget.tracker.scanStatus==2"
+                     (click)="scanTarget.tracker.scanStatus==2?openScanResultEvent.emit(scanTarget):1"
+                >
+                    <div class="row tinyBottomMargin valign-wrapper">
+                        <div class="s1 col">
+                            <img *ngIf="scanTarget.type==0" class="scanTargetIcon" src="images/harddisk.svg">
+                            <img *ngIf="scanTarget.type==1" class="scanTargetIcon" src="images/usb-stick.svg">
+                            <img *ngIf="scanTarget.type==2" class="scanTargetIcon" src="images/my-folder.svg">
+                        </div>
+                        <div class="s2 col valign">
+                            {{scanTarget.name}}
+                        </div>
+                        <div class="s5 col offset-s2">
+                            <!--Unscanned-->
+                            <div class="menuLoaderBackground"
+                                 *ngIf="scanTarget.tracker.scanStatus==0">
+                                <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
+                                <label>
+                                    {{scanTarget.used|unitSpace}} used
+                                </label>
+                                <label class="floatRight">
+                                    {{scanTarget.total|unitSpace}}
+                                </label>
+                            </div>
+
+                            <!--Scanned and not folder-->
+                            <div class="menuLoaderBackground"
+                                 *ngIf="scanTarget.tracker.scanStatus!=0&&scanTarget.type!=2">
+                                <div class="diskCapacity" [style.width]="(scanTarget.used/scanTarget.total)*100+'%'"></div>
+                                <label>
+                                    {{scanTarget.used|unitSpace}} used
+                                </label>
+                                <label class="floatRight">
+                                    {{scanTarget.folderStack[0].size|unitSpace}}
+                                </label>
+                            </div>
+                            <div [class.menuLoaderBackground]="scanTarget.tracker.scanStatus==1"
+                                 *ngIf="scanTarget.tracker.scanStatus!=0&&scanTarget.type==2">
+                                <div class="diskCapacity"
+                                     *ngIf="scanTarget.tracker.scanStatus==1"
+                                     [style.width]="((scanTarget.tracker.totalChildrenOfRoot-scanTarget.folderStack[0].countOfChildrenLeft)/
+                                     scanTarget.tracker.totalChildrenOfRoot)*100+'%'"></div>
+                                <h6 *ngIf="scanTarget.tracker.scanStatus==2">
+                                    {{scanTarget.folderStack[0].size|unitSpace}}
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="s2 col">
+
+                            <!--Already Scanned targets will have different colors-->
+                            <a class="mainMenuActionButton"
+                               [style.background]="scanTarget.tracker.scanStatus==2?'#436186':'#ab2d64'"
+                               (click)="actOnScanTarget(scanTarget,$event)">
+                                <span *ngIf="scanTarget.tracker.scanStatus==0">Scan</span>
+                                <span *ngIf="scanTarget.tracker.scanStatus==1">Scanning</span>
+                                <span *ngIf="scanTarget.tracker.scanStatus==2">View</span>
+                            </a>
+                            <a class="mainMenuActionButton scanDropDown"
+                               [style.background]="scanTarget.tracker.scanStatus==2?'#436186':'#ab2d64'">
+                                <i class="material-icons white-text">arrow_drop_down</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="bottomOptions">
+                <a id="scanFolder"
+                   class="mainMenuActionButton smallGapFromLeft"
+                   (click)="openFolderForScan()"
+                >Scan folder
+                </a>
+                <a class="verticallyCenterAnchored smallGapFromRight clickable"
+                   (click)="openFeedbackForm()"
+                ><i class="material-icons scaleUpOnHover white-text small ">comment</i>
+                </a>
+                <feedback></feedback>
+            </div>
+
+        </div>
+    </div>
+    <div id="menuDarkOverlay" @darkOverlayState="getMenuState()" (click)="changeMenuStateToClose()">
+        &nbsp;
+    </div>
+
+</div>
+

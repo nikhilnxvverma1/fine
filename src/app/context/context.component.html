@@ -1,0 +1,53 @@
+
+<div class="row" (mousedown)="closeSortByMenu()">
+    <div class="col s9"
+         id="mainDataContainer"
+         #mainDataContainer
+         >
+
+            <sunburst id="sunburstComponent"
+                      @sunburstToggle="toggleStatus.getState()"
+                      [toggleStatus]="toggleStatus"
+                      (jumpedToFolder)="jumpedToFolderEvent.emit($event)"
+                      [scanTarget]="_scanTarget"></sunburst>
+            <data-area @dataAreaToggle="toggleStatus.getState()"
+                       *ngIf="_scanTarget"
+                       [toggleStatus]="toggleStatus"
+                       [sortOption]="_scanTarget.sortOption"
+                       [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
+                       [dummyFolder]="context.dummyFolder"
+                       (opendataitem)="openDataItem($event)"
+                       (deselectall)="_scanTarget.folderStack[_scanTarget.folderStack.length-1].setSelectionForAll(false)" (sortby)="sortBy($event)"></data-area>
+
+
+    </div>
+    <!-- Height 100% needed for setting percentage based heights of children-->
+    <div class="col s3" id="rightSideViewContainer" >
+        <usageDetail id="usageDetailComponent"
+                     @sunburstToggle="toggleStatus.getState()"
+                     [toggleStatus]="toggleStatus"
+                     [scanTarget]="_scanTarget"
+                     style="height: 100%;"></usageDetail>
+        <operation @dataAreaToggle="toggleStatus.getState()"
+                   [dummyFolder]="context.dummyFolder"
+                   [toggleStatus]="toggleStatus"
+                   (move)="moveToLocation($event)"
+                   (reviewDelete)="confirmDeletingFiles()"
+                   (rename)="renameFiles($event)"
+                   (group)="groupInFolder($event)"></operation>
+        <info-box *ngIf="organizeFolder" ></info-box>
+
+        <a id="toggleView" class="btn noTextHighlight" (click)="toggleView()">
+            <span @analyzeLabelToggle="toggleStatus.getState()">Analyze</span>
+            <span @organizeLabelToggle="toggleStatus.getState()">Organize</span>
+        </a>
+    </div>
+</div>
+<deletion [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
+          *ngIf="_scanTarget"
+          (trash)="moveToTrash()"
+          (hardDelete)="deletePermenantly()"></deletion>
+<operation-progress [toggleStatus]="toggleStatus"
+                    [scanTarget]="_scanTarget"
+                    (removeFromContext)="removeFromContext($event)"
+></operation-progress>

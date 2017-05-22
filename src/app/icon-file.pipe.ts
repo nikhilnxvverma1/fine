@@ -13,7 +13,7 @@ import {Folder} from "../core/folder";
  *   dataItem | iconFile
  */
 @Pipe({name: 'iconFile'})
-export class IconFile implements PipeTransform{
+export class IconFilePipe implements PipeTransform{
 
     //for the sake of maintenance, please keep this list in alphabetical order
     static availableIcons=["7z","aac","aep","ai","aiff","app","avi","bmp","class","cpp","cs","css","csv","dll","doc",

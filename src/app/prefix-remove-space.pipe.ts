@@ -13,7 +13,7 @@ import {DataItem} from '../core/data-item';
  *   formats to: delete_filename_with_spaces
  */
 @Pipe({name: 'prefixRemoveSpace'})
-export class PrefixAndRemoveSpace implements PipeTransform {
+export class PrefixRemoveSpacePipe implements PipeTransform {
     transform(filename: string,prefix:string) {
         var withSpaces:string=prefix+'_'+filename;
         return withSpaces.replace(/\s+/,'_');

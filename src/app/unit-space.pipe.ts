@@ -12,7 +12,7 @@ import {DataItem} from '../core/data-item';
  *   value | unitSpace
  */
 @Pipe({name: 'unitSpace'})
-export class UnitSpace implements PipeTransform {
+export class UnitSpacePipe implements PipeTransform {
     transform(spaceInBytes: string) {
         var bytes:number=parseInt(spaceInBytes);
         var toGb:number=bytes/1073741824 ;
