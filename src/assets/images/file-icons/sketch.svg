@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="83px" height="102px" viewBox="0 0 83 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>sketch</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F6F6F6" offset="0%"></stop>
+            <stop stop-color="#CECECE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="21.3994966%" y1="80.1338005%" x2="50%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#E5E4E4" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sketch">
+            <path d="M53.9462592,0 L0,0 L0,102 L83,102 L83,28.0763718 L53.9462592,28.076373 L53.9462592,-1.11022302e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <polygon id="Path-2-Copy" fill="url(#linearGradient-2)" points="56.4957983 0 56.4957983 25.6054138 82.9155003 25.6054127"></polygon>
+            <text id="SKETCH" font-family="SourceSansPro-Light, Source Sans Pro" font-size="17" font-weight="300" fill="#6B6B6B">
+                <tspan x="14" y="90">SKETCH</tspan>
+            </text>
+            <g id="SketchLogo" transform="translate(21.000000, 31.000000)">
+                <polygon id="Triangle-8" fill="#E7941F" transform="translate(21.500000, 25.500000) scale(1, -1) translate(-21.500000, -25.500000) " points="21.5 10 43 41 0 41"></polygon>
+                <polygon id="Rectangle-52" fill="#E7941F" points="35.9613084 0 43 10 -1.59161573e-12 10 7.03869163 0"></polygon>
+                <polygon id="Triangle-9" fill-opacity="0.338485054" fill="#FFFFFF" style="mix-blend-mode: overlay;" points="7 0 14 10 0 10"></polygon>
+                <polygon id="Triangle-9-Copy-3" fill-opacity="0.228798687" fill="#FFFFFF" style="mix-blend-mode: overlay;" transform="translate(14.247478, 5.000000) scale(1, -1) translate(-14.247478, -5.000000) " points="14 0 21.494957 10 7 10"></polygon>
+                <polygon id="Triangle-9-Copy-4" fill-opacity="0.255944293" fill="#FFFFFF" style="mix-blend-mode: overlay;" transform="translate(28.724828, 4.999872) scale(1, -1) translate(-28.724828, -4.999872) " points="29 -0.000256538391 35.9414669 10 21.5081884 10"></polygon>
+                <polygon id="Triangle-9-Copy-2" fill-opacity="0.317170516" fill="#FFFFFF" style="mix-blend-mode: overlay;" points="21.5 0 29 10 14 10"></polygon>
+                <polygon id="Triangle-9-Copy" fill-opacity="0.31824615" fill="#FFFFFF" style="mix-blend-mode: overlay;" points="36 0 43 10 29 10"></polygon>
+                <polygon id="Triangle-10" fill-opacity="0.40404212" fill="#FFFFFF" style="mix-blend-mode: overlay;" transform="translate(21.500000, 25.500000) scale(1, -1) translate(-21.500000, -25.500000) " points="21.5 10 29 41 14 41"></polygon>
+                <polygon id="Triangle-10" fill-opacity="0.310773324" fill="#FFFFFF" style="mix-blend-mode: overlay;" transform="translate(10.779229, 25.502550) scale(1, -1) translate(-10.779229, -25.502550) " points="21.5 10.0051003 13.9859486 41 0.0584583282 41"></polygon>
+                <polygon id="Triangle-10" fill-opacity="0.285127944" fill="#FFFFFF" style="mix-blend-mode: overlay;" transform="translate(32.236209, 25.490880) scale(1, -1) translate(-32.236209, -25.490880) " points="21.5 9.98176003 42.9724178 41 29.0165887 41"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

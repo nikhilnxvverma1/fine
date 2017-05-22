@@ -6,3 +6,7 @@ require('./dist/polyfills.bundle.js');
 require('./dist/styles.bundle.js');
 require('./dist/vendor.bundle.js');
 require('./dist/main.bundle.js');
+
+window.$=window.JQuery=require('./js/jquery-2.1.1.min.js')
+var Hammer=require('./js/hammer-2.0.6.min.js');
+require('./js/bin/materialize.min.js');

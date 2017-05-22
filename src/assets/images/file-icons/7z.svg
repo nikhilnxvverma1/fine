@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="83px" height="102px" viewBox="0 0 83 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>7z</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F6F6F6" offset="0%"></stop>
+            <stop stop-color="#CECECE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="21.3994966%" y1="80.1338005%" x2="50%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#E5E4E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F0F0F0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="7z">
+            <path d="M53.9462592,0 L0,0 L0,102 L83,102 L83,28.0763718 L53.9462592,28.076373 L53.9462592,-1.11022302e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <polygon id="Path-2-Copy" fill="url(#linearGradient-2)" points="56.4957983 0 56.4957983 25.6054138 82.9155003 25.6054127"></polygon>
+            <text id="7Z" font-family="SourceSansPro-Light, Source Sans Pro" font-size="20" font-weight="300" fill="#6B6B6B">
+                <tspan x="33" y="90">7Z</tspan>
+            </text>
+            <g id="7zLogo" transform="translate(19.000000, 32.000000)">
+                <rect id="Rectangle-47" fill="url(#linearGradient-3)" x="0" y="0" width="51" height="38"></rect>
+                <rect id="Rectangle-46" fill="#2C2C2C" x="4" y="3" width="28" height="32"></rect>
+                <text id="7" font-family="SourceSansPro-Black, Source Sans Pro" font-size="30" font-weight="700" fill="#FFFFFF">
+                    <tspan x="10" y="30">7</tspan>
+                </text>
+                <text id="Z" font-family="SourceSansPro-Black, Source Sans Pro" font-size="20" font-weight="700" fill="#414141">
+                    <tspan x="35" y="30">Z</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

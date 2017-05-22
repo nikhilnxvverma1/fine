@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="83px" height="102px" viewBox="0 0 83 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>wma</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F6F6F6" offset="0%"></stop>
+            <stop stop-color="#CECECE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="21.3994966%" y1="80.1338005%" x2="50%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#EEEEEE" offset="0%"></stop>
+            <stop stop-color="#E5E4E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#6BBDE8" offset="0%"></stop>
+            <stop stop-color="#3987CD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFAD32" offset="0%"></stop>
+            <stop stop-color="#F6850B" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wma">
+            <path d="M53.9462592,0 L0,0 L0,102 L83,102 L83,28.0763718 L53.9462592,28.076373 L53.9462592,-1.11022302e-16 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <polygon id="Path-2-Copy" fill="url(#linearGradient-2)" points="56.4957983 0 56.4957983 25.6054138 82.9155003 25.6054127"></polygon>
+            <text id="WMA" font-family="SourceSansPro-Light, Source Sans Pro" font-size="20" font-weight="300" fill="#6B6B6B">
+                <tspan x="22" y="88">WMA</tspan>
+            </text>
+            <g id="WmaLogo" transform="translate(25.000000, 34.000000)">
+                <rect id="Rectangle-24" fill="url(#linearGradient-3)" x="0" y="0" width="33" height="33" rx="1"></rect>
+                <circle id="Oval-16" fill="url(#linearGradient-4)" cx="16.6941176" cy="16.6941176" r="10.6779565"></circle>
+                <polygon id="Triangle-6" fill="#FFFFFF" points="12.9254271 22.0330959 12.9254271 11.3551394 23.6033836 16.6941176"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
