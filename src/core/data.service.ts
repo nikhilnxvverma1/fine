@@ -5,7 +5,7 @@ import {File} from "./file";
 import {Inject,NgZone} from "@angular/core";
 import {Stats} from "fs";
 import {ServiceProgress} from "./service-progress";
-import {OperationProgressComponent} from "../operation-progress.component";
+import {OperationProgressComponent} from "../app/operation-progress/operation-progress.component";
 import {DataOperation} from "./data-operation";
 /// <reference path="../../typings/main/ambient/node/node.d.ts" />
 //import fs=require('fs');

@@ -10,7 +10,7 @@ import {ScanStatus} from "./scan-status";
 import {GroupElement} from "./group-element";
 import {LeafElement} from "./leaf-element";
 import {DisplayElement} from "./display-element";
-import {SunburstComponent} from "../sunburst.component";
+import {SunburstComponent} from "../app/sunburst/sunburst.component";
 
 export class ScanTarget{
     _totalElements=0;
