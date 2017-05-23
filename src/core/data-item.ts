@@ -1,5 +1,4 @@
 import {Stats} from "fs";
-import {Timestamp} from "rxjs/Rx.KitchenSink";
 import {SortOption} from "./sort-option";
 import {Folder} from "./folder";
 export abstract class DataItem{

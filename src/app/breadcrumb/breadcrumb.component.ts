@@ -46,7 +46,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
     private _breadcrumbContractionAnimationTimeLimit=100;
     private _animationIntervalDelay=5;
     private _currentAnimationTime=0;
-    private _breadcrumbAnimationTimerId:number;
+    private _breadcrumbAnimationTimerId:NodeJS.Timer;
     private _breadcrumbChanged=false;
     private _doBreadcrumbItemsNeedToContract=false;
 

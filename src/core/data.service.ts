@@ -7,10 +7,6 @@ import {Stats} from "fs";
 import {ServiceProgress} from "./service-progress";
 import {OperationProgressComponent} from "../app/operation-progress/operation-progress.component";
 import {DataOperation} from "./data-operation";
-/// <reference path="../../typings/main/ambient/node/node.d.ts" />
-//import fs=require('fs');
-/// <reference path="../jslib/disk-usage.d.ts" />
-//import diskUsage=require("../../jslib/disk-usage.js")
 import {ScanTarget} from "./scan-target";
 import {ScanTargetType} from "./scan-target-type";
 import {Tracker} from "./tracker";
@@ -23,6 +19,8 @@ import {DeletePostExecution} from "./post-execution";
 import {MovePostExecution} from "./post-execution";
 import {DeleteOperationInfo} from "./operation-info";
 import {MoveOperationInfo} from "./operation-info";
+import * as fs from 'fs-extra';
+
 @Injectable()
 export class DataService{
 
@@ -35,8 +33,6 @@ export class DataService{
     }
 
     public readDirectory(directoryPath:string):DataItem[]{
-
-        var fs=require('fs-extra');
 
         var dataItemsResult:DataItem[]=[];
         //var dirPath:string=directoryPath;
@@ -68,8 +64,6 @@ export class DataService{
     }
 
     public scanDirectoryRecursively(directoryPath:string,name:string,parentFolder:Folder):Folder{
-
-        var fs=require('fs-extra');
 
         var folder:Folder=new Folder(name);
         folder.parent=parentFolder;
@@ -111,8 +105,6 @@ export class DataService{
     }
 
     public scanFolder(folder:Folder,tracker:Tracker){
-
-        var fs=require('fs-extra');
 
         let path = folder.getFullyQualifiedPath();
         fs.readdir(path,(err, folderChildren:string[])=>{
@@ -169,7 +161,6 @@ export class DataService{
         var operationInfo=new MoveOperationInfo(dataOperation,scanTarget,total,
             serviceProgress,this._zone,folderToMoveTo);
 
-        var fs=require('fs-extra');
         for(var i=0;i<dataItems.length;i++){
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let newPath = directory+dataItems[i].name;
@@ -198,7 +189,6 @@ export class DataService{
 
         if(permenantly){
             var operationInfo=new DeleteOperationInfo(DataOperation.HardDelete,scanTarget,total,serviceProgress,this._zone);
-            var fs=require('fs-extra');
             for(var i=0;i<dataItems.length;i++){
                 let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
                 serviceProgress.beganProcessingDataItem(dataItems[i],dataOperation);
@@ -230,7 +220,7 @@ export class DataService{
 
         var operationInfo=new OperationInfo(DataOperation.Rename,scanTarget,total,serviceProgress,this._zone);
 
-        var fs=require('fs-extra');
+        
         for(var i=0;i<dataItems.length;i++){
             let fullyQualifiedPath = dataItems[i].getFullyQualifiedPath();
             let renamedPath;

@@ -44,16 +44,16 @@ export class IconFilePipe implements PipeTransform{
             var extension=dataItem.getExtension().substr(1);
 
             //if extension is available return corresponding file icon
-            iconFile=IconFile.iconFor(extension);
+            iconFile=IconFilePipe.iconFor(extension);
         }
         return "images/file-icons/"+iconFile;
     }
 
     static iconFor(extension:string):string{
 
-        for(var i=0;i<IconFile.availableIcons.length;i++){
-            if(IconFile.availableIcons[i]===extension){
-                return IconFile.availableIcons[i]+".svg";
+        for(var i=0;i<IconFilePipe.availableIcons.length;i++){
+            if(IconFilePipe.availableIcons[i]===extension){
+                return IconFilePipe.availableIcons[i]+".svg";
             }
         }
         return "generic-file.svg";

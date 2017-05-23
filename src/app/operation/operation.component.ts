@@ -8,7 +8,7 @@ import {DataItem} from "../../core/data-item";
 import {ScanTarget} from "../../core/scan-target";
 import {Folder} from "../../core/folder";
 import {ToggleStatus} from "../../core/toggle-status";
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-operation',
