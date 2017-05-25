@@ -13,6 +13,8 @@ import {NgZone} from "@angular/core";
 import {ScanTarget} from "../../core/scan-target";
 import {Folder} from "../../core/folder";
 import {GroupElement} from "../../core/group-element";
+import * as electron from 'electron';
+import * as childProcess from 'child_process';
 declare var $:any;
 
 @Component({
@@ -71,7 +73,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
     openRoot(){
 
-        var dialog=require('electron').remote.dialog;
+        var dialog=electron.remote.dialog;
 
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{
@@ -134,7 +136,7 @@ export class BreadcrumbComponent implements AfterViewChecked{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path
             let filePath=dataItem.getFullyQualifiedPath();
-            var spawn = require('child_process').spawn;
+            var spawn = childProcess.spawn;
             spawn('open', [filePath]);
         }
     }

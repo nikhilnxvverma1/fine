@@ -15,6 +15,9 @@ import {MainMenuComponent} from "./main-menu/main-menu.component";
 import {ScanTarget} from "../core/scan-target";
 import {DummyData} from "../core/dummy-data";
 import {ScanTargetType} from "../core/scan-target-type";
+import * as freeDiskSpace from 'freediskspace';
+import * as njds from 'nodejs-disks';
+import * as childProcess from 'child_process';
 
 @Component({
     selector: 'app-root',
@@ -53,7 +56,6 @@ export class AppComponent{
 
     getScanTargets(){
         var scanTargets=this._scanTargets;
-        var freeDiskSpace = require('freediskspace');
         var driveInfoList=[];
         freeDiskSpace.driveList(
             (err, drives) =>{
@@ -80,7 +82,7 @@ export class AppComponent{
 
     getScanTargetsNodejsDisks(){
         var scanTargets=this._scanTargets;
-        var njds = require('nodejs-disks');
+        
         var driveInfoList=[];
         njds.drives(
              (err, drives) =>{
@@ -152,8 +154,8 @@ export class AppComponent{
         }else{
 
             //mind the subtle difference here. command line "open" requires those quotes for the full path
+			let spawn=childProcess.spawn;
             let filePath=dataItem.getFullyQualifiedPath();
-            var spawn = require('child_process').spawn
             spawn('open', [filePath]);
         }
     }

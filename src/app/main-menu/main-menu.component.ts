@@ -9,6 +9,7 @@ import {ScanTarget} from "../../core/scan-target";
 import {FeedbackComponent} from "../feedback/feedback.component";
 import {UnitSpacePipe} from "../unit-space.pipe";
 import {ScanStatus} from "../../core/scan-status";
+import * as electron from 'electron';
 
 @Component({
   selector: 'app-main-menu',
@@ -56,7 +57,7 @@ export class MainMenuComponent{
     }
 
     openFolderForScan(){
-        var dialog=require('electron').remote.dialog;
+        var dialog=electron.remote.dialog;
 
         dialog.showOpenDialog({ properties: ['openDirectory']},(folderToOpen)=>{
             this._zone.run(()=>{

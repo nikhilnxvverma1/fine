@@ -23,6 +23,7 @@ import {ToggleStatus} from "../../core/toggle-status";
 import {trigger,state,style,transition,animate,keyframes} from "@angular/core";
 import {Point} from "../../core/point";
 import {Folder} from "../../core/folder";
+import * as electron from 'electron';
 declare var $:any;
 
 @Component({
@@ -118,7 +119,7 @@ export class ContextComponent implements AfterContentInit,OnChanges{
     }
 
     moveToLocation(deleteAfterMoving:boolean){
-        var dialog=require('electron').remote.dialog;
+        var dialog=electron.remote.dialog;
         var moveOrCopy:DataOperation;
         if(deleteAfterMoving){
             moveOrCopy=DataOperation.Move;
