@@ -1,0 +1,17 @@
+module.exports={
+	entry:{
+		polyfills:'./src/polyfills.ts',
+		vendor:'./src/polyfills.ts',
+		app:'./src/main.ts',
+	},
+	rules:[
+		{
+			test:/\.ts$/,
+			loader:'awesome-typescript-loader'
+		},
+		{
+			test:/\.scss$/,
+			loaders:'style-loader!css-loader!sass-loader'
+		}
+	],
+};
