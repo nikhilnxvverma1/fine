@@ -13,19 +13,24 @@ module.exports = {
 		rules: [
 			{
 				test: /\.ts$/,
-				loader: 'awesome-typescript-loader'
+				loader: 'awesome-typescript-loader',
+				exclude:["node_modules"],
 			},
 			{
 				test: /\.scss$/,
 				loader: 'style-loader!css-loader!sass-loader'
-			},
-			{
-				test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-				loader: 'file-loader',
-			}
-		],
-	},
-	resolve: {
+				},
+				{
+					test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+					loader: 'file-loader',
+				},
+				{
+					test: /\.node$/,
+					loader: 'node-loader',
+				}
+			],
+		},
+		resolve: {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		extensions: ['.ts', '.js', '.json', '.scss', '.css', 'html'],
 	},
@@ -34,6 +39,7 @@ module.exports = {
 		publicPath: path.join(__dirname, 'dist/assets/'),
 		filename: '[name].bundle.js',
 	},
+	target:"electron-renderer",
 	plugins: [
 		new webpack.ContextReplacementPlugin(
 			/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,

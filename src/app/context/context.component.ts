@@ -16,7 +16,7 @@ import {DeletionComponent} from "../deletion/deletion.component";
 import {OperationProgressComponent} from "../operation-progress/operation-progress.component";
 import {DataOperation} from '../../core/data-operation'
 import {SunburstComponent} from "../sunburst/sunburst.component";
-import {UsageDetailComponent} from "../usage-details/usage-details.component";
+import {UsageDetailsComponent} from "../usage-details/usage-details.component";
 import {ScanTarget} from "../../core/scan-target";
 import {OperationComponent} from "../operation/operation.component";
 import {ToggleStatus} from "../../core/toggle-status";

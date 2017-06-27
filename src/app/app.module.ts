@@ -19,7 +19,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { OperationComponent } from './operation/operation.component';
 import { OperationProgressComponent } from './operation-progress/operation-progress.component';
 import { SunburstComponent } from './sunburst/sunburst.component';
-import { UsageDetailComponent } from './usage-details/usage-details.component';
+import { UsageDetailsComponent } from './usage-details/usage-details.component';
 import { DataItemComponent } from './data-item/data-item.component';
 
 @NgModule({
@@ -40,7 +40,7 @@ import { DataItemComponent } from './data-item/data-item.component';
     OperationComponent,
     OperationProgressComponent,
     SunburstComponent,
-    UsageDetailComponent,
+    UsageDetailsComponent,
     DataItemComponent
   ],
   imports: [

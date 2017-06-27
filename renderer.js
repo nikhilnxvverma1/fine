@@ -8,11 +8,12 @@ var Hammer=require('./js/hammer-2.0.6.min.js');
 require('./js/bin/materialize.min.js');
 
 //angular js dependencies
-require('./dist/inline.bundle.js');
-require('./dist/polyfills.bundle.js');
-require('./dist/styles.bundle.js');
-require('./dist/vendor.bundle.js');
-require('./dist/main.bundle.js');
+// require('./dist/inline.bundle.js');
+// require('./dist/polyfills.bundle.js');
+// require('./dist/styles.bundle.js');
+// require('./dist/vendor.bundle.js');
+// require('./dist/main.bundle.js');
+
 
 //Monaco editor dependencies
 require.config({ paths: { 'vs': 'monaco-editor/min/vs' }});
@@ -26,3 +27,6 @@ require.config({ paths: { 'vs': 'monaco-editor/min/vs' }});
 			language: 'javascript'
 		});
 	});
+
+require('./dist/polyfills.bundle.js');
+require('./dist/main.bundle.js');

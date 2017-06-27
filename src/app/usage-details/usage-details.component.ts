@@ -64,7 +64,7 @@ declare var $:any;
         ]),
     ]
 })
-export class UsageDetailComponent {
+export class UsageDetailsComponent {
 
     //Important note : instead of using topFolder() we use displayTreeCurrent here everywhere
 
@@ -83,7 +83,7 @@ export class UsageDetailComponent {
             //var sortedCopy=this.scanTarget.displayTreeCurrent.getDataItem().sort(SortOption.Size,true,true);
             var sortedCopy=this.concatenatedDataItemList();
             dataItem.selected=true;
-            UsageDetailComponent.selectContinuousDataItems(sortedCopy,dataItem);
+            UsageDetailsComponent.selectContinuousDataItems(sortedCopy,dataItem);
         }else{
             if(event.metaKey){
                 dataItem.selected=!dataItem.selected;
