@@ -3,7 +3,7 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 var helpers = require('./helpers');
 var path = require('path');
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-
+var isTest=false;
 module.exports = {
 	entry: {
 		polyfills: './src/polyfills.ts',
@@ -11,11 +11,17 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			// {
+			// 	test: /\.ts$/,
+			// 	loader: 'awesome-typescript-loader',
+			// 	exclude:["node_modules"],
+			// },
 			{
 				test: /\.ts$/,
-				loader: 'awesome-typescript-loader',
-				exclude:["node_modules"],
+				loaders: ['awesome-typescript-loader?', 'angular2-template-loader', '@angularclass/hmr-loader'],
+				exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
 			},
+
 			{
 				test: /\.scss$/,
 				loader: 'style-loader!css-loader!sass-loader'
