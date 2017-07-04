@@ -1,9 +1,0 @@
-{
-  "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20170310222111"
-  },
-  "dependencies": {
-    "d3": "registry:dt/d3#4.7.0+20170308023845",
-    "fs-extra": "registry:dt/fs-extra#2.0.0+20170306033830"
-  }
-}
