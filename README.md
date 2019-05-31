@@ -1,58 +1,24 @@
-# Angular 2 electron starterkit featuring webpack
+# File Neat
 
-A working demo of [electron] with [angular] using [Webpack], [ngrx] and [material2]
+### Disk usage + File organization
 
-This is a starter of angular (2 and above) and electron. Its a demo of oauth with github using angular and electron. It uses [ngrx] to manage state. You should create a config file as following :
+We all go through it. Messy folder structures, low disk spaces, unrecognizable filenames, yet we still procrastinate the task of cleaning it all up.
 
-```javascript
-{
-    "github": {
-        "client_id": "yourclientID",
-        "client_secret": "yoursecretkey",
-        "scopes": [
-            "user:email",
-            "notifications"
-        ]
-    }
-}
-```
+**FI.NE** is a clean disk utility tool that allows you to analyze your disk usage. It then goes one step further by providing a handy file browser that can be used to perform a multitude of file operations.
 
-and place this file inside the "app" folder.Dont use this in production as for production you should have a safe server side URI and not have your secret key in the app folder.  
+![FI.NE preview](http://res.cloudinary.com/madebynikhil/image/upload/v1473352764/fine-preview_x5dsxh.gif)
 
-When running it authenticates the user and goes to a page showing the username received from the authentication oauth workflow.
+After scanning a directory, you get a **sunburst** chart that gives you an overview of the root folder's disk usage. Think of a sunburst chart as a pie chart. Except that it provides several layers to display a hierarchy.
 
-## Run the example
+Colored elements represent folders that can be clicked to zoom and show further details. Hovering over any element reveals further information about that element.Files and folders that are too small are intentionally omitted out for the sake of brevity.
 
-```bash
-$ npm install
-$ npm run build
-$ npm run watch
-$ npm run electron
-```
+Once you have found a directory you would like to work with, just hit **_Organize_**. This takes you to the file browser that can be used to perform several operations on a group of selected items. No need to perform operations out of the application and rescan the directory again. FI.NE provides everything you need under one roof. Clicking the **_Analyze_** button at the bottom right takes you back to the sunburst chart.
 
-## Packaging
+### Instructions for running:
 
-The app has support for packaging using 'electron-packager'
+If you would like to check out this project, do the following:
+ 
+1. npm install (for the first run, make sure your **node environment is not set to production**. It should be development)
+2. npm start
 
-```bash
-$ npm run package
-```
-
-Will run the package for OSX. You can also provide additional options to the package command such as
-
-*  --name : The package name
-*  --all : Will packaget the application to all the platforms
-*  --arch : Arches to be provided
-*  --icon : The icon for the app
-
-## License
-
-[MIT]
-
-[Webpack]: http://webpack.github.io
-[MIT]: http://markdalgleish.mit-license.org
-[angular]: http://angular.io
-[electron]: http://electron.atom.io/
-[ngrx]: https://github.com/ngrx/store
-[material2]: https://github.com/angular/material2
-[electron-packager]: https://github.com/electron-userland/electron-packager
+If you still face issues, just let me know. Please keep in mind that File Neat is still in alpha. 
