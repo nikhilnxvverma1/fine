@@ -5,49 +5,52 @@
          #mainDataContainer
          >
 
-            <sunburst id="sunburstComponent"
-                      @sunburstToggle="toggleStatus.getState()"
+            <app-sunburst id="sunburstComponent"
+                      [@sunburstToggle]="toggleStatus.getState()"
                       [toggleStatus]="toggleStatus"
                       (jumpedToFolder)="jumpedToFolderEvent.emit($event)"
-                      [scanTarget]="_scanTarget"></sunburst>
-            <data-area @dataAreaToggle="toggleStatus.getState()"
+                      [scanTarget]="_scanTarget"></app-sunburst>
+            <app-data-area [@dataAreaToggle]="toggleStatus.getState()"
                        *ngIf="_scanTarget"
                        [toggleStatus]="toggleStatus"
                        [sortOption]="_scanTarget.sortOption"
                        [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
                        [dummyFolder]="context.dummyFolder"
                        (opendataitem)="openDataItem($event)"
-                       (deselectall)="_scanTarget.folderStack[_scanTarget.folderStack.length-1].setSelectionForAll(false)" (sortby)="sortBy($event)"></data-area>
+                       (deselectall)="_scanTarget.folderStack[_scanTarget.folderStack.length-1].setSelectionForAll(false)" (sortby)="sortBy($event)"></app-data-area>
 
 
     </div>
     <!-- Height 100% needed for setting percentage based heights of children-->
     <div class="col s3" id="rightSideViewContainer" >
-        <usageDetail id="usageDetailComponent"
-                     @sunburstToggle="toggleStatus.getState()"
+        <app-usage-details id="usageDetailComponent"
+                     [@sunburstToggle]="toggleStatus.getState()"
                      [toggleStatus]="toggleStatus"
                      [scanTarget]="_scanTarget"
-                     style="height: 100%;"></usageDetail>
-        <operation @dataAreaToggle="toggleStatus.getState()"
+                     style="height: 100%;"></app-usage-details>
+        <app-operation [@dataAreaToggle]="toggleStatus.getState()"
                    [dummyFolder]="context.dummyFolder"
                    [toggleStatus]="toggleStatus"
                    (move)="moveToLocation($event)"
                    (reviewDelete)="confirmDeletingFiles()"
                    (rename)="renameFiles($event)"
-                   (group)="groupInFolder($event)"></operation>
-        <info-box *ngIf="organizeFolder" ></info-box>
+                   (group)="groupInFolder($event)"></app-operation>
+        <app-info-box *ngIf="organizeFolder" ></app-info-box>
 
         <a id="toggleView" class="btn noTextHighlight" (click)="toggleView()">
-            <span @analyzeLabelToggle="toggleStatus.getState()">Analyze</span>
-            <span @organizeLabelToggle="toggleStatus.getState()">Organize</span>
+            <span [@analyzeLabelToggle]="toggleStatus.getState()">Analyze</span>
+            <span [@organizeLabelToggle]="toggleStatus.getState()">Organize</span>
         </a>
     </div>
 </div>
-<deletion [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
+<app-deletion [dataItems]="_scanTarget.folderStack[_scanTarget.folderStack.length-1].children"
           *ngIf="_scanTarget"
           (trash)="moveToTrash()"
-          (hardDelete)="deletePermenantly()"></deletion>
-<operation-progress [toggleStatus]="toggleStatus"
+          (hardDelete)="deletePermenantly()"></app-deletion>
+<!-- <app-operation-progress [toggleStatus]="toggleStatus"
                     [scanTarget]="_scanTarget"
                     (removeFromContext)="removeFromContext($event)"
-></operation-progress>
+></app-operation-progress> -->
+<app-operation-progress [scanTarget]="_scanTarget"
+                    (removeFromContext)="removeFromContext($event)"
+></app-operation-progress>

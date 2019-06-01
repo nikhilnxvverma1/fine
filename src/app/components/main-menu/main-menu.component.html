@@ -1,6 +1,6 @@
 
 <div>
-    <div id="mainMenu" @menuState="getMenuState()">
+    <div id="mainMenu" [@menuState]="getMenuState()">
 
         <div>
 
@@ -90,12 +90,12 @@
                    (click)="openFeedbackForm()"
                 ><i class="material-icons scaleUpOnHover white-text small ">comment</i>
                 </a>
-                <feedback></feedback>
+                <app-feedback></app-feedback>
             </div>
 
         </div>
     </div>
-    <div id="menuDarkOverlay" @darkOverlayState="getMenuState()" (click)="changeMenuStateToClose()">
+    <div id="menuDarkOverlay" [@darkOverlayState]="getMenuState()" (click)="changeMenuStateToClose()">
         &nbsp;
     </div>
 

@@ -33,30 +33,33 @@ export class HomeComponent implements OnInit {
     @ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
 
     constructor(private _dataService:DataService){
-        this.rootModel=new RootModel();
-
-            var folderToOpen=['/Users/NikhilVerma/Desktop/dummy/'];
-            if(folderToOpen==null) return;
-            var dataItems:DataItem[]=this._dataService.readDirectory(folderToOpen[0]);//this also needs to happen inside ng zone
-            this.rootModel.rootDirectory=folderToOpen[0];
-            //create a new context holding the value of the root now
-            var context=new Context();//null context meaning root
-            context.dataItems=dataItems;
-            this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length);
-            this.rootModel.contextStack.push(context);
-            //this.contextStack.splice(0,this.rootModel.contextStack.length);
-            //this.contextStack.push(context);
-            console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
-
-
-        let dummyData = new DummyData();
-        //this._scanTargets=dummyData.dummyScanTargets();
-        this.getScanTargets();
-
+		// this.scanInitialData();
 	}
 	
 	ngOnInit(){
 		
+	}
+
+	private scanInitialData(){
+		this.rootModel=new RootModel();
+
+		var folderToOpen=['/Users/NikhilVerma/Desktop/dummy/'];
+		if(folderToOpen==null) return;
+		var dataItems:DataItem[]=this._dataService.readDirectory(folderToOpen[0]);//this also needs to happen inside ng zone
+		this.rootModel.rootDirectory=folderToOpen[0];
+		//create a new context holding the value of the root now
+		var context=new Context();//null context meaning root
+		context.dataItems=dataItems;
+		this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length);
+		this.rootModel.contextStack.push(context);
+		//this.contextStack.splice(0,this.rootModel.contextStack.length);
+		//this.contextStack.push(context);
+		console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
+
+
+		let dummyData = new DummyData();
+		//this._scanTargets=dummyData.dummyScanTargets();
+		this.getScanTargets();
 	}
 
     getScanTargets(){

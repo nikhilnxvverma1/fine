@@ -1,4 +1,4 @@
-<div class="row" id="feedbackContainer" @feedbackState="getFeedbackState()">
+<div class="row" id="feedbackContainer" [@feedbackState]="getFeedbackState()">
 
     <div class="s12 col input-field smallTopMargin">
         <textarea id="feedbackMessage" class="black-text materialize-textarea" [(ngModel)]="message"></textarea>

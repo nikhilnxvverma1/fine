@@ -5,12 +5,12 @@
          <!--[style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"-->
     <!--&gt;</div>-->
 <div class="usageDetailHeader"
-    @usageHeaderToggle="toggleStatus.getState()">
+    [@usageHeaderToggle]="toggleStatus.getState()">
         <!--<span>{{scanTarget.displayTreeHovered.getDataItem().name}}</span>-->
         <!--<span class="right" @sizeToggle="toggleStatus.getState()">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>-->
 
     <div class="usageLegendForHeader"
-         @legendToggle="toggleStatus.getState()"
+         [@legendToggle]="toggleStatus.getState()"
          [style.background]="scanTarget.displayTreeHovered.getDataItem().colorRGB()"
     ></div>
     <div class="usageDetailHeaderName"
@@ -21,7 +21,7 @@
     <span class="right usageDetailHeaderSize">{{scanTarget.displayTreeHovered.getDataItem().size|unitSpace}}</span>
 </div>
     <div id="usageListContainer" class="noTextHighlight">
-        <ul @usageDetailListToggle="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
+        <ul [@usageDetailListToggle]="toggleStatus.getState()" class="tinyLeftMargin relativePosition">
             <li class="usageDetailItem"
                 *ngFor="let child of scanTarget.displayTreeHovered.children"
                 [class.selectedUsageDetail]="child.getDataItem().selected"
@@ -29,7 +29,7 @@
                 (dblclick)="openUsage(child.getDataItem())"
             >
                 <div class="usageLegendForDetail"
-                     @legendToggle="toggleStatus.getState()"
+                     [@legendToggle]="toggleStatus.getState()"
                      [style.background]="child.getDataItem().colorRGB()"
                 ></div>
                 <div class="usageDetailName"
@@ -46,7 +46,7 @@
                 (click)="showMoreItems()"
                 class="usageDetailItem usageDetailMoreItems">
                 <div class="usageLegendForDetail"
-                     @legendToggle="toggleStatus.getState()"
+                     [@legendToggle]="toggleStatus.getState()"
                      style="background:rgb(228, 228, 228)"
                 ></div>
                 <div class="usageDetailName"
@@ -56,8 +56,9 @@
                 </div>
                 <span class="right">{{scanTarget.displayTreeHovered.omissionSize|unitSpace}}</span>
             </li>
-            <!-- showMoreItems is not a new component, but just a wrapper for the if condition -->
-            <showMoreItems *ngIf="scanTarget.showAllItems && scanTarget.displayTreeHovered==scanTarget.displayTreeCurrent">
+			<!-- showMoreItems is not a new component, but just a wrapper for the if condition -->
+			<!-- now changed to div -->
+            <div *ngIf="scanTarget.showAllItems && scanTarget.displayTreeHovered==scanTarget.displayTreeCurrent">
                 <li class="usageDetailItem"
                     *ngFor="let child of _moreItems"
                     [class.selectedUsageDetail]="child.selected"
@@ -66,7 +67,7 @@
                 >
                     <!--For the extended list, we show the color of the last group list item-->
                     <div class="usageLegendForDetail"
-                         @legendToggle="toggleStatus.getState()"
+                         [@legendToggle]="toggleStatus.getState()"
                          [style.background]="child.isDirectory()?_lastGroupElement.getDataItem().colorRGB():child.colorRGB()"
                     ></div>
                     <div class="usageDetailName"
@@ -76,7 +77,7 @@
                     </div>
                     <span class="right">{{child.size|unitSpace}}</span>
                 </li>
-            </showMoreItems>
+            </div>
 
         </ul>
     </div>

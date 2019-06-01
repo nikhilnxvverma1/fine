@@ -1,5 +1,5 @@
 <div>
-    <div *ngFor="#tag of tags"  class="chip">
+    <div *ngFor="let tag of tags"  class="chip">
         {{tag.name}}
         <i class="material-icons" (click)="removeTag(tag)">X</i>
     </div>

@@ -1,5 +1,8 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<app-main-menu [scanTargets]="_scanTargets"
+           [activeScanTarget]="activeScanTarget"
+           (addFolderToScanTargets)="addFolderToScanTargets($event)"
+           (openScanResult)="openScanResult($event)"
+></app-main-menu>
+<div class="row" *ngIf="activeScanTarget">
+<app-breadcrumb [scanTarget]="activeScanTarget" (openMainMenu)="changeMenuStateToOpen()" [contextStack]="rootModel.contextStack" (opendataitem)="openDataItem($event)"></app-breadcrumb>
 </div>
