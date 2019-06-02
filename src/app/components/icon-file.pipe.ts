@@ -46,7 +46,7 @@ export class IconFilePipe implements PipeTransform{
             //if extension is available return corresponding file icon
             iconFile=IconFilePipe.iconFor(extension);
         }
-        return "images/file-icons/"+iconFile;
+        return "assets/images/file-icons/"+iconFile;
     }
 
     static iconFor(extension:string):string{

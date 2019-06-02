@@ -74,6 +74,7 @@
     "karma-coverage-istanbul-reporter": "2.0.4",
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.0",
+    "material-design-icons": "^3.0.1",
     "materialize-css": "^1.0.0",
     "mocha": "6.0.2",
     "nodejs-disks": "^0.2.1",
@@ -86,6 +87,7 @@
     "typescript": "3.2.4",
     "wait-on": "3.2.0",
     "webdriver-manager": "12.1.0",
+    "xterm": "^3.14.1",
     "zone.js": "0.8.29"
   }
 }

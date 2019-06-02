@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import {DataService} from '../../core/data.service'
 import {InfoBoxComponent} from "../info-box/info-box.component";
 import {DataAreaComponent} from "../data-area/data-area.component";
@@ -18,32 +18,40 @@ import {ScanTargetType} from "../../core/scan-target-type";
 import * as freeDiskSpace from 'freediskspace';
 import * as njds from 'nodejs-disks';
 import * as childProcess from 'child_process';
-
+import { Terminal } from "xterm";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit {
 
 	public rootModel:RootModel=new RootModel();
     private _scanTargets:ScanTarget[]=[];
     private activeScanTarget:ScanTarget;
-    @ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
+	@ViewChild(MainMenuComponent) mainMenu:MainMenuComponent;
+	@ViewChild('xterm') xterm:ElementRef;
+	private terminal:Terminal;
 
     constructor(private _dataService:DataService){
-		// this.scanInitialData();
+		this.scanInitialData();
 	}
 	
 	ngOnInit(){
 		
 	}
 
+	ngAfterViewInit(){
+		// this.terminal = new Terminal();
+		// this.terminal.open(this.xterm.nativeElement);
+		// this.terminal.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ');
+	}
+
 	private scanInitialData(){
 		this.rootModel=new RootModel();
 
-		var folderToOpen=['/Users/NikhilVerma/Desktop/dummy/'];
+		var folderToOpen=['/Users/NikhilVerma/Downloads'];
 		if(folderToOpen==null) return;
 		var dataItems:DataItem[]=this._dataService.readDirectory(folderToOpen[0]);//this also needs to happen inside ng zone
 		this.rootModel.rootDirectory=folderToOpen[0];
