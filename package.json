@@ -55,6 +55,7 @@
     "@ngx-translate/http-loader": "4.0.0",
     "@types/jasmine": "2.8.7",
     "@types/jasminewd2": "2.0.3",
+    "@types/jquery": "^3.3.29",
     "@types/mocha": "^5.2.6",
     "@types/node": "8.9.4",
     "chai": "^4.2.0",

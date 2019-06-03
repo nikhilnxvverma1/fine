@@ -3,11 +3,9 @@ import {NgZone} from "@angular/core";
 import {Input} from "@angular/core";
 import {Output,EventEmitter} from "@angular/core";
 import {trigger,state,style,transition,animate} from "@angular/animations";
-import {DataItem} from "../../core/data-item";
 
 import {ScanTarget} from "../../core/scan-target";
 import {FeedbackComponent} from "../feedback/feedback.component";
-import {UnitSpacePipe} from "../unit-space.pipe";
 import {ScanStatus} from "../../core/scan-status";
 import * as electron from 'electron';
 

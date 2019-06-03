@@ -6,7 +6,6 @@ import {DataItem} from "./data-item";
 import {Folder} from "./folder";
 import {SortOption} from "./sort-option";
 import {Tracker} from "./tracker";
-import {ScanStatus} from "./scan-status";
 import {GroupElement} from "./group-element";
 import {LeafElement} from "./leaf-element";
 import {DisplayElement} from "./display-element";

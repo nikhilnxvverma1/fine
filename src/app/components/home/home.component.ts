@@ -1,15 +1,8 @@
 import { Component, ViewChild, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import {DataService} from '../../core/data.service'
-import {InfoBoxComponent} from "../info-box/info-box.component";
-import {DataAreaComponent} from "../data-area/data-area.component";
-import {BreadcrumbComponent} from "../breadcrumb/breadcrumb.component";
-import {SelectionFieldComponent} from "../selection-field/selection-field.component";
 import {RootModel} from "../../core/root-model";
 import {Context} from "../../core/context";
 import {DataItem} from "../../core/data-item";
-import {Data} from "../../core/data";
-import {ContextComponent} from "../context/context.component";
-import {Inject} from "@angular/core";
 import {Folder} from "../../core/folder";
 import {MainMenuComponent} from "../main-menu/main-menu.component";
 import {ScanTarget} from "../../core/scan-target";
@@ -55,46 +48,36 @@ export class HomeComponent implements OnInit,AfterViewInit {
 		if(folderToOpen==null) return;
 		var dataItems:DataItem[]=this._dataService.readDirectory(folderToOpen[0]);//this also needs to happen inside ng zone
 		this.rootModel.rootDirectory=folderToOpen[0];
+
 		//create a new context holding the value of the root now
 		var context=new Context();//null context meaning root
 		context.dataItems=dataItems;
-		this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length);
-		this.rootModel.contextStack.push(context);
-		//this.contextStack.splice(0,this.rootModel.contextStack.length);
-		//this.contextStack.push(context);
+		this.rootModel.contextStack.splice(0,this.rootModel.contextStack.length); // empty the array
+		this.rootModel.contextStack.push(context);// push the context on a empty array
 		console.log('RootModel Model folder(chan): '+this.rootModel.rootDirectory);
 
-
-		let dummyData = new DummyData();
-		//this._scanTargets=dummyData.dummyScanTargets();
 		this.getScanTargets();
 	}
 
     getScanTargets(){
-        var scanTargets=this._scanTargets;
-        var driveInfoList=[];
-        freeDiskSpace.driveList(
-            (err, drives) =>{
-                for(var i in drives){
-                    freeDiskSpace.detail(
-                        drives[i],
-                        (err, data) =>{
-                            this._dataService.zone.run(()=>{
-                                var scanTarget=new ScanTarget(data.drive,'/',ScanTargetType.HardDisk,data.total,data.used);
-                                scanTargets.push(scanTarget);
-                                //console.log("scan target name : "+scanTarget.name);
-                                //if(this._scanTargets.length==1){
-                                //    //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
-                                //    var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
-                                //    scanTargets[0].folderStack.push(folder);
-                                //}
-                            });
-                        }
-                    );
-                }
-            }
-        );
-    }
+		var scanTargets=this._scanTargets;
+		freeDiskSpace.driveList((err, drives) =>{
+			for(var i in drives){
+				freeDiskSpace.detail(drives[i],(err, data) =>{
+						this._dataService.zone.run(()=>{
+						var scanTarget=new ScanTarget(data.drive,'/',ScanTargetType.HardDisk,data.total,data.used);
+						scanTargets.push(scanTarget);
+						//console.log("scan target name : "+scanTarget.name);
+						//if(this._scanTargets.length==1){
+						//    //scanTargets[0].rootScanResult=new DummyData().dummyDataItems(6,7,5,"Users/NikhilVerma/Documents","My Data");
+						//    var folder=this._dataService.scanDirectoryRecursively('/Users/NikhilVerma/Documents/','Admission Process',null);
+						//    scanTargets[0].folderStack.push(folder);
+						//}
+					});
+				});
+			}
+		});
+	}
 
     getScanTargetsNodejsDisks(){
         var scanTargets=this._scanTargets;

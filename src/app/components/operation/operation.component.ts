@@ -1,11 +1,7 @@
 import {Component,OnInit} from '@angular/core';
-import {NgZone} from "@angular/core";
 import {Input} from "@angular/core";
 import {Output,EventEmitter} from "@angular/core";
 import {trigger,state,style,transition,animate} from "@angular/animations";
-
-import {DataItem} from "../../core/data-item";
-import {ScanTarget} from "../../core/scan-target";
 import {Folder} from "../../core/folder";
 import {ToggleStatus} from "../../core/toggle-status";
 import * as $ from 'jquery';
@@ -43,12 +39,11 @@ export class OperationComponent implements OnInit{
     private newName:string="";
 
     ngOnInit():any {
-
+		
         //initialization of the collapsible popouts
-        // noinspection TypeScriptUnresolvedFunction
-        $('.collapsible').collapsible({//ignore the red, the method is loaded before
-            accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-        });
+        // $('.collapsible').collapsible({// TODO fix imports or find alternative
+        //     accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        // });
     }
 
     private move(deleteAfterMoving:boolean){

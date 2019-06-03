@@ -4,7 +4,7 @@ import {DataItem} from "../../core/data-item";
 import {ServiceProgress} from '../../core/service-progress'
 import {DataOperation} from '../../core/data-operation'
 import {ScanTarget} from "../../core/scan-target";
-declare var $:any;
+import * as $ from 'jquery';
 declare var Materialize:any;
 
 @Component({
@@ -13,10 +13,8 @@ declare var Materialize:any;
   styleUrls: ['./operation-progress.component.scss']
 })
 export class OperationProgressComponent implements ServiceProgress,OnInit{
-    ngOnInit():any {
-        //noinspection TypeScriptUnresolvedFunction
-        $('.tooltipped').tooltip({delay: 50});
-        return undefined;
+    ngOnInit() {
+        // $('.tooltipped').tooltip({delay: 50}); // TODO fix import, remove or find alternative
     }
 
     @Input('scanTarget') private _scanTarget:ScanTarget;
@@ -32,13 +30,13 @@ export class OperationProgressComponent implements ServiceProgress,OnInit{
 
     beganProcessingDataItem(dataItem:DataItem,operation:DataOperation){
         this._currentOperation=this.stringForOperation(operation);
-        $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
+        // $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
     }
 
     processedDataItem(dataItem:DataItem,count:number,total:number, operation:DataOperation) {
         this.progress=(count / total)*100;
         this._currentOperation=this.stringForOperation(operation)+ " : "+Math.floor(this.progress)+"%";
-        $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
+        // $('#progressBarContainer').tooltip({tooltip:this._currentOperation});
     }
 
     operationCompleted(total:number,operation:DataOperation) {
