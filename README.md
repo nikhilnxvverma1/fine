@@ -22,3 +22,6 @@ If you would like to check out this project, do the following:
 2. npm start
 
 If you still face issues, just let me know. Please keep in mind that File Neat is still in pre-alpha. 
+
+#### Note
+I am migrating this project to the latest angular framework. Currently the UI is a bit buggy and needs some restoration.
