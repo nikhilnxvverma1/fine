@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit, ElementRef} from '@angular/core';
 import {Output} from "@angular/core";
 import {Input,ViewChildren,QueryList,ViewChild} from "@angular/core";
 import {OnChanges} from "@angular/core";
@@ -68,8 +68,8 @@ export class DataAreaComponent{
     @Input('dummyFolder') public dummyFolder:Folder;
 
     @ViewChildren(DataItemComponent) dataItemComponents:QueryList<DataItemComponent>;
-    @ViewChild('selectionRect') private _selectionRect;
-    @ViewChild('dataAreaContainer') private _dataAreaContainer;
+    @ViewChild('selectionRect') private _selectionRect:ElementRef;
+    @ViewChild('dataAreaContainer') private _dataAreaContainer:ElementRef;
 
     private _initialX:number;
     private _initialY:number;

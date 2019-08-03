@@ -21,4 +21,4 @@ If you would like to check out this project, do the following:
 1. npm install (for the first run, make sure your **node environment is not set to production**. It should be development)
 2. npm start
 
-If you still face issues, just let me know. Please keep in mind that File Neat is still in alpha. 
+If you still face issues, just let me know. Please keep in mind that File Neat is still in pre-alpha. 
